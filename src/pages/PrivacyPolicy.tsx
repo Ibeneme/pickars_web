@@ -66,6 +66,7 @@ const styles = {
     fontFamily: "Lufga, sans-serif",
     padding: "3rem 1rem",
     minHeight: "100vh",
+    margin:'-10px'
   },
   content: {
     maxWidth: "800px",
