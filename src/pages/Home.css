@@ -1,0 +1,58 @@
+.home-container {
+    background: url("../assets/android_graphic.png") no-repeat center center/cover;
+    height: 100vh;
+    font-family: "Lufga";
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin:-10px
+
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--padding-inline);
+}
+
+.hero-content {
+    text-align: center;
+    color: white;
+    max-width: 700px;
+}
+
+.hero-title {
+    font-size: 2.8rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.hero-description {
+    font-size: 1.25rem;
+    font-weight: 400;
+    margin-bottom: 2rem;
+}
+
+.contact-btn {
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 4px;
+    background-color: white;
+    color: #ff0000;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    font-family: "Lufga";
+}
+
+.contact-btn:hover {
+    background-color: #ffe5e5;
+}

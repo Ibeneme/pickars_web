@@ -1,0 +1,36 @@
+
+:root {
+  --font-family: "Lufga",;
+  --max-width: 1280px;
+  --padding-inline: 1.25rem;
+
+  line-height: 1.5;
+  font-weight: 400;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* GLOBAL RESET */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* BASE HTML & BODY STYLES */
+html, body {
+  font-family: var(--font-family);
+  height: 100%;
+  width: 100%;
+  background-color: #ff0000;
+  color: #ffffff;
+  scroll-behavior: smooth;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
