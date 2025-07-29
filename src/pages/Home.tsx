@@ -1,5 +1,4 @@
-import React from "react";
-import androidGraphic from "../assets/imgs/android_graphic.png";
+
 import "./Home.css";
 
 const Home = () => {
