@@ -1,0 +1,130 @@
+/* Base styles for the navbar */
+/* Base styles for the navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    background-color: #ffffff;
+    /* White background */
+
+    /* Subtle shadow */
+    font-family: 'Lufga', sans-serif;
+    /* Use your specified font */
+    position: fixed;
+    /* Pin the navbar to the top */
+    top: 0;
+    /* Align to the very top */
+    width: 100%;
+    /* Ensure it spans the full width */
+    z-index: 1000;
+    /* Ensure navbar is on top of other content */
+}
+
+
+/* Logo styling */
+.navbar-logo span {
+    font-weight: 600;
+    /* Bold */
+    font-size: 18px;
+    /* Larger font size */
+    color: #ff0000;
+    /* Dark text */
+}
+
+/* Default state for navigation links (desktop) */
+.navbar-links {
+    display: flex;
+    gap: 2rem;
+    /* Space between links */
+}
+
+.navbar-links a {
+    text-decoration: none;
+    color: #121212;
+    /* Medium dark text */
+    font-size: 13px;
+    padding: 0.5rem 0;
+    transition: color 0.3s ease;
+ 
+}
+
+/* Icon styling */
+.navbar-icons {
+    display: flex;
+    gap: 1rem;
+}
+
+.navbar-icons .icon {
+    width: 24px;
+    /* Icon size */
+    height: 24px;
+    color: #555;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+
+/* Burger menu toggle (hidden by default on desktop) */
+.menu-toggle {
+    display: none;
+    /* Hidden on desktop */
+    cursor: pointer;
+    z-index: 1001;
+    /* Above dropdown */
+}
+
+.menu-toggle .icon {
+    width: 30px;
+    /* Larger icon for burger */
+    height: 30px;
+    color: #121212;
+}
+
+/* --- Media Queries for Responsiveness --- */
+
+@media (max-width: 768px) {
+    .navbar {
+        flex-wrap: wrap;
+        justify-content: space-between;
+        padding: 1rem;
+    }
+
+    .menu-toggle {
+        display: block;
+        order: 2;
+    }
+
+    .navbar-icons {
+        display: none;
+        order: 3;
+    }
+
+    .navbar-links {
+        flex-direction: column;
+        background-color: #121212; /* Updated: Dark background for mobile dropdown */
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        padding: 64px 0;
+        max-height: 0;
+        overflow: hidden;
+        opacity: 0;
+        transform: translateY(-10px);
+        transition: max-height 0.5s ease-out, opacity 0.5s ease-out, transform 0.5s ease-out;
+    }
+
+    .navbar-links.active {
+        max-height: 500px;
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .navbar-links a {
+        padding: 16px;
+        width: 100%;
+        text-align: left;
+        color: #fff; /* Updated: White text for mobile navigation links */
+    }
+}

@@ -1,16 +1,49 @@
 /* src/assets/fonts/fonts.css */
+
+/* Light */
+@font-face {
+    font-family: "Lufga";
+    src: url("./LufgaLight.ttf") format("truetype");
+    font-weight: 300;
+    font-style: normal;
+}
+
+/* Regular */
 @font-face {
     font-family: "Lufga";
     src: url("./LufgaRegular.ttf") format("truetype");
     font-weight: 400;
-    /* Regular weight */
     font-style: normal;
 }
 
+/* Medium */
+@font-face {
+    font-family: "Lufga";
+    src: url("./LufgaMedium.ttf") format("truetype");
+    font-weight: 500;
+    font-style: normal;
+}
+
+/* Semibold */
+@font-face {
+    font-family: "Lufga";
+    src: url("./LufgaSemibold.ttf") format("truetype");
+    font-weight: 600;
+    font-style: normal;
+}
+
+/* Bold */
 @font-face {
     font-family: "Lufga";
     src: url("./LufgaBold.ttf") format("truetype");
     font-weight: 700;
-    /* Bold weight */
+    font-style: normal;
+}
+
+/* Extrabold */
+@font-face {
+    font-family: "Lufga";
+    src: url("./LufgaExtrabold.ttf") format("truetype");
+    font-weight: 800;
     font-style: normal;
 }

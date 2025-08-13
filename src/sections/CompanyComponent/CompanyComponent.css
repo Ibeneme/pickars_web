@@ -1,0 +1,248 @@
+/* General styling for the company section */
+.company-section {
+    padding: 80px 20px;
+    max-width: 1000px;
+    margin: auto;
+    background-color: #ffffff;
+    color: #121212;
+    font-family: 'Inter', sans-serif;
+    /* Using Inter font as per instructions */
+}
+
+/* Content wrapper to center and limit width */
+.company-content {
+    display: flex;
+    flex-direction: column;
+
+
+}
+
+/* Main title for the company component */
+.company-title {
+    font-size: 2.8rem;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+    color: #121212;
+    text-align: left;
+}
+
+/* Description paragraph */
+.company-description {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    margin-bottom: 3rem;
+    color: #666;
+
+    text-align: left;
+}
+
+/* Container for Mission and Vision cards */
+.mission-vision-container {
+    display: flex;
+    flex-wrap: wrap;
+    /* Allows cards to wrap on smaller screens */
+    gap: 30px;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 4rem;
+    /* Added margin below vision/mission */
+}
+
+/* Styling for individual vision and mission cards */
+.vision-card,
+.mission-card {
+    background-color: #f9f9f9;
+    border: 1px solid #e0e0e0;
+    border-radius: 15px;
+    padding: 30px;
+    flex: 1;
+    /* Allows cards to grow and shrink */
+    min-width: 300px;
+    /* Minimum width before wrapping */
+    max-width: 450px;
+    /* Max width to keep them side-by-side */
+
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: left;
+}
+
+.vision-card:hover,
+.mission-card:hover {
+    transform: translateY(-8px);
+
+}
+
+/* Title inside the cards */
+.card-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: #121212;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Text inside the cards */
+.card-text {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #555;
+}
+
+/* Core Values Section */
+.core-values-container {
+    width: 100%;
+    margin-top: 4rem;
+    text-align: center;
+}
+
+.core-values-title {
+    font-size: 2.2rem;
+    font-weight: bold;
+    margin-bottom: 2.5rem;
+    color: #121212;
+}
+
+.values-grid {
+    display: flex;
+    /* Changed from grid to flex */
+    flex-wrap: wrap;
+    /* Allows items to wrap to the next line */
+    gap: 25px;
+    justify-content: center;
+    /* Centers items within the flex container */
+    /* grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); */
+    /* Removed as no longer using grid */
+}
+
+.value-item {
+    background-color: #fcfcfc;
+    border: 1px solid #e9e9e9;
+    border-radius: 12px;
+    padding: 25px;
+    text-align: left;
+
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    /* Align content to the start */
+    flex: 1 1 300px;
+    /* Flex-grow, flex-shrink, and base width for items */
+    max-width: 450px;
+    /* Ensure cards don't get too wide on larger screens */
+}
+
+.value-item:hover {
+    transform: translateY(-5px);
+
+}
+
+.value-item h3 {
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-top: 0;
+    margin-bottom: 0.8rem;
+    color: #121212;
+    /* display: inline-block; */
+    /* Removed as flex on parent h3 handles it */
+}
+
+.value-item p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #555;
+    /* Added property for overflow handling */
+    overflow-wrap: break-word;
+}
+
+.value-number {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #ff0000;
+    /* Red color for numbers */
+    margin-right: 10px;
+    align-self: flex-start;
+    /* Align number to the top-left */
+    line-height: 1;
+    /* Adjust line height for better alignment */
+    padding-bottom: 5px;
+    /* Add a little space below number */
+}
+
+/* Combine number and heading */
+.value-item h3 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    /* Space between number and heading text */
+}
+
+.value-item .value-number {
+    flex-shrink: 0;
+    /* Prevent number from shrinking */
+}
+
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .company-title {
+        font-size: 2rem;
+    }
+
+    .company-description {
+        font-size: 0.95rem;
+    }
+
+    .mission-vision-container {
+        flex-direction: column;
+        /* Stack cards vertically on smaller screens */
+        align-items: center;
+    }
+
+    .vision-card,
+    .mission-card {
+        max-width: 100%;
+        /* Take full width on small screens */
+    }
+
+    .card-title {
+        font-size: 1.5rem;
+    }
+
+    .card-text {
+        font-size: 0.9rem;
+    }
+
+    .core-values-title {
+        font-size: 1.8rem;
+    }
+
+    /* .values-grid { */
+    /* grid-template-columns: 1fr; */
+    /* Removed as no longer using grid */
+    /* } */
+
+    .value-item {
+        padding: 20px;
+    }
+
+    .value-item h3 {
+        font-size: 1.2rem;
+    }
+
+    .value-item p {
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .company-section {
+        padding: 60px 15px;
+    }
+}

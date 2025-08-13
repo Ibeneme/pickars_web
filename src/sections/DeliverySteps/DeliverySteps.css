@@ -1,0 +1,124 @@
+.delivery-steps {
+    background-color: #121212;
+    color: #fff;
+    padding: 160px 20px;
+    position: relative;
+}
+
+.delivery-title {
+    text-align: left;
+    font-size: 4.7rem;
+    margin-bottom: 48px;
+    max-width: 1200px;
+}
+
+/* Scroll arrows */
+.scroll-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-bottom: 15px;
+    align-items: flex-end;
+    margin-top: 48px
+}
+
+.scroll-btn {
+    background: #1e1e1e;
+    border: none;
+    color: #fff;
+    padding: 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    display: flex;
+}
+
+.scroll-btn:hover {
+    background: #ff0000;
+}
+
+/* Horizontal scroll container */
+.cards-container {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    padding-bottom: 10px;
+}
+
+.cards-container::-webkit-scrollbar {
+    display: none;
+}
+
+.step-card {
+    background: #1e1e1e;
+    border-radius: 12px;
+    padding: 20px;
+    max-width: 300px;
+    width: 300px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+}
+
+.step-number {
+    font-size: 1.5rem;
+    font-weight: bold;
+    background: #ff0000;
+    color: #fff;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.step-content {
+    flex: 1;
+
+}
+
+.step-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.step-content h3 {
+    margin: 0;
+    font-size: 16px;
+}
+
+.toggle-btn {
+    background: transparent;
+    border: none;
+    color: #fff;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.step-content p {
+    margin-top: 8px;
+    font-size: 13px;
+    color: #ccc;
+}
+
+@media (max-width: 600px) {
+    .delivery-steps {
+        background-color: #121212;
+        color: #fff;
+        padding: 96px 20px;
+        position: relative;
+    }
+
+
+    .delivery-title {
+        text-align: left;
+        font-size: 3.8rem;
+        margin-bottom: 20px;
+    }
+
+}

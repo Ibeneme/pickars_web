@@ -20,31 +20,31 @@ const Support = () => {
   };
 
   return (
-    <div style={styles.pageContainer}>
-      <div style={styles.inner}>
-        <h1 style={styles.title}>Need Help?</h1>
-        <p style={styles.subtitle}>
+    <div style={lightModeStyles.pageContainer}>
+      <div style={lightModeStyles.inner}>
+        <h1 style={lightModeStyles.title}>Need Help?</h1>
+        <p style={lightModeStyles.subtitle}>
           We're here to support your Pickars journey.
         </p>
 
-        <section style={styles.section}>
-          <h2 style={styles.heading}>Contact Us</h2>
-          <p style={styles.text}>
+        <section style={lightModeStyles.section}>
+          <h2 style={lightModeStyles.heading}>Contact Us</h2>
+          <p style={lightModeStyles.text}>
             Email:{" "}
-            <a href="mailto:support@pickars.com" style={styles.link}>
+            <a href="mailto:support@pickars.com" style={lightModeStyles.link}>
               support@pickars.com
             </a>
             <br />
             Phone:{" "}
-            <a href="tel:+2348012345678" style={styles.link}>
+            <a href="tel:+2348012345678" style={lightModeStyles.link}>
               +234 801 234 5678
             </a>
           </p>
         </section>
 
-        <section style={styles.section}>
-          <h2 style={styles.heading}>Submit a Request</h2>
-          <form onSubmit={handleSubmit} style={styles.form}>
+        <section style={lightModeStyles.section}>
+          <h2 style={lightModeStyles.heading}>Submit a Request</h2>
+          <form onSubmit={handleSubmit} style={lightModeStyles.form}>
             <input
               type="text"
               name="name"
@@ -52,7 +52,7 @@ const Support = () => {
               value={formData.name}
               onChange={handleChange}
               required
-              style={styles.input}
+              style={lightModeStyles.input}
             />
             <input
               type="email"
@@ -61,7 +61,7 @@ const Support = () => {
               value={formData.email}
               onChange={handleChange}
               required
-              style={styles.input}
+              style={lightModeStyles.input}
             />
             <textarea
               name="issue"
@@ -70,56 +70,30 @@ const Support = () => {
               onChange={handleChange}
               required
               rows={5}
-              style={styles.textarea}
+              style={lightModeStyles.textarea}
             ></textarea>
-            <button type="submit" style={styles.button}>
+            <button type="submit" style={lightModeStyles.button}>
               Submit
             </button>
           </form>
-        </section>
-
-        <section style={styles.section}>
-          <h2 style={styles.heading}>Frequently Asked Questions</h2>
-          <ul style={styles.faqList}>
-            <li style={styles.faqItem}>
-              <strong>How do I book a dispatch?</strong>
-              <p style={styles.faqText}>
-                Download the Pickars app and follow the steps to schedule a pickup
-                and drop-off.
-              </p>
-            </li>
-            <li style={styles.faqItem}>
-              <strong>Can I cancel a delivery?</strong>
-              <p style={styles.faqText}>
-                Yes. Cancellations are allowed within 5 minutes of booking without
-                a fee.
-              </p>
-            </li>
-            <li style={styles.faqItem}>
-              <strong>How do I track my delivery?</strong>
-              <p style={styles.faqText}>
-                Use the live tracking link sent to your email or open the app to
-                see real-time updates.
-              </p>
-            </li>
-          </ul>
         </section>
       </div>
     </div>
   );
 };
 
-const styles = {
+const lightModeStyles = {
   pageContainer: {
-    backgroundColor: "#121212",
-    color: "white",
+    backgroundColor: "#f9f9f9", // Light background
+    color: "#333", // Dark text
     minHeight: "100vh",
     padding: "4rem 1rem",
+    paddingTop: "120px", // Added requested padding
     fontFamily: "'Lufga', sans-serif",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    margin: -16
+    margin: -16,
   },
   inner: {
     width: "100%",
@@ -130,13 +104,13 @@ const styles = {
     fontWeight: 700,
     textAlign: "center",
     marginBottom: "0.5rem",
-    color: "#fff",
+    color: "#1a1a1a", // Darker title color
   },
   subtitle: {
     fontSize: "1.1rem",
     textAlign: "center",
     marginBottom: "2rem",
-    color: "#ddd",
+    color: "#555", // Dark subtitle color
   },
   section: {
     marginBottom: "3rem",
@@ -145,14 +119,14 @@ const styles = {
     fontSize: "1.5rem",
     fontWeight: 600,
     marginBottom: "1rem",
-    color: "#ff0000",
+    color: "#131313", // A better contrasting accent color for light mode
   },
   text: {
     fontSize: "1rem",
-    color: "#ccc",
+    color: "#444", // Dark text
   },
   link: {
-    color: "#ff0000",
+    color: "#131313", // Accent color for links
     textDecoration: "underline",
   },
   form: {
@@ -164,20 +138,20 @@ const styles = {
     padding: "0.75rem",
     fontSize: "1rem",
     borderRadius: "5px",
-    border: "1px solid #444",
-    backgroundColor: "#1e1e1e",
-    color: "#fff",
+    border: "1px solid #ccc",
+    backgroundColor: "#fff",
+    color: "#333",
   },
   textarea: {
     padding: "0.75rem",
     fontSize: "1rem",
     borderRadius: "5px",
-    border: "1px solid #444",
-    backgroundColor: "#1e1e1e",
-    color: "#fff",
+    border: "1px solid #ccc",
+    backgroundColor: "#fff",
+    color: "#333",
   },
   button: {
-    backgroundColor: "#ff0000",
+    backgroundColor: "#131313", // Accent color for the button
     color: "#fff",
     padding: "0.75rem",
     fontSize: "1rem",
@@ -194,7 +168,7 @@ const styles = {
     marginBottom: "1.5rem",
   },
   faqText: {
-    color: "#bbb",
+    color: "#666", // Slightly lighter dark text for FAQ content
     fontSize: "0.95rem",
   },
 } as const;
