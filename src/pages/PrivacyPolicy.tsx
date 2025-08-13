@@ -46,30 +46,30 @@ const PrivacyPolicyPage: React.FC = () => {
         to provide our services. We may collect your information when you:
       </p>
       <ul className="privacy-list">
-        <li className="privacy-list-item">
+        <p className="privacy-list-item">
           **Create an account or use our services.** This includes registering
           your name, phone number, email address, and physical address.
-        </li>
-        <li className="privacy-list-item">
+        </p>
+        <p className="privacy-list-item">
           **Request or book a rider for a delivery.**
-        </li>
-        <li className="privacy-list-item">
+        </p>
+        <p className="privacy-list-item">
           **Subscribe to our newsletters** or other communications.
-        </li>
-        <li className="privacy-list-item">
+        </p>
+        <p className="privacy-list-item">
           **Contact us with a question or complaint.**
-        </li>
-        <li className="privacy-list-item">
+        </p>
+        <p className="privacy-list-item">
           **Participate in a promotion or survey.**
-        </li>
-        <li className="privacy-list-item">
+        </p>
+        <p className="privacy-list-item">
           **Use or browse our website and apps.**
-        </li>
-        <li className="privacy-list-item">
+        </p>
+        <p className="privacy-list-item">
           With your consent, or as permitted by law, we may also **receive
           information about you from other organizations or third parties.**
           This can include fraud-prevention agencies and business directories.
-        </li>
+        </p>
       </ul>
 
       {/* --- Section 3: Understanding what you want (the use of cookies) --- */}
@@ -103,57 +103,57 @@ const PrivacyPolicyPage: React.FC = () => {
         We may use and analyze your information to:
       </p>
       <ul className="privacy-list">
-        <li className="privacy-list-item">
+        <p className="privacy-list-item">
           **Facilitate and provide our dispatch and delivery services.**
-        </li>
-        <li className="privacy-list-item">
+        </p>
+        <p className="privacy-list-item">
           **Keep you informed about new features and services** (unless you opt
           out of marketing messages).
-        </li>
-        <li className="privacy-list-item">
+        </p>
+        <p className="privacy-list-item">
           **Improve and personalize the services we offer you** by understanding
           how you use our platform.
-        </li>
-        <li className="privacy-list-item">
+        </p>
+        <p className="privacy-list-item">
           **Comply with all applicable laws and regulations.**
-        </li>
-        <li className="privacy-list-item">
+        </p>
+        <p className="privacy-list-item">
           **Enhance, modify, and further develop our services.**
-        </li>
-        <li className="privacy-list-item">
+        </p>
+        <p className="privacy-list-item">
           **Authenticate users, verify identities, and ensure data
           credibility.**
-        </li>
-        <li className="privacy-list-item">
+        </p>
+        <p className="privacy-list-item">
           **Prevent and detect fraudulent or illegal activities.**
-        </li>
-        <li className="privacy-list-item">
+        </p>
+        <p className="privacy-list-item">
           **Provide customer support,** including responding to your inquiries
           and complaints.
-        </li>
-        <li className="privacy-list-item">**Conduct surveys and research.**</li>
-        <li className="privacy-list-item">
+        </p>
+        <p className="privacy-list-item">**Conduct surveys and research.**</p>
+        <p className="privacy-list-item">
           **Fulfill our legal obligations** or defend our rights in legal
           proceedings.
-        </li>
-        <li className="privacy-list-item">
+        </p>
+        <p className="privacy-list-item">
           **Process payments for services** rendered on our platform.
-        </li>
-        <li className="privacy-list-item">
+        </p>
+        <p className="privacy-list-item">
           **Inform you about products and services from other companies** we
           think you might find interesting.
-        </li>
-        <li className="privacy-list-item">
+        </p>
+        <p className="privacy-list-item">
           **Contact you at any time** using your provided phone number, email
           address, or other contact details.
-        </li>
-        <li className="privacy-list-item">
+        </p>
+        <p className="privacy-list-item">
           **Share aggregated, non-personal data with our partners** to help them
           improve their services.
-        </li>
-        <li className="privacy-list-item">
+        </p>
+        <p className="privacy-list-item">
           **Use it for any other purpose with your explicit consent.**
-        </li>
+        </p>
       </ul>
 
       {/* --- Section 5: Consent --- */}
@@ -196,49 +196,49 @@ const PrivacyPolicyPage: React.FC = () => {
         use our services. This includes:
       </p>
       <ul className="privacy-list">
-        <li className="privacy-list-item">
+        <p className="privacy-list-item">
           **Your account details:** Name, age, date of birth, gender, physical
           address, email address, and phone number. If you provide information
           about third parties (such as for a delivery recipient), we assume you
           have their consent to do so. We are not liable for any data breaches
           related to this third-party information.
-        </li>
-        <li className="privacy-list-item">
+        </p>
+        <p className="privacy-list-item">
           **Dispatch details:** The time, location, and history of your delivery
           requests. Your geographical location is obtained from information
           collected as described in Section 9.
-        </li>
-        <li className="privacy-list-item">
+        </p>
+        <p className="privacy-list-item">
           **Device information:** Details of the device you use to access our
           platform, including operating system, unique identifiers, and network
           information.
-        </li>
-        <li className="privacy-list-item">
+        </p>
+        <p className="privacy-list-item">
           **Payment information:** Data collected via financial or third-party
           payment systems for processing payments, including credit card
           details.
-        </li>
-        <li className="privacy-list-item">
+        </p>
+        <p className="privacy-list-item">
           **Referral details:** Information about individuals you refer to our
           service.
-        </li>
-        <li className="privacy-list-item">
+        </p>
+        <p className="privacy-list-item">
           **Loyalty program information:** Details about your participation in
           any loyalty programs linked to our services.
-        </li>
-        <li className="privacy-list-item">
+        </p>
+        <p className="privacy-list-item">
           **Social media data:** Any information you allow a social media
           platform to share with us if you interact with us through these
           channels.
-        </li>
-        <li className="privacy-list-item">
+        </p>
+        <p className="privacy-list-item">
           **Saved addresses:** Any addresses you store for delivery purposes.
-        </li>
-        <li className="privacy-list-item">
+        </p>
+        <p className="privacy-list-item">
           **Demographic information:** If you choose to participate in optional
           surveys, we may collect information like age, marital status, and
           profession.
-        </li>
+        </p>
       </ul>
 
       {/* --- Section 8: Third-Party Technologies and Services --- */}
@@ -317,36 +317,36 @@ const PrivacyPolicyPage: React.FC = () => {
         third parties. However, we may share your information with:
       </p>
       <ul className="privacy-list">
-        <li className="privacy-list-item">
+        <p className="privacy-list-item">
           **Our group companies or subsidiaries.**
-        </li>
-        <li className="privacy-list-item">
+        </p>
+        <p className="privacy-list-item">
           **Agents, vendors, or partners** who help us provide our services.
-        </li>
-        <li className="privacy-list-item">
+        </p>
+        <p className="privacy-list-item">
           **Companies hired to perform services on our behalf.**
-        </li>
-        <li className="privacy-list-item">
+        </p>
+        <p className="privacy-list-item">
           **Credit reference, fraud prevention, or other credit scoring
           agencies.**
-        </li>
-        <li className="privacy-list-item">
+        </p>
+        <p className="privacy-list-item">
           **Law enforcement agencies, courts, or other public authorities** when
           required or authorized by law.
-        </li>
-        <li className="privacy-list-item">
+        </p>
+        <p className="privacy-list-item">
           **Investors, financial advisers, or auditors.**
-        </li>
-        <li className="privacy-list-item">
+        </p>
+        <p className="privacy-list-item">
           We may **share your information for our everyday business
           operations,** such as processing your dispatch requests.
-        </li>
-        <li className="privacy-list-item">
+        </p>
+        <p className="privacy-list-item">
           We may **disclose your information from our databases and server logs
           to comply with legal requirements,** protect our rights, or ensure the
           security of our platform. We will notify you of any such disclosure if
           legally required.
-        </li>
+        </p>
       </ul>
       <p className="privacy-paragraph">
         12.2. Pickars Courier Limited will comply with all relevant data

@@ -6,59 +6,59 @@
     margin: 0 auto;
     padding: 20px;
     line-height: 1.6;
-    padding-top: 120px
-}
-
-/* Main title styling */
-.privacy-title {
+    padding-top: 120px;
+  }
+  
+  /* Main title styling */
+  .privacy-title {
     color: #1a1a1a;
     /* Very dark gray */
     text-align: center;
     font-size: 2.5em;
     padding-bottom: 10px;
-}
-
-/* Paragraph styling */
-.privacy-paragraph {
+  }
+  
+  /* Paragraph styling */
+  .privacy-paragraph {
     margin-bottom: 15px;
-    font-size: 15px
-}
-
-/* Link styling within the policy */
-.privacy-link {
+    font-size: 15px;
+  }
+  
+  /* Link styling within the policy */
+  .privacy-link {
     color: #ff0000;
     /* Bright blue for links */
     text-decoration: none;
     font-weight: 800;
-}
-
-.privacy-link:hover {
+  }
+  
+  .privacy-link:hover {
     text-decoration: underline;
-}
-
-/* Heading styles for sections */
-.privacy-section-heading {
+  }
+  
+  /* Heading styles for sections */
+  .privacy-section-heading {
     color: #1a1a1a;
     font-size: 1.8em;
     margin-top: 30px;
     margin-bottom: 15px;
-}
-
-/* Numbered list styling */
-.privacy-numbered-list {
-    list-style-type: decimal;
+  }
+  
+  /* Numbered list styling - changed to `none` */
+  .privacy-numbered-list {
+    list-style-type: none; /* Removed the dots */
     margin-left: 20px;
     margin-bottom: 15px;
-}
-
-/* List item styling for both numbered and sub-lists */
-.privacy-list-item {
+  }
+  
+  /* List item styling for both numbered and sub-lists */
+  .privacy-list-item {
     margin-bottom: 8px;
-}
-
-/* Sub-list styling (for lists within a list) */
-.privacy-sub-list {
-    list-style-type: lower-alpha;
+  }
+  
+  /* Sub-list styling (for lists within a list) - changed to `none` */
+  .privacy-sub-list {
+    list-style-type: none; /* Removed the dots */
     margin-left: 30px;
     margin-top: 5px;
-}
+  }

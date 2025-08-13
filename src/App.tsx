@@ -9,10 +9,12 @@ import Footer from "./sections/Footer/Footer";
 import FAQsPage from "./pages/FAQ/FAQsPage";
 import HeroDelivery from "./sections/HeroDelivery/MidImage";
 import Company from "./pages/Company";
+import ScrollToTop from "./ScrollToTop";
 
 function App() {
   return (
     <>
+      <ScrollToTop />
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
