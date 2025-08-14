@@ -55,7 +55,7 @@ const Footer: React.FC = () => {
                 style={{
                   color: "#fff",
                   textDecorationLine: "none",
-                  fontSize: 13,
+               
                 }}
                 href="mailto:support@pickars.com"
               >
@@ -89,7 +89,7 @@ const Footer: React.FC = () => {
                 style={{
                   color: "#fff",
                   textDecorationLine: "none",
-                  fontSize: 13,
+               
                 }}
                 href="tel:+2348120710198"
               >
@@ -125,7 +125,7 @@ const Footer: React.FC = () => {
                 style={{
                   color: "#fff",
                   textDecorationLine: "none",
-                  fontSize: 13,
+               
                 }}
               >
                 WhatsApp Chat
@@ -170,7 +170,7 @@ const Footer: React.FC = () => {
       <div className="footer-bottom">
         <p
           style={{
-            color: "#fff",
+            color: "#666",
           }}
         >
           © {new Date().getFullYear()} Pickars. All rights reserved.

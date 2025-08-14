@@ -548,8 +548,9 @@ const CommentsSection: React.FC = () => {
   return (
     <section className="comments-section">
       <h2 className="comments-title">
-        Over <span style={{ color: "#ff0000" }}>{count.toLocaleString()}+</span>{" "}
-        packages delivered and counting!
+        Dispatched over <span style={{ color: "#ff0000" }}>{count.toLocaleString()}+</span>{" "}
+        packages!
+        {/* and counting! */}
       </h2>
 
       {renderRow(row1, "left-to-right")}

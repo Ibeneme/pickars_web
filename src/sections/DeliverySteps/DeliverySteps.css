@@ -54,8 +54,7 @@
     background: #1e1e1e;
     border-radius: 12px;
     padding: 20px;
-    max-width: 300px;
-    width: 300px;
+    width: 400px;
     flex-shrink: 0;
     display: flex;
     align-items: flex-start;
@@ -89,7 +88,7 @@
 
 .step-content h3 {
     margin: 0;
-    font-size: 16px;
+    font-size: 24px;
 }
 
 .toggle-btn {
@@ -102,8 +101,10 @@
 
 .step-content p {
     margin-top: 8px;
-    font-size: 13px;
+    font-size: 15px;
     color: #ccc;
+    line-height: 24px;
+    font-weight: 500;
 }
 
 @media (max-width: 600px) {
@@ -117,7 +118,7 @@
 
     .delivery-title {
         text-align: left;
-        font-size: 3.8rem;
+        font-size: 4rem;
         margin-bottom: 20px;
     }
 

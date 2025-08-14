@@ -12,7 +12,7 @@
 
 .sliding-track {
     display: flex;
-    animation: scroll 300s linear infinite;
+    animation: scroll 50s linear infinite;
     white-space: nowrap;
 }
 

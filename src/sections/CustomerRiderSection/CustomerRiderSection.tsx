@@ -11,7 +11,7 @@ const CustomerRiderSection: React.FC = () => {
 
   const content = {
     customer: {
-      header: "Book a dispatch rider with ease",
+      header: "Book a dispatch rider",
       description:
         "Book a ride in just a few taps, track your driver in real-time, and arrive at your destination without stress. Our service runs 24/7, with transparent pricing, professional drivers, and vehicles ready to get you where you need to go. Whether it’s your daily commute, a night out, or an urgent trip across town, we make transportation effortless and dependable.",
       image: heroImage1,

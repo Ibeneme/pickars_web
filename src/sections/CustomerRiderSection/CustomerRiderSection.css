@@ -44,10 +44,10 @@
 }
 
 .cr-content h2 {
-    font-size: 3.5rem;
+    font-size: 4.5rem;
     margin-bottom: 15px;
     font-weight: 700;
-    line-height: 4rem;
+    line-height: 4.9rem;
     max-width: 500px;
 }
 
@@ -69,7 +69,7 @@
 /* Mobile responsiveness */
 @media (max-width: 600px) {
     .cr-content h2 {
-        font-size: 3.5rem;
+        font-size: 4rem;
     }
 
     .cr-content p {

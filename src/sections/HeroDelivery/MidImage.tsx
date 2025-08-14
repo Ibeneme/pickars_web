@@ -1,6 +1,6 @@
 import React from "react";
 import "./MidImage.css";
-import heroBg from "../../assets/images/driver/driverc.jpg"; // replace with your image path
+import heroBg from "../../assets/images/driver/driverc.png"; // replace with your image path
 import { NavIcon } from "../../components/NavIcon/NavIcon";
 import { FaApple } from "react-icons/fa";
 import { BiLogoPlayStore } from "react-icons/bi";
