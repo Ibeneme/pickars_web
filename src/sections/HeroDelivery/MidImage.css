@@ -15,6 +15,8 @@
     overflow: hidden;
     /* Add this line for the parallax effect */
     background-attachment: fixed;
+    object-fit: cover;
+    height: 100%
   }
 .mid-overlay {
     position: absolute;

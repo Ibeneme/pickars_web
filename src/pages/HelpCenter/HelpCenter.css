@@ -252,8 +252,11 @@
         /* Stack categories on small screens */
     }
 
-    .category-card {
-        padding: 25px;
+    .selected-category-view {
+
+        padding-top: 12px;
+        border-radius: 16px;
+        background-color: #fff;
     }
 
     .category-title {
@@ -266,7 +269,6 @@
 
     .go-back-button {
         width: 100%;
-        /* Full width on mobile */
-        justify-content: center;
+
     }
 }

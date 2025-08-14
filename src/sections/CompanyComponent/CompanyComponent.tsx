@@ -11,7 +11,7 @@ const CompanyComponent = () => {
       <div className="company-overlay"></div>
 
       <div className="company-content">
-        <h1 className="company-title">About Pickars 💭</h1>
+        <h1 className="company-title">About Pickars </h1>
         <p className="company-description">
           Pickars makes sending and receiving packages in
           Nigeria easy and reliable. Our app connects you with trusted riders
