@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./HeroSection.css";
 import { FaApple } from "react-icons/fa";
 import { BiLogoPlayStore } from "react-icons/bi";
-import heroImage1 from "../../assets/images/hero/hero.png";
+import heroImage1 from "../../assets/images/hero/heroa.png";
 import heroImage2 from "../../assets/images/hero/herob.png";
 import { ComingSoonModal } from "../../components/Modals/ComingSoonModal";
 
