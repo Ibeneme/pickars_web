@@ -13,7 +13,7 @@ const Footer: React.FC = () => {
             <img src={logo} alt="Pickars Logo" className="footer-logo" />
             <h2>
               {" "}
-              Pickars
+              Pickars 
               {/* Courier Limited */}
             </h2>
           </div>
@@ -173,7 +173,7 @@ const Footer: React.FC = () => {
             color: "#666",
           }}
         >
-          © {new Date().getFullYear()} Pickars. All rights reserved.
+          © {new Date().getFullYear()} Pickars Courier Limited, All rights reserved.
         </p>
       </div>
     </footer>

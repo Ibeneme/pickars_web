@@ -13,7 +13,7 @@ const MidImage: React.FC = () => {
     >
       <div className="mid-overlay" />
       <div className="mid-content">
-        <h1>Book a Dispatch Rider Instantly</h1>
+        <h1>Book a Dispatch Rider</h1>
    
         {/* <div className="mid-buttons">
           <button className="mid-btn ios">Download for iOS</button>

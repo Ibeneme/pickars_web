@@ -1,0 +1,150 @@
+/* General container for the Problem/Idea page */
+.problem-idea-container {
+    padding-top: 40px;
+    /* Space for fixed header */
+    padding-bottom: 20px;
+    background-color: #fff;
+
+    font-family: 'Lufga', sans-serif;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.problem-idea-inner {
+
+    /* Adjusted max-width for better story readability */
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    text-align: left;
+    /* Aligned text to the left */
+}
+
+/* Page Title and Subtitle */
+.problem-idea-title {
+    font-size: 4rem;
+    font-weight: 700;
+    margin-bottom: 0.8rem;
+    color: #1a1a1a;
+    text-align: left;
+    /* Aligned text to the left */
+}
+
+.problem-idea-subtitle {
+    font-size: 1.15rem;
+    color: #666;
+    margin-bottom: 3.5rem;
+    line-height: 1.6;
+    text-align: left;
+    /* Aligned text to the left */
+}
+
+/* Story Section */
+.story-section {
+    margin-bottom: 4rem;
+}
+
+.story-card {
+    background-color: #fff;
+    padding: 16px;
+    border-radius: 12px;
+    border-left: 10px solid #ff0000;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    /* Align items to the left */
+    text-align: left;
+
+    /* Aligned text to the left */
+}
+
+.story-card-title {
+    font-size: 4rem;
+    font-weight: 600;
+    color: #ff0000;
+    /* Accent color */
+    margin-bottom: 20px;
+    text-align: left;
+    /* Aligned text to the left */
+}
+
+.story-description {
+    font-size: 15px;
+    color: #555;
+    line-height: 1.8;
+    /* Increased line-height for better readability */
+    margin-bottom: 15px;
+    /* Space between paragraphs */
+    text-align: left;
+    /* Aligned text to the left */
+}
+
+.story-description:last-child {
+    margin-bottom: 0;
+    /* No bottom margin for the last paragraph */
+}
+
+/* Idea Section */
+.idea-section {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    border: 1px solid #eee;
+    text-align: left;
+    /* Aligned text to the left */
+}
+
+.idea-heading {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 15px;
+    text-align: left;
+    /* Aligned text to the left */
+}
+
+.idea-text {
+    font-size: 1.1rem;
+    color: #333;
+    line-height: 1.8;
+    font-weight: 500;
+    text-align: left;
+    /* Aligned text to the left */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .problem-idea-title {
+        font-size: 3.5rem;
+    }
+
+    .problem-idea-subtitle {
+        font-size: 1rem;
+        margin-bottom: 2.5rem;
+    }
+
+
+    .story-card-title {
+        font-size: 1.7rem;
+    }
+
+    .story-description {
+        font-size: 0.8rem;
+        line-height: 1.7;
+    }
+
+    .idea-section {
+        padding: 25px;
+    }
+
+    .idea-heading {
+        font-size: 1.7rem;
+    }
+
+    .idea-text {
+        font-size: 1rem;
+        line-height: 1.7;
+    }
+}

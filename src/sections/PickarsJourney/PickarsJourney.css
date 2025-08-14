@@ -1,0 +1,221 @@
+/* General container for the Pickars Journey page */
+.pickars-journey-container {
+    padding-top: 120px;
+    /* Space for fixed header */
+    padding-bottom: 60px;
+    background-color: #f8f8f8;
+    min-height: 100vh;
+    font-family: 'Lufga', sans-serif;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.pickars-journey-inner {
+    /* max-width: 1000px; */
+    width: 100%;
+    padding: 48px;
+    box-sizing: border-box;
+    text-align: left;
+    /* Aligned text to the left */
+}
+
+/* Page Title and Subtitle */
+.pickars-journey-title {
+    font-size: 4rem;
+    font-weight: 700;
+    margin-bottom: 0.8rem;
+    color: #1a1a1a;
+    text-align: left;
+    /* Aligned text to the left */
+}
+
+.pickars-journey-subtitle {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 3.5rem;
+    line-height: 1.6;
+    text-align: left;
+    max-width: 500px;
+    /* Aligned text to the left */
+}
+
+/* Scrollable Wrapper for the Grid */
+.scrollable-grid-wrapper {
+    overflow-x: auto;
+    /* Enable horizontal scrolling */
+    padding-bottom: 15px;
+    /* Add space for the scrollbar */
+    /* Optional: Hide scrollbar for aesthetics, but keep functionality */
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+}
+
+.scrollable-grid-wrapper::-webkit-scrollbar {
+    display: none;
+    /* Chrome, Safari, Opera */
+}
+
+/* Journey Grid */
+.journey-grid {
+    display: grid;
+    /* Force horizontal flow, ensuring fixed column width that will cause overflow */
+    grid-auto-flow: column;
+    /* Items flow horizontally */
+    grid-auto-columns: 400px;
+    /* Each card will try to be this wide */
+    gap: 16px;
+    margin-top: 0px;
+    justify-content: start;
+    /* Align grid items to the start of the scroll container */
+}
+
+.journey-card {
+    background-color: #fff;
+    padding: 16px;
+    border-radius: 12px;
+    border: 1px solid #eee;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    /* Aligned items to the left */
+    text-align: left;
+    /* Aligned text to the left */
+    transition: transform 0.3s ease;
+    /* Removed box-shadow from transition */
+    flex-shrink: 0;
+    width: 400px
+        /* Prevent cards from shrinking below their grid-auto-columns width */
+}
+
+
+/* Styles for the new image */
+.journey-card-image {
+    width: 100%;
+
+    height: 250px;
+    /* Maintain aspect ratio */
+    border-radius: 8px;
+    /* Slightly rounded corners for the image */
+    margin-bottom: 20px;
+    /* Space below the image */
+    object-fit: cover;
+    /* Ensures image covers area without distortion */
+}
+
+
+.journey-phase-tag {
+    background-color: #ff0000;
+    /* Accent color */
+    color: #fff;
+    font-weight: 600;
+    padding: 8px 15px;
+    border-radius: 20px;
+    margin-bottom: 12px;
+    display: inline-block;
+    /* Allows padding and margin to work correctly */
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+}
+
+.journey-card-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin-bottom: 8px;
+    text-align: left;
+    /* Aligned text to the left */
+}
+
+.journey-description {
+    font-size: 0.75rem;
+    color: #555;
+    line-height: 1.6;
+    text-align: left;
+    /* Aligned text to the left */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .pickars-journey-container {
+        padding-top: 64px;
+
+    }
+
+    .pickars-journey-inner {
+        /* max-width: 1000px; */
+        width: 100%;
+        padding: 16px;
+        box-sizing: border-box;
+        text-align: left;
+        /* Aligned text to the left */
+    }
+
+    .pickars-journey-title {
+        font-size: 3.3rem;
+        text-align: left;
+        /* Aligned text to the left */
+    }
+
+    .pickars-journey-subtitle {
+        font-size: 0.8rem;
+        margin-bottom: 2.5rem;
+        text-align: left;
+        /* Aligned text to the left */
+    }
+
+    .journey-grid {
+        grid-auto-columns: 300px;
+        /* Adjust card width for smaller screens */
+    }
+
+    .journey-card {
+        padding: 16px;
+        align-items: flex-start;
+        /* Aligned items to the left */
+        text-align: left;
+        width: 300px
+            /* Aligned text to the left */
+    }
+
+    .journey-card-title {
+        font-size: 1.1rem;
+        text-align: left;
+        /* Aligned text to the left */
+    }
+
+    .journey-description {
+        font-size: 0.75rem;
+        text-align: left;
+        /* Aligned text to the left */
+    }
+
+    .journey-phase-tag {
+        padding: 6px 12px;
+        font-size: 0.75rem;
+    }
+
+    .journey-card-image {
+        width: 100%;
+        height: 180px;
+        /* Adjust image size for smaller screens */
+    }
+}
+
+@media (max-width: 480px) {
+
+    .pickars-journey-inner {
+        /* max-width: 1000px; */
+        width: 100%;
+        padding: 16px;
+        box-sizing: border-box;
+        text-align: left;
+        /* Aligned text to the left */
+    }
+
+
+}

@@ -1,0 +1,136 @@
+/* General container for the App Features page */
+.app-features-container {
+    padding-top: 120px;
+    /* Space for fixed header */
+    padding-bottom: 60px;
+    background-color: #f8f8f8;
+    min-height: 100vh;
+    font-family: 'Lufga', sans-serif;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.app-features-inner {
+    max-width: 1400px;
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+/* Page Title and Subtitle */
+.app-features-title {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 0.8rem;
+    color: #1a1a1a;
+}
+
+.app-features-subtitle {
+    font-size: 1.15rem;
+    color: #666;
+    margin-bottom: 3.5rem;
+    line-height: 1.6;
+}
+
+/* Features Grid */
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 30px;
+    margin-top: 20px;
+}
+
+.feature-card {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    border: 1px solid #eee;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+
+.feature-icon-wrapper {
+    background-color: #ff0000;
+    /* Accent color for icon background */
+    color: #fff;
+    border-radius: 50%;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+
+}
+
+.feature-icon {
+    font-size: 40px;
+    /* Adjust icon size */
+}
+
+.feature-card-title {
+    font-size: 1.7rem;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin-bottom: 10px;
+}
+
+.feature-description {
+    font-size: 1rem;
+    color: #555;
+    line-height: 1.6;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .app-features-title {
+        font-size: 2.5rem;
+    }
+
+    .app-features-subtitle {
+        font-size: 1rem;
+        margin-bottom: 2.5rem;
+    }
+
+    .features-grid {
+        grid-template-columns: 1fr;
+        /* Stack features on small screens */
+        gap: 25px;
+    }
+
+    .feature-card {
+        padding: 25px;
+    }
+
+    .feature-card-title {
+        font-size: 1.5rem;
+    }
+
+    .feature-description {
+        font-size: 0.95rem;
+    }
+
+    .feature-icon-wrapper {
+        padding: 18px;
+    }
+}
+
+@media (max-width: 480px) {
+    .app-features-title {
+        font-size: 2rem;
+    }
+
+    .feature-icon-wrapper {
+        padding: 15px;
+    }
+
+    .feature-icon {
+        font-size: 35px;
+    }
+}

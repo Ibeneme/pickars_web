@@ -14,9 +14,10 @@ const Navbar = () => {
   const navItems = [
     // { name: "Home", path: "/" },
     { name: "About Us", path: "/app/our-company" },
-    { name: "Privacy Policy", path: "/app/privacy-policy" },
-    { name: "Terms & Conditions", path: "/app/terms-of-use" },
+    // { name: "Privacy Policy", path: "/app/privacy-policy" },
+    // { name: "Terms & Conditions", path: "/app/terms-of-use" },
     { name: "FAQs", path: "/app/faqs" },
+    { name: "Help Center", path: "/app/help-center" },
   ];
 
   return (

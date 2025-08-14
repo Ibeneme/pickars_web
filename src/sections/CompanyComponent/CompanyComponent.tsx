@@ -1,24 +1,23 @@
 import "./CompanyComponent.css"; // Import the CSS file for styling
+import bgImage from "../../assets/images/story/rider.jpg"; // Ensure this path is correct
 
 const CompanyComponent = () => {
   return (
-    <section className="company-section">
+    <section
+      className="company-section"
+      style={{ backgroundImage: `url(${bgImage})` }}
+    >
+      {/* Semi-transparent overlay for text legibility */}
+      <div className="company-overlay"></div>
+
       <div className="company-content">
-        <br /> <br /> <br /> <br />
-        <h1 className="company-title">About Pickars Courier Limited</h1>
+        <h1 className="company-title">About Pickars 💭</h1>
         <p className="company-description">
-          Pickars Courier Limited is dedicated to revolutionizing the logistics
-          industry through cutting-edge technology and exceptional service. We
-          are committed to providing seamless, reliable, and efficient delivery
-          solutions for individuals and businesses across Nigeria. Our
-          innovative platform connects users with a robust network of
-          professional dispatch riders, ensuring your packages reach their
-          destination safely, securely, and always on time. We strive to
-          simplify complex logistics, offering unparalleled convenience and
-          peace of mind to our diverse clientele, from urgent document
-          deliveries to comprehensive e-commerce logistics support, and
-          everything in between. Our commitment extends to fostering sustainable
-          practices and leveraging data to constantly refine our services.
+          Pickars makes sending and receiving packages in
+          Nigeria easy and reliable. Our app connects you with trusted riders
+          who deliver your items safely and on time, whether it’s documents,
+          parcels, or online orders. We focus on convenience, speed, and
+          dependable service for everyone.{" "}
         </p>
         {/* <div className="mission-vision-container">
           <div className="vision-card">

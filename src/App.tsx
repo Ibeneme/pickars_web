@@ -10,6 +10,9 @@ import FAQsPage from "./pages/FAQ/FAQsPage";
 import HeroDelivery from "./sections/HeroDelivery/MidImage";
 import Company from "./pages/Company";
 import ScrollToTop from "./ScrollToTop";
+import LostItemPage from "./pages/LostItemPage/LostItemPage";
+import HelpCenter from "./pages/HelpCenter/HelpCenter";
+import AppFeatures from "./pages/AppFeatures/AppFeatures";
 
 function App() {
   return (
@@ -23,6 +26,9 @@ function App() {
         <Route path="/app/support" element={<Support />} />
         <Route path="/app/faqs" element={<FAQsPage />} />
         <Route path="/app/our-company" element={<Company />} />
+        <Route path="/app/find-item" element={<LostItemPage />} />
+        <Route path="/app/help-center" element={<HelpCenter />} />
+        <Route path="/app/app-features" element={<AppFeatures />} />
       </Routes>
       <HeroDelivery />
       <Footer />
