@@ -109,8 +109,8 @@ const FAQPage: React.FC = () => {
       </div>
 
       <div className="navbar-icons">
-        <NavIcon icon={FaApple} fontSize={40} padding={18} />
-        <NavIcon icon={BiLogoPlayStore} fontSize={40} padding={18} />
+        <NavIcon icon={FaApple} fontSize={22} padding={16} />
+        <NavIcon icon={BiLogoPlayStore} fontSize={22} padding={16} />
       </div>
       <br />
       {faqs.map((faq, index) => (
