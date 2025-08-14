@@ -44,6 +44,7 @@
     overflow-x: auto;
     scroll-behavior: smooth;
     padding-bottom: 10px;
+    margin-top: 32px
 }
 
 .cards-container::-webkit-scrollbar {
@@ -114,12 +115,31 @@
         padding: 96px 20px;
         position: relative;
     }
-
-
+    .step-card {
+        background: #1e1e1e;
+        border-radius: 12px;
+        padding: 20px;
+        width: 300px;
+        flex-shrink: 0;
+        display: flex;
+        align-items: flex-start;
+        gap: 16px;
+    }
+    
+    .step-content h3 {
+        margin: 0;
+        font-size: 16px;
+    }
     .delivery-title {
         text-align: left;
         font-size: 4rem;
         margin-bottom: 20px;
     }
-
+    .step-content p {
+        margin-top: 8px;
+        font-size: 13px;
+        color: #ccc;
+        line-height: 24px;
+        font-weight: 500;
+    }
 }
