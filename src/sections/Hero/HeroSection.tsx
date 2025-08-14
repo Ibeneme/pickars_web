@@ -1,11 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import "./HeroSection.css";
 import { FaApple } from "react-icons/fa";
 import { BiLogoPlayStore } from "react-icons/bi";
 import heroImage1 from "../../assets/images/hero/hero.png";
 import heroImage2 from "../../assets/images/hero/herob.png";
+import { ComingSoonModal } from "../../components/Modals/ComingSoonModal";
 
 const HeroSection: React.FC = () => {
+  const [showModal, setShowModal] = useState(false);
+
+  const handleButtonClick = () => {
+    setShowModal(true);
+  };
+
   return (
     <section className="hero">
       <div className="hero-content">
@@ -30,6 +37,7 @@ const HeroSection: React.FC = () => {
           </span>
           Only within Port Harcourt, NG
         </p>
+
         <h1>Deliver Anything, Anytime</h1>
         <p>
           Your trusted on-demand dispatch service fast, reliable, and right at
@@ -37,37 +45,26 @@ const HeroSection: React.FC = () => {
         </p>
 
         <div className="hero-buttons">
-          <a href="#appstore" className="store-button apple">
+          <button className="store-button apple" onClick={handleButtonClick}>
             <FaApple className="store-icon" />
             <div className="store-text">
               <span className="small">Download on</span>
               <span className="big">App Store</span>
             </div>
-          </a>
+          </button>
 
-          <a href="#playstore" className="store-button playstore">
+          <button
+            className="store-button playstore"
+            onClick={handleButtonClick}
+          >
             <BiLogoPlayStore className="store-icon" />
             <div className="store-text">
               <span className="small">Get it on</span>
               <span className="big">Google Play</span>
             </div>
-          </a>
+          </button>
         </div>
 
-        {/* Two images side-by-side */}
-        <div>
-          {/* <h2
-            style={{
-              marginTop: 32,
-              backgroundColor: "#ff0000",
-              color: "#fff",
-              padding: `16px 32px`,
-              borderRadius: 48,
-            }}
-          >
-            Coming Soon!
-          </h2> */}
-        </div>
         <div className="hero-images">
           <img
             src={heroImage1}
@@ -81,6 +78,11 @@ const HeroSection: React.FC = () => {
           />
         </div>
       </div>
+
+      {/* Show modal */}
+      {showModal && (
+        <ComingSoonModal show={showModal} onClose={() => setShowModal(false)} />
+      )}
     </section>
   );
 };
