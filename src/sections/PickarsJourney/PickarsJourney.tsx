@@ -49,15 +49,14 @@ const pickarsJourney: JourneyStage[] = [
   },
 ];
 
-
 const PickarsJourney: React.FC = () => {
   return (
     <div className="pickars-journey-container">
       <div className="pickars-journey-inner">
         <h1 className="pickars-journey-title">Pickars Story</h1>
         <p className="pickars-journey-subtitle">
-          From concept to market leader, our commitment to efficient and
-          reliable delivery drives every step.
+          From day one, our focus has been on providing dependable and efficient
+          delivery services
         </p>
 
         {/* New wrapper for horizontal scrolling */}

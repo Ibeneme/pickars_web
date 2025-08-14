@@ -55,9 +55,30 @@ const HeroSection: React.FC = () => {
         </div>
 
         {/* Two images side-by-side */}
+        <div>
+          <h2
+            style={{
+              marginTop: 32,
+              backgroundColor: "#ff0000",
+              color: "#fff",
+              padding: `16px 32px`,
+              borderRadius: 48,
+            }}
+          >
+            Coming Soon!
+          </h2>
+        </div>
         <div className="hero-images">
-          <img src={heroImage1} alt="Delivery App Preview 1" className="hero-image" />
-          <img src={heroImage2} alt="Delivery App Preview 2" className="hero-image" />
+          <img
+            src={heroImage1}
+            alt="Delivery App Preview 1"
+            className="hero-image"
+          />
+          <img
+            src={heroImage2}
+            alt="Delivery App Preview 2"
+            className="hero-image"
+          />
         </div>
       </div>
     </section>

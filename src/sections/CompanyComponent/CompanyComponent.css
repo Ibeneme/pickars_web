@@ -12,7 +12,7 @@
     /* Cover the entire section */
     background-position: center;
     /* Center the background image */
-
+    background-attachment: fixed;
     /* This creates the parallax effect */
     color: #fff;
     /* Default text color for contrast */
@@ -226,7 +226,10 @@
     .company-title {
         font-size: 4rem;
     }
-
+    .company-section {
+        background-attachment: scroll; /* Disable fixed background on mobile */
+      }
+    
     .company-description {
         font-size: 0.8rem;
     }
