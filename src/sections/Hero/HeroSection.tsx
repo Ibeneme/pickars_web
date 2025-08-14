@@ -56,7 +56,7 @@ const HeroSection: React.FC = () => {
 
         {/* Two images side-by-side */}
         <div>
-          <h2
+          {/* <h2
             style={{
               marginTop: 32,
               backgroundColor: "#ff0000",
@@ -66,7 +66,7 @@ const HeroSection: React.FC = () => {
             }}
           >
             Coming Soon!
-          </h2>
+          </h2> */}
         </div>
         <div className="hero-images">
           <img
