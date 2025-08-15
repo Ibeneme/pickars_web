@@ -13,7 +13,6 @@
     background-size: cover;
     background-position: center;
     overflow: hidden;
-    /* Add this line for the parallax effect */
     background-attachment: fixed;
     object-fit: cover;
     height: 70vh
