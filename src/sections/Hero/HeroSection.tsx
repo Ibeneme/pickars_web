@@ -38,7 +38,7 @@ const HeroSection: React.FC = () => {
           Only within Port Harcourt, NG
         </p>
 
-        <h1>Where Every Delivery Becomes an Experience</h1>
+        <h1>Seamless Dispatch</h1>
         <p>
           Your trusted on-demand dispatch service fast, reliable, and right at
           your fingertips.

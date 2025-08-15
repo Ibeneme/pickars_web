@@ -13,13 +13,13 @@ const CustomerRiderSection: React.FC = () => {
     customer: {
       header: "Book a dispatch rider",
       description:
-        "Book a ride in just a few taps, track your driver in real-time, and arrive at your destination without stress. Our service runs 24/7, with transparent pricing, professional drivers, and vehicles ready to get you where you need to go. Whether it’s your daily commute, a night out, or an urgent trip across town, we make transportation effortless and dependable.",
+        "Book a dispatch rider in just a few taps and track your parcel in real time. We guarantee safe delivery, transparent pricing, and professional riders. From daily errands to urgent parcels, we make deliveries a seamless experience.",
       image: heroImage1,
     },
     rider: {
       header: "Ya!, Become our rider",
       description:
-        "Join our network of professional riders and take control of your earnings. Accept ride or delivery requests with a tap, work the hours that suit you, and get paid fast. With our platform, you have the flexibility to choose your routes, enjoy consistent demand, and rely on our safety and support features to make every trip smooth and secure.",
+        "Accept delivery requests in just a few taps and get real-time updates on every trip. Earn with transparent pricing, enjoy timely payouts, and ride with confidence. Whether it’s daily errands or urgent parcels, we make every delivery smooth, secure, and rewarding for you.",
       image: heroImage2,
     },
   };

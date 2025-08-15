@@ -58,7 +58,7 @@ const ServicesSection: React.FC = () => {
   return (
     <section className="delivery-steps">
       <h2 className="delivery-title">
-        Bringing your orders home, the easy way.
+        Where Every Delivery Becomes an Experience
       </h2>
 
       {/* Services */}
