@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import "./HeroSection.css";
 import { FaApple } from "react-icons/fa";
 import { BiLogoPlayStore } from "react-icons/bi";
-import heroImage1 from "../../assets/images/hero/heroa.png";
-import heroImage2 from "../../assets/images/hero/herob.png";
+import heroImage1 from "../../assets/images/driver/driverc.png";
+// import heroImage2 from "../../assets/images/hero/herob.png";
 import { ComingSoonModal } from "../../components/Modals/ComingSoonModal";
 
 const HeroSection: React.FC = () => {
@@ -71,11 +71,11 @@ const HeroSection: React.FC = () => {
             alt="Delivery App Preview 1"
             className="hero-image"
           />
-          <img
+          {/* <img
             src={heroImage2}
             alt="Delivery App Preview 2"
             className="hero-image"
-          />
+          /> */}
         </div>
       </div>
 
