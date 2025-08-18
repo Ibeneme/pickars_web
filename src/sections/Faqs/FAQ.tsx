@@ -77,7 +77,7 @@ const faqs = [
   {
     question: "Is there a weight or size limit for packages?",
     answer:
-      "Yes, there are weight and size limitations for packages to ensure safe and efficient transport by our riders. Specific limits depend on the vehicle type (e.g., motorcycle, car) and will be clearly communicated during the booking process. For unusually large or heavy items, please contact customer support for special arrangements.",
+      "Yes, there are weight and size limitations for packages to ensure safe and efficient transport by our riders. Specific limits depend on the vehicle type (e.g., motorcycle, car or van) and will be clearly communicated during the booking process. For unusually large or heavy items, please contact customer support for special arrangements.",
   },
   {
     question: "Can I cancel a delivery after booking?",
