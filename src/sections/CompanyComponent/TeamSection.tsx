@@ -55,7 +55,8 @@ const TeamSection: React.FC = () => {
       <div className="team-header">
         <p className="team-eyebrow">The Pickars Team</p>
         <h2 id="team-heading" className="team-title">
-          Meet the people behind Pickars
+          Meet the <span style={{ color: "#ff0000" }}>Creatives</span> behind
+          Pickars
         </h2>
         <p className="team-sub">
           A small, focused crew building Nigeria’s most reliable courier and
