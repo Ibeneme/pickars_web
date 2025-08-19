@@ -63,7 +63,7 @@ const TeamSection: React.FC = () => {
           last‑mile experience.
         </p>
       </div>
-      <br /> <br />
+      <br />
       <ul className="team-grid" role="list">
         {PICKARS_TEAM.map((m) => (
           <li key={m.id} className="team-card">

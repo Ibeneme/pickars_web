@@ -13,6 +13,7 @@
     align-items: center;
     display: flex;
     flex-direction: column;
+
 }
 
 
@@ -21,6 +22,7 @@
     font-size: clamp(1.5rem, 1.2rem + 1.2vw, 2.25rem);
     line-height: 1.1;
     margin: 0.75rem 0 0.5rem;
+
 }
 
 .team-sub {
@@ -72,6 +74,14 @@
     .team-card {
         grid-column: span 6;
     }
+    .team-title {
+        font-size: clamp(1.5rem, 1.2rem + 1.2vw, 2.25rem);
+        line-height: 1.1;
+        margin: 0.75rem 0 0.5rem;
+
+    }
+    
+
 }
 
 @media (min-width: 1024px) {
