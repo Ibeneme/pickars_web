@@ -136,9 +136,9 @@ const Footer: React.FC = () => {
 
         {/* Right Section */}
         <div className="footer-right">
-          <Link to="app/about-us" className="footer-link">
+          {/* <Link to="app/about-us" className="footer-link">
             About Us
-          </Link>
+          </Link> */}
           <Link to="app/faqs" className="footer-link">
             Our FAQs
           </Link>
