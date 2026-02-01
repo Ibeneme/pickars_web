@@ -115,7 +115,7 @@ const ServicesSection: React.FC = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
               viewport={{ once: true }}
-              className="group relative min-w-[320px] md:min-w-[400px] rounded-[40px] border border-white/5 bg-[#121212] p-10 transition-all hover:border-red-600/30"
+              className="group relative min-w-[320px] md:min-w-[400px] rounded-[40px] border border-white/5 bg-[#121212] md:p-10 p-8 transition-all hover:border-red-600/30"
             >
               {/* Subtle Icon Box */}
               <div className="mb-8 flex h-16 w-16 items-center justify-center rounded-2xl bg-white/5 text-2xl text-red-600 transition-all group-hover:bg-red-600 group-hover:text-white group-hover:scale-110">

@@ -134,7 +134,7 @@ const PickarsJourney: React.FC = () => {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="relative min-w-[320px] md:min-w-[440px] snap-start"
+              className="relative min-w-[380px] md:min-w-[440px] snap-start"
             >
               <span className="absolute -top-12 left-6 z-0 text-[10rem] font-black text-gray-100/60 select-none">
                 {stage.id}
@@ -149,7 +149,7 @@ const PickarsJourney: React.FC = () => {
                   />
                 </div>
 
-                <div className="p-8">
+                <div className="p-2 py-10">
                   <div className="mb-4 inline-block rounded-xl bg-red-50 px-4 py-1.5 text-[10px] font-black uppercase tracking-widest text-red-600">
                     {stage.phase}
                   </div>

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import heroImage1 from "../../assets/images/cr/customer.png";
-import heroImage2 from "../../assets/images/cr/driver.png";
+import heroImage2 from "../../assets/images/cr/customer.png";
 import { FaApple, FaCheckCircle } from "react-icons/fa";
 import { BiLogoPlayStore } from "react-icons/bi";
 

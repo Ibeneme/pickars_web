@@ -1,4 +1,3 @@
-
 import { motion } from "framer-motion";
 import bgImage from "../../assets/images/story/rider.jpg";
 import {
@@ -103,7 +102,7 @@ const CompanyComponent = () => {
             <motion.div
               whileHover={{ y: -10 }}
               key={i}
-              className="rounded-[40px] border border-white/10 bg-white/5 p-12 backdrop-blur-xl"
+              className="rounded-[40px] border border-white/10 bg-white/5 p-8 md:p-12 backdrop-blur-xl"
             >
               <h2 className="mb-6 text-2xl font-black uppercase tracking-widest text-red-600">
                 {card.label}
@@ -134,7 +133,7 @@ const CompanyComponent = () => {
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
                 key={i}
-                className="group rounded-[32px] border border-gray-100 bg-[#f9f9f9] p-10 transition-all hover:bg-white hover:shadow-2xl hover:shadow-red-500/10"
+                className="group rounded-[32px] border border-gray-100 bg-[#f9f9f9] p-8 md:p-10 transition-all hover:bg-white hover:shadow-2xl hover:shadow-red-500/10"
               >
                 <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-red-600 text-white shadow-lg transition-transform group-hover:scale-110 group-hover:rotate-6">
                   {val.icon}

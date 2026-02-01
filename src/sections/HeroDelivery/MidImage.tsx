@@ -1,40 +1,53 @@
 import React from "react";
-import "./MidImage.css";
-import heroBg from "../../assets/images/driver/driverc.jpg"; // replace with your image path
+import heroBg from "../../assets/images/driver/driverc.jpg";
 import { FaApple } from "react-icons/fa";
 import { BiLogoPlayStore } from "react-icons/bi";
+import { motion } from "framer-motion";
 
 const MidImage: React.FC = () => {
   return (
-    <section
-      className="mid-image"
-      style={{ backgroundImage: `url(${heroBg})` }}
-    >
-      <div className="mid-overlay" />
-      <div className="relative z-10 mx-6 flex max-w-[600px] flex-col items-center rounded-[50px] border border-white/10 bg-white/5 p-12 text-center backdrop-blur-3xl md:p-16">
-        <span className="mb-4 text-[10px] font-bold uppercase tracking-[0.4em] text-red-500">
+    <section className="relative min-h-[80vh] w-full flex items-center justify-center overflow-hidden py-16 px-4 md:px-8">
+      {/* Background Image with Parallax-like fix */}
+      <div 
+        className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat transition-transform duration-700 hover:scale-105"
+        style={{ backgroundImage: `url(${heroBg})` }}
+      />
+      
+      {/* Premium Dark Overlay */}
+      <div className="absolute inset-0 z-0 bg-gradient-to-b from-black/70 via-black/40 to-black/80" />
+
+      {/* Responsive Glass Card */}
+      <motion.div 
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8 }}
+        className="relative z-10 w-full max-w-[700px] rounded-[40px] md:rounded-[60px] border border-white/10 bg-white/5 p-8 sm:p-12 md:p-20 text-center backdrop-blur-2xl shadow-2xl"
+      >
+        <span className="mb-4 block text-[10px] md:text-xs font-black uppercase tracking-[0.5em] text-red-600">
           Fast. Reliable. PH City.
         </span>
 
-        <h2 className="mb-6 text-5xl font-black leading-[1.1] text-white md:text-7xl tracking-tighter">
+        <h2 className="mb-6 text-5xl sm:text-5xl md:text-7xl font-black leading-[1.1] text-white tracking-tighter">
           Your Logistics <br />
           <span className="text-red-600">Perfected.</span>
         </h2>
 
-        <p className="mb-10 text-sm leading-relaxed text-gray-300 md:text-base">
+        <p className="mx-auto mb-10 max-w-md text-sm leading-relaxed text-gray-300 md:text-lg opacity-80">
           Experience the next generation of delivery. Real-time tracking,
-          professional riders, and seamless scheduling at your fingertips.
+          professional riders, and seamless scheduling.
         </p>
 
-        <div className="flex flex-wrap justify-center gap-4">
-          <button className="flex items-center gap-3 rounded-2xl bg-white px-8 py-3.5 text-black font-bold hover:bg-red-600 hover:text-white transition-all">
-            <FaApple size={20} /> App Store
+        {/* Buttons: Stacked on mobile, row on desktop */}
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <button className="flex w-full sm:w-auto items-center justify-center gap-3 rounded-2xl bg-white px-8 py-4 text-black font-black text-sm uppercase tracking-widest hover:bg-red-600 hover:text-white transition-all duration-300 shadow-xl shadow-white/5">
+            <FaApple size={22} /> App Store
           </button>
-          <button className="flex items-center gap-3 rounded-2xl bg-white px-8 py-3.5 text-black font-bold hover:bg-red-600 hover:text-white transition-all">
-            <BiLogoPlayStore size={20} /> Play Store
+          <button className="flex w-full sm:w-auto items-center justify-center gap-3 rounded-2xl bg-[#121212] border border-white/10 px-8 py-4 text-white font-black text-sm uppercase tracking-widest hover:bg-red-600 transition-all duration-300 shadow-xl shadow-black/20">
+            <BiLogoPlayStore size={22} /> Play Store
           </button>
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 };
