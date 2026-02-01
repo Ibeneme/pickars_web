@@ -22,6 +22,8 @@ const Navbar = () => {
     { name: "About Us", path: "/app/our-company" },
     { name: "FAQs", path: "/app/faqs" },
     { name: "Help Center", path: "/app/help-center" },
+    { name: "Track your Package", path: "/app/tracking" },
+    ///app/tracking
   ];
 
   return (

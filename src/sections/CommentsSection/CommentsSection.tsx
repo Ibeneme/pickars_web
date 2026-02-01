@@ -6,9 +6,9 @@ import {
   FaTiktok,
   FaXTwitter,
   FaQuoteLeft,
-  FaBoxArchive,
-  FaTruckFast,
-  FaUsers,
+  // // FaBoxArchive,
+  // // FaTruckFast,
+  // // FaUsers,
 } from "react-icons/fa6";
 
 // --- Types & Data ---
@@ -70,25 +70,25 @@ const row2Data: Comment[] = [
 
 // --- Sub-components ---
 
-const StatCard = ({
-  icon: Icon,
-  label,
-  value,
-}: {
-  icon: any;
-  label: string;
-  value: string;
-}) => (
-  <div className="flex flex-col items-center p-6 bg-white rounded-3xl border border-gray-100 shadow-sm">
-    <div className="mb-4 p-3 bg-red-50 text-red-600 rounded-2xl text-2xl">
-      <Icon />
-    </div>
-    <span className="text-3xl font-black text-gray-900">{value}</span>
-    <span className="text-[10px] md:text-xs font-bold text-gray-400 uppercase tracking-widest mt-1">
-      {label}
-    </span>
-  </div>
-);
+// const StatCard = ({
+//   icon: Icon,
+//   label,
+//   value,
+// }: {
+//   icon: any;
+//   label: string;
+//   value: string;
+// }) => (
+//   <div className="flex flex-col items-center p-6 bg-white rounded-3xl border border-gray-100 shadow-sm">
+//     <div className="mb-4 p-3 bg-red-50 text-red-600 rounded-2xl text-2xl">
+//       <Icon />
+//     </div>
+//     <span className="text-3xl font-black text-gray-900">{value}</span>
+//     <span className="text-[10px] md:text-xs font-bold text-gray-400 uppercase tracking-widest mt-1">
+//       {label}
+//     </span>
+//   </div>
+// );
 
 const TickerRow = ({
   items,
@@ -186,9 +186,7 @@ const CommentsSection: React.FC = () => {
             packages!
           </motion.h2>
         </div>
-
-        {/* 2. Key Stats Grid (New Section) */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-20">
+        {/* <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-20">
           <StatCard
             icon={FaBoxArchive}
             label="Deliveries Monthly"
@@ -197,6 +195,7 @@ const CommentsSection: React.FC = () => {
           <StatCard icon={FaTruckFast} label="Average Time" value="45min" />
           <StatCard icon={FaUsers} label="Active Riders" value="15+" />
         </div>
+     */}{" "}
       </div>
 
       {/* 3. Ticker Section */}
@@ -211,7 +210,7 @@ const CommentsSection: React.FC = () => {
       {/* 4. Footer & CTA (New Section) */}
       <div className="mt-12 md:mt-24 text-center px-6 max-w-2xl mx-auto">
         <p className="text-gray-400 font-bold text-[10px] md:text-sm tracking-widest uppercase mb-8">
-          Trusted by thousands of businesses 
+          Trusted by thousands of businesses
         </p>
 
         <motion.button

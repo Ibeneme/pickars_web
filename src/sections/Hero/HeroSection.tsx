@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { motion, type Variants } from "framer-motion";
 import { FaApple } from "react-icons/fa";
 import { BiLogoPlayStore } from "react-icons/bi";
-import heroImage1 from "../../assets/images/driver/driverc.jpg";
+import heroImage1  from "../../assets/images/story/clean.png";
 import { ComingSoonModal } from "../../components/Modals/ComingSoonModal";
 
 const HeroSection: React.FC = () => {
