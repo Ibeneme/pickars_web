@@ -10,6 +10,7 @@ import LoadingScreen from "./LoadingScreen"; // The new premium loader
 
 // 2. Global Styles
 import "./assets/fonts/fonts.css";
+import './index.css'
 
 // 3. Lazy Loaded Page Components (Code Splitting)
 const Home = lazy(() => import("./pages/Home/Home"));
