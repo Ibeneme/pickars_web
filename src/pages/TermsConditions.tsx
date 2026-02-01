@@ -1,181 +1,235 @@
-import React from "react";
-import "./PrivacyPolicyPage.css"; // Assuming the same CSS file is used for styling
+import React, { useState } from "react";
+import { motion } from "framer-motion";
+import {
+  FiFileText,
+  FiUserCheck,
+  FiTruck,
+  FiCreditCard,
+  FiAlertTriangle,
+  FiGlobe,
+  FiMail,
+} from "react-icons/fi";
 
 const TermsAndConditionsPage: React.FC = () => {
+  const [activeTab, setActiveTab] = useState("account");
+
+  const sections = [
+    { id: "account", label: "User Account", icon: <FiUserCheck /> },
+    { id: "services", label: "Responsibilities", icon: <FiTruck /> },
+    { id: "payments", label: "Payments & Fees", icon: <FiCreditCard /> },
+    { id: "liability", label: "Liability", icon: <FiAlertTriangle /> },
+    { id: "legal", label: "Governing Law", icon: <FiGlobe /> },
+  ];
+
   return (
-    <div className="privacy-container">
-      <h1 className="privacy-title">TERMS AND CONDITIONS</h1>
-      <p className="privacy-paragraph">
-        Welcome to **Pickars Courier Limited**! These Terms and Conditions
-        ("Terms") govern your use of the Pickars Courier Limited platform,
-        website, and mobile application ("Platform") and the services we provide
-        ("Services"). By accessing or using our Platform, you agree to be bound
-        by these Terms. If you do not agree with any part of these Terms, you
-        must not use our Services.
-      </p>
-      <p className="privacy-paragraph">
-        The Services offered by Pickars Courier Limited are intended to connect
-        users ("Customers") with independent delivery riders ("Riders") to
-        facilitate the dispatch and delivery of items. Pickars Courier Limited
-        acts as an intermediary platform and is not a courier service itself.
-      </p>
+    <div className="min-h-screen bg-[#FAFAFA] pt-[180px] font-['Lufga'] py-24 px-6 md:px-12">
+      <div className="mx-auto max-w-7xl">
+        {/* Header Section */}
+        <header className="mb-20">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="max-w-3xl"
+          >
+            <span className="text-xs font-black uppercase tracking-[0.4em] text-red-600 mb-4 block">
+              User Agreement
+            </span>
+            <h1 className="text-6xl md:text-8xl font-black tracking-tighter text-[#121212] leading-tight mb-8">
+              Terms of <span className="text-gray-300">Service.</span>
+            </h1>
+            <p className="text-gray-500 text-xl leading-relaxed">
+              Welcome to **Pickars Courier Limited**. By using our platform, you
+              agree to the following terms. We act as a technology bridge
+              connecting you with independent delivery professionals.
+            </p>
+          </motion.div>
+        </header>
 
-      {/* --- Section 1: User Account --- */}
-      {/* <hr className="privacy-separator" /> */}
-      <h2 className="privacy-section-heading">1. User Account</h2>
-      <p className="privacy-paragraph">
-        **1.1. Account Creation:** To use our Services, you must create an
-        account. You agree to provide accurate, complete, and current
-        information during the registration process. You are responsible for
-        maintaining the confidentiality of your account password and are liable
-        for all activities that occur under your account.
-      </p>
-      <p className="privacy-paragraph">
-        **1.2. Eligibility:** You must be at least 18 years old to create an
-        account and use our Services. By using the Platform, you represent and
-        warrant that you meet this age requirement.
-      </p>
-      <p className="privacy-paragraph">
-        **1.3. Prohibited Use:** You may not create an account for anyone other
-        than yourself without authorization. Your account is non-transferable
-        and may not be sold, traded, or otherwise transferred to any other
-        person or entity.
-      </p>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
+          {/* LEFT: Sticky Navigation */}
+          <aside className="hidden lg:block lg:col-span-3 sticky top-32 h-fit">
+            <nav className="space-y-2">
+              {sections.map((sec) => (
+                <button
+                  key={sec.id}
+                  onClick={() => {
+                    document
+                      .getElementById(sec.id)
+                      ?.scrollIntoView({ behavior: "smooth" });
+                    setActiveTab(sec.id);
+                  }}
+                  className={`w-full flex items-center gap-4 px-6 py-5 rounded-[25px] font-bold transition-all ${
+                    activeTab === sec.id
+                      ? "bg-[#121212] text-white shadow-2xl shadow-black/20"
+                      : "text-gray-400 hover:bg-gray-100 hover:text-[#121212]"
+                  }`}
+                >
+                  <span className="text-xl">{sec.icon}</span>
+                  <span className="text-sm uppercase tracking-widest">
+                    {sec.label}
+                  </span>
+                </button>
+              ))}
+            </nav>
 
-      {/* --- Section 2: Services and Responsibilities --- */}
-      {/* <hr className="privacy-separator" /> */}
-      <h2 className="privacy-section-heading">
-        2. Services and Your Responsibilities
-      </h2>
-      <p className="privacy-paragraph">
-        **2.1. Dispatch and Delivery:** Our Platform allows you to request a
-        Rider to pick up and deliver an item. You are responsible for accurately
-        describing the item, providing correct pickup and delivery addresses,
-        and ensuring the item is ready for pickup.
-      </p>
-      <p className="privacy-paragraph">
-        **2.2. Item Restrictions:** You agree not to request the dispatch of any
-        illegal, hazardous, or prohibited items, including but not limited to
-        weapons, illegal substances, stolen goods, or any items that require a
-        special license or permit for transport. Pickars Courier Limited
-        reserves the right to refuse a delivery request at its discretion if it
-        suspects a violation of this clause.
-      </p>
-      <p className="privacy-paragraph">
-        **2.3. Communication:** You agree to maintain professional and
-        respectful communication with Riders. Any form of harassment, abuse, or
-        inappropriate behavior towards a Rider will result in immediate account
-        suspension.
-      </p>
+            <div className="mt-12 p-10 bg-[#0c0c0c] rounded-[40px] text-white relative overflow-hidden">
+              <FiFileText className="absolute -right-4 -bottom-4 text-white/5 text-9xl rotate-12" />
+              <h4 className="font-black text-xl mb-2 relative z-10">
+                Last Updated
+              </h4>
+              <p className="text-gray-500 text-sm relative z-10">
+                February 2026
+              </p>
+            </div>
+          </aside>
 
-      {/* --- Section 3: Payments and Fees --- */}
-      {/* <hr className="privacy-separator" /> */}
-      <h2 className="privacy-section-heading">3. Payments and Fees</h2>
-      <p className="privacy-paragraph">
-        **3.1. Pricing:** The fees for our Services are displayed on the
-        Platform. By placing a delivery request, you agree to pay the quoted
-        price for the service. Pricing may be subject to change based on factors
-        such as distance, time, and demand.
-      </p>
-      <p className="privacy-paragraph">
-        **3.2. Payment Processing:** All payments are processed securely through
-        our third-party payment partners. You agree to provide valid and current
-        payment information. You authorize us to charge your selected payment
-        method for all fees and applicable taxes.
-      </p>
-      <p className="privacy-paragraph">
-        **3.3. Cancellation Policy:** You may cancel a delivery request, but a
-        cancellation fee may apply if a Rider has already been dispatched. The
-        specific cancellation fee structure will be outlined on the Platform.
-      </p>
+          {/* RIGHT: Content Sections */}
+          <main className="lg:col-span-9 space-y-20">
+            {/* 1. User Account */}
+            <section id="account" className="scroll-mt-32">
+              <div className="p-10 md:p-16 bg-white border border-gray-100 rounded-[50px] shadow-sm">
+                <h2 className="text-3xl font-black mb-8 flex items-center gap-4">
+                  <span className="h-10 w-1 bg-red-600 rounded-full" />
+                  1. User Account
+                </h2>
+                <div className="grid md:grid-cols-2 gap-8 text-gray-500 leading-relaxed">
+                  <div>
+                    <h4 className="text-[#121212] font-black mb-3">
+                      1.1 Eligibility
+                    </h4>
+                    <p>
+                      You must be at least **18 years old** to use Pickars. By
+                      registering, you warrant that you meet this requirement
+                      and all information provided is accurate.
+                    </p>
+                  </div>
+                  <div>
+                    <h4 className="text-[#121212] font-black mb-3">
+                      1.2 Security
+                    </h4>
+                    <p>
+                      You are the sole custodian of your password. Any activity
+                      occurring under your account is your legal responsibility.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </section>
 
-      {/* --- Section 4: Limitation of Liability and Disclaimer --- */}
-      {/* <hr className="privacy-separator" /> */}
-      <h2 className="privacy-section-heading">
-        4. Limitation of Liability and Disclaimer
-      </h2>
-      <p className="privacy-paragraph">
-        **4.1. Platform Only:** Pickars Courier Limited is a technology platform
-        that facilitates a connection between you and a Rider. We are not
-        responsible for the actions, omissions, or conduct of any Rider. You
-        acknowledge that any delivery service is performed by the Rider and that
-        Pickars Courier Limited disclaims all liability for any loss, damage, or
-        theft of your item during transit.
-      </p>
-      <p className="privacy-paragraph">
-        **4.2. "As Is" Service:** The Platform and Services are provided on an
-        "as is" and "as available" basis. Pickars Courier Limited makes no
-        warranties, express or implied, regarding the reliability, timeliness,
-        or quality of the Services. We do not guarantee that the Platform will
-        be uninterrupted or error-free.
-      </p>
-      <p className="privacy-paragraph">
-        **4.3. Indemnification:** You agree to indemnify and hold harmless
-        Pickars Courier Limited, its affiliates, and their respective officers,
-        directors, and employees from any claims, damages, losses, or costs
-        arising from your use of the Services or your breach of these Terms.
-      </p>
+            {/* 2. Responsibilities */}
+            <section id="services" className="scroll-mt-32">
+              <h2 className="text-4xl font-black mb-10 tracking-tight">
+                2. Your Responsibilities
+              </h2>
+              <div className="grid gap-6">
+                <div className="p-10 bg-[#121212] text-white rounded-[40px]">
+                  <h4 className="text-red-600 font-black uppercase tracking-widest text-xs mb-4">
+                    Prohibited Items
+                  </h4>
+                  <p className="text-gray-400 text-lg leading-relaxed">
+                    You strictly agree **not** to dispatch: illegal substances,
+                    hazardous materials, weapons, stolen goods, or live animals.
+                    Pickars reserves the right to cancel any request that
+                    violates safety protocols.
+                  </p>
+                </div>
+                <div className="p-10 bg-white border border-gray-100 rounded-[40px]">
+                  <h4 className="text-[#121212] font-black mb-2">
+                    Professionalism
+                  </h4>
+                  <p className="text-gray-500 leading-relaxed">
+                    Harassment of Riders will result in an immediate and
+                    permanent **Account Ban**. Communication must remain
+                    professional at all times.
+                  </p>
+                </div>
+              </div>
+            </section>
 
-      {/* --- Section 5: Intellectual Property --- */}
-      {/* <hr className="privacy-separator" /> */}
-      <h2 className="privacy-section-heading">5. Intellectual Property</h2>
-      <p className="privacy-paragraph">
-        All content on the Platform, including text, graphics, logos, and
-        software, is the property of Pickars Courier Limited or its licensors
-        and is protected by intellectual property laws. You may not use any of
-        our trademarks or other intellectual property without our prior written
-        consent.
-      </p>
+            {/* 3. Payments */}
+            <section id="payments" className="scroll-mt-32">
+              <div className="p-10 md:p-16 bg-white border border-gray-100 rounded-[50px]">
+                <h2 className="text-3xl font-black mb-8 flex items-center gap-4">
+                  <FiCreditCard className="text-red-600" /> 3. Payments & Fees
+                </h2>
+                <div className="space-y-6 text-gray-500 text-lg">
+                  <p>
+                    All pricing is transparently displayed before confirmation.
+                    Fees are calculated based on **Distance, Demand, and Time**.
+                  </p>
+                  <div className="p-8 bg-gray-50 rounded-3xl border border-gray-100">
+                    <p className="text-sm">
+                      **Cancellation Policy:** A fee may apply if a Rider has
+                      already been dispatched to your pickup location.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </section>
 
-      {/* --- Section 6: Termination --- */}
-      {/* <hr className="privacy-separator" /> */}
-      <h2 className="privacy-section-heading">6. Termination</h2>
-      <p className="privacy-paragraph">
-        We reserve the right to suspend or terminate your access to the Platform
-        and Services at any time, with or without cause, and without prior
-        notice. We may do this if you violate these Terms, engage in fraudulent
-        or illegal activity, or for any other reason deemed appropriate by us.
-      </p>
+            {/* 4. Liability Disclaimer */}
+            <section id="liability" className="scroll-mt-32">
+              <div className="p-10 md:p-16 bg-red-600 rounded-[50px] text-white shadow-2xl shadow-red-600/20">
+                <h2 className="text-3xl font-black mb-8">
+                  4. Limitation of Liability
+                </h2>
+                <p className="text-red-100 text-lg leading-relaxed mb-8">
+                  Pickars is a **Technology Intermediary**, not a courier
+                  service. We facilitate connections but are not responsible for
+                  the independent actions, omissions, or conduct of Riders.
+                </p>
+                <div className="grid md:grid-cols-2 gap-4">
+                  <div className="bg-white/10 p-6 rounded-2xl backdrop-blur-md">
+                    <p className="text-xs font-black uppercase mb-2">
+                      As-Is Basis
+                    </p>
+                    <p className="text-sm opacity-80">
+                      We do not guarantee the Platform will be 100% error-free
+                      or uninterrupted.
+                    </p>
+                  </div>
+                  <div className="bg-white/10 p-6 rounded-2xl backdrop-blur-md">
+                    <p className="text-xs font-black uppercase mb-2">
+                      Indemnity
+                    </p>
+                    <p className="text-sm opacity-80">
+                      You agree to hold Pickars harmless from claims arising
+                      from your use of the service.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </section>
 
-      {/* --- Section 7: Governing Law and Jurisdiction --- */}
-      {/* <hr className="privacy-separator" /> */}
-      <h2 className="privacy-section-heading">
-        7. Governing Law and Jurisdiction
-      </h2>
-      <p className="privacy-paragraph">
-        These Terms are governed by the laws of [Your Jurisdiction], without
-        regard to its conflict of law principles. Any disputes arising from
-        these Terms or your use of the Services shall be resolved in the courts
-        located in [Your Jurisdiction].
-      </p>
+            {/* 5. Legal */}
+            <section id="legal" className="scroll-mt-32">
+              <h2 className="text-4xl font-black mb-8">5. Governing Law</h2>
+              <div className="p-10 bg-white border border-gray-100 rounded-[40px] flex items-center justify-between">
+                <div>
+                  <p className="text-gray-500 text-lg">
+                    These terms are governed by the laws of the **Federal
+                    Republic of Nigeria**.
+                  </p>
+                </div>
+                <FiGlobe className="text-5xl text-gray-100" />
+              </div>
+            </section>
 
-      {/* --- Section 8: Changes to these Terms --- */}
-      {/* <hr className="privacy-separator" /> */}
-      <h2 className="privacy-section-heading">8. Changes to these Terms</h2>
-      <p className="privacy-paragraph">
-        We may update these Terms from time to time. We will notify you of any
-        significant changes by posting the new Terms on the Platform and, where
-        appropriate, by sending you an email notification. Your continued use of
-        the Services after any such changes constitutes your acceptance of the
-        new Terms.
-      </p>
-
-      {/* --- Section 9: Contact Us --- */}
-      {/* <hr className="privacy-separator" /> */}
-      <h2 className="privacy-section-heading">9. Contact Us</h2>
-      <p className="privacy-paragraph">
-        If you have any questions about these Terms, please contact us at{" "}
-        <a href="mailto:support@pickars.com" className="privacy-link">
-          support@pickars.com
-        </a>
-        .
-      </p>
-
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
+            {/* Footer Contact */}
+            <section className="pt-20 text-center">
+              <h3 className="text-2xl font-black mb-4 text-[#121212]">
+                Have questions about these terms?
+              </h3>
+              <a
+                href="mailto:support@pickars.com"
+                className="inline-flex items-center gap-3 bg-red-600 text-white px-10 py-5 rounded-2xl font-bold hover:bg-[#121212] transition-colors"
+              >
+                <FiMail /> Contact Legal Support
+              </a>
+            </section>
+          </main>
+        </div>
+      </div>
     </div>
   );
 };

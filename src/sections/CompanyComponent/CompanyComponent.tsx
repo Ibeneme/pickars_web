@@ -1,140 +1,154 @@
-import "./CompanyComponent.css"; // Import the CSS file for styling
-import bgImage from "../../assets/images/story/rider.jpg"; // Ensure this path is correct
+
+import { motion } from "framer-motion";
+import bgImage from "../../assets/images/story/rider.jpg";
+import {
+  FaBullseye,
+  FaLightbulb,
+  FaShieldAlt,
+  FaUsers,
+  FaHeart,
+  FaRocket,
+} from "react-icons/fa";
 
 const CompanyComponent = () => {
+  const values = [
+    {
+      icon: <FaShieldAlt />,
+      title: "Reliability",
+      text: "Unwavering commitment to consistent, dependable service from pickup to drop-off.",
+    },
+    {
+      icon: <FaLightbulb />,
+      title: "Innovation",
+      text: "Integrating cutting-edge tech to optimize complex logistics and user experience.",
+    },
+    {
+      icon: <FaRocket />,
+      title: "Integrity",
+      text: "Operating with total transparency and strong ethical principles in every interaction.",
+    },
+    {
+      icon: <FaHeart />,
+      title: "Customer-First",
+      text: "Your satisfaction is the heartbeat of our operations. We listen, adapt, and deliver.",
+    },
+    {
+      icon: <FaUsers />,
+      title: "Empowerment",
+      text: "Providing our riders with tools, fair pay, and growth opportunities to thrive.",
+    },
+    {
+      icon: <FaBullseye />,
+      title: "Community",
+      text: "Fostering an interconnected network that drives collective economic growth.",
+    },
+  ];
+
   return (
-    <section
-      className="company-section"
-      style={{ backgroundImage: `url(${bgImage})` }}
-    >
-      {/* Semi-transparent overlay for text legibility */}
-      <div className="company-overlay"></div>
+    <main className="bg-[#0c0c0c] font-['Lufga'] text-white">
+      {/* --- HERO SECTION --- */}
+      <section className="relative flex min-h-[80vh] items-center justify-center overflow-hidden px-6 pt-32 pb-20">
+        <motion.div
+          initial={{ scale: 1.1, opacity: 0 }}
+          animate={{ scale: 1, opacity: 0.4 }}
+          transition={{ duration: 1.5 }}
+          className="absolute inset-0 z-0 bg-cover bg-center"
+          style={{ backgroundImage: `url(${bgImage})` }}
+        />
+        <div className="absolute inset-0 z-10 bg-gradient-to-b from-[#0c0c0c]/80 via-transparent to-[#0c0c0c]" />
 
-      <div className="company-content">
-        <h1 className="company-title">About Pickars </h1>
-        <p className="company-description">
-          Pickars makes sending and receiving packages in
-          Nigeria easy and reliable. Our app connects you with trusted riders
-          who deliver your items safely and on time, whether it’s documents,
-          parcels, or online orders. We focus on convenience, speed, and
-          dependable service for everyone.{" "}
-        </p>
-        {/* <div className="mission-vision-container">
-          <div className="vision-card">
-            <h2 className="card-title">Our Vision</h2>
-            <p className="card-text">
-              To be the undisputed leader and most trusted logistics technology
-              platform in [Specify Region/Country], empowering individuals and
-              businesses with unparalleled delivery solutions that foster
-              stronger communities and accelerate economic growth. We envision a
-              future where every delivery is an effortless, transparent, and
-              environmentally responsible journey, contributing to a more
-              connected and efficient world where logistical challenges are a
-              thing of the past. Our aim is to set new industry standards for
-              speed, security, sustainability, and customer satisfaction,
-              transforming the way goods move.
-            </p>
+        <div className="relative z-20 mx-auto max-w-5xl text-center">
+          <motion.span
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="mb-4 inline-block text-xs font-bold uppercase tracking-[0.5em] text-red-600"
+          >
+            The Pickars Story
+          </motion.span>
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+            className="mb-8 text-5xl font-black leading-tight tracking-tighter md:text-8xl"
+          >
+            Logistics for the <br />
+            <span className="text-red-600">Modern World.</span>
+          </motion.h1>
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.4 }}
+            className="mx-auto max-w-2xl text-lg leading-relaxed text-gray-300 md:text-xl"
+          >
+            Pickars makes sending and receiving packages in Nigeria effortless.
+            We connect you with trusted riders to ensure your items reach their
+            destination safely, focusing on speed and absolute dependability.
+          </motion.p>
+        </div>
+      </section>
+
+      {/* --- MISSION & VISION (Split Cards) --- */}
+      <section className="px-6 py-24">
+        <div className="mx-auto grid max-w-7xl gap-8 md:grid-cols-2">
+          {[
+            {
+              label: "Our Vision",
+              text: "To be the undisputed leader in logistics tech, empowering businesses with unparalleled delivery solutions that accelerate economic growth across Nigeria.",
+            },
+            {
+              label: "Our Mission",
+              text: "To deliver excellence through innovation and integrity, building a secure platform that guarantees reliability for every single delivery, every time.",
+            },
+          ].map((card, i) => (
+            <motion.div
+              whileHover={{ y: -10 }}
+              key={i}
+              className="rounded-[40px] border border-white/10 bg-white/5 p-12 backdrop-blur-xl"
+            >
+              <h2 className="mb-6 text-2xl font-black uppercase tracking-widest text-red-600">
+                {card.label}
+              </h2>
+              <p className="text-lg leading-relaxed text-gray-300">
+                {card.text}
+              </p>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      {/* --- CORE VALUES GRID --- */}
+      <section className="bg-white py-32 text-[#121212] rounded-t-[60px]">
+        <div className="mx-auto max-w-7xl px-6">
+          <div className="mb-20 text-center">
+            <h2 className="text-4xl font-black tracking-tighter md:text-6xl">
+              Our Core Values
+            </h2>
+            <div className="mx-auto mt-4 h-1.5 w-24 rounded-full bg-red-600" />
           </div>
 
-          <div className="mission-card">
-            <h2 className="card-title">Our Mission</h2>
-            <p className="card-text">
-              To deliver operational excellence through continuous innovation,
-              unwavering integrity, and a deeply customer-centric approach. We
-              are committed to building and maintaining a robust, intuitive, and
-              highly secure platform that guarantees speed, reliability, and
-              security for every single delivery, irrespective of size or
-              distance. Furthermore, we are dedicated to fostering a supportive,
-              empowering, and fair community for our invaluable network of
-              riders, providing them with advanced tools, fair compensation, and
-              opportunities for professional growth, while consistently
-              contributing positively to the overall logistics ecosystem's
-              growth, ethical practices, and digital transformation.
-            </p>
+          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+            {values.map((val, i) => (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                key={i}
+                className="group rounded-[32px] border border-gray-100 bg-[#f9f9f9] p-10 transition-all hover:bg-white hover:shadow-2xl hover:shadow-red-500/10"
+              >
+                <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-red-600 text-white shadow-lg transition-transform group-hover:scale-110 group-hover:rotate-6">
+                  {val.icon}
+                </div>
+                <h3 className="mb-4 text-xl font-black">{val.title}</h3>
+                <p className="text-sm leading-relaxed text-gray-500">
+                  {val.text}
+                </p>
+              </motion.div>
+            ))}
           </div>
-        </div> */}
-        {/* <div className="core-values-container">
-          <h2 className="core-values-title">Our Core Values</h2>
-          <div className="values-grid">
-            <div className="value-item">
-              <span className="value-number">1.</span>
-              <h3>Reliability</h3>
-              <p>
-                We are unyieldingly committed to providing consistent and
-                dependable service. This means ensuring every delivery is
-                handled with the utmost care, from pickup to drop-off, and
-                reaches its intended destination securely and precisely on
-                schedule, every single time. Our clients count on us for peace
-                of mind, knowing their parcels are in safe hands from start to
-                finish.
-              </p>
-            </div>
-            <div className="value-item">
-              <span className="value-number">2.</span>
-              <h3>Innovation</h3>
-              <p>
-                We continuously embrace and integrate cutting-edge technologies
-                and creative solutions to enhance our platform, optimize complex
-                logistics processes, and significantly improve the overall user
-                experience. We actively seek out new methods and tools to make
-                deliveries faster, smarter, more transparent, and more seamless
-                for everyone involved, pushing the boundaries of what's possible
-                in last-mile delivery.
-              </p>
-            </div>
-            <div className="value-item">
-              <span className="value-number">3.</span>
-              <h3>Integrity</h3>
-              <p>
-                We operate with unwavering honesty, complete transparency, and
-                strong ethical principles in all our business interactions.
-                Building and maintaining trust with our customers, our dedicated
-                riders, and all partners is paramount to us, forming the bedrock
-                of our long-term relationships and ensuring fairness in every
-                transaction and interaction.
-              </p>
-            </div>
-            <div className="value-item">
-              <span className="value-number">4.</span>
-              <h3>Customer-Centricity</h3>
-              <p>
-                Our customers' needs and satisfaction are unequivocally at the
-                heart of everything we do. We actively listen to feedback, adapt
-                our services to meet evolving demands, and consistently go the
-                extra mile to not only meet but exceed their expectations and
-                efficiently solve their unique delivery challenges, ensuring
-                every experience is positive and hassle-free.
-              </p>
-            </div>
-            <div className="value-item">
-              <span className="value-number">5.</span>
-              <h3>Empowerment</h3>
-              <p>
-                We are dedicated to empowering our riders by providing them with
-                the best available tools, comprehensive support, fair
-                compensation, and abundant opportunities they need to thrive
-                professionally and personally. We deeply recognize their crucial
-                role as the backbone of our success and value their
-                contributions immensely, fostering a strong sense of partnership
-                and growth.
-              </p>
-            </div>
-            <div className="value-item">
-              <span className="value-number">6.</span>
-              <h3>Community</h3>
-              <p>
-                We believe in fostering a strong, interconnected, and supportive
-                community among all our users, our dedicated riders, and our
-                internal team members. We work collaboratively, sharing
-                knowledge and resources, to achieve collective growth, mutual
-                success, and a positive impact on the wider society and the
-                local economies we serve.
-              </p>
-            </div>
-          </div>
-        </div> */}
-      </div>
-    </section>
+        </div>
+      </section>
+    </main>
   );
 };
 

@@ -1,386 +1,238 @@
-import React from "react";
-import "./PrivacyPolicyPage.css";
+import React, { useState } from "react";
+import { motion } from "framer-motion";
+import {
+  FiShield,
+  FiEye,
+  FiLock,
+  FiMapPin,
+  FiInfo,
+  FiMail,
+} from "react-icons/fi";
 
 const PrivacyPolicyPage: React.FC = () => {
+  const [activeSection, setActiveSection] = useState("intro");
+
+  // Sections for the sticky side-nav
+  const sections = [
+    { id: "intro", label: "Overview", icon: <FiShield /> },
+    { id: "collection", label: "Data Collection", icon: <FiInfo /> },
+    { id: "cookies", label: "Cookie Policy", icon: <FiEye /> },
+    { id: "use", label: "Usage & Analysis", icon: <FiLock /> },
+    { id: "location", label: "Location Services", icon: <FiMapPin /> },
+    { id: "contact", label: "Contact Us", icon: <FiMail /> },
+  ];
+
   return (
-    <div className="privacy-container">
-      <h1 className="privacy-title">PRIVACY POLICY</h1>
-      <p className="privacy-paragraph">
-        **Pickars Courier Limited** ("Pickars Courier Limited", “we”, “us”,
-        “our”) provides a platform for users to connect with and dispatch
-        delivery riders for their logistical needs (“Services”). At Pickars
-        Courier Limited, one of our core values is transparency, and we are
-        committed to being clear about how we collect, use, and share your
-        personal information. Personal information is any data that identifies
-        you, such as your name, email address, telephone number, and location.
-        We strongly recommend that you read this Privacy Policy ("Policy")
-        carefully to understand your rights and our responsibilities regarding
-        your personal data. This policy works in conjunction with our Terms of
-        Use. If you have any questions, please contact us at{" "}
-        <a href="mailto:support@pickars.com" className="privacy-link">
-          support@pickars.com
-        </a>
-        .
-      </p>
+    <div className="min-h-screen bg-[#FAFAFA] pt-[180px] font-['Lufga'] py-24 px-6 md:px-12">
+      <div className="mx-auto max-w-7xl">
+        {/* Header Section */}
+        <header className="mb-20">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="max-w-3xl"
+          >
+            <span className="text-xs font-black uppercase tracking-[0.4em] text-red-600 mb-4 block">
+              Trust & Security
+            </span>
+            <h1 className="text-6xl md:text-8xl font-black tracking-tighter text-[#121212] leading-tight mb-8">
+              Privacy <span className="text-gray-300">Policy.</span>
+            </h1>
+            <p className="text-gray-500 text-xl leading-relaxed">
+              At **Pickars Courier Limited**, transparency is a core value. We
+              are committed to protecting your personal data and being clear
+              about how we use it.
+            </p>
+          </motion.div>
+        </header>
 
-      {/* --- Section 1: Notification of Changes to Privacy Policy --- */}
-      {/* <hr className="privacy-separator" /> */}
-      <h2 className="privacy-section-heading">
-        1. Notification of Changes to Privacy Policy
-      </h2>
-      <p className="privacy-paragraph">
-        This Privacy Policy is reviewed annually. However, as we continually
-        improve our services, add new features, and adapt to changes in the law
-        and technology, our data protection practices may evolve. When our
-        practices change, we will update this Policy and publish the new version
-        on our website and applications to describe our new approach.
-      </p>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
+          {/* LEFT: Sticky Navigation (Hidden on Mobile) */}
+          <aside className="hidden lg:block lg:col-span-3 sticky top-32 h-fit">
+            <nav className="space-y-2">
+              {sections.map((sec) => (
+                <button
+                  key={sec.id}
+                  onClick={() => {
+                    document
+                      .getElementById(sec.id)
+                      ?.scrollIntoView({ behavior: "smooth" });
+                    setActiveSection(sec.id);
+                  }}
+                  className={`w-full flex items-center gap-4 px-6 py-4 rounded-2xl font-bold transition-all ${
+                    activeSection === sec.id
+                      ? "bg-[#121212] text-white shadow-xl shadow-black/10"
+                      : "text-gray-400 hover:bg-gray-100 hover:text-[#121212]"
+                  }`}
+                >
+                  <span className="text-xl">{sec.icon}</span>
+                  <span className="text-sm uppercase tracking-widest">
+                    {sec.label}
+                  </span>
+                </button>
+              ))}
+            </nav>
 
-      {/* --- Section 2: Collecting your personal information --- */}
-      {/* <hr className="privacy-separator" /> */}
-      <h2 className="privacy-section-heading">
-        2. How We Collect Your Personal Information
-      </h2>
-      <p className="privacy-paragraph">
-        We are committed to only collecting the personal information necessary
-        to provide our services. We may collect your information when you:
-      </p>
-      <ul className="privacy-list">
-        <p className="privacy-list-item">
-          **Create an account or use our services.** This includes registering
-          your name, phone number, email address, and physical address.
-        </p>
-        <p className="privacy-list-item">
-          **Request or book a rider for a delivery.**
-        </p>
-        <p className="privacy-list-item">
-          **Subscribe to our newsletters** or other communications.
-        </p>
-        <p className="privacy-list-item">
-          **Contact us with a question or complaint.**
-        </p>
-        <p className="privacy-list-item">
-          **Participate in a promotion or survey.**
-        </p>
-        <p className="privacy-list-item">
-          **Use or browse our website and apps.**
-        </p>
-        <p className="privacy-list-item">
-          With your consent, or as permitted by law, we may also **receive
-          information about you from other organizations or third parties.**
-          This can include fraud-prevention agencies and business directories.
-        </p>
-      </ul>
+            <div className="mt-12 p-8 bg-red-600 rounded-[32px] text-white shadow-2xl shadow-red-600/20">
+              <h4 className="font-black text-xl mb-2">Need Help?</h4>
+              <p className="text-red-100 text-sm mb-6 leading-relaxed">
+                Questions about your data? Our legal team is here.
+              </p>
+              <a
+                href="mailto:support@pickars.com"
+                className="block text-center bg-white text-red-600 py-3 rounded-xl font-bold text-sm"
+              >
+                Email Support
+              </a>
+            </div>
+          </aside>
 
-      {/* --- Section 3: Understanding what you want (the use of cookies) --- */}
-      {/* <hr className="privacy-separator" /> */}
-      <h2 className="privacy-section-heading">3. The Use of Cookies</h2>
-      <p className="privacy-paragraph">
-        We may use **cookies** (small text files stored in your browser) and
-        other technologies like **web beacons** (tiny, transparent image files)
-        to understand how you use our platform. These tools help our website
-        remember you and provide a more personalized experience.
-      </p>
-      <p className="privacy-paragraph">
-        This data helps us tailor our services to your interests and needs. For
-        example, a persistent cookie may be used to remember your details so you
-        don't have to log in every time you visit.
-      </p>
-      <p className="privacy-paragraph">
-        Cookies cannot be used to determine your identity on their own and do
-        not harm your computer. You have the option to set your browser to alert
-        you when you receive a cookie, allowing you to choose whether to accept
-        it. However, declining cookies may affect the functionality or
-        performance of our website.
-      </p>
+          {/* RIGHT: Scrollable Content */}
+          <main className="lg:col-span-9 space-y-24">
+            {/* Section 1: Intro */}
+            <section id="intro" className="scroll-mt-32">
+              <div className="p-10 md:p-16 bg-white border border-gray-100 rounded-[50px] shadow-sm">
+                <h2 className="text-3xl font-black mb-8 flex items-center gap-4">
+                  <span className="h-10 w-1 bg-red-600 rounded-full" />
+                  1. Introduction
+                </h2>
+                <div className="space-y-6 text-gray-500 text-lg leading-relaxed">
+                  <p>
+                    **Pickars Courier Limited** ("Pickars", “we”, “us”) provides
+                    a technology platform for logistical needs. Personal
+                    information is any data that identifies you—such as your
+                    name, email, and live location.
+                  </p>
+                  <p>
+                    This policy is reviewed annually. As we add new features,
+                    our practices may evolve. We will always notify you of
+                    significant changes by publishing the new version here.
+                  </p>
+                </div>
+              </div>
+            </section>
 
-      {/* --- Section 4: Use and analysis of your personal information --- */}
-      {/* <hr className="privacy-separator" /> */}
-      <h2 className="privacy-section-heading">
-        4. How We Use and Analyze Your Personal Information
-      </h2>
-      <p className="privacy-paragraph">
-        We may use and analyze your information to:
-      </p>
-      <ul className="privacy-list">
-        <p className="privacy-list-item">
-          **Facilitate and provide our dispatch and delivery services.**
-        </p>
-        <p className="privacy-list-item">
-          **Keep you informed about new features and services** (unless you opt
-          out of marketing messages).
-        </p>
-        <p className="privacy-list-item">
-          **Improve and personalize the services we offer you** by understanding
-          how you use our platform.
-        </p>
-        <p className="privacy-list-item">
-          **Comply with all applicable laws and regulations.**
-        </p>
-        <p className="privacy-list-item">
-          **Enhance, modify, and further develop our services.**
-        </p>
-        <p className="privacy-list-item">
-          **Authenticate users, verify identities, and ensure data
-          credibility.**
-        </p>
-        <p className="privacy-list-item">
-          **Prevent and detect fraudulent or illegal activities.**
-        </p>
-        <p className="privacy-list-item">
-          **Provide customer support,** including responding to your inquiries
-          and complaints.
-        </p>
-        <p className="privacy-list-item">**Conduct surveys and research.**</p>
-        <p className="privacy-list-item">
-          **Fulfill our legal obligations** or defend our rights in legal
-          proceedings.
-        </p>
-        <p className="privacy-list-item">
-          **Process payments for services** rendered on our platform.
-        </p>
-        <p className="privacy-list-item">
-          **Inform you about products and services from other companies** we
-          think you might find interesting.
-        </p>
-        <p className="privacy-list-item">
-          **Contact you at any time** using your provided phone number, email
-          address, or other contact details.
-        </p>
-        <p className="privacy-list-item">
-          **Share aggregated, non-personal data with our partners** to help them
-          improve their services.
-        </p>
-        <p className="privacy-list-item">
-          **Use it for any other purpose with your explicit consent.**
-        </p>
-      </ul>
+            {/* Section 2: Collection */}
+            <section id="collection" className="scroll-mt-32">
+              <h2 className="text-4xl font-black mb-10 tracking-tight">
+                2. How We Collect Data
+              </h2>
+              <div className="grid md:grid-cols-2 gap-6">
+                {[
+                  "Account creation (Name, Phone, Email)",
+                  "Booking a rider for delivery",
+                  "Subscribing to newsletters",
+                  "Customer support inquiries",
+                  "Participating in promotions",
+                  "App/Website usage tracking",
+                ].map((item, i) => (
+                  <div
+                    key={i}
+                    className="p-8 bg-white border border-gray-50 rounded-[32px] flex items-start gap-4"
+                  >
+                    <div className="h-8 w-8 rounded-full bg-red-50 text-red-600 flex shrink-0 items-center justify-center font-bold">
+                      ✓
+                    </div>
+                    <p className="text-gray-600 font-medium">{item}</p>
+                  </div>
+                ))}
+              </div>
+            </section>
 
-      {/* --- Section 5: Consent --- */}
-      {/* <hr className="privacy-separator" /> */}
-      <h2 className="privacy-section-heading">5. Your Consent</h2>
-      <p className="privacy-paragraph">
-        You agree to this Policy by signing our Consent Form or by clicking the
-        “accept” button to use any of our platforms or services. You consent to
-        the collection and processing of your personal information (including
-        but not limited to your name, date of birth, email, address, and phone
-        number), your dispatch history, and any other relevant data required to
-        provide Pickars Courier Limited services. If you wish to opt out of our
-        services or withdraw your consent, you can do so by contacting us at{" "}
-        <a href="mailto:support@pickars.com" className="privacy-link">
-          support@pickars.com
-        </a>{" "}
-        or by completing our Data Subject Request Form. Please note that this
-        Policy governs your use of our services, and if you are not comfortable
-        with how we process your data, you may not be able to use our services.
-      </p>
+            {/* Section 3: Cookies */}
+            <section id="cookies" className="scroll-mt-32">
+              <div className="p-10 md:p-16 bg-[#121212] rounded-[50px] text-white">
+                <h2 className="text-3xl font-black mb-8 flex items-center gap-4">
+                  <FiEye className="text-red-600" /> 3. The Use of Cookies
+                </h2>
+                <div className="space-y-6 text-gray-400 text-lg">
+                  <p>
+                    We use cookies and web beacons to understand platform usage.
+                    These tools help us remember your preferences so you don't
+                    have to log in every time.
+                  </p>
+                  <p>
+                    Cookies do not harm your computer. You can disable them in
+                    your browser, though some features of Pickars may become
+                    unavailable.
+                  </p>
+                </div>
+              </div>
+            </section>
 
-      {/* --- Section 6: Lawful Basis for Processing Data --- */}
-      {/* <hr className="privacy-separator" /> */}
-      <h2 className="privacy-section-heading">
-        6. Lawful Basis for Data Processing
-      </h2>
-      <p className="privacy-paragraph">
-        The legal basis for processing your data is the **performance of our
-        contractual obligations to you.** The personal data we collect—such as
-        your name, address, and phone number—is necessary to fulfill your
-        dispatch requests and complete your deliveries.
-      </p>
+            {/* Section 4: Usage */}
+            <section id="use" className="scroll-mt-32">
+              <h2 className="text-4xl font-black mb-10 tracking-tight">
+                4. Usage & Analysis
+              </h2>
+              <div className="bg-white border border-gray-100 rounded-[50px] overflow-hidden">
+                <table className="w-full text-left border-collapse">
+                  <thead>
+                    <tr className="bg-gray-50">
+                      <th className="p-8 text-sm uppercase tracking-widest font-black text-gray-400">
+                        Purpose
+                      </th>
+                      <th className="p-8 text-sm uppercase tracking-widest font-black text-gray-400">
+                        Benefit
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-gray-50 text-gray-600">
+                    <tr>
+                      <td className="p-8 font-bold text-[#121212]">
+                        Operational
+                      </td>
+                      <td className="p-8">
+                        Facilitating dispatch and delivery services.
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="p-8 font-bold text-[#121212]">Security</td>
+                      <td className="p-8">
+                        Verifying identities and preventing fraud.
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="p-8 font-bold text-[#121212]">
+                        Marketing
+                      </td>
+                      <td className="p-8">
+                        Keeping you updated on features you'll love.
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </section>
 
-      {/* --- Section 7: The Personal Information We Collect --- */}
-      {/* <hr className="privacy-separator" /> */}
-      <h2 className="privacy-section-heading">7. The Information We Collect</h2>
-      <p className="privacy-paragraph">
-        The information we collect varies depending on the services you use. We
-        only collect the essential information needed to create your account and
-        use our services. This includes:
-      </p>
-      <ul className="privacy-list">
-        <p className="privacy-list-item">
-          **Your account details:** Name, age, date of birth, gender, physical
-          address, email address, and phone number. If you provide information
-          about third parties (such as for a delivery recipient), we assume you
-          have their consent to do so. We are not liable for any data breaches
-          related to this third-party information.
-        </p>
-        <p className="privacy-list-item">
-          **Dispatch details:** The time, location, and history of your delivery
-          requests. Your geographical location is obtained from information
-          collected as described in Section 9.
-        </p>
-        <p className="privacy-list-item">
-          **Device information:** Details of the device you use to access our
-          platform, including operating system, unique identifiers, and network
-          information.
-        </p>
-        <p className="privacy-list-item">
-          **Payment information:** Data collected via financial or third-party
-          payment systems for processing payments, including credit card
-          details.
-        </p>
-        <p className="privacy-list-item">
-          **Referral details:** Information about individuals you refer to our
-          service.
-        </p>
-        <p className="privacy-list-item">
-          **Loyalty program information:** Details about your participation in
-          any loyalty programs linked to our services.
-        </p>
-        <p className="privacy-list-item">
-          **Social media data:** Any information you allow a social media
-          platform to share with us if you interact with us through these
-          channels.
-        </p>
-        <p className="privacy-list-item">
-          **Saved addresses:** Any addresses you store for delivery purposes.
-        </p>
-        <p className="privacy-list-item">
-          **Demographic information:** If you choose to participate in optional
-          surveys, we may collect information like age, marital status, and
-          profession.
-        </p>
-      </ul>
+            {/* Section 5: Location */}
+            <section id="location" className="scroll-mt-32">
+              <div className="p-10 md:p-16 bg-red-50 border border-red-100 rounded-[50px]">
+                <h2 className="text-3xl font-black mb-8 text-red-600 flex items-center gap-4">
+                  <FiMapPin /> 5. Location Services
+                </h2>
+                <p className="text-red-900/70 text-lg leading-relaxed mb-6">
+                  **Enabling location services is essential for Pickars.** We
+                  use GPS, IP addresses, and Wi-Fi metadata to connect you with
+                  the nearest riders and optimize delivery routes.
+                </p>
+                <div className="bg-white/50 p-6 rounded-2xl text-red-600 text-sm font-bold border border-red-200">
+                  Note: You can manage these settings on your device at any
+                  time.
+                </div>
+              </div>
+            </section>
 
-      {/* --- Section 8: Third-Party Technologies and Services --- */}
-      {/* <hr className="privacy-separator" /> */}
-      <h2 className="privacy-section-heading">
-        8. Third-Party Technologies and Services
-      </h2>
-      <p className="privacy-paragraph">
-        At times, we may feature products or services from third parties on our
-        platform. These third-party sites have their own independent privacy
-        policies. We are not responsible for the content or activities of these
-        sites, but we always welcome your feedback to ensure the integrity of
-        our platform.
-      </p>
-      <p className="privacy-paragraph">
-        We may also use social media sites like Facebook and Twitter for
-        interactive communication. Please be aware that these services have
-        their own terms and conditions, and their handling of your personal
-        information may differ from ours. We encourage you to review their
-        policies.
-      </p>
-      <p className="privacy-paragraph">
-        To protect your privacy, we recommend you communicate with us directly
-        through private messages, email, or our customer service hotline.
-      </p>
-
-      {/* --- Section 9: Location Services --- */}
-      {/* <hr className="privacy-separator" /> */}
-      <h2 className="privacy-section-heading">9. Location Services</h2>
-      <p className="privacy-paragraph">
-        The first time you use our platform, you will be asked to grant Pickars
-        Courier Limited access to your location. **Enabling location services is
-        essential for us to provide our dispatch services.** You can manage
-        these settings on your device at any time. Once granted, we will use
-        your IP address, GPS, and other sensors to get your location, which is
-        necessary to connect you with nearby riders.
-      </p>
-      <p className="privacy-paragraph">
-        We may also collect **Wi-Fi metadata** from your device, such as your
-        Wi-Fi status, MAC address, and GPS coordinates relative to nearby Wi-Fi
-        networks. This information is primarily used to **recommend the closest
-        riders to you.**
-      </p>
-
-      {/* --- Section 10: Communication --- */}
-      {/* <hr className="privacy-separator" /> */}
-      <h2 className="privacy-section-heading">10. Communication</h2>
-      <p className="privacy-paragraph">
-        Our platform allows you to contact riders via an anonymous call or
-        message after a dispatch request has been confirmed. For safety, quality
-        assurance, fraud prevention, and to improve our services, Pickars
-        Courier Limited will **record all voice and text communications** made
-        and received through the platform. By using this feature, you consent to
-        this recording and our use of these communications as outlined in this
-        policy.
-      </p>
-
-      {/* --- Section 11: Surveys --- */}
-      {/* <hr className="privacy-separator" /> */}
-      <h2 className="privacy-section-heading">11. Surveys</h2>
-      <p className="privacy-paragraph">
-        We may ask you to complete a survey to help us better understand and
-        improve our services. If you participate, we may collect **demographic
-        information** such as age, marital status, and profession. By
-        participating, you consent to our use of the information you provide in
-        accordance with this privacy policy.
-      </p>
-
-      {/* --- Section 12: Disclosures of your personal information --- */}
-      {/* <hr className="privacy-separator" /> */}
-      <h2 className="privacy-section-heading">
-        12. How We Disclose Your Personal Information
-      </h2>
-      <p className="privacy-paragraph">
-        12.1. Pickars Courier Limited will not sell or rent your information to
-        third parties. However, we may share your information with:
-      </p>
-      <ul className="privacy-list">
-        <p className="privacy-list-item">
-          **Our group companies or subsidiaries.**
-        </p>
-        <p className="privacy-list-item">
-          **Agents, vendors, or partners** who help us provide our services.
-        </p>
-        <p className="privacy-list-item">
-          **Companies hired to perform services on our behalf.**
-        </p>
-        <p className="privacy-list-item">
-          **Credit reference, fraud prevention, or other credit scoring
-          agencies.**
-        </p>
-        <p className="privacy-list-item">
-          **Law enforcement agencies, courts, or other public authorities** when
-          required or authorized by law.
-        </p>
-        <p className="privacy-list-item">
-          **Investors, financial advisers, or auditors.**
-        </p>
-        <p className="privacy-list-item">
-          We may **share your information for our everyday business
-          operations,** such as processing your dispatch requests.
-        </p>
-        <p className="privacy-list-item">
-          We may **disclose your information from our databases and server logs
-          to comply with legal requirements,** protect our rights, or ensure the
-          security of our platform. We will notify you of any such disclosure if
-          legally required.
-        </p>
-      </ul>
-      <p className="privacy-paragraph">
-        12.2. Pickars Courier Limited will comply with all relevant data
-        protection laws in these disclosures. We will use commercially
-        reasonable efforts to ensure that any third parties only use your
-        information as necessary and in a manner consistent with privacy
-        legislation.
-      </p>
-      <p className="privacy-paragraph">
-        12.3. You can update your privacy and information settings at any time
-        within the Pickars Courier Limited mobile app when logged into your
-        account.
-      </p>
-
-      {/* --- Section 13: Disclaimer --- */}
-      {/* <hr className="privacy-separator" /> */}
-      <h2 className="privacy-section-heading">13. Disclaimer</h2>
-      <p className="privacy-paragraph">
-        Pickars Courier Limited acts solely as a platform to connect you with
-        delivery riders. We are not responsible for the quality, fitness for
-        purpose, or accuracy of any services provided by the riders or for the
-        condition of any items dispatched.
-      </p>
-      <p className="privacy-paragraph">
-        While we strive to provide a seamless service, we do not make any
-        guarantees about the representations made by the riders concerning their
-        services and are not responsible for any issues arising from a delivery.
-      </p>
-
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
+            {/* Footer Notice */}
+            <footer className="pt-12 border-t border-gray-100">
+              <p className="text-gray-400 text-sm">
+                Last Updated: February 2026 • Pickars Courier Limited Legal
+                Department
+              </p>
+            </footer>
+          </main>
+        </div>
+      </div>
     </div>
   );
 };
