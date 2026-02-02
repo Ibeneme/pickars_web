@@ -1,5 +1,5 @@
 import React from "react";
-import { motion } from "framer-motion";
+import { motion, type Variants } from "framer-motion"; // Import Variants type
 import {
   FaExclamationTriangle,
   FaLightbulb,
@@ -8,7 +8,8 @@ import {
 } from "react-icons/fa";
 
 const ProblemIdea: React.FC = () => {
-  const containerVariants = {
+  // Explicitly typing these as Variants resolves the TS(2322) error
+  const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
@@ -16,7 +17,7 @@ const ProblemIdea: React.FC = () => {
     },
   };
 
-  const itemVariants = {
+  const itemVariants: Variants = {
     hidden: { opacity: 0, y: 20 },
     visible: {
       opacity: 1,
@@ -27,12 +28,11 @@ const ProblemIdea: React.FC = () => {
 
   return (
     <section className="relative overflow-hidden bg-white px-6 py-24 font-['Lufga'] md:py-40">
-      {/* Soft Background Glows */}
+      {/* Rest of your component remains the same */}
       <div className="pointer-events-none absolute -top-24 -left-24 h-[500px] w-[500px] rounded-full bg-red-50/60 blur-[120px]" />
       <div className="pointer-events-none absolute bottom-0 right-0 h-[300px] w-[300px] rounded-full bg-gray-50 blur-[100px]" />
 
       <div className="relative mx-auto max-w-7xl">
-        {/* Header Section */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -47,7 +47,6 @@ const ProblemIdea: React.FC = () => {
         </motion.div>
 
         <div className="grid gap-16 lg:grid-cols-12 lg:items-center">
-          {/* Left Side: The Narrative */}
           <motion.article
             variants={containerVariants}
             initial="hidden"
@@ -105,7 +104,6 @@ const ProblemIdea: React.FC = () => {
             </motion.div>
           </motion.article>
 
-          {/* Right Side: The Solution Card */}
           <motion.aside
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
@@ -114,7 +112,6 @@ const ProblemIdea: React.FC = () => {
             className="relative lg:col-span-6"
           >
             <div className="group relative overflow-hidden rounded-[40px] bg-[#0c0c0c] p-10 text-white shadow-2xl md:p-16">
-              {/* Decorative Glow */}
               <div className="absolute -right-20 -top-20 h-64 w-64 rounded-full bg-red-600/10 blur-3xl transition-all group-hover:bg-red-600/20" />
 
               <div className="relative z-10">
