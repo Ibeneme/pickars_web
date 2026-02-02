@@ -1,9 +1,100 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { FiPlus, FiMinus, FiSearch, FiMessageCircle } from "react-icons/fi";
-import { FaApple } from "react-icons/fa";
-import { BiLogoPlayStore } from "react-icons/bi";
+import { FiPlus, FiMinus, FiSearch, FiPhoneCall, FiMail } from "react-icons/fi";
+import { FaShieldAlt, FaMapMarkedAlt, FaUserCheck } from "react-icons/fa";
 
+// --- NEW SECTION: SAFETY & TRUST ---
+const SafetySection: React.FC = () => {
+  const safetyFeatures = [
+    {
+      icon: <FaShieldAlt />,
+      title: "Secure Goods",
+      desc: "Every package is handled with military-grade care and tracked until it reaches the hands of your recipient.",
+    },
+    {
+      icon: <FaUserCheck />,
+      title: "Verified Riders",
+      desc: "Our riders undergo rigorous background checks and training to ensure professionalism and security.",
+    },
+    {
+      icon: <FaMapMarkedAlt />,
+      title: "Geofenced Pathing",
+      desc: "Smart routing ensures riders stay on path, giving you accurate ETAs and complete peace of mind.",
+    },
+  ];
+
+  return (
+    <section className="bg-white py-24 md:py-32 font-['Lufga']">
+      <div className="mx-auto max-w-7xl px-6">
+        <div className="grid lg:grid-cols-3 gap-8">
+          {safetyFeatures.map((item, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: i * 0.1 }}
+              className="p-10 rounded-[3rem] bg-[#fafafa] border border-gray-100 hover:shadow-2xl hover:shadow-red-600/5 transition-all group"
+            >
+              <div className="h-16 w-16 rounded-2xl bg-white  flex items-center justify-center text-2xl text-red-600 mb-8 group-hover:bg-red-600 group-hover:text-white transition-all duration-500">
+                {item.icon}
+              </div>
+              <h3 className="text-2xl font-black text-[#121212] mb-4 uppercase tracking-tighter">
+                {item.title}
+              </h3>
+              <p className="text-gray-500 font-bold leading-relaxed lowercase">
+                {item.desc}
+              </p>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+// --- NEW SECTION: CONTACT CTA ---
+const ContactCTA: React.FC = () => {
+  return (
+    <section className="bg-white py-20 font-['Lufga']">
+      <div className="mx-auto max-w-7xl px-6">
+        <div className="rounded-[4rem] bg-[#121212] p-12 md:p-24 overflow-hidden relative">
+          {/* Decorative background text */}
+          <div className="absolute top-0 right-0 text-[15rem] font-black text-white/[0.02] leading-none pointer-events-none translate-x-1/4 select-none">
+            HELP
+          </div>
+
+          <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-12">
+            <div className="text-center lg:text-left">
+              <h2 className="text-5xl md:text-7xl font-black text-white tracking-tighter leading-none mb-6">
+                Still <span className="text-red-600">Stuck?</span>
+              </h2>
+              <p className="text-gray-400 text-xl font-bold max-w-md mx-auto lg:mx-0">
+                Our support experts are ready to assist you 24/7.
+              </p>
+            </div>
+
+            <div className="flex flex-col sm:flex-row gap-6">
+              <a
+                href="mailto:support@pickars.com"
+                className="flex items-center gap-4 bg-white text-[#121212] px-10 py-6 rounded-3xl font-black text-lg hover:scale-105 transition-transform "
+              >
+                <FiMail size={24} /> Email Us
+              </a>
+              <a
+                href="tel:+2340000000"
+                className="flex items-center gap-4 bg-red-600 text-white px-10 py-6 rounded-3xl font-black text-lg hover:scale-105 transition-transform  shadow-red-600/20"
+              >
+                <FiPhoneCall size={24} /> Call Now
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+// --- EXISTING FAQ PAGE ---
 const faqs = [
   {
     question: "What is Pickars Courier Limited?",
@@ -25,26 +116,6 @@ const faqs = [
     answer:
       "Fees are based on distance, item size/weight, and current demand. The exact fee is displayed transparently before you confirm—no hidden charges.",
   },
-  {
-    question: "Can I track my delivery in real-time?",
-    answer:
-      "Yes! Once a rider is assigned, you can view their live location on the map and receive status updates until the package reaches its destination.",
-  },
-  {
-    question: "What if my item is damaged or lost?",
-    answer:
-      "While we facilitate connections with reliable riders, Pickars is a platform provider. We encourage users to review our Terms regarding liability and report any concerns to our support team.",
-  },
-  {
-    question: "How can I contact customer support?",
-    answer:
-      "Reach us via email at support@pickars.com, through our in-app chat, or by calling our hotline. We aim for prompt responses to every inquiry.",
-  },
-  {
-    question: "Do you offer services for businesses?",
-    answer:
-      "Yes! From bulk deliveries to scheduled pickups, we offer tailored logistics for businesses of all sizes. Contact support@pickars.com for custom solutions.",
-  },
 ];
 
 const FAQPage: React.FC = () => {
@@ -56,82 +127,57 @@ const FAQPage: React.FC = () => {
   );
 
   return (
-    <section className="bg-[#FAFAFA] py-24 px-6 font-['Lufga'] pt-[160px]">
-      <div className="mx-auto max-w-7xl">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
-          {/* LEFT COLUMN: Sticky Info & Search */}
-          <div className="lg:col-span-5 lg:sticky lg:top-32 lg:h-fit">
-            <motion.span
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              className="text-xs font-black uppercase tracking-[0.4em] text-red-600 mb-6 block"
-            >
-              Support Center
-            </motion.span>
-            <h1 className="text-6xl md:text-8xl font-black tracking-tighter text-[#121212] leading-[0.9] mb-8">
-              Got <br /> <span className="text-gray-300">Questions?</span>
-            </h1>
-
-            <p className="text-gray-500 text-lg mb-10 max-w-md">
-              Find everything you need to know about Pickars. Can't find an
-              answer? Our team is just a chat away.
-            </p>
-
-            {/* Modern Search Input */}
-            <div className="relative mb-10 group">
-              <FiSearch
-                className="absolute left-6 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-red-600 transition-colors"
-                size={22}
-              />
-              <input
-                type="text"
-                placeholder="Search topics..."
-                className="w-full bg-white border border-gray-200 rounded-3xl py-6 pl-16 pr-8 outline-none focus:border-red-600/20 focus:ring-8 focus:ring-red-600/5 transition-all text-lg shadow-sm"
-                onChange={(e) => setSearchTerm(e.target.value)}
-              />
+    <>
+      <section className="bg-[#FAFAFA] py-24 px-6 font-['Lufga'] pt-[160px]">
+        <div className="mx-auto max-w-7xl">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
+            {/* LEFT COLUMN */}
+            <div className="lg:col-span-5 lg:sticky lg:top-32 lg:h-fit">
+              <motion.span
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="text-xs font-black uppercase tracking-[0.4em] text-red-600 mb-6 block"
+              >
+                Support Center
+              </motion.span>
+              <h1 className="text-6xl md:text-8xl font-black tracking-tighter text-[#121212] leading-[0.9] mb-8">
+                Got <br /> <span className="text-gray-300">Questions?</span>
+              </h1>
+              <div className="relative mb-10 group">
+                <FiSearch
+                  className="absolute left-6 top-1/2 -translate-y-1/2 text-gray-400"
+                  size={22}
+                />
+                <input
+                  type="text"
+                  placeholder="Search topics..."
+                  className="w-full bg-white border border-gray-200 rounded-3xl py-6 pl-16 pr-8 outline-none focus:border-red-600/20 transition-all text-lg"
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                />
+              </div>
             </div>
 
-            <div className="flex flex-wrap gap-4">
-              <button className="flex items-center gap-3 rounded-2xl bg-[#0c0c0c] px-6 py-4 text-white hover:bg-red-600 transition-all shadow-lg hover:-translate-y-1">
-                <FaApple size={20} />{" "}
-                <span className="text-sm font-bold tracking-tight">
-                  App Store
-                </span>
-              </button>
-              <button className="flex items-center gap-3 rounded-2xl bg-[#0c0c0c] px-6 py-4 text-white hover:bg-red-600 transition-all shadow-lg hover:-translate-y-1">
-                <BiLogoPlayStore size={20} />{" "}
-                <span className="text-sm font-bold tracking-tight">
-                  Play Store
-                </span>
-              </button>
-            </div>
-          </div>
-
-          {/* RIGHT COLUMN: The FAQ Accordions */}
-          <div className="lg:col-span-7 space-y-4">
-            <AnimatePresence mode="popLayout">
-              {filteredFaqs.length > 0 ? (
-                filteredFaqs.map((faq, index) => (
+            {/* RIGHT COLUMN */}
+            <div className="lg:col-span-7 space-y-4">
+              <AnimatePresence mode="popLayout">
+                {filteredFaqs.map((faq, index) => (
                   <motion.div
-                    layout
                     key={index}
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.95 }}
-                    className={`group rounded-[40px] border transition-all duration-500 overflow-hidden ${
+                    layout
+                    className={`group rounded-[40px] border transition-all ${
                       activeIndex === index
-                        ? "border-red-600/10 bg-white shadow-2xl shadow-red-600/5"
-                        : "border-gray-200/50 bg-white/50 backdrop-blur-sm hover:border-gray-300"
+                        ? "border-red-600/10 bg-white "
+                        : "border-gray-200 bg-white/50"
                     }`}
                   >
                     <button
                       onClick={() =>
                         setActiveIndex(activeIndex === index ? null : index)
                       }
-                      className="w-full flex items-center justify-between p-8 md:p-10 text-left outline-none"
+                      className="w-full flex items-center justify-between p-8 md:p-10 text-left"
                     >
                       <h3
-                        className={`text-xl md:text-2xl font-black tracking-tight transition-colors duration-300 ${
+                        className={`text-xl md:text-2xl font-black tracking-tight ${
                           activeIndex === index
                             ? "text-red-600"
                             : "text-[#121212]"
@@ -140,10 +186,10 @@ const FAQPage: React.FC = () => {
                         {faq.question}
                       </h3>
                       <div
-                        className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl transition-all duration-500 ${
+                        className={`h-12 w-12 flex items-center justify-center rounded-2xl transition-all ${
                           activeIndex === index
-                            ? "bg-red-600 text-white rotate-180"
-                            : "bg-gray-100 text-gray-400 group-hover:bg-[#121212] group-hover:text-white"
+                            ? "bg-red-600 text-white"
+                            : "bg-gray-100"
                         }`}
                       >
                         {activeIndex === index ? (
@@ -153,63 +199,26 @@ const FAQPage: React.FC = () => {
                         )}
                       </div>
                     </button>
-
-                    <AnimatePresence>
-                      {activeIndex === index && (
-                        <motion.div
-                          initial={{ height: 0, opacity: 0 }}
-                          animate={{ height: "auto", opacity: 1 }}
-                          exit={{ height: 0, opacity: 0 }}
-                          transition={{
-                            duration: 0.4,
-                            ease: [0.04, 0.62, 0.23, 0.98],
-                          }}
-                        >
-                          <div className="px-8 md:px-10 pb-10 text-gray-500 leading-relaxed text-lg border-t border-gray-50 pt-8">
-                            {faq.answer.split(" ").map((word, i) =>
-                              word.includes("@") ? (
-                                <span
-                                  key={i}
-                                  className="text-red-600 font-bold underline decoration-2 underline-offset-4 cursor-pointer hover:text-[#121212] transition-colors"
-                                >
-                                  {word}{" "}
-                                </span>
-                              ) : (
-                                <span key={i}>{word} </span>
-                              )
-                            )}
-                          </div>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
+                    {activeIndex === index && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        className="px-8 md:px-10 pb-10 text-gray-500 font-bold leading-relaxed lowercase"
+                      >
+                        {faq.answer}
+                      </motion.div>
+                    )}
                   </motion.div>
-                ))
-              ) : (
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  className="py-20 text-center rounded-[40px] border-2 border-dashed border-gray-200"
-                >
-                  <FiMessageCircle
-                    size={48}
-                    className="mx-auto text-gray-300 mb-4"
-                  />
-                  <p className="text-gray-400 text-xl font-medium">
-                    No results found for "{searchTerm}"
-                  </p>
-                </motion.div>
-              )}
-            </AnimatePresence>
+                ))}
+              </AnimatePresence>
+            </div>
           </div>
         </div>
+      </section>
 
-        {/* Floating Background Elements */}
-        <div className="fixed top-0 right-0 -z-10 h-screen w-screen overflow-hidden opacity-30 pointer-events-none">
-          <div className="absolute top-[-10%] right-[-10%] h-[500px] w-[500px] rounded-full bg-red-100/50 blur-[120px]" />
-          <div className="absolute bottom-[10%] left-[-10%] h-[400px] w-[400px] rounded-full bg-gray-200/50 blur-[100px]" />
-        </div>
-      </div>
-    </section>
+      <SafetySection />
+      <ContactCTA />
+    </>
   );
 };
 

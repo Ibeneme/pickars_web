@@ -1,6 +1,8 @@
 import React, { useRef, useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import { motion, useScroll, useSpring } from "framer-motion";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
+
+// Note: Replace these imports with your actual asset paths
 import Founding from "../../assets/images/story/dev.jpg";
 import Growth from "../../assets/images/story/timer.jpg";
 import Excellence from "../../assets/images/story/rider.jpg";
@@ -46,24 +48,30 @@ const PickarsJourney: React.FC = () => {
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
 
-  // Function to handle the actual scrolling
+  // Progressive Scroll Tracking
+  const { scrollXProgress } = useScroll({ container: scrollRef });
+  const scaleX = useSpring(scrollXProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001,
+  });
+
   const scroll = (direction: "left" | "right") => {
     if (scrollRef.current) {
-      const { scrollLeft, clientWidth } = scrollRef.current;
-      const scrollTo =
-        direction === "left"
-          ? scrollLeft - clientWidth
-          : scrollLeft + clientWidth;
-      scrollRef.current.scrollTo({ left: scrollTo, behavior: "smooth" });
+      const { clientWidth } = scrollRef.current;
+      const scrollAmount = clientWidth * 0.8;
+      scrollRef.current.scrollBy({
+        left: direction === "left" ? -scrollAmount : scrollAmount,
+        behavior: "smooth",
+      });
     }
   };
 
-  // Check scroll position to hide/show arrows
   const checkScroll = () => {
     if (scrollRef.current) {
       const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
-      setCanScrollLeft(scrollLeft > 0);
-      setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 10);
+      setCanScrollLeft(scrollLeft > 20);
+      setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 20);
     }
   };
 
@@ -74,101 +82,127 @@ const PickarsJourney: React.FC = () => {
   }, []);
 
   return (
-    <section className="bg-[#fdfdfd] py-24 font-['Lufga'] overflow-hidden">
+    <section className="bg-white py-24 font-['Lufga'] md:py-32">
       <div className="mx-auto max-w-7xl px-6">
-        {/* Header with Integrated Navigation Arrows */}
-        <div className="mb-16 flex flex-col md:flex-row md:items-end md:justify-between gap-8">
-          <div>
-            <motion.span
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              className="text-xs font-black uppercase tracking-[0.4em] text-red-600"
+        {/* Header Section */}
+        <div className="mb-12 flex flex-col items-start justify-between gap-8 md:flex-row md:items-end">
+          <div className="max-w-2xl">
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              className="mb-4 inline-flex items-center gap-3"
             >
-              The Evolution
-            </motion.span>
+              <span className="h-[1px] w-8 bg-red-600" />
+              <span className="text-xs font-bold uppercase tracking-[0.3em] text-red-600">
+                The Evolution
+              </span>
+            </motion.div>
             <motion.h2
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              className="mt-4 text-5xl font-black tracking-tighter text-[#121212] md:text-7xl"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              className="text-5xl font-black tracking-tighter text-[#121212] md:text-7xl"
             >
               Our Story <span className="text-gray-300">In Motion.</span>
             </motion.h2>
           </div>
 
-          {/* Navigation Buttons */}
-          <div className="flex gap-4">
-            <button
+          {/* Nav Controls */}
+          <div className="flex gap-3">
+            <NavButton
               onClick={() => scroll("left")}
               disabled={!canScrollLeft}
-              className={`flex h-14 w-14 items-center justify-center rounded-full border transition-all ${
-                canScrollLeft
-                  ? "border-red-600 text-red-600 hover:bg-red-600 hover:text-white"
-                  : "border-gray-200 text-gray-200 cursor-not-allowed"
-              }`}
-            >
-              <FiChevronLeft size={28} />
-            </button>
-            <button
+              icon={<FiChevronLeft size={24} />}
+            />
+            <NavButton
               onClick={() => scroll("right")}
               disabled={!canScrollRight}
-              className={`flex h-14 w-14 items-center justify-center rounded-full border transition-all ${
-                canScrollRight
-                  ? "border-red-600 text-red-600 hover:bg-red-600 hover:text-white"
-                  : "border-gray-200 text-gray-200 cursor-not-allowed"
-              }`}
-            >
-              <FiChevronRight size={28} />
-            </button>
+              icon={<FiChevronRight size={24} />}
+            />
           </div>
         </div>
 
-        {/* Scrollable Container (Scrollbar hidden via CSS class) */}
-        <div
-          ref={scrollRef}
-          onScroll={checkScroll}
-          className="no-scrollbar flex gap-8 overflow-x-auto pb-8 snap-x snap-mandatory transition-all"
-        >
-          {pickarsJourney.map((stage) => (
-            <motion.div
-              key={stage.id}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="relative min-w-[380px] md:min-w-[440px] snap-start"
-            >
-              <span className="absolute -top-12 left-6 z-0 text-[10rem] font-black text-gray-100/60 select-none">
-                {stage.id}
-              </span>
-
-              <div className="group relative z-10 overflow-hidden rounded-[48px] border border-gray-100 bg-white p-4 shadow-xl shadow-gray-200/30 transition-all duration-500 hover:shadow-2xl hover:shadow-red-500/10">
-                <div className="relative h-72 w-full overflow-hidden rounded-[38px]">
-                  <img
-                    src={stage.image}
-                    alt={stage.title}
-                    className="h-full w-full object-cover transition-transform duration-1000 group-hover:scale-110"
-                  />
+        {/* Story Slider */}
+        <div className="relative">
+          <div
+            ref={scrollRef}
+            onScroll={checkScroll}
+            className="no-scrollbar flex gap-6 overflow-x-auto pb-12 snap-x snap-mandatory lg:gap-10"
+          >
+            {pickarsJourney.map((stage) => (
+              <motion.div
+                key={stage.id}
+                className="relative min-w-[85vw] snap-start first:pl-2 md:min-w-[480px]"
+              >
+                {/* Large Background ID */}
+                <div className="absolute -top-10 left-4 z-0 opacity-[0.03] text-[12rem] font-black leading-none pointer-events-none">
+                  {stage.id}
                 </div>
 
-                <div className="p-2 py-10">
-                  <div className="mb-4 inline-block rounded-xl bg-red-50 px-4 py-1.5 text-[10px] font-black uppercase tracking-widest text-red-600">
-                    {stage.phase}
+                <div className="group relative z-10 flex h-full flex-col overflow-hidden rounded-[40px] border border-gray-100 bg-white p-4 transition-all duration-500 hover:border-red-100 hover:shadow-[0_20px_50px_rgba(239,68,68,0.08)]">
+                  {/* Image Container */}
+                  <div className="relative aspect-[4/3] w-full overflow-hidden rounded-[32px]">
+                    <img
+                      src={stage.image}
+                      alt={stage.title}
+                      className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
                   </div>
-                  <h3 className="mb-3 text-2xl font-black tracking-tight text-[#121212]">
-                    {stage.title}
-                  </h3>
-                  <p className="text-sm leading-relaxed text-gray-500">
-                    {stage.description}
-                  </p>
+
+                  {/* Content */}
+                  <div className="flex flex-1 flex-col p-6 pt-10">
+                    <div className="mb-4 inline-flex w-fit rounded-full border border-red-100 bg-red-50/50 px-5 py-1 text-[10px] font-black uppercase tracking-widest text-red-600">
+                      Phase {stage.id}: {stage.phase}
+                    </div>
+                    <h3 className="mb-4 text-3xl font-black leading-tight text-[#121212]">
+                      {stage.title}
+                    </h3>
+                    <p className="text-base leading-relaxed text-gray-500">
+                      {stage.description}
+                    </p>
+                  </div>
                 </div>
-              </div>
-            </motion.div>
-          ))}
-          {/* Invisible spacer to allow full scroll of last item */}
-          <div className="min-w-[100px] flex-shrink-0" />
+              </motion.div>
+            ))}
+
+            {/* Last Spacer */}
+            <div className="min-w-[5vw] flex-shrink-0" />
+          </div>
+
+          {/* Visual Progress Bar */}
+          <div className="relative mx-auto mt-4 h-1 w-full max-w-7xl overflow-hidden rounded-full bg-gray-100">
+            <motion.div
+              style={{ scaleX }}
+              className="absolute inset-0 origin-left bg-red-600"
+            />
+          </div>
         </div>
       </div>
     </section>
   );
 };
+
+// Sub-component for Navigation Buttons to keep code clean
+const NavButton = ({
+  onClick,
+  disabled,
+  icon,
+}: {
+  onClick: () => void;
+  disabled: boolean;
+  icon: React.ReactNode;
+}) => (
+  <button
+    onClick={onClick}
+    disabled={disabled}
+    className={`flex h-14 w-14 items-center justify-center rounded-full border-2 transition-all duration-300 ${
+      disabled
+        ? "border-gray-100 text-gray-200"
+        : "border-gray-900 text-gray-900 hover:bg-red-600 hover:border-red-600 hover:text-white active:scale-95"
+    }`}
+  >
+    {icon}
+  </button>
+);
 
 export default PickarsJourney;

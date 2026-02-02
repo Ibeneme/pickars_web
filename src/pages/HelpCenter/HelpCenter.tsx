@@ -8,15 +8,12 @@ import {
   FiHelpCircle,
   FiUser,
   FiTruck,
-  FiSend,
   FiCreditCard,
-  FiMapPin,
-  FiAlertTriangle,
 } from "react-icons/fi";
-import { FaWhatsapp } from "react-icons/fa";
+import { FaWhatsapp, FaTwitter, FaInstagram } from "react-icons/fa";
 
 // ──────────────────────────────────────────────────────────────
-// Types & Expanded Data
+// Types & Data
 // ──────────────────────────────────────────────────────────────
 
 interface FAQItem {
@@ -62,18 +59,6 @@ const categories: Category[] = [
           },
         ],
       },
-      {
-        id: "gen4",
-        question: "Are my items insured during transit?",
-        answer:
-          "Yes — every delivery includes **Standard Transit Insurance** (up to ₦150,000).\n\nFor higher-value items we strongly recommend adding **Extended Coverage** during booking.",
-        annotations: [
-          {
-            type: "warning",
-            text: "Standard coverage has limits — declare high-value items!",
-          },
-        ],
-      },
     ],
   },
   {
@@ -87,12 +72,6 @@ const categories: Category[] = [
         question: "How do I book a delivery?",
         answer:
           "1. Open app → enter **Pickup** & **Drop-off** locations\n2. Choose **package type** & size\n3. Select rider (see rating & estimated time)\n4. Confirm payment method → track in real-time",
-      },
-      {
-        id: "cust5",
-        question: "What payment methods do you accept?",
-        answer:
-          "• Debit & Credit Cards (Visa, Verve, Mastercard)\n• Bank Transfer\n• Pickars Wallet (fastest – top-up once, reuse)",
       },
       {
         id: "cust7",
@@ -114,18 +93,6 @@ const categories: Category[] = [
         answer:
           "1. Download **Pickars Rider** app\n2. Upload valid Driver’s License + Bike/Car documents\n3. Complete short safety & service training\n4. Get verified (usually 24–48h) → start accepting orders",
       },
-      {
-        id: "rider3",
-        question: "How and when do I get paid?",
-        answer:
-          "Weekly payouts every **Monday morning**.\nAll completed trips from previous week are automatically transferred to your linked bank account.",
-      },
-      {
-        id: "rider6",
-        question: "Can I choose my own working hours?",
-        answer:
-          "Yes — 100% flexible.\nGo **Online** when you want orders, **Offline** when you’re done. No minimum hours required.",
-      },
     ],
   },
   {
@@ -145,58 +112,6 @@ const categories: Category[] = [
             text: "Wallet refunds are instant — choose Wallet for faster access",
           },
         ],
-      },
-      {
-        id: "pay2",
-        question: "Why was I charged extra?",
-        answer:
-          "Extra charges may apply for:\n• Waiting time > 10 min\n• Oversized / overweight packages\n• Additional stops not declared\n• Night surcharge (10 PM – 6 AM)",
-      },
-    ],
-  },
-  {
-    id: "tracking",
-    name: "Tracking & Delivery Status",
-    icon: <FiMapPin />,
-    description: "Live tracking, estimated time, status updates",
-    faqs: [
-      {
-        id: "track1",
-        question: "How accurate is the live tracking?",
-        answer:
-          "Tracking updates every **10–30 seconds** when the rider is moving.\n\nYou can see rider location, speed, and estimated time of arrival in real-time.",
-      },
-      {
-        id: "track2",
-        question: "What does 'Package Secured' mean?",
-        answer:
-          "**Package Secured** = rider has confirmed pickup and item is safely with them.\nNext statuses: **In Transit** → **Arrived** → **Delivered**.",
-      },
-    ],
-  },
-  {
-    id: "troubleshooting",
-    name: "Common Issues & Troubleshooting",
-    icon: <FiAlertTriangle />,
-    description: "App crashes, login problems, rider no-show",
-    faqs: [
-      {
-        id: "trb1",
-        question: "Rider is not moving / delayed — what should I do?",
-        answer:
-          "1. Message rider directly in chat\n2. If no response in 5 min → contact support via WhatsApp\n3. You can cancel & re-book if delay > 30 min (no fee if rider fault)",
-        annotations: [
-          {
-            type: "warning",
-            text: "Don't cancel before contacting support if you want compensation",
-          },
-        ],
-      },
-      {
-        id: "trb2",
-        question: "App keeps crashing or not loading",
-        answer:
-          "Try these steps:\n1. Clear app cache (Settings → Apps → Pickars → Storage → Clear Cache)\n2. Update to latest version\n3. Restart phone\n4. Use mobile data instead of Wi-Fi (or vice versa)",
       },
     ],
   },
@@ -230,208 +145,188 @@ const HelpCenter: React.FC = () => {
   const hasSearch = searchTerm.trim().length > 0;
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 via-white to-gray-50 font-['Lufga']">
-      {/* Hero */}
-      <header className="pt-16 pb-12 px-5 md:pt-24 md:pb-16 text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }}
-        >
-          <span className="inline-block px-5 py-2 text-sm font-black uppercase tracking-wider pt-[120px] text-red-700 rounded-full mb-6">
-            Help & Support Center
-          </span>
-          <h1 className="text-5xl sm:text-6xl md:text-7xl font-black tracking-tight text-gray-900 leading-tight">
-            Answers that <span className="text-gray-400">actually help</span>
-          </h1>
-          <p className="mt-6 text-gray-600 text-lg md:text-xl max-w-3xl mx-auto">
-            Quick solutions for customers, riders, payments, tracking and more.
-          </p>
-        </motion.div>
-      </header>
-
-      {/* Search */}
-      <div className="px-5 max-w-3xl mx-auto mb-16 md:mb-20">
-        <div className="relative group">
-          <FiSearch
-            className="absolute left-5 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-red-600 transition-colors"
-            size={22}
-          />
-          <input
-            type="search"
-            placeholder="Search any question..."
-            value={searchTerm}
-            onChange={(e) => {
-              setSearchTerm(e.target.value);
-              setOpenFAQ(null);
-            }}
-            className="w-full bg-white border border-gray-200 rounded-full py-5 pl-14 pr-6 text-lg shadow-sm focus:border-red-500 focus:ring-4 focus:ring-red-100 outline-none transition-all duration-300"
-          />
+    <div className="min-h-screen bg-white font-['Lufga'] selection:bg-red-100 selection:text-red-600">
+      {/* 1. SYSTEM STATUS BAR */}
+      <div className="bg-gray-50 border-b border-gray-100 py-3 overflow-hidden">
+        <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+            </span>
+            <p className="text-[10px] font-black uppercase tracking-widest text-gray-500">
+              System Status: All Services Operational
+            </p>
+          </div>
+          <div className="hidden md:flex items-center gap-6">
+            <p className="text-[10px] font-bold text-gray-400">
+              Current Wait: <span className="text-gray-900">~4 mins</span>
+            </p>
+            <p className="text-[10px] font-bold text-gray-400">
+              Riders Online: <span className="text-gray-900">1,240+</span>
+            </p>
+          </div>
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-5 pb-24">
+      {/* HERO & SEARCH */}
+      <header className="pt-24 pb-16 px-6 text-center relative overflow-hidden">
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[500px] bg-gradient-to-b from-red-50/50 to-transparent -z-10" />
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+        >
+          <span className="inline-block text-[10px] font-black uppercase tracking-[0.4em] text-red-600 mb-6 px-4 py-2 bg-red-50 rounded-full">
+            Pickars Concierge
+          </span>
+          <h1 className="text-6xl md:text-[7rem] font-black tracking-[-0.04em] text-[#121212] leading-[0.85] mb-8">
+            How can we <br /> <span className="text-gray-300">assist you?</span>
+          </h1>
+
+          <div className="max-w-2xl mx-auto relative group mt-12">
+            <FiSearch
+              className="absolute left-6 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-red-600 transition-colors"
+              size={24}
+            />
+            <input
+              type="search"
+              placeholder="Describe your issue (e.g. 'refunds', 'rider tracking')..."
+              value={searchTerm}
+              onChange={(e) => {
+                setSearchTerm(e.target.value);
+                setOpenFAQ(null);
+              }}
+              className="w-full bg-white border-2 border-gray-100 rounded-3xl py-7 pl-16 pr-8 text-xl  focus:border-red-600 outline-none transition-all duration-500"
+            />
+          </div>
+        </motion.div>
+      </header>
+
+      <main className="max-w-7xl mx-auto px-6 pb-32">
         <AnimatePresence mode="wait">
-          {/* Category Grid */}
           {!hasSearch && !selectedCategory && (
             <motion.div
               key="categories"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"
+              className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
             >
-              {categories.map((cat) => (
-                <motion.button
+              {categories.map((cat, i) => (
+                <motion.div
                   key={cat.id}
-                  whileHover={{ y: -8, scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: i * 0.05 }}
                   onClick={() => setSelectedCategory(cat)}
-                  className="group bg-white border border-gray-100 rounded-3xl p-8 md:p-10 text-left hover:border-red-200 hover:shadow-2xl hover:shadow-red-100/40 transition-all duration-300"
+                  className="group cursor-pointer bg-gray-50/50 border border-gray-100 p-10 rounded-[3rem] hover:bg-white hover:border-red-100 hover:shadow-[0_40px_80px_rgba(0,0,0,0.05)] transition-all duration-500"
                 >
-                  <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-red-50 text-red-600 text-3xl group-hover:bg-red-600 group-hover:text-white transition-all duration-400">
+                  <div className="mb-10 text-3xl text-red-600 group-hover:scale-110 transition-transform origin-left">
                     {cat.icon}
                   </div>
-                  <h3 className="text-2xl md:text-3xl font-black text-gray-900 mb-3">
+                  <h3 className="text-3xl font-black text-[#121212] mb-3 tracking-tighter">
                     {cat.name}
                   </h3>
-                  <p className="text-gray-500 leading-relaxed text-base md:text-lg">
+                  <p className="text-gray-500 font-bold leading-tight lowercase">
                     {cat.description}
                   </p>
-                  <div className="mt-6 opacity-0 group-hover:opacity-100 flex items-center gap-2 text-red-600 font-semibold transition-opacity">
-                    Explore{" "}
-                    <FiSend className="group-hover:translate-x-1.5 transition-transform" />
+                  <div className="mt-8 flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-red-600 opacity-0 group-hover:opacity-100 transition-opacity">
+                    View Topics <FiArrowLeft className="rotate-180" />
                   </div>
-                </motion.button>
+                </motion.div>
               ))}
             </motion.div>
           )}
 
-          {/* FAQ List */}
           {(hasSearch || selectedCategory) && (
             <motion.div
               key="faqs"
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -20 }}
               className="max-w-4xl mx-auto"
             >
               <button
                 onClick={() => {
                   setSelectedCategory(null);
                   setSearchTerm("");
-                  setOpenFAQ(null);
                 }}
-                className="group flex items-center gap-3 text-red-600 font-bold mb-10 hover:gap-5 transition-all text-lg"
+                className="flex items-center gap-3 text-[#121212] font-black text-sm uppercase tracking-widest mb-12 hover:text-red-600 transition-colors"
               >
-                <FiArrowLeft size={24} />
-                Back {selectedCategory ? "to Categories" : "to Search"}
+                <FiArrowLeft size={20} /> Back to Categories
               </button>
 
-              <div className="space-y-6">
+              <div className="space-y-4">
                 {(selectedCategory ? selectedCategory.faqs : filteredFaqs).map(
                   (faq) => (
-                    <motion.div
+                    <div
                       key={faq.id}
-                      layout
-                      className={`rounded-3xl border overflow-hidden transition-all duration-400 ${
+                      className={`rounded-[2.5rem] border transition-all duration-500 ${
                         openFAQ === faq.id
-                          ? "border-red-200 bg-gradient-to-b from-white to-gray-50 shadow-xl shadow-red-100/30"
-                          : "border-gray-100 bg-white hover:border-gray-200"
+                          ? "bg-white border-red-100 "
+                          : "bg-gray-50/50 border-gray-100 hover:bg-white"
                       }`}
                     >
                       <button
                         onClick={() =>
                           setOpenFAQ(openFAQ === faq.id ? null : faq.id)
                         }
-                        className="w-full px-7 py-8 md:px-10 md:py-10 flex items-center justify-between text-left"
+                        className="w-full p-8 md:p-10 flex items-center justify-between text-left outline-none"
                       >
                         <span
-                          className={`text-xl md:text-2xl font-bold tracking-tight transition-colors ${
+                          className={`text-xl md:text-2xl font-black tracking-tight ${
                             openFAQ === faq.id
                               ? "text-red-600"
-                              : "text-gray-900"
+                              : "text-[#121212]"
                           }`}
                         >
                           {faq.question}
                         </span>
-
                         <div
-                          className={`min-w-[52px] h-12 md:h-14 flex items-center justify-center rounded-2xl transition-all duration-400 ${
+                          className={`h-12 w-12 flex items-center justify-center rounded-2xl transition-all ${
                             openFAQ === faq.id
-                              ? "bg-red-600 text-white rotate-180 shadow-md"
-                              : "bg-gray-100 text-gray-500 group-hover:bg-gray-200"
+                              ? "bg-red-600 text-white"
+                              : "bg-white text-gray-400 "
                           }`}
                         >
-                          {openFAQ === faq.id ? (
-                            <FiMinus size={22} />
-                          ) : (
-                            <FiPlus size={22} />
-                          )}
+                          {openFAQ === faq.id ? <FiMinus /> : <FiPlus />}
                         </div>
                       </button>
-
-                      <AnimatePresence initial={false}>
+                      <AnimatePresence>
                         {openFAQ === faq.id && (
                           <motion.div
                             initial={{ height: 0, opacity: 0 }}
                             animate={{ height: "auto", opacity: 1 }}
                             exit={{ height: 0, opacity: 0 }}
-                            transition={{
-                              duration: 0.4,
-                              ease: [0.04, 0.62, 0.23, 0.98],
-                            }}
+                            className="px-8 md:px-10 pb-10"
                           >
-                            <div className="px-7 pb-10 md:px-10 md:pb-12 border-t border-gray-100 pt-6 md:pt-8">
+                            <div
+                              className="pt-6 border-t border-gray-50 text-gray-500 font-bold text-lg leading-relaxed"
+                              dangerouslySetInnerHTML={{
+                                __html: formatAnswer(faq.answer),
+                              }}
+                            />
+                            {faq.annotations?.map((note, idx) => (
                               <div
-                                className="text-gray-700 text-base md:text-lg leading-relaxed"
-                                dangerouslySetInnerHTML={{
-                                  __html: formatAnswer(faq.answer),
-                                }}
-                              />
-
-                              {/* Annotations / Callouts */}
-                              {faq.annotations &&
-                                faq.annotations.length > 0 && (
-                                  <div className="mt-6 space-y-4">
-                                    {faq.annotations.map((note, idx) => (
-                                      <div
-                                        key={idx}
-                                        className={`p-5 rounded-2xl border-l-4 flex items-start gap-4 ${
-                                          note.type === "tip"
-                                            ? "bg-green-50 border-green-500"
-                                            : note.type === "warning"
-                                            ? "bg-orange-50 border-orange-500"
-                                            : "bg-blue-50 border-blue-500"
-                                        }`}
-                                      >
-                                        {note.type === "tip" && (
-                                          <span className="text-green-600 text-xl">
-                                            💡
-                                          </span>
-                                        )}
-                                        {note.type === "warning" && (
-                                          <span className="text-orange-600 text-xl">
-                                            ⚠️
-                                          </span>
-                                        )}
-                                        {note.type === "important" && (
-                                          <span className="text-blue-600 text-xl">
-                                            ★
-                                          </span>
-                                        )}
-                                        <p className="text-sm md:text-base font-medium">
-                                          {note.text}
-                                        </p>
-                                      </div>
-                                    ))}
-                                  </div>
-                                )}
-                            </div>
+                                key={idx}
+                                className={`mt-6 p-6 rounded-3xl border-l-4 ${
+                                  note.type === "warning"
+                                    ? "bg-orange-50 border-orange-500 text-orange-800"
+                                    : "bg-red-50 border-red-600 text-red-900"
+                                }`}
+                              >
+                                <p className="text-sm font-black uppercase tracking-widest mb-1">
+                                  {note.type}
+                                </p>
+                                <p className="text-sm font-bold opacity-80">
+                                  {note.text}
+                                </p>
+                              </div>
+                            ))}
                           </motion.div>
                         )}
                       </AnimatePresence>
-                    </motion.div>
+                    </div>
                   )
                 )}
               </div>
@@ -439,40 +334,132 @@ const HelpCenter: React.FC = () => {
           )}
         </AnimatePresence>
 
-        {/* WhatsApp CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.9 }}
-          className="mt-24 md:mt-32 max-w-5xl mx-auto px-6 py-16 md:py-20 rounded-[40px] md:rounded-[60px] bg-gradient-to-br from-gray-900 via-black to-gray-950 text-white text-center relative overflow-hidden shadow-2xl"
-        >
-          <div className="absolute inset-0 opacity-10 pointer-events-none">
-            <div className="absolute -top-32 -right-20 w-96 h-96 bg-red-600 rounded-full blur-3xl" />
-            <div className="absolute -bottom-32 -left-20 w-96 h-96 bg-green-600 rounded-full blur-3xl" />
-          </div>
+        <section className="mt-32">
+          <div className="grid md:grid-cols-3 gap-8">
+            <div className="bg-[#121212] p-12 rounded-[3.5rem] text-white flex flex-col justify-between group hover:bg-red-600 transition-colors duration-700">
+              <div>
+                <h4 className="text-4xl font-black tracking-tighter mb-4 leading-none">
+                  Corporate <br />
+                  Logistics
+                </h4>
+                <p className="text-gray-400 font-bold group-hover:text-white/80 transition-colors">
+                  Custom business solutions & bulk delivery contracts.
+                </p>
+              </div>
+              <a
+                href="mailto:biz@pickars.com"
+                className="mt-12 inline-flex items-center gap-3 font-black uppercase tracking-[0.2em] text-xs"
+              >
+                Email Sales <FiArrowLeft className="rotate-180" />
+              </a>
+            </div>
 
-          <div className="relative z-10">
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-black mb-6 leading-tight">
-              Need help right now?
-            </h2>
-            <p className="text-gray-300 text-lg md:text-xl max-w-2xl mx-auto mb-10 md:mb-12">
-              Our team usually replies in <strong>under 5 minutes</strong> on
-              WhatsApp — day or night.
-            </p>
+            <div className="bg-gray-50 p-12 rounded-[3.5rem] border border-gray-100 flex flex-col justify-between group hover:border-red-100 transition-all">
+              <div>
+                <h4 className="text-4xl font-black tracking-tighter mb-4 leading-none text-[#121212]">
+                  Social <br />
+                  Updates
+                </h4>
+                <p className="text-gray-500 font-bold">
+                  Follow us for real-time traffic alerts & holiday hours.
+                </p>
+              </div>
+              <div className="mt-12 flex gap-4">
+                <a
+                  href="#"
+                  className="h-12 w-12 rounded-full bg-white border border-gray-200 flex items-center justify-center text-gray-600 hover:bg-red-600 hover:text-white transition-all"
+                >
+                  <FaTwitter />
+                </a>
+                <a
+                  href="#"
+                  className="h-12 w-12 rounded-full bg-white border border-gray-200 flex items-center justify-center text-gray-600 hover:bg-red-600 hover:text-white transition-all"
+                >
+                  <FaInstagram />
+                </a>
+              </div>
+            </div>
 
-            <a
-              href="https://wa.me/2349164860591"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-4 bg-[#25D366] hover:bg-[#1ebe50] text-white px-10 py-6 md:px-16 md:py-8 rounded-full font-bold text-xl shadow-2xl shadow-green-900/40 hover:shadow-green-900/60 transition-all duration-300 transform hover:scale-105 active:scale-95"
-            >
-              <FaWhatsapp size={32} />
-              Message Support on WhatsApp
-            </a>
+            <div className="bg-red-50 p-12 rounded-[3.5rem] border border-red-100 flex flex-col justify-between group">
+              <div>
+                <div className="h-2 w-2 bg-red-600 rounded-full animate-pulse mb-6" />
+                <h4 className="text-4xl font-black tracking-tighter mb-4 leading-none text-red-600">
+                  Call Dispatch
+                </h4>
+                <p className="text-red-900/60 font-bold">
+                  Urgent issue with an active delivery? Speak to a lead
+                  controller.
+                </p>
+              </div>
+              <a
+                href="tel:+2349164860591"
+                className="mt-12 text-[#121212] font-black text-2xl tracking-tighter hover:text-red-600 transition-colors"
+              >
+                +234 916 486 0591
+              </a>
+            </div>
           </div>
-        </motion.div>
-      </div>
+        </section>
+
+        <section className="mt-40 relative max-w-7xl ">
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="relative group overflow-hidden rounded-[4rem] bg-[#0A0A0A] "
+          >
+            {/* Animated Radial Glow Background */}
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,#25D366_0%,transparent_50%)] opacity-0 group-hover:opacity-10 transition-opacity duration-700" />
+
+            <div className="relative z-10 bg-[#0A0A0A] rounded-[3.8rem] px-8 py-20 md:py-28 text-center border border-white/5">
+              {/* Availability Badge */}
+              <div className="inline-flex items-center gap-3 bg-white/5 backdrop-blur-xl px-6 py-3 rounded-full border border-white/10 mb-10">
+                <span className="relative flex h-3 w-3">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#25D366] opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-3 w-3 bg-[#25D366]"></span>
+                </span>
+                <span className="text-[10px] font-black uppercase tracking-[0.3em] text-white">
+                  Riders & Support Online
+                </span>
+              </div>
+
+              {/* Main Typography */}
+              <h2 className="text-6xl md:text-7xl font-black text-white tracking-tighter leading-[0.85] mb-8">
+                Immediate Support.
+              </h2>
+
+              <p className="text-gray-500 text-lg md:text-xl font-bold max-w-xl mx-auto mb-14 leading-relaxed">
+                Skip the queue. Our average response time is{" "}
+                <span className="text-white">4m 12s</span>. Connect directly
+                with our dispatch controllers.
+              </p>
+
+              {/* The Magnetic Button Effect */}
+              <motion.a
+                href="https://wa.me/2349164860591"
+                target="_blank"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="inline-flex items-center gap-5 bg-white text-[#0A0A0A] px-6 py-6 rounded-[2.5rem] font-black text-xl md:text-xl transition-all"
+              >
+                <FaWhatsapp size={28} className="text-[#25D366]" />
+                Message Now
+              </motion.a>
+
+              {/* Ghost Background Icon */}
+              <div className="absolute -bottom-10 -right-10 opacity-[0.03] text-white rotate-12 pointer-events-none">
+                <FaWhatsapp size={400} />
+              </div>
+            </div>
+          </motion.div>
+        </section>
+      </main>
+
+      <footer className="py-12 px-6 border-t border-gray-100 text-center">
+        <p className="text-[10px] font-black uppercase tracking-[0.5em] text-gray-300">
+          © 2026 Pickars Courier Limited • Port Harcourt City
+        </p>
+      </footer>
     </div>
   );
 };

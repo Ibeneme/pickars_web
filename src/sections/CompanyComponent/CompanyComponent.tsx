@@ -116,7 +116,7 @@ const CompanyComponent = () => {
       </section>
 
       {/* --- CORE VALUES GRID --- */}
-      <section className="bg-white py-32 text-[#121212] rounded-t-[60px]">
+      <section className="bg-white py-32 text-[#121212] ">
         <div className="mx-auto max-w-7xl px-6">
           <div className="mb-20 text-center">
             <h2 className="text-4xl font-black tracking-tighter md:text-6xl">

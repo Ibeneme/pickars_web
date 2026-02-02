@@ -51,7 +51,7 @@ const CoreValuesSection: React.FC = () => {
   };
 
   return (
-    <section className="relative overflow-hidden bg-[#0c0c0c] py-24 font-['Lufga'] md:py-32">
+    <section className="relative overflow-hidden bg-[#080808] py-24 font-['Lufga'] md:py-32">
       {/* Background Glow */}
       <div className="absolute top-1/2 left-1/2 -z-10 h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-red-600/10 blur-[120px]" />
 
@@ -66,7 +66,7 @@ const CoreValuesSection: React.FC = () => {
               The Foundation
             </motion.span>
             <h2 className="text-5xl font-black tracking-tighter text-white md:text-7xl">
-              Our Core <span className="text-gray-500">Values.</span>
+              What Makes us <span className="text-gray-500">Pickars.</span>
             </h2>
           </div>
 

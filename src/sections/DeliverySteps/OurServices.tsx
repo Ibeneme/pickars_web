@@ -1,149 +1,157 @@
-import React, { useRef } from "react";
+import React from "react";
 import { motion } from "framer-motion";
 import {
-  FiChevronsLeft,
-  FiChevronsRight,
   FiZap,
   FiMapPin,
   FiShield,
   FiTarget,
   FiClock,
   FiHeadphones,
+  FiArrowUpRight,
 } from "react-icons/fi";
 
-interface Service {
-  title: string;
-  description: string;
-  icon: React.ReactNode;
-}
-
-const services: Service[] = [
+const services = [
   {
     title: "Easy to Use",
     icon: <FiZap />,
     description:
-      "Navigate through scheduling in just a few taps. No complicated forms—just a seamless, intuitive experience from start to finish.",
+      "Navigate through scheduling in just a few taps. No complicated forms—just a seamless experience.",
+    size: "md", // Standard card
   },
   {
     title: "Multiple Locations",
     icon: <FiMapPin />,
     description:
-      "Save time by sending packages to multiple addresses in one go. Add points, arrange stops, and include custom instructions.",
+      "Save time by sending packages to multiple addresses in one go. Add points and custom instructions.",
+    size: "lg", // Larger feature card
   },
   {
     title: "Secure & Reliable",
     icon: <FiShield />,
     description:
-      "Handled by verified riders with end-to-end tracking and insurance. Rest easy knowing your items are in safe hands.",
+      "Handled by verified riders with end-to-end tracking and insurance.",
+    size: "md",
   },
   {
     title: "Real-Time Tracking",
     icon: <FiTarget />,
     description:
-      "Our live tracking system allows you to see exactly where your rider is with transparent, accurate arrival updates.",
+      "See exactly where your rider is with transparent, accurate arrival updates.",
+    size: "md",
   },
   {
     title: "Fast & Efficient",
     icon: <FiClock />,
     description:
-      "Smart routing and local dispatchers cut down delays. We move at the speed of your life while keeping costs reasonable.",
+      "Smart routing and local dispatchers cut down delays. We move at the speed of your life.",
+    size: "md",
   },
   {
-    title: "Dedicated Support",
+    title: "24/7 Support",
     icon: <FiHeadphones />,
     description:
-      "Our friendly team is always ready to assist via chat, email, or phone. We're here for you 24/7.",
+      "Our friendly team is always ready to assist via chat, email, or phone.",
+    size: "md",
   },
 ];
 
-const ServicesSection: React.FC = () => {
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  const scroll = (direction: "left" | "right") => {
-    if (containerRef.current) {
-      const scrollAmount = 400;
-      containerRef.current.scrollBy({
-        left: direction === "left" ? -scrollAmount : scrollAmount,
-        behavior: "smooth",
-      });
-    }
-  };
-
+const FeatureGrid: React.FC = () => {
   return (
-    <section className="bg-[#0c0c0c] px-6 py-24 text-white md:py-40 font-['Lufga'] overflow-hidden">
-      <div className="mx-auto max-w-[1400px]">
-        {/* Your Original Header - Styled Beautifully */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16">
+    <section className="bg-[#f8f8f8] px-6 py-24 font-['Lufga'] md:py-40">
+      <div className="mx-auto max-w-7xl">
+        {/* Header - Center Aligned for a fresh feel */}
+        <div className="mb-20 text-center">
+          <motion.span
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            className="text-sm font-black uppercase tracking-[0.4em] text-red-600"
+          >
+            Our Capabilities
+          </motion.span>
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="max-w-[900px] text-[3.2rem] font-black leading-[1.05] tracking-tighter md:text-[4.7rem]"
+            className="mt-6 text-5xl font-black tracking-tighter text-[#121212] md:text-7xl"
           >
-            Where Every Delivery <br />
-            <span className="bg-gradient-to-r from-red-600 to-orange-500 bg-clip-text text-transparent">
-              Becomes an Experience.
-            </span>
+            Delivery Redefined.
           </motion.h2>
-
-          {/* Minimalist Scroll Buttons */}
-          <div className="flex gap-3">
-            <button
-              onClick={() => scroll("left")}
-              className="flex h-14 w-14 items-center justify-center rounded-2xl border border-white/5 bg-white/5 transition-all hover:bg-red-600 hover:border-red-600"
-            >
-              <FiChevronsLeft size={24} />
-            </button>
-            <button
-              onClick={() => scroll("right")}
-              className="flex h-14 w-14 items-center justify-center rounded-2xl border border-white/5 bg-white/5 transition-all hover:bg-red-600 hover:border-red-600"
-            >
-              <FiChevronsRight size={24} />
-            </button>
-          </div>
+          <p className="mx-auto mt-6 max-w-2xl text-lg text-gray-500">
+            We've stripped away the complexity of logistics to give you a suite
+            of tools that just work.
+          </p>
         </div>
 
-        {/* Scrollable Container */}
-        <div
-          className="no-scrollbar flex gap-6 overflow-x-auto pb-10"
-          ref={containerRef}
-        >
-          {services.map((service, index) => (
+        {/* Bento Grid */}
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+          {services.map((item, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1 }}
               viewport={{ once: true }}
-              className="group relative min-w-[320px] md:min-w-[400px] rounded-[40px] border border-white/5 bg-[#121212] md:p-10 p-8 transition-all hover:border-red-600/30"
+              transition={{ delay: index * 0.1 }}
+              className={`group relative flex flex-col justify-between overflow-hidden rounded-[40px] border border-gray-200 bg-white p-10 transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_30px_60px_rgba(0,0,0,0.05)] ${
+                item.size === "lg" ? "md:col-span-2" : "md:col-span-1"
+              }`}
             >
-              {/* Subtle Icon Box */}
-              <div className="mb-8 flex h-16 w-16 items-center justify-center rounded-2xl bg-white/5 text-2xl text-red-600 transition-all group-hover:bg-red-600 group-hover:text-white group-hover:scale-110">
-                {service.icon}
+              <div>
+                <div className="mb-8 flex h-14 w-14 items-center justify-center rounded-2xl bg-red-50 text-2xl text-red-600 transition-colors group-hover:bg-red-600 group-hover:text-white">
+                  {item.icon}
+                </div>
+                <h3 className="mb-4 text-2xl font-black text-[#121212] md:text-3xl">
+                  {item.title}
+                </h3>
+                <p className="text-gray-500 leading-relaxed">
+                  {item.description}
+                </p>
               </div>
 
-              {/* Text Content */}
-              <h3 className="mb-4 text-2xl font-bold tracking-tight md:text-3xl transition-colors group-hover:text-red-500">
-                {service.title}
-              </h3>
+              {/* Interaction Hint */}
+              <div className="mt-10 flex items-center gap-2 text-sm font-bold text-red-600 opacity-0 transition-opacity group-hover:opacity-100">
+                Learn more <FiArrowUpRight />
+              </div>
 
-              <p className="text-base leading-relaxed text-gray-400 md:text-lg">
-                {service.description}
-              </p>
-
-              {/* Decorative Number */}
-              <span className="absolute bottom-10 right-10 text-6xl font-black text-white/[0.02] transition-colors group-hover:text-red-600/[0.05]">
-                0{index + 1}
-              </span>
+              {/* Subtle background decoration */}
+              <div className="absolute -bottom-4 -right-4 text-9xl font-black text-gray-50 opacity-[0.03] transition-all group-hover:scale-110 group-hover:text-red-600 group-hover:opacity-[0.05]">
+                {index + 1}
+              </div>
             </motion.div>
           ))}
         </div>
 
-        {/* Bottom Detail Line */}
-        <div className="mt-4 h-[1px] w-full bg-gradient-to-r from-red-600/50 to-transparent" />
+        {/* Brand Statement Footer */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          className="mt-20 flex flex-col items-center justify-between border-t border-gray-200 pt-10 md:flex-row"
+        >
+          <p className="text-sm font-medium text-gray-400">
+            © 2024 Pickars Logistics Technology
+          </p>
+          <div className="mt-4 flex gap-8 md:mt-0">
+            <a
+              href="#"
+              className="text-sm font-bold text-[#121212] hover:text-red-600"
+            >
+              Reliability
+            </a>
+            <a
+              href="#"
+              className="text-sm font-bold text-[#121212] hover:text-red-600"
+            >
+              Security
+            </a>
+            <a
+              href="#"
+              className="text-sm font-bold text-[#121212] hover:text-red-600"
+            >
+              Speed
+            </a>
+          </div>
+        </motion.div>
       </div>
     </section>
   );
 };
 
-export default ServicesSection;
+export default FeatureGrid;

@@ -19,9 +19,9 @@ const SlidingPage: React.FC = () => {
   const doubleValues = [...values, ...values];
 
   return (
-    <div className="relative z-20 -mt-10 mb-20 w-full overflow-hidden">
-      {/* Skewed Container to create a "Dynamic" slant */}
-      <div className="flex rotate-[-2deg] scale-[1.02] items-center bg-[#ff0000] py-3 shadow-2xl md:py-5">
+    <div className="relative z-20  w-full overflow-hidden bg-[#ffffff]">
+      {/* Skewed Container to create a "Dynamic" slant  rotate-[-2deg] scale-[1.02] */}
+      <div className="flex  items-center bg-[#ff0000] py-3  md:py-5">
         <motion.div
           initial={{ x: 0 }}
           animate={{ x: "-50%" }}
