@@ -5,7 +5,7 @@ import CustomerRiderSection from "../../sections/CustomerRiderSection/CustomerRi
 import HeroSection from "../../sections/Hero/HeroSection";
 import HowItWorksSection from "../../sections/HowItWorksSection/HowItWorksSection";
 import FinalBookingSection from "../../sections/HowItWorksSection/FinalBookingSection";
-
+import MidImage from "../../sections/HeroDelivery/MidImage";
 
 const Home = () => {
   const { scrollYProgress } = useScroll();
@@ -29,7 +29,14 @@ const Home = () => {
         <section className="relative z-10">
           <SlidingPage />
         </section>
-
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 1 }}
+          viewport={{ margin: "-100px" }}
+        >
+          <FinalBookingSection />
+        </motion.div>
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -41,14 +48,7 @@ const Home = () => {
 
         <HowItWorksSection />
         <CommentsSection />
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 1 }}
-          viewport={{ margin: "-100px" }}
-        >
-          <FinalBookingSection />
-        </motion.div>
+        <MidImage />
       </main>
     </div>
   );

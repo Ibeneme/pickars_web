@@ -130,19 +130,22 @@ const FinalBookingSection = () => {
   return (
     <div className="bg-white">
       <TrustStatsSection />
-
       <section
         className="
     relative overflow-hidden 
-    bg-[#ff0000] 
-    py-20 md:py-40 
+    bg-[#ff0000]
+    p-12
     font-['Lufga']
-    mx-4 md:mx-12 rounded-[4rem]
-    md:rounded-[7rem] mb-16
+    max-w-7xl
+    mx-auto
+    my-6
+    px-4 sm:px-6 md:px-12
+    rounded-[0rem] md:rounded-[3rem]
+    md:mb-16 mb-0
     shadow-2xl
+    py-24 md:py-12
   "
       >
-        {/* Grid Texture */}
         <div
           className="absolute inset-0 opacity-[0.07]"
           style={{
@@ -179,14 +182,14 @@ const FinalBookingSection = () => {
               viewport={{ once: true }}
               className="text-white"
             >
-              <h2 className="text-6xl md:text-8xl font-black leading-[0.85] tracking-tighter">
+              <h2 className="text-7xl md:text-7xl font-black leading-[0.85] tracking-tighter">
                 Get Your <br />
                 <span className="text-white/30">Packages</span> <br />
                 Moving.
               </h2>
 
               <div className="mt-12 space-y-6">
-                <p className="text-2xl md:text-3xl font-bold max-w-md">
+                <p className="text-2xl md:text-2xl font-bold max-w-md">
                   Experience the fastest dispatch network in Port Harcourt.
                 </p>
 
@@ -205,10 +208,10 @@ const FinalBookingSection = () => {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
             >
-              <div className="rounded-[3rem] bg-white p-10 md:p-14 shadow-[0_50px_100px_rgba(0,0,0,0.3)]">
+              <div className="  rounded-[2rem] md:rounded-[3rem] bg-white p-10 md:p-14 shadow-[0_50px_100px_rgba(0,0,0,0.3)]">
                 <div className="flex justify-between items-start mb-12">
                   <h3 className="text-4xl font-black text-[#121212]">
-                    Request <br /> Delivery
+                    Request Delivery
                   </h3>
 
                   <span className="bg-red-50 text-red-600 text-[10px] font-black px-4 py-2 rounded-full uppercase tracking-widest border border-red-100">
@@ -237,7 +240,7 @@ const FinalBookingSection = () => {
                   whileTap={{ scale: 0.98 }}
                   className="mt-10 w-full bg-[#121212] text-white py-6 rounded-2xl text-xl font-black hover:bg-black transition-all"
                 >
-                  Check Pricing
+                  Download our App
                 </motion.button>
 
                 <p className="mt-8 text-center text-xs font-bold text-gray-400">
