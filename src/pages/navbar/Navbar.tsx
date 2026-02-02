@@ -39,6 +39,7 @@ const Navbar = () => {
           }`}
         >
           {/* Logo Section */}
+          {/* Logo Section */}
           <a href="/" className="flex items-center gap-2 pl-2 group">
             <div className="relative">
               <img
@@ -47,11 +48,20 @@ const Navbar = () => {
                 className="h-8 w-auto transition-transform duration-500 group-hover:rotate-[360deg]"
               />
             </div>
-            <h3 className="hidden text-xl font-black tracking-tighter text-[#121212] sm:block">
+
+            {/* Brand Name */}
+            <h3
+              className={`text-xl font-black tracking-tighter text-[#121212] transition-all duration-500
+    ${
+      scrolled
+        ? "opacity-100 translate-x-0"
+        : "opacity-0 -translate-x-3 pointer-events-none"
+    }
+    sm:opacity-100 sm:translate-x-0`}
+            >
               Pickars
             </h3>
           </a>
-
           {/* Desktop Nav Links */}
           <ul className="hidden items-center gap-1 md:flex">
             {navItems.map(({ name, path, highlight }) => (
