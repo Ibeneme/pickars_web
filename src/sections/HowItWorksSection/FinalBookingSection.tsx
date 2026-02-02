@@ -14,7 +14,7 @@ type StatCardProps = {
 };
 
 /* ----------------------------- */
-/* Stat Card */
+/* Stat Card - Refined Padding & Text for Mobile */
 /* ----------------------------- */
 
 const StatCard = ({ icon, label, value, desc, delay }: StatCardProps) => (
@@ -24,25 +24,22 @@ const StatCard = ({ icon, label, value, desc, delay }: StatCardProps) => (
     viewport={{ once: true }}
     transition={{ duration: 0.8, delay, ease: [0.16, 1, 0.3, 1] }}
     whileHover={{ y: -10 }}
-    className="relative group bg-[#fafafa] p-10 rounded-[3rem] border border-gray-100 overflow-hidden"
+    className="relative group bg-[#fafafa] p-8 md:p-10 rounded-[2.5rem] md:rounded-[3rem] border border-gray-100 overflow-hidden"
   >
-    {/* Glow Blob */}
     <div className="absolute -right-10 -top-10 h-32 w-32 bg-red-500/5 rounded-full blur-3xl group-hover:bg-red-500/10 transition-colors duration-500" />
 
     <div className="relative z-10">
-      <div className="mb-14 inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-white shadow-sm text-red-600 group-hover:bg-red-600 group-hover:text-white transition-all duration-500">
+      <div className="mb-8 md:mb-14 inline-flex h-12 w-12 md:h-14 md:w-14 items-center justify-center rounded-2xl bg-white shadow-sm text-red-600 group-hover:bg-red-600 group-hover:text-white transition-all duration-500">
         {icon}
       </div>
 
       <div className="space-y-2">
-        <h3 className="text-6xl font-black text-[#121212] tracking-tighter">
+        <h3 className="text-5xl md:text-6xl font-black text-[#121212] tracking-tighter">
           {value}
         </h3>
-
-        <p className="text-sm font-black uppercase tracking-[0.2em] text-[#121212]">
+        <p className="text-xs md:text-sm font-black uppercase tracking-[0.2em] text-[#121212]">
           {label}
         </p>
-
         <p className="text-sm font-bold text-gray-400 leading-relaxed max-w-[200px]">
           {desc}
         </p>
@@ -56,36 +53,34 @@ const StatCard = ({ icon, label, value, desc, delay }: StatCardProps) => (
 /* ----------------------------- */
 
 const TrustStatsSection = () => (
-  <section className="bg-white py-32 md:py-48 font-['Lufga']">
+  <section className="bg-white py-20 md:py-48 font-['Lufga']">
     <div className="mx-auto max-w-7xl px-6">
-      {/* Header */}
-      <div className="grid lg:grid-cols-12 gap-16 items-start mb-24">
+      <div className="grid lg:grid-cols-12 gap-10 md:gap-16 items-start mb-16 md:mb-24">
         <div className="lg:col-span-7">
           <motion.span
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            className="inline-block px-4 py-1 rounded-full border border-red-200 text-[10px] font-black uppercase tracking-[0.3em] text-red-600 mb-8"
+            className="inline-block px-4 py-1 rounded-full border border-red-200 text-[10px] font-black uppercase tracking-[0.3em] text-red-600 mb-6 md:mb-8"
           >
             Logistics Excellence
           </motion.span>
 
-          <h2 className="text-6xl md:text-8xl font-black text-[#121212] tracking-tighter leading-[0.85]">
+          <h2 className="text-5xl md:text-8xl font-black text-[#121212] tracking-tighter leading-[0.9] md:leading-[0.85]">
             We move <span className="text-gray-300">faster</span> <br />
             than the city <span className="text-red-600">breathes.</span>
           </h2>
         </div>
 
         <div className="lg:col-span-5 lg:pt-12">
-          <p className="text-xl md:text-2xl font-bold text-gray-500 leading-snug">
+          <p className="text-lg md:text-2xl font-bold text-gray-500 leading-snug">
             Built for the hustlers of Port Harcourt. We’ve optimized every
             street corner to ensure your packages never see a red light.
           </p>
         </div>
       </div>
 
-      {/* Stats Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         <StatCard
           icon={<FaRoute size={24} />}
           value="50k+"
@@ -128,123 +123,96 @@ const FinalBookingSection = () => {
   const backgroundTextX = useTransform(scrollYProgress, [0.8, 1], [100, -100]);
 
   return (
-    <div className="bg-white">
+    <div className="bg-white pb-10 md:pb-20">
       <TrustStatsSection />
-      <section
-        className="
-    relative overflow-hidden 
-    bg-[#ff0000]
-    p-12
-    font-['Lufga']
-    max-w-7xl
-    mx-auto
-    my-6
-    px-4 sm:px-6 md:px-12
-    rounded-[0rem] md:rounded-[3rem]
-    md:mb-16 mb-0
-    shadow-2xl
-    py-24 md:py-12
-  "
-      >
+
+      <section className="relative overflow-hidden bg-[#ff0000] font-['Lufga'] max-w-7xl mx-auto rounded-[0rem] md:rounded-[3rem] shadow-2xl py-16 md:py-24 px-6 md:px-12">
+        {/* Pattern Backgrounds */}
         <div
-          className="absolute inset-0 opacity-[0.07]"
+          className="absolute inset-0 opacity-[0.07] pointer-events-none"
           style={{
-            backgroundImage: `
-        linear-gradient(#fff 1px, transparent 1px),
-        linear-gradient(90deg, #fff 1px, transparent 1px)
-      `,
+            backgroundImage: `linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px)`,
             backgroundSize: "40px 40px",
           }}
         />
 
-        {/* Animated Mesh */}
-        <motion.div
-          className="absolute inset-0 opacity-20"
-          animate={{
-            backgroundPosition: ["0% 0%", "100% 100%"],
-            opacity: [0.3, 0.5, 0.3],
-          }}
-          transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
-          style={{
-            backgroundImage:
-              "radial-gradient(circle at 2px 2px, white 1px, transparent 0)",
-            backgroundSize: "40px 40px",
-          }}
-        />
-
-        {/* Content */}
-        <div className="relative z-10 mx-auto max-w-7xl px-8">
-          <div className="grid lg:grid-cols-2 gap-20 items-center">
-            {/* LEFT SIDE */}
+        <div className="relative z-10 mx-auto max-w-7xl">
+          <div className="grid lg:grid-cols-2 gap-12 md:gap-20 items-center">
+            {/* LEFT SIDE - Text Content */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="text-white"
+              className="text-white text-left"
             >
-              <h2 className="text-7xl md:text-7xl font-black leading-[0.85] tracking-tighter">
+              <h2 className="text-6xl md:text-8xl font-black leading-[0.9] md:leading-[0.85] tracking-tighter">
                 Get Your <br />
                 <span className="text-white/30">Packages</span> <br />
                 Moving.
               </h2>
 
-              <div className="mt-12 space-y-6">
-                <p className="text-2xl md:text-2xl font-bold max-w-md">
+              <div className="mt-8 md:mt-12 space-y-6">
+                <p className="text-xl md:text-2xl font-bold max-w-md">
                   Experience the fastest dispatch network in Port Harcourt.
                 </p>
 
-                <div className="flex items-center gap-4">
-                  <div className="h-[2px] w-12 bg-white" />
-                  <p className="text-xs font-black uppercase tracking-[0.3em] text-white/70">
+                <div className="flex items-center justify-start gap-4">
+                  <div className="hidden md:block h-[2px] w-12 bg-white" />
+                  <p className="text-[10px] md:text-xs font-black uppercase tracking-[0.3em] text-white/70">
                     Web booking coming soon
                   </p>
                 </div>
               </div>
             </motion.div>
 
-            {/* RIGHT CARD */}
+            {/* RIGHT SIDE - Request Card */}
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
+              className="w-full"
             >
-              <div className="  rounded-[2rem] md:rounded-[3rem] bg-white p-10 md:p-14 shadow-[0_50px_100px_rgba(0,0,0,0.3)]">
-                <div className="flex justify-between items-start mb-12">
-                  <h3 className="text-4xl font-black text-[#121212]">
+              <div className="rounded-[2.5rem] md:rounded-[3.5rem] bg-white p-8 md:p-14 shadow-[0_50px_100px_rgba(0,0,0,0.3)]">
+                <div className="flex flex-col sm:flex-row justify-between items-center sm:items-start gap-4 mb-10 md:mb-12 text-center sm:text-left">
+                  <h3 className="text-3xl md:text-4xl font-black text-[#121212]">
                     Request Delivery
                   </h3>
-
-                  <span className="bg-red-50 text-red-600 text-[10px] font-black px-4 py-2 rounded-full uppercase tracking-widest border border-red-100">
+                  <span className="bg-red-50 text-red-600 text-[10px] font-black px-4 py-2 rounded-full uppercase tracking-widest border border-red-100 whitespace-nowrap">
                     App Live
                   </span>
                 </div>
 
-                {/* Inputs */}
                 <div className="space-y-4">
-                  <input
-                    disabled
-                    placeholder="Pickup point"
-                    className="w-full bg-gray-50 rounded-2xl py-6 pl-14 pr-6 font-bold text-gray-400 outline-none"
-                  />
+                  <div className="relative">
+                    <div className="absolute left-6 top-1/2 -translate-y-1/2 h-2 w-2 rounded-full bg-red-600" />
+                    <input
+                      disabled
+                      placeholder="Pickup point"
+                      className="w-full bg-gray-50 rounded-2xl py-5 md:py-6 pl-12 md:pl-14 pr-6 font-bold text-gray-400 outline-none border border-transparent"
+                    />
+                  </div>
 
-                  <input
-                    disabled
-                    placeholder="Destination"
-                    className="w-full bg-gray-50 rounded-2xl py-6 pl-14 pr-6 font-bold text-gray-400 outline-none"
-                  />
+                  <div className="relative">
+                    <div className="absolute left-6 top-1/2 -translate-y-1/2 h-2 w-2 rounded-full bg-gray-300" />
+                    <input
+                      disabled
+                      placeholder="Destination"
+                      className="w-full bg-gray-50 rounded-2xl py-5 md:py-6 pl-12 md:pl-14 pr-6 font-bold text-gray-400 outline-none border border-transparent"
+                    />
+                  </div>
                 </div>
 
-                {/* Button */}
                 <motion.button
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
-                  className="mt-10 w-full bg-[#121212] text-white py-6 rounded-2xl text-xl font-black hover:bg-black transition-all"
+                  className="mt-8 md:mt-10 w-full bg-[#121212] text-white py-5 md:py-6 rounded-2xl text-lg md:text-xl font-black hover:bg-black transition-all shadow-xl"
                 >
                   Download our App
                 </motion.button>
 
-                <p className="mt-8 text-center text-xs font-bold text-gray-400">
-                  Web booking is restricted to corporate accounts. <br />
+                <p className="mt-8 text-center text-[10px] md:text-xs font-bold text-gray-400 leading-relaxed">
+                  Web booking is restricted to corporate accounts.{" "}
+                  <br className="hidden md:block" />
                   <span className="text-red-600">
                     Download the mobile app to book instantly.
                   </span>
@@ -254,10 +222,10 @@ const FinalBookingSection = () => {
           </div>
         </div>
 
-        {/* BACKGROUND TEXT */}
+        {/* BACKGROUND TEXT - Responsive sizing */}
         <motion.div
           style={{ x: backgroundTextX }}
-          className="absolute -bottom-10 left-0 text-[20rem] font-black text-white/[0.04] whitespace-nowrap select-none pointer-events-none"
+          className="absolute -bottom-10 md:-bottom-20 left-0 text-[10rem] md:text-[20rem] font-black text-white/[0.04] whitespace-nowrap select-none pointer-events-none"
         >
           PORT HARCOURT DISPATCH
         </motion.div>

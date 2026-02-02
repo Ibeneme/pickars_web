@@ -34,7 +34,7 @@ const SlidingPage: React.FC = () => {
         >
           {doubleValues.map((sentence, idx) => (
             <div key={idx} className="flex items-center px-6 md:px-12">
-              <span className="font-['Lufga'] text-sm font-black italic tracking-widest text-white md:text-xl">
+              <span className="font-['Lufga'] text-sm font-black tracking-widest text-white md:text-xl">
                 {sentence}
               </span>
 
