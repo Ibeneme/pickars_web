@@ -61,7 +61,7 @@ const PrivacyPolicyPage: React.FC = () => {
                   }}
                   className={`w-full flex items-center gap-4 px-6 py-4 rounded-2xl font-bold transition-all ${
                     activeSection === sec.id
-                      ? "bg-[#121212] text-white shadow-xl shadow-black/10"
+                      ? "bg-[#121212] text-white "
                       : "text-gray-400 hover:bg-gray-100 hover:text-[#121212]"
                   }`}
                 >
@@ -73,7 +73,7 @@ const PrivacyPolicyPage: React.FC = () => {
               ))}
             </nav>
 
-            <div className="mt-12 p-8 bg-red-600 rounded-[32px] text-white shadow-2xl shadow-red-600/20">
+            <div className="mt-12 p-8 bg-red-600 rounded-[32px] text-white ">
               <h4 className="font-black text-xl mb-2">Need Help?</h4>
               <p className="text-red-100 text-sm mb-6 leading-relaxed">
                 Questions about your data? Our legal team is here.
@@ -91,7 +91,7 @@ const PrivacyPolicyPage: React.FC = () => {
           <main className="lg:col-span-9 space-y-24">
             {/* Section 1: Intro */}
             <section id="intro" className="scroll-mt-32">
-              <div className="p-10 md:p-16 bg-white border border-gray-100 rounded-[50px] shadow-sm">
+              <div className="p-10 md:p-16 bg-white border border-gray-100 rounded-[50px] ">
                 <h2 className="text-3xl font-black mb-8 flex items-center gap-4">
                   <span className="h-10 w-1 bg-red-600 rounded-full" />
                   1. Introduction

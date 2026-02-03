@@ -34,7 +34,7 @@ const Navbar = () => {
         <div
           className={`flex items-center justify-between gap-8 rounded-full border border-white/20 bg-white/70 px-4 py-2.5 backdrop-blur-2xl transition-all duration-500 ${
             scrolled
-              ? "shadow-[0_20px_50px_rgba(0,0,0,0.1)] md:w-auto"
+              ? "shadow-[0_20px_50px_rgba(0,0,0,0.1)] md:w-auto border-[2px]"
               : "w-full"
           }`}
         >
@@ -143,7 +143,7 @@ const Navbar = () => {
             initial={{ opacity: 0, scale: 0.95, y: -20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: -20 }}
-            className="absolute left-6 right-6 top-24 z-[-1] overflow-hidden rounded-[40px] border border-white/20 bg-white/95 p-10 shadow-[0_40px_80px_rgba(0,0,0,0.15)] backdrop-blur-3xl md:hidden"
+            className="absolute left-6 right-6 top-24 z-[-1] overflow-hidden rounded-[40px] border border-white/20 bg-white/95 p-10 shadow-[0_40px_80px_rgba(0,0,0,0.10)] backdrop-blur-3xl md:hidden"
           >
             <div className="flex flex-col gap-6">
               {navItems.map(({ name, path }, i) => (

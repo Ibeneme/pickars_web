@@ -220,7 +220,7 @@ const HelpCenter: React.FC = () => {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: i * 0.05 }}
                   onClick={() => setSelectedCategory(cat)}
-                  className="group cursor-pointer bg-gray-50/50 border border-gray-100 p-10 rounded-[3rem] hover:bg-white hover:border-red-100 hover:shadow-[0_40px_80px_rgba(0,0,0,0.05)] transition-all duration-500"
+                  className="group cursor-pointer bg-gray-50/50 border border-gray-100 p-10 rounded-[3rem] hover:bg-white hover:border-red-100  transition-all duration-500"
                 >
                   <div className="mb-10 text-3xl text-red-600 group-hover:scale-110 transition-transform origin-left">
                     {cat.icon}

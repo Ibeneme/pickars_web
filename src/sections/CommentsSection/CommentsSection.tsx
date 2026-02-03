@@ -216,7 +216,7 @@ const CommentsSection: React.FC = () => {
         <motion.button
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
-          className="bg-gray-900 text-white px-8 py-4 rounded-full font-black uppercase text-xs md:text-sm tracking-widest shadow-xl shadow-gray-200"
+          className="bg-gray-900 text-white px-8 py-4 rounded-full font-black uppercase text-xs md:text-sm tracking-widest "
         >
           Ship Your First Package Now
         </motion.button>

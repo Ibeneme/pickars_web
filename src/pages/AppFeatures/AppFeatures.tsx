@@ -147,7 +147,7 @@ const AppFeatures: React.FC = () => {
 
           {/* Special "Coming Soon" CTA Card */}
           <motion.div
-            className="col-span-1 md:col-span-2 lg:col-span-1 bg-red-600 rounded-[45px] p-10 flex flex-col justify-between text-white shadow-xl shadow-red-600/20"
+            className="col-span-1 md:col-span-2 lg:col-span-1 bg-red-600 rounded-[45px] p-10 flex flex-col justify-between text-white"
             whileHover={{ y: -5 }}
           >
             <div>
@@ -167,7 +167,7 @@ const AppFeatures: React.FC = () => {
 
         {/* Footer Support CTA */}
         <div className="mt-20 text-center">
-          <div className="inline-flex items-center gap-6 px-8 py-4 bg-white border border-gray-100 rounded-full shadow-sm">
+          <div className="inline-flex items-center gap-6 px-8 py-4 bg-white border border-gray-100 rounded-full ">
             <FiHeadphones className="text-red-600 text-xl" />
             <span className="text-gray-500 font-medium">
               Need a custom feature for your business?

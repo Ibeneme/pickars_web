@@ -60,7 +60,7 @@ const TermsAndConditionsPage: React.FC = () => {
                   }}
                   className={`w-full flex items-center gap-4 px-6 py-5 rounded-[25px] font-bold transition-all ${
                     activeTab === sec.id
-                      ? "bg-[#121212] text-white shadow-2xl shadow-black/20"
+                      ? "bg-[#121212] text-white"
                       : "text-gray-400 hover:bg-gray-100 hover:text-[#121212]"
                   }`}
                 >
@@ -87,7 +87,7 @@ const TermsAndConditionsPage: React.FC = () => {
           <main className="lg:col-span-9 space-y-20">
             {/* 1. User Account */}
             <section id="account" className="scroll-mt-32">
-              <div className="p-10 md:p-16 bg-white border border-gray-100 rounded-[50px] shadow-sm">
+              <div className="p-10 md:p-16 bg-white border border-gray-100 rounded-[50px] ">
                 <h2 className="text-3xl font-black mb-8 flex items-center gap-4">
                   <span className="h-10 w-1 bg-red-600 rounded-full" />
                   1. User Account
@@ -169,7 +169,7 @@ const TermsAndConditionsPage: React.FC = () => {
 
             {/* 4. Liability Disclaimer */}
             <section id="liability" className="scroll-mt-32">
-              <div className="p-10 md:p-16 bg-red-600 rounded-[50px] text-white shadow-2xl shadow-red-600/20">
+              <div className="p-10 md:p-16 bg-red-600 rounded-[50px] text-white ">
                 <h2 className="text-3xl font-black mb-8">
                   4. Limitation of Liability
                 </h2>

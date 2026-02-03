@@ -51,7 +51,7 @@ const CustomerRiderSection: React.FC = () => {
                 {activeTab === tab && (
                   <motion.div
                     layoutId="activeTabPill"
-                    className="absolute inset-0 rounded-full bg-[#ff0000] shadow-xl shadow-red-200"
+                    className="absolute inset-0 rounded-full bg-[#ff0000] "
                     transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
                   />
                 )}
@@ -107,7 +107,7 @@ const CustomerRiderSection: React.FC = () => {
 
               {/* STORE BUTTONS */}
               <div className="flex flex-wrap gap-4">
-                <button className="flex items-center gap-4 rounded-2xl bg-[#121212] px-8 py-4 text-white transition-all hover:scale-105 active:scale-95 shadow-xl">
+                <button className="flex items-center gap-4 rounded-2xl bg-[#121212] px-8 py-4 text-white transition-all hover:scale-105 active:scale-95">
                   <FaApple size={28} />
                   <div className="text-left">
                     <p className="text-[10px] font-medium opacity-60">
@@ -116,7 +116,7 @@ const CustomerRiderSection: React.FC = () => {
                     <p className="text-lg font-black leading-none">App Store</p>
                   </div>
                 </button>
-                <button className="flex items-center gap-4 rounded-2xl border-2 border-gray-200 bg-white px-8 py-4 text-[#121212] transition-all hover:border-[#ff0000] shadow-sm">
+                <button className="flex items-center gap-4 rounded-2xl border-2 border-gray-200 bg-white px-8 py-4 text-[#121212] transition-all hover:border-[#ff0000]">
                   <BiLogoPlayStore size={28} />
                   <div className="text-left">
                     <p className="text-[10px] font-medium opacity-60">
@@ -136,7 +136,7 @@ const CustomerRiderSection: React.FC = () => {
                 <motion.div
                   initial={{ rotate: 5, y: 40 }}
                   whileInView={{ rotate: 0, y: 0 }}
-                  className="relative z-10 aspect-[9/18.5] w-full overflow-hidden rounded-[3.5rem] border-[10px] border-[#121212] bg-[#121212] shadow-[0_60px_120px_rgba(0,0,0,0.3)]"
+                  className="relative z-10 aspect-[9/18.5] w-full overflow-hidden rounded-[3.5rem] border-[10px] border-[#121212] bg-[#121212]"
                 >
                   {/* Styled Map Background (Dark Mode) */}
                   <div
@@ -208,7 +208,7 @@ const CustomerRiderSection: React.FC = () => {
                       repeat: Infinity,
                       ease: "linear",
                     }}
-                    className="absolute z-20 flex h-10 w-10 items-center justify-center rounded-full bg-red-600 text-white shadow-[0_0_20px_rgba(255,0,0,0.5)]"
+                    className="absolute z-20 flex h-10 w-10 items-center justify-center rounded-full bg-red-600 text-white"
                   >
                     <FaMotorcycle size={18} />
                   </motion.div>
@@ -225,7 +225,7 @@ const CustomerRiderSection: React.FC = () => {
                     <motion.div
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
-                      className="rounded-3xl bg-[#1e1e1e] border border-white/5 p-5 shadow-2xl backdrop-blur-md"
+                      className="rounded-3xl bg-[#1e1e1e] border border-white/5 p-5 backdrop-blur-md"
                     >
                       <div className="flex items-center gap-4">
                         <div className="h-12 w-12 rounded-2xl bg-red-600/20 flex items-center justify-center text-red-600">

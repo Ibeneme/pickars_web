@@ -1,11 +1,6 @@
 import React, { useState } from "react";
 import { motion, type Variants } from "framer-motion";
-import {
-  FaApple,
-  FaMotorcycle,
-  FaUserCircle,
-  FaBox,
-} from "react-icons/fa";
+import { FaApple, FaMotorcycle, FaUserCircle, FaBox } from "react-icons/fa";
 import { BiLogoPlayStore } from "react-icons/bi";
 import { ComingSoonModal } from "../../components/Modals/ComingSoonModal";
 
@@ -53,7 +48,7 @@ const HeroSection: React.FC = () => {
         {/* 2. Top Content: Centered Heading & Subtext */}
         <motion.div
           variants={itemVariants}
-          className="mb-6 flex items-center gap-2 rounded-full border border-red-200 bg-white/50 px-4 py-2 shadow-sm backdrop-blur-sm"
+          className="mb-6 flex items-center gap-2 rounded-full border border-red-200 bg-white/50 px-4 py-2 backdrop-blur-sm"
         >
           <span className="flex h-2 w-2 animate-pulse rounded-full bg-red-600" />
           <span className="text-xs font-black uppercase tracking-widest text-red-600">
@@ -87,7 +82,7 @@ const HeroSection: React.FC = () => {
         >
           <button
             onClick={() => setShowModal(true)}
-            className="group flex items-center gap-3 rounded-2xl bg-[#121212] px-10 py-4 text-white shadow-xl transition-all hover:scale-105 active:scale-95"
+            className="group flex items-center gap-3 rounded-2xl bg-[#121212] px-10 py-4 text-white transition-all hover:scale-105 active:scale-95"
           >
             <FaApple
               size={28}
@@ -100,7 +95,7 @@ const HeroSection: React.FC = () => {
           </button>
           <button
             onClick={() => setShowModal(true)}
-            className="group flex items-center gap-3 rounded-2xl border-2 border-gray-200 bg-white px-10 py-4 text-[#121212] transition-all hover:border-red-500 hover:scale-105 active:scale-95 shadow-sm"
+            className="group flex items-center gap-3 rounded-2xl border-2 border-gray-200 bg-white px-10 py-4 text-[#121212] transition-all hover:border-red-500 hover:scale-105 active:scale-95 "
           >
             <BiLogoPlayStore
               size={28}
@@ -119,7 +114,7 @@ const HeroSection: React.FC = () => {
           className="relative mt-12 w-full max-w-[340px] md:max-w-[400px]"
         >
           {/* Internal Phone Structure */}
-          <div className="relative z-10 aspect-[9/18.5] w-full overflow-hidden rounded-[3.5rem] border-[12px] border-[#121212] bg-[#121212] shadow-[0_60px_120px_-20px_rgba(0,0,0,0.4)]">
+          <div className="relative z-10 aspect-[9/18.5] w-full overflow-hidden rounded-[3.5rem] border-[12px] border-[#121212] bg-[#121212]">
             {/* The Animated Map View */}
             <div className="absolute inset-0 bg-[#f3f4f6]">
               {/* City Grid Background */}
@@ -175,7 +170,7 @@ const HeroSection: React.FC = () => {
                 }}
                 animate={{ offsetDistance: ["0%", "100%"] }}
                 transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
-                className="absolute z-20 flex h-12 w-12 items-center justify-center rounded-full bg-white text-red-600 shadow-xl border-2 border-red-500"
+                className="absolute z-20 flex h-12 w-12 items-center justify-center rounded-full bg-white text-red-600  border-2 border-red-500"
               >
                 <FaMotorcycle size={24} />
               </motion.div>
@@ -183,7 +178,7 @@ const HeroSection: React.FC = () => {
 
             {/* App UI Elements */}
             <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-white/90 to-transparent p-6 flex items-start justify-between">
-              <div className="flex items-center gap-3 rounded-full bg-white/80 p-1 pr-4 shadow-sm backdrop-blur-md">
+              <div className="flex items-center gap-3 rounded-full bg-white/80 p-1 pr-4 backdrop-blur-md">
                 <FaUserCircle size={30} className="text-gray-300" />
                 <span className="text-xs font-black text-[#121212]">
                   John D. <span className="text-red-600">★ 5.0</span>
@@ -192,7 +187,7 @@ const HeroSection: React.FC = () => {
             </div>
 
             <div className="absolute bottom-6 left-4 right-4">
-              <div className="rounded-3xl bg-[#121212] p-5 border border-white/10 shadow-2xl">
+              <div className="rounded-3xl bg-[#121212] p-5 border border-white/10 ">
                 <div className="flex items-center justify-between">
                   <div className="flex flex-col gap-1">
                     <span className="text-[10px] font-black text-red-500 uppercase tracking-widest">

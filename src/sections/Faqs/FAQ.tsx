@@ -33,7 +33,7 @@ const SafetySection: React.FC = () => {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.1 }}
-              className="p-10 rounded-[3rem] bg-[#fafafa] border border-gray-100 hover:shadow-2xl hover:shadow-red-600/5 transition-all group"
+              className="p-10 rounded-[3rem] bg-[#fafafa] border border-gray-100 transition-all group"
             >
               <div className="h-16 w-16 rounded-2xl bg-white  flex items-center justify-center text-2xl text-red-600 mb-8 group-hover:bg-red-600 group-hover:text-white transition-all duration-500">
                 {item.icon}
@@ -82,7 +82,7 @@ const ContactCTA: React.FC = () => {
               </a>
               <a
                 href="tel:+2340000000"
-                className="flex items-center gap-4 bg-red-600 text-white px-10 py-6 rounded-3xl font-black text-lg hover:scale-105 transition-transform  shadow-red-600/20"
+                className="flex items-center gap-4 bg-red-600 text-white px-10 py-6 rounded-3xl font-black text-lg hover:scale-105 transition-transform "
               >
                 <FiPhoneCall size={24} /> Call Now
               </a>

@@ -29,7 +29,7 @@ const StatCard = ({ icon, label, value, desc, delay }: StatCardProps) => (
     <div className="absolute -right-10 -top-10 h-32 w-32 bg-red-500/5 rounded-full blur-3xl group-hover:bg-red-500/10 transition-colors duration-500" />
 
     <div className="relative z-10">
-      <div className="mb-8 md:mb-14 inline-flex h-12 w-12 md:h-14 md:w-14 items-center justify-center rounded-2xl bg-white shadow-sm text-red-600 group-hover:bg-red-600 group-hover:text-white transition-all duration-500">
+      <div className="mb-8 md:mb-14 inline-flex h-12 w-12 md:h-14 md:w-14 items-center justify-center rounded-2xl bg-white  text-red-600 group-hover:bg-red-600 group-hover:text-white transition-all duration-500">
         {icon}
       </div>
 
@@ -126,7 +126,7 @@ const FinalBookingSection = () => {
     <div className="bg-white pb-10 md:pb-20">
       <TrustStatsSection />
 
-      <section className="relative overflow-hidden bg-[#ff0000] font-['Lufga'] max-w-7xl mx-auto rounded-[0rem] md:rounded-[3rem] shadow-2xl py-16 md:py-24 px-6 md:px-12">
+      <section className="relative overflow-hidden bg-[#ff0000] font-['Lufga'] max-w-7xl mx-auto rounded-[0rem] md:rounded-[3rem]  py-16 md:py-24 px-6 md:px-12">
         {/* Pattern Backgrounds */}
         <div
           className="absolute inset-0 opacity-[0.07] pointer-events-none"
@@ -172,7 +172,7 @@ const FinalBookingSection = () => {
               viewport={{ once: true }}
               className="w-full"
             >
-              <div className="rounded-[2.5rem] md:rounded-[3.5rem] bg-white p-8 md:p-14 shadow-[0_50px_100px_rgba(0,0,0,0.3)]">
+              <div className="rounded-[2.5rem] md:rounded-[3.5rem] bg-white p-8 md:p-14 ">
                 <div className="flex flex-col sm:flex-row justify-between items-center sm:items-start gap-4 mb-10 md:mb-12 text-center sm:text-left">
                   <h3 className="text-3xl md:text-4xl font-black text-[#121212]">
                     Request Delivery
@@ -205,7 +205,7 @@ const FinalBookingSection = () => {
                 <motion.button
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
-                  className="mt-8 md:mt-10 w-full bg-[#121212] text-white py-5 md:py-6 rounded-2xl text-lg md:text-xl font-black hover:bg-black transition-all shadow-xl"
+                  className="mt-8 md:mt-10 w-full bg-[#121212] text-white py-5 md:py-6 rounded-2xl text-lg md:text-xl font-black hover:bg-black transition-all "
                 >
                   Download our App
                 </motion.button>

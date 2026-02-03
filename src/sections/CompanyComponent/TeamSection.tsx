@@ -73,7 +73,7 @@ const TeamSection: React.FC = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.15 }}
               viewport={{ once: true }}
-              className="group relative overflow-hidden rounded-[50px] border border-gray-100 bg-[#f9f9f9] p-5 transition-all hover:bg-white hover:shadow-2xl hover:shadow-red-500/10"
+              className="group relative overflow-hidden rounded-[50px] border border-gray-100 bg-[#f9f9f9] p-5 transition-all hover:bg-white "
             >
               {/* Media Container */}
               <div className="relative mb-8 overflow-hidden rounded-[40px] bg-gray-200 aspect-square">
@@ -89,7 +89,7 @@ const TeamSection: React.FC = () => {
                     <a
                       href={m.linkedin}
                       target="_blank"
-                      className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white text-[#121212] shadow-xl hover:bg-red-600 hover:text-white transition-all"
+                      className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white text-[#121212] hover:bg-red-600 hover:text-white transition-all"
                     >
                       <FaLinkedinIn size={18} />
                     </a>
@@ -98,7 +98,7 @@ const TeamSection: React.FC = () => {
                     <a
                       href={m.twitter}
                       target="_blank"
-                      className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white text-[#121212] shadow-xl hover:bg-red-600 hover:text-white transition-all"
+                      className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white text-[#121212] hover:bg-red-600 hover:text-white transition-all"
                     >
                       <FaXTwitter size={18} />
                     </a>

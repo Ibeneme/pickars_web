@@ -133,15 +133,15 @@ const HowItWorksSection: React.FC = () => {
               key={index}
               variants={cardVariants}
               whileHover={{ y: -15, rotateY: 5 }}
-              className="group relative rounded-[3rem] bg-white p-6 shadow-[0_30px_100px_rgba(0,0,0,0.04)] transition-all duration-500"
+              className="group relative rounded-[3rem] bg-white p-6  transition-all duration-500"
             >
               {/* Floating Number */}
-              <div className="absolute -top-6 -right-4 flex h-14 w-14 items-center justify-center rounded-full bg-[#121212] font-black text-white shadow-xl transition-transform group-hover:scale-110 group-hover:-rotate-12">
+              <div className="absolute -top-6 -right-4 flex h-14 w-14 items-center justify-center rounded-full bg-[#121212] font-black text-white  transition-transform group-hover:scale-110 group-hover:-rotate-12">
                 {step.number}
               </div>
 
               <div
-                className={`mb-10 flex h-20 w-20 items-center justify-center rounded-[2rem] bg-gradient-to-br ${step.accent} text-3xl text-white shadow-2xl transition-all duration-700 group-hover:rounded-full group-hover:rotate-[360deg]`}
+                className={`mb-10 flex h-20 w-20 items-center justify-center rounded-[2rem] bg-gradient-to-br ${step.accent} text-3xl text-white transition-all duration-700 group-hover:rounded-full group-hover:rotate-[360deg]`}
               >
                 {step.icon}
               </div>

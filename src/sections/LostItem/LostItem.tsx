@@ -59,7 +59,7 @@ const LostItem = () => {
           </p>
         </header>
 
-        <div className="bg-white border border-gray-100 rounded-[50px] p-8 md:p-16 shadow-2xl shadow-gray-200/50">
+        <div className="bg-white border border-gray-100 rounded-[50px] p-8 md:p-16 ">
           <form
             className="grid grid-cols-1 md:grid-cols-2 gap-8"
             onSubmit={handleSubmit}
@@ -152,7 +152,7 @@ const LostItem = () => {
               initial={{ scale: 0.9, opacity: 0, y: 20 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.9, opacity: 0, y: 20 }}
-              className="relative bg-white rounded-[50px] p-12 md:p-16 max-w-xl w-full text-center shadow-2xl"
+              className="relative bg-white rounded-[50px] p-12 md:p-16 max-w-xl w-full text-center"
             >
               <div className="w-24 h-24 bg-red-50 text-red-600 rounded-full flex items-center justify-center text-5xl mx-auto mb-8">
                 🥹
