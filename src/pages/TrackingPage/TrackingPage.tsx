@@ -1,16 +1,23 @@
-
-import { motion } from "framer-motion";
-import {
-
-  FaSearch,
-  FaTruckLoading,
-  FaClock,
-  FaBoxOpen,
-} from "react-icons/fa";
+import { motion, useScroll, useSpring } from "framer-motion";
+import { FaSearch, FaTruckLoading, FaClock, FaBoxOpen } from "react-icons/fa";
 
 const TrackingPage = () => {
+  // 1. Implementation of the Scroll Progress
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001,
+  });
+
   return (
     <main className="min-h-screen bg-[#f9f9f9] font-['Lufga'] text-[#121212] pt-[120px]">
+      {/* --- GLOBAL TOP SCROLLER --- */}
+      <motion.div
+        className="fixed top-0 left-0 right-0 z-[100] h-1.5 bg-red-600 origin-left"
+        style={{ scaleX }}
+      />
+
       <div className="mx-auto max-w-7xl px-6 pb-24 pt-[80px]">
         {/* --- HEADER SECTION --- */}
         <div className="mb-12 text-center md:text-left">
@@ -40,7 +47,7 @@ const TrackingPage = () => {
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
-              className="rounded-[40px] border border-gray-200 bg-white p-8 "
+              className="rounded-[40px] border border-gray-200 bg-white p-8 shadow-sm"
             >
               <label className="mb-4 block text-sm font-bold uppercase tracking-widest text-gray-400">
                 Tracking ID
@@ -51,7 +58,7 @@ const TrackingPage = () => {
                   placeholder="PK-9920-X12"
                   className="w-full rounded-2xl bg-gray-50 border border-gray-200 px-6 py-4 text-[#121212] outline-none focus:border-red-600 focus:ring-4 focus:ring-red-600/5 transition-all"
                 />
-                <button className="absolute right-2 top-2 bottom-2 rounded-xl bg-red-600 px-6 text-white font-bold hover:bg-red-700 transition-colors ">
+                <button className="absolute right-2 top-2 bottom-2 rounded-xl bg-red-600 px-6 text-white font-bold hover:bg-red-700 transition-colors">
                   <FaSearch />
                 </button>
               </div>
@@ -82,7 +89,7 @@ const TrackingPage = () => {
             <motion.div
               initial={{ opacity: 0, scale: 0.98 }}
               animate={{ opacity: 1, scale: 1 }}
-              className="relative h-[500px] w-full overflow-hidden rounded-[40px] border border-gray-200 bg-white "
+              className="relative h-[500px] w-full overflow-hidden rounded-[40px] border border-gray-200 bg-white"
             >
               {/* Light Mode Map Background */}
               <div className="absolute inset-0 opacity-50">
@@ -107,7 +114,6 @@ const TrackingPage = () => {
                     </pattern>
                   </defs>
                   <rect width="100%" height="100%" fill="url(#grid-light)" />
-                  {/* Styled "Streets" */}
                   <path
                     d="M0 200 L 1000 200"
                     stroke="#f3f4f6"
@@ -180,11 +186,15 @@ const TrackingPage = () => {
             { label: "In Transit", active: false },
             { label: "Delivered", active: false },
           ].map((step, i) => (
-            <div
+            <motion.div
               key={i}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: i * 0.1 }}
+              viewport={{ once: true }}
               className={`p-6 rounded-[32px] border ${
                 step.active
-                  ? "border-red-100 bg-red-50/50"
+                  ? "border-red-100 bg-red-50/50 shadow-sm"
                   : "border-gray-200 bg-white"
               } transition-all`}
             >
@@ -200,7 +210,7 @@ const TrackingPage = () => {
               >
                 {step.label}
               </span>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>

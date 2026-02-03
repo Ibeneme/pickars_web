@@ -1,5 +1,5 @@
 import React from "react";
-import { motion } from "framer-motion";
+import { motion, useScroll, useSpring } from "framer-motion";
 import {
   FiMapPin,
   FiRepeat,
@@ -18,7 +18,7 @@ interface FeatureItem {
   icon: React.ElementType;
   title: string;
   description: string;
-  size: "small" | "large"; // For the bento layout
+  size: "small" | "large";
 }
 
 const appFeatures: FeatureItem[] = [
@@ -89,23 +89,38 @@ const appFeatures: FeatureItem[] = [
 ];
 
 const AppFeatures: React.FC = () => {
+  // 1. Implementation of the Scroll Progress
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001,
+  });
+
   return (
-    <div className="min-h-screen pt-[180px] bg-[#FAFAFA] font-['Lufga'] py-24 px-6">
+    <div className="min-h-screen pt-[180px] bg-[#FAFAFA] font-['Lufga'] py-24 px-6 relative">
+      {/* --- GLOBAL TOP SCROLLER --- */}
+      <motion.div
+        className="fixed top-0 left-0 right-0 z-[120] h-1.5 bg-red-600 origin-left"
+        style={{ scaleX }}
+      />
+
       <div className="mx-auto max-w-7xl">
         {/* Header */}
         <header className="mb-20 text-center">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
           >
             <span className="text-xs font-black uppercase tracking-[0.4em] text-red-600 mb-4 block">
               Engineered for Efficiency
             </span>
-            <h1 className="text-6xl md:text-8xl font-black tracking-tighter text-[#121212] leading-tight">
-              Powerful <span className="text-gray-300">Features.</span>
+            <h1 className="text-6xl md:text-9xl font-black tracking-tighter text-[#121212] leading-[0.85]">
+              Powerful <span className="text-gray-200">Features.</span>
             </h1>
-            <p className="mt-6 text-gray-500 text-xl max-w-2xl mx-auto leading-relaxed">
+            <p className="mt-8 text-gray-500 text-xl max-w-2xl mx-auto leading-relaxed font-medium">
               Experience the next generation of logistics with tools designed to
               keep your business moving 24/7.
             </p>
@@ -113,73 +128,95 @@ const AppFeatures: React.FC = () => {
         </header>
 
         {/* Bento Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 auto-rows-[300px]">
-          {appFeatures.map((feature, index) => (
+        <motion.div
+          className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 auto-rows-[340px]"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={{
+            visible: { transition: { staggerChildren: 0.1 } },
+          }}
+        >
+          {appFeatures.map((feature) => (
             <motion.div
               key={feature.id}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
-              className={`group relative overflow-hidden bg-white border border-gray-100 p-10 rounded-[45px] hover:border-red-600/20 hover:shadow-2xl hover:shadow-red-600/5 transition-all duration-500 ${
+              variants={{
+                hidden: { opacity: 0, scale: 0.95 },
+                visible: { opacity: 1, scale: 1 },
+              }}
+              className={`group relative overflow-hidden bg-white border border-gray-100 p-10 rounded-[45px] transition-all duration-700 hover:shadow-[0_40px_100px_-20px_rgba(239,68,68,0.15)] ${
                 feature.size === "large" ? "md:col-span-2" : "col-span-1"
               }`}
             >
               {/* Icon Container */}
-              <div className="mb-8 h-16 w-16 rounded-2xl bg-[#121212] text-white flex items-center justify-center text-3xl group-hover:bg-red-600 group-hover:scale-110 transition-all duration-500">
+              <div className="mb-8 h-16 w-16 rounded-2xl bg-[#121212] text-white flex items-center justify-center text-3xl group-hover:bg-red-600 group-hover:rotate-[15deg] group-hover:scale-110 transition-all duration-500 shadow-xl">
                 <feature.icon />
               </div>
 
-              {/* Text */}
-              <h3 className="text-2xl font-black mb-4 text-[#121212] tracking-tight">
-                {feature.title}
-              </h3>
-              <p className="text-gray-400 leading-relaxed text-sm md:text-base">
-                {feature.description}
-              </p>
+              {/* Text Content */}
+              <div className="relative z-10">
+                <h3 className="text-3xl font-black mb-4 text-[#121212] tracking-tight">
+                  {feature.title}
+                </h3>
+                <p className="text-gray-400 leading-relaxed font-medium group-hover:text-gray-600 transition-colors">
+                  {feature.description}
+                </p>
+              </div>
 
-              {/* Aesthetic Background Element */}
-              <div className="absolute -right-8 -bottom-8 text-gray-50 opacity-[0.03] group-hover:text-red-600 group-hover:opacity-[0.05] transition-all duration-700">
-                <feature.icon size={180} />
+              {/* Ghost Icon Background */}
+              <div className="absolute -right-10 -bottom-10 text-gray-100 opacity-5 transition-all duration-700 group-hover:text-red-600 group-hover:opacity-10 group-hover:-rotate-12 group-hover:scale-125">
+                <feature.icon size={220} />
               </div>
             </motion.div>
           ))}
 
-          {/* Special "Coming Soon" CTA Card */}
+          {/* CTA Bento Card */}
           <motion.div
-            className="col-span-1 md:col-span-2 lg:col-span-1 bg-red-600 rounded-[45px] p-10 flex flex-col justify-between text-white"
-            whileHover={{ y: -5 }}
+            variants={{
+              hidden: { opacity: 0, y: 20 },
+              visible: { opacity: 1, y: 0 },
+            }}
+            className="col-span-1 md:col-span-2 lg:col-span-1 bg-[#ff0000] rounded-[45px] p-10 flex flex-col justify-between text-white shadow-2xl shadow-red-200"
           >
             <div>
-              <FiSmartphone size={40} className="mb-6" />
-              <h3 className="text-2xl font-black tracking-tight mb-2">
-                Ready to ship?
+              <div className="h-14 w-14 rounded-full bg-white/10 flex items-center justify-center mb-6 backdrop-blur-md">
+                <FiSmartphone size={28} />
+              </div>
+              <h3 className="text-3xl font-black tracking-tight mb-4">
+                Ready to <br />
+                ship now?
               </h3>
-              <p className="text-red-100 text-sm opacity-80">
-                Join thousands of Nigerians moving items with Pickars today.
+              <p className="text-red-100 font-medium">
+                Join thousands moving items with Pickars today.
               </p>
             </div>
-            <button className="bg-white text-red-600 w-full py-4 rounded-2xl font-black text-sm uppercase tracking-widest hover:bg-[#121212] hover:text-white transition-all">
+            <button className="bg-white text-[#ff0000] w-full py-5 rounded-3xl font-black text-sm uppercase tracking-widest hover:bg-[#121212] hover:text-white transition-all transform active:scale-95">
               Download App
             </button>
           </motion.div>
-        </div>
+        </motion.div>
 
-        {/* Footer Support CTA */}
-        <div className="mt-20 text-center">
-          <div className="inline-flex items-center gap-6 px-8 py-4 bg-white border border-gray-100 rounded-full ">
-            <FiHeadphones className="text-red-600 text-xl" />
-            <span className="text-gray-500 font-medium">
-              Need a custom feature for your business?
+        {/* Support Section */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          className="mt-28 text-center"
+        >
+          <div className="inline-flex flex-col md:flex-row items-center gap-6 px-10 py-6 bg-white border border-gray-100 rounded-[30px] shadow-sm">
+            <div className="flex h-12 w-12 items-center justify-center rounded-full bg-red-50">
+              <FiHeadphones className="text-red-600 text-xl" />
+            </div>
+            <span className="text-gray-600 font-bold">
+              Need a custom solution for your business?
             </span>
             <a
               href="mailto:support@pickars.com"
-              className="text-red-600 font-black hover:underline underline-offset-4 transition-all"
+              className="bg-[#121212] px-6 py-3 rounded-xl text-white font-black hover:bg-red-600 transition-all text-sm"
             >
               Talk to us
             </a>
           </div>
-        </div>
+        </motion.div>
       </div>
     </div>
   );

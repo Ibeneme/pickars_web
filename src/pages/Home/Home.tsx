@@ -17,7 +17,6 @@ const Home = () => {
 
   return (
     <div className="relative bg-[#fff] selection:bg-red-600 selection:text-white">
-      {/* 1. Global Progress Bar */}
       <motion.div
         className="fixed top-0 left-0 right-0 z-[110] h-1 bg-red-600 origin-left"
         style={{ scaleX }}

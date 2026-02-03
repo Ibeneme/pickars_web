@@ -67,15 +67,16 @@ const TrustStatsSection = () => (
           </motion.span>
 
           <h2 className="text-5xl md:text-8xl font-black text-[#121212] tracking-tighter leading-[0.9] md:leading-[0.85]">
-            We move <span className="text-gray-300">faster</span> <br />
+            We Pick-up packages <span className="text-gray-300">faster</span>{" "}
+            <br />
             than the city <span className="text-red-600">breathes.</span>
           </h2>
         </div>
 
         <div className="lg:col-span-5 lg:pt-12">
           <p className="text-lg md:text-2xl font-bold text-gray-500 leading-snug">
-            Built for the hustlers of Port Harcourt. We’ve optimized every
-            street corner to ensure your packages never see a red light.
+            Instant pickups, real-time tracking, and trusted dispatch riders
+            ready to move when you are.
           </p>
         </div>
       </div>

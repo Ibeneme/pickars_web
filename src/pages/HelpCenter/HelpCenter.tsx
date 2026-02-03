@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useScroll, useSpring } from "framer-motion";
 import {
   FiSearch,
   FiArrowLeft,
@@ -11,10 +11,6 @@ import {
   FiCreditCard,
 } from "react-icons/fi";
 import { FaWhatsapp, FaTwitter, FaInstagram } from "react-icons/fa";
-
-// ──────────────────────────────────────────────────────────────
-// Types & Data
-// ──────────────────────────────────────────────────────────────
 
 interface FAQItem {
   id: string;
@@ -117,16 +113,19 @@ const categories: Category[] = [
   },
 ];
 
-// ──────────────────────────────────────────────────────────────
-// Main Component
-// ──────────────────────────────────────────────────────────────
-
 const HelpCenter: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [openFAQ, setOpenFAQ] = useState<string | null>(null);
   const [selectedCategory, setSelectedCategory] = useState<Category | null>(
     null
   );
+
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001,
+  });
 
   const filteredFaqs = categories
     .flatMap((cat) => cat.faqs)
@@ -146,7 +145,11 @@ const HelpCenter: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-white font-['Lufga'] selection:bg-red-100 selection:text-red-600">
-      {/* 1. SYSTEM STATUS BAR */}
+      <motion.div
+        className="fixed top-0 left-0 right-0 h-1.5 bg-red-600 origin-left z-[100]"
+        style={{ scaleX }}
+      />
+
       <div className="bg-gray-50 border-b border-gray-100 py-3 overflow-hidden">
         <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
           <div className="flex items-center gap-3">
@@ -169,7 +172,6 @@ const HelpCenter: React.FC = () => {
         </div>
       </div>
 
-      {/* HERO & SEARCH */}
       <header className="pt-24 pb-16 px-6 text-center relative overflow-hidden">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[500px] bg-gradient-to-b from-red-50/50 to-transparent -z-10" />
 
@@ -198,7 +200,7 @@ const HelpCenter: React.FC = () => {
                 setSearchTerm(e.target.value);
                 setOpenFAQ(null);
               }}
-              className="w-full bg-white border-2 border-gray-100 rounded-3xl py-7 pl-16 pr-8 text-xl  focus:border-red-600 outline-none transition-all duration-500"
+              className="w-full bg-white border-2 border-gray-100 rounded-3xl py-7 pl-16 pr-8 text-xl focus:border-red-600 outline-none transition-all duration-500 shadow-xl shadow-gray-200/10"
             />
           </div>
         </motion.div>
@@ -211,6 +213,7 @@ const HelpCenter: React.FC = () => {
               key="categories"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
               className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
             >
               {categories.map((cat, i) => (
@@ -220,7 +223,7 @@ const HelpCenter: React.FC = () => {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: i * 0.05 }}
                   onClick={() => setSelectedCategory(cat)}
-                  className="group cursor-pointer bg-gray-50/50 border border-gray-100 p-10 rounded-[3rem] hover:bg-white hover:border-red-100  transition-all duration-500"
+                  className="group cursor-pointer bg-gray-50/50 border border-gray-100 p-10 rounded-[3rem] hover:bg-white hover:border-red-100 transition-all duration-500 hover:shadow-2xl hover:shadow-red-500/5"
                 >
                   <div className="mb-10 text-3xl text-red-600 group-hover:scale-110 transition-transform origin-left">
                     {cat.icon}
@@ -263,7 +266,7 @@ const HelpCenter: React.FC = () => {
                       key={faq.id}
                       className={`rounded-[2.5rem] border transition-all duration-500 ${
                         openFAQ === faq.id
-                          ? "bg-white border-red-100 "
+                          ? "bg-white border-red-100 shadow-lg shadow-red-500/5"
                           : "bg-gray-50/50 border-gray-100 hover:bg-white"
                       }`}
                     >
@@ -285,8 +288,8 @@ const HelpCenter: React.FC = () => {
                         <div
                           className={`h-12 w-12 flex items-center justify-center rounded-2xl transition-all ${
                             openFAQ === faq.id
-                              ? "bg-red-600 text-white"
-                              : "bg-white text-gray-400 "
+                              ? "bg-red-600 text-white shadow-lg shadow-red-600/30"
+                              : "bg-white text-gray-400 shadow-sm"
                           }`}
                         >
                           {openFAQ === faq.id ? <FiMinus /> : <FiPlus />}
@@ -367,13 +370,13 @@ const HelpCenter: React.FC = () => {
               <div className="mt-12 flex gap-4">
                 <a
                   href="#"
-                  className="h-12 w-12 rounded-full bg-white border border-gray-200 flex items-center justify-center text-gray-600 hover:bg-red-600 hover:text-white transition-all"
+                  className="h-12 w-12 rounded-full bg-white border border-gray-200 flex items-center justify-center text-gray-600 hover:bg-red-600 hover:text-white transition-all shadow-sm"
                 >
                   <FaTwitter />
                 </a>
                 <a
                   href="#"
-                  className="h-12 w-12 rounded-full bg-white border border-gray-200 flex items-center justify-center text-gray-600 hover:bg-red-600 hover:text-white transition-all"
+                  className="h-12 w-12 rounded-full bg-white border border-gray-200 flex items-center justify-center text-gray-600 hover:bg-red-600 hover:text-white transition-all shadow-sm"
                 >
                   <FaInstagram />
                 </a>
@@ -406,13 +409,11 @@ const HelpCenter: React.FC = () => {
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="relative group overflow-hidden rounded-[4rem] bg-[#0A0A0A] "
+            className="relative group overflow-hidden rounded-[4rem] bg-[#0A0A0A] shadow-2xl"
           >
-            {/* Animated Radial Glow Background */}
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,#25D366_0%,transparent_50%)] opacity-0 group-hover:opacity-10 transition-opacity duration-700" />
 
             <div className="relative z-10 bg-[#0A0A0A] rounded-[3.8rem] px-8 py-20 md:py-28 text-center border border-white/5">
-              {/* Availability Badge */}
               <div className="inline-flex items-center gap-3 bg-white/5 backdrop-blur-xl px-6 py-3 rounded-full border border-white/10 mb-10">
                 <span className="relative flex h-3 w-3">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#25D366] opacity-75"></span>
@@ -423,7 +424,6 @@ const HelpCenter: React.FC = () => {
                 </span>
               </div>
 
-              {/* Main Typography */}
               <h2 className="text-6xl md:text-7xl font-black text-white tracking-tighter leading-[0.85] mb-8">
                 Immediate Support.
               </h2>
@@ -434,19 +434,17 @@ const HelpCenter: React.FC = () => {
                 with our dispatch controllers.
               </p>
 
-              {/* The Magnetic Button Effect */}
               <motion.a
                 href="https://wa.me/2349164860591"
                 target="_blank"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="inline-flex items-center gap-5 bg-white text-[#0A0A0A] px-6 py-6 rounded-[2.5rem] font-black text-xl md:text-xl transition-all"
+                className="inline-flex items-center gap-5 bg-white text-[#0A0A0A] px-6 py-6 rounded-[2.5rem] font-black text-xl md:text-xl transition-all shadow-2xl"
               >
                 <FaWhatsapp size={28} className="text-[#25D366]" />
                 Message Now
               </motion.a>
 
-              {/* Ghost Background Icon */}
               <div className="absolute -bottom-10 -right-10 opacity-[0.03] text-white rotate-12 pointer-events-none">
                 <FaWhatsapp size={400} />
               </div>
@@ -454,12 +452,6 @@ const HelpCenter: React.FC = () => {
           </motion.div>
         </section>
       </main>
-
-      <footer className="py-12 px-6 border-t border-gray-100 text-center">
-        <p className="text-[10px] font-black uppercase tracking-[0.5em] text-gray-300">
-          © 2026 Pickars Courier Limited • Port Harcourt City
-        </p>
-      </footer>
     </div>
   );
 };
