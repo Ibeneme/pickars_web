@@ -39,7 +39,7 @@ const Launcher: React.FC = () => {
         <div className="flex items-center gap-3">
           <FaRocket className="text-xl animate-pulse" />
           <h2 className="text-xl md:text-xl font-black tracking-tighter uppercase leading-none">
-            Get Ready <span className="text-white/60 ">to Move</span>
+            Launching<span className="text-white/60 "></span>
           </h2>
         </div>
 
