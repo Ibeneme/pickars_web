@@ -10,7 +10,7 @@ const Footer: React.FC = () => {
   };
 
   return (
-    <footer className="bg-[#080808] pt-24 pb-12 font-['Lufga'] text-white">
+    <footer className="bg-[#080808] pt-24 pb-32 font-['Lufga'] text-white">
       <div className="mx-auto max-w-[1400px] px-6">
         <div className="grid grid-cols-1 gap-16 lg:grid-cols-12">
           {/* Brand Identity Section */}
