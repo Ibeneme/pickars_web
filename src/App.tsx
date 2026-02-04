@@ -22,19 +22,35 @@ import TrackingPage from "./pages/TrackingPage/TrackingPage";
 import "./assets/fonts/fonts.css";
 import "./index.css";
 
+// Launcher
+import Launcher from "./components/Launcher/Laucher";
+
 const App: React.FC = () => {
   const location = useLocation();
 
   return (
     <div
       className="app-main-wrapper"
-      style={{ backgroundColor: "#FAFAFA", minHeight: "100vh" }}
+      style={{
+        backgroundColor: "#FAFAFA",
+        minHeight: "100vh",
+        display: "flex",
+        flexDirection: "column",
+      }}
     >
       <ScrollToTop />
 
+      {/* Top Navigation */}
       <Navbar />
 
-      <main className="content-area">
+      {/* Main Content */}
+      <main
+        className="content-area"
+        style={{
+          flex: 1,
+          paddingBottom: "90px", // prevents content from hiding behind launcher
+        }}
+      >
         <Routes location={location} key={location.pathname}>
           <Route path="/" element={<Home />} />
           <Route path="/app/privacy-policy" element={<PrivacyPolicy />} />
@@ -49,7 +65,25 @@ const App: React.FC = () => {
         </Routes>
       </main>
 
+      {/* Footer */}
       <Footer />
+
+      {/* Fixed Bottom Launcher */}
+      <div
+        style={{
+          position: "fixed",
+          bottom: 0,
+          left: 0,
+          right: 0,
+          zIndex: 9999,
+          background: "transparent",
+          pointerEvents: "none",
+        }}
+      >
+        <div style={{ pointerEvents: "auto" }}>
+          <Launcher />
+        </div>
+      </div>
     </div>
   );
 };

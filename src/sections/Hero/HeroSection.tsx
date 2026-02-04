@@ -52,7 +52,7 @@ const HeroSection: React.FC = () => {
         >
           <span className="flex h-2 w-2 animate-pulse rounded-full bg-red-600" />
           <span className="text-xs font-black uppercase tracking-widest text-red-600">
-            Live in Port Harcourt City
+            Coming soon in Port Harcourt City
           </span>
         </motion.div>
 
@@ -60,7 +60,8 @@ const HeroSection: React.FC = () => {
           variants={itemVariants}
           className="mb-6 text-5xl font-black leading-[0.95] tracking-tighter text-[#121212] md:text-8xl"
         >
-          Send Packages. <br />
+          Get a Dispatch Rider
+          <br />
           <span className="bg-gradient-to-r from-red-600 via-orange-500 to-red-600 bg-clip-text text-transparent ">
             Instantly.
           </span>
