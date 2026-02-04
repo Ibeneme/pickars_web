@@ -38,8 +38,8 @@ const Launcher: React.FC = () => {
         {/* Minimal Headline */}
         <div className="flex items-center gap-3">
           <FaRocket className="text-xl animate-pulse" />
-          <h2 className="text-xl md:text-xl font-black tracking-tighter uppercase leading-none">
-            Launching<span className="text-white/60 "></span>
+          <h2 className="text-[15px] md:text-[24px] font-black tracking-tighter uppercase leading-none">
+            Launching on<span className="text-white/60 "></span>
           </h2>
         </div>
 
