@@ -3,7 +3,7 @@ import SlidingPage from "../../components/SlidingPgae/SlidingPage";
 import CommentsSection from "../../sections/CommentsSection/CommentsSection";
 import CustomerRiderSection from "../../sections/CustomerRiderSection/CustomerRiderSection";
 import HeroSection from "../../sections/Hero/HeroSection";
-import HowItWorksSection from "../../sections/HowItWorksSection/HowItWorksSection";
+//import HowItWorksSection from "../../sections/HowItWorksSection/HowItWorksSection";
 import FinalBookingSection from "../../sections/HowItWorksSection/FinalBookingSection";
 //import MidImage from "../../sections/HeroDelivery/MidImage";
 
@@ -45,7 +45,7 @@ const Home = () => {
           <CustomerRiderSection />
         </motion.div>
 
-        <HowItWorksSection />
+        {/* <HowItWorksSection /> */}
         <CommentsSection />
         {/* <MidImage /> */}
       </main>
