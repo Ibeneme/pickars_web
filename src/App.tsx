@@ -40,15 +40,12 @@ const App: React.FC = () => {
     >
       <ScrollToTop />
 
-      {/* Top Navigation */}
       <Navbar />
 
-      {/* Main Content */}
       <main
         className="content-area"
         style={{
           flex: 1,
-          paddingBottom: "90px", // prevents content from hiding behind launcher
         }}
       >
         <Routes location={location} key={location.pathname}>
@@ -65,10 +62,8 @@ const App: React.FC = () => {
         </Routes>
       </main>
 
-      {/* Footer */}
       <Footer />
 
-      {/* Fixed Bottom Launcher */}
       <div
         style={{
           position: "fixed",

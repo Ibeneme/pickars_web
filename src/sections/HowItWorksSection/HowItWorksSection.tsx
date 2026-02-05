@@ -1,163 +1,261 @@
 import React, { useRef } from "react";
 import { motion, useScroll, useSpring, type Variants } from "framer-motion";
-import { FaMapMarkerAlt, FaMotorcycle, FaBox, FaRoute } from "react-icons/fa";
+import {
+  FaMapMarkerAlt,
+  FaMotorcycle,
+  FaBox,
+  FaRoute,
+  FaCheckCircle,
+} from "react-icons/fa";
 
 const HowItWorksSection: React.FC = () => {
-  const containerRef = useRef(null);
+  const sectionRef = useRef<HTMLDivElement>(null);
 
-  // Mad Scroll Progress for the "Route Line"
   const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start end", "end start"],
+    target: sectionRef,
+    offset: ["start 70%", "end 30%"],
   });
 
-  const pathLength = useSpring(scrollYProgress, {
-    stiffness: 400,
-    damping: 90,
+  const pathProgress = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001,
   });
 
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: { staggerChildren: 0.2, delayChildren: 0.1 },
+      transition: { staggerChildren: 0.4 },
     },
   };
 
-  const cardVariants: Variants = {
-    hidden: { y: 100, opacity: 0, rotateX: -20 },
+  const stepVariants: Variants = {
+    hidden: { scale: 0.8, opacity: 0 },
     visible: {
-      y: 0,
+      scale: 1,
       opacity: 1,
-      rotateX: 0,
-      transition: { type: "spring", stiffness: 80, damping: 12 },
+      transition: { type: "spring", stiffness: 100, damping: 20 },
     },
   };
 
   const steps = [
     {
       number: "01",
-      icon: <FaMapMarkerAlt />,
+      icon: <FaMapMarkerAlt className="text-4xl" />,
       title: "Set Locations",
       description:
-        "Quickly input pickup and drop-off. Add photos or special notes in seconds.",
-      accent: "from-red-500 to-red-400",
+        "Tap to pin your pickup. We’ve made it as easy as sending a text.",
+      miniMap: (
+        <div className="relative h-72 w-full max-w-lg rounded-[2.5rem] overflow-hidden bg-white border border-gray-100 group">
+          <div className="absolute inset-0 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:20px_20px] opacity-30" />
+
+          <motion.div
+            animate={{
+              scale: [1, 1.1, 1],
+              rotate: [3, -3, 3],
+            }}
+            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute left-[20%] top-[30%] z-20"
+          >
+            <div className="flex h-16 w-16 items-center justify-center rounded-3xl bg-red-600 text-white">
+              <FaMapMarkerAlt size={28} />
+            </div>
+          </motion.div>
+
+          <svg className="absolute inset-0 h-full w-full" viewBox="0 0 400 300">
+            <motion.path
+              d="M 110 120 Q 200 120, 280 200"
+              fill="none"
+              stroke="#ef4444"
+              strokeWidth="3"
+              strokeLinecap="round"
+              strokeDasharray="10 10"
+              initial={{ pathLength: 0 }}
+              whileInView={{ pathLength: 1 }}
+              transition={{ duration: 2, ease: "easeInOut" }}
+            />
+          </svg>
+
+          <motion.div
+            animate={{ scale: [1, 1.2, 1] }}
+            transition={{ duration: 2, repeat: Infinity }}
+            className="absolute right-[20%] bottom-[25%] h-6 w-6 rounded-full bg-green-500 border-[4px] border-green-100"
+          />
+        </div>
+      ),
+      side: "right",
     },
     {
       number: "02",
-      icon: <FaMotorcycle />,
+      icon: <FaMotorcycle className="text-4xl" />,
       title: "Instant Match",
       description:
-        "We find the nearest rider in PH City. View ETA and rider details instantly.",
-      accent: "from-orange-500 to-orange-400",
+        "Our smart engine finds the best rider for your route in the blink of an eye.",
+      miniMap: (
+        <div className="relative h-72 w-full max-w-lg rounded-[2.5rem] overflow-hidden bg-[#121212]">
+          <motion.div
+            animate={{ opacity: [0.1, 0.3, 0.1] }}
+            transition={{ duration: 3, repeat: Infinity }}
+            className="absolute inset-0 bg-[radial-gradient(circle_at_center,#ef4444_0%,transparent_70%)]"
+          />
+
+          <div className="absolute inset-0 flex items-center justify-center">
+            <motion.div
+              animate={{ rotate: 360 }}
+              transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+              className="relative h-40 w-40 border border-white/10 rounded-full"
+            >
+              <motion.div className="absolute -top-2 left-1/2 h-4 w-4 bg-red-500 rounded-full shadow-[0_0_15px_rgba(239,68,68,0.8)]" />
+            </motion.div>
+            <motion.div
+              animate={{ scale: [0.9, 1.1, 0.9] }}
+              transition={{ duration: 2, repeat: Infinity }}
+              className="absolute h-16 w-16 rounded-full bg-red-600 flex items-center justify-center text-white"
+            >
+              <FaMotorcycle size={28} />
+            </motion.div>
+          </div>
+        </div>
+      ),
+      side: "left",
     },
     {
       number: "03",
-      icon: <FaBox />,
+      icon: <FaBox className="text-4xl" />,
       title: "Secure Pickup",
       description:
-        "Rider confirms package details with photo proof for total peace of mind.",
-      accent: "from-red-700 to-red-500",
+        "Every item is verified. No guesswork, just pure transparency.",
+      miniMap: (
+        <div className="relative h-72 w-full max-w-lg rounded-[2.5rem] overflow-hidden bg-red-50 flex items-center justify-center">
+          <motion.div
+            animate={{ y: [0, -10, 0] }}
+            transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+            className="h-36 w-36 rounded-[2rem] bg-white flex items-center justify-center relative"
+          >
+            <FaBox className="text-red-600" size={50} />
+            <motion.div
+              initial={{ scale: 0 }}
+              whileInView={{ scale: 1 }}
+              className="absolute -top-4 -right-4 h-12 w-12 bg-green-500 rounded-full flex items-center justify-center text-white border-4 border-red-50"
+            >
+              <FaCheckCircle size={20} />
+            </motion.div>
+          </motion.div>
+        </div>
+      ),
+      side: "right",
     },
     {
       number: "04",
-      icon: <FaRoute />,
-      title: "Track & Receive",
+      icon: <FaRoute className="text-4xl" />,
+      title: "Track & Deliver",
       description:
-        "Track the ride live. Recipient confirms arrival for a safe delivery.",
-      accent: "from-emerald-600 to-emerald-400",
+        "Watch your package glide through the city to its destination.",
+      miniMap: (
+        <div className="relative h-72 w-full max-w-lg rounded-[2.5rem] overflow-hidden bg-gray-900">
+          <svg
+            className="absolute inset-0 h-full w-full opacity-20"
+            viewBox="0 0 400 300"
+          >
+            <path d="M0 150 H400 M200 0 V300" stroke="white" strokeWidth="1" />
+          </svg>
+
+          <motion.div
+            style={{ offsetPath: "path('M 50 150 Q 200 50, 350 150')" }}
+            animate={{ offsetDistance: ["0%", "100%"] }}
+            transition={{ duration: 5, repeat: Infinity, ease: "linear" }}
+            className="absolute h-10 w-10 bg-white rounded-full flex items-center justify-center text-red-600"
+          >
+            <FaMotorcycle size={20} />
+          </motion.div>
+
+          <div className="absolute bottom-6 left-1/2 -translate-x-1/2 bg-white/10 backdrop-blur-md px-6 py-2 rounded-full border border-white/20">
+            <span className="text-white text-xs font-bold tracking-widest uppercase">
+              Live Tracking
+            </span>
+          </div>
+        </div>
+      ),
+      side: "left",
     },
   ];
 
   return (
     <section
-      ref={containerRef}
-      className="relative overflow-hidden bg-[#fafafa] py-24 font-['Lufga'] md:py-40 perspective-1000"
+      ref={sectionRef}
+      className="relative bg-white py-24 md:py-40 font-['Lufga'] overflow-hidden"
     >
-      {/* --- MAD BACKGROUND ANIMATION --- */}
-      <div className="absolute inset-0 -z-10 overflow-hidden">
-        <motion.div
-          style={{ rotate: 45, opacity: 0.03 }}
-          animate={{ scale: [1, 1.2, 1], x: [0, 50, 0] }}
-          transition={{ duration: 20, repeat: Infinity }}
-          className="absolute -top-[20%] -left-[10%] h-[1000px] w-[1200px] bg-[repeating-linear-gradient(90deg,#000,#000_1px,transparent_1px,transparent_80px)]"
-        />
-      </div>
-
-      <div className="relative z-10 mx-auto max-w-[1500px] px-6">
-        {/* Editorial Header */}
-        <div className="mb-24 flex flex-col items-center text-center">
+      <div className="max-w-6xl mx-auto px-6">
+        <div className="text-center mb-32">
           <motion.div
-            initial={{ scale: 0 }}
-            whileInView={{ scale: 1 }}
-            className="mb-6 rounded-full bg-red-600/10 px-6 py-2 text-xs font-black uppercase tracking-[0.4em] text-red-600"
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            className="inline-block px-4 py-1.5 rounded-full bg-red-50 text-red-600 text-[10px] font-black uppercase tracking-[0.2em] mb-6"
           >
-            Seamless Flow
+            Simple Steps
           </motion.div>
-          <h2 className="text-6xl font-black leading-none tracking-tighter text-[#121212] md:text-8xl">
-            How it
-            <span className="ml-1 bg-gradient-to-r from-red-600 via-orange-500 to-red-600 bg-[length:200%_auto] bg-clip-text text-transparent animate-gradient-x">
-              works.
-            </span>
-          </h2>
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            className="text-5xl md:text-7xl font-black text-[#121212] tracking-tighter"
+          >
+            How It <span className="text-red-600">Works.</span>
+          </motion.h2>
         </div>
 
-        {/* --- DYNAMIC ROUTE LINE --- */}
-        <div className="absolute left-1/2 top-[55%] hidden h-1 w-[80%] -translate-x-1/2 -translate-y-1/2 lg:block">
-          <svg width="100%" height="20" viewBox="0 0 1000 20" fill="none">
-            <motion.path
-              d="M0 10 Q 250 20 500 10 T 1000 10"
-              stroke="#fee2e2"
-              strokeWidth="4"
-              strokeDasharray="12 12"
-            />
-            <motion.path
-              d="M0 10 Q 250 20 500 10 T 1000 10"
-              stroke="#ef4444"
-              strokeWidth="4"
-              style={{ pathLength }}
-            />
-          </svg>
+        {/* Sweet vertical line */}
+        <div className="absolute left-1/2 top-[400px] bottom-40 w-[1px] bg-gray-100 -translate-x-1/2 hidden lg:block">
+          <motion.div
+            style={{ scaleY: pathProgress, originY: 0 }}
+            className="w-full h-full bg-red-400"
+          />
         </div>
 
-        {/* 4-Step Grid */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
-          className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4"
+          className="space-y-32 md:space-y-40"
         >
-          {steps.map((step, index) => (
+          {steps.map((step, idx) => (
             <motion.div
-              key={index}
-              variants={cardVariants}
-              whileHover={{ y: -15, rotateY: 5 }}
-              className="group relative rounded-[3rem] bg-white p-6  transition-all duration-500"
+              key={idx}
+              variants={stepVariants}
+              className={`flex flex-col lg:flex-row items-center gap-16 ${
+                step.side === "left" ? "lg:flex-row-reverse" : ""
+              }`}
             >
-              {/* Floating Number */}
-              <div className="absolute -top-6 -right-4 flex h-14 w-14 items-center justify-center rounded-full bg-[#121212] font-black text-white  transition-transform group-hover:scale-110 group-hover:-rotate-12">
-                {step.number}
+              <div className="flex-1 w-full flex justify-center">
+                {step.miniMap}
               </div>
 
-              <div
-                className={`mb-10 flex h-20 w-20 items-center justify-center rounded-[2rem] bg-gradient-to-br ${step.accent} text-3xl text-white transition-all duration-700 group-hover:rounded-full group-hover:rotate-[360deg]`}
-              >
-                {step.icon}
+              <div className="flex-1 text-center lg:text-left">
+                <motion.span
+                  whileInView={{ rotate: [0, 15, 0] }}
+                  className="inline-flex items-center justify-center h-14 w-14 rounded-[1.2rem] bg-gray-50 text-[#121212] mb-8 text-xl font-black"
+                >
+                  {step.number}
+                </motion.span>
+
+                <h3 className="text-4xl md:text-5xl font-black text-[#121212] mb-4 tracking-tight">
+                  {step.title}
+                </h3>
+
+                <p className="text-lg text-gray-500 leading-relaxed max-w-sm mx-auto lg:mx-0">
+                  {step.description}
+                </p>
               </div>
-
-              <h3 className="mb-4 text-3xl font-black tracking-tighter text-[#121212]">
-                {step.title}
-              </h3>
-              <p className="text-gray-500 leading-relaxed">
-                {step.description}
-              </p>
-
-              {/* Step completion indicator */}
-              <motion.div className="mt-8 h-1 w-0 bg-red-600 transition-all duration-500 group-hover:w-full" />
             </motion.div>
           ))}
         </motion.div>
+      </div>
+
+      {/* Sweet background pulses */}
+      <div className="absolute top-0 left-0 w-full h-full pointer-events-none -z-10">
+        <div className="absolute top-1/4 -left-20 w-96 h-96 bg-red-50 rounded-full blur-[100px] opacity-50" />
+        <div className="absolute bottom-1/4 -right-20 w-96 h-96 bg-orange-50 rounded-full blur-[100px] opacity-50" />
       </div>
     </section>
   );

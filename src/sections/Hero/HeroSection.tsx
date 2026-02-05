@@ -7,23 +7,43 @@ import { ComingSoonModal } from "../../components/Modals/ComingSoonModal";
 const HeroSection: React.FC = () => {
   const [showModal, setShowModal] = useState(false);
 
-  // Animation Variants
+  // Stagger container
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: { staggerChildren: 0.2 },
+      transition: { staggerChildren: 0.12, delayChildren: 0.5 },
     },
   };
 
   const itemVariants: Variants = {
-    hidden: { y: 20, opacity: 0 },
+    hidden: { y: 50, opacity: 0 },
     visible: {
       y: 0,
       opacity: 1,
-      transition: { type: "spring", stiffness: 100, damping: 15 },
+      transition: { type: "spring", stiffness: 90, damping: 16 },
     },
   };
+
+  // Premium floating phone (gentle, multi-axis, breathing)
+  const phoneFloatVariants: Variants = {
+    float: {
+      y: [-14, 14, -14],
+      rotateX: [-2, 2, -2],
+      rotateY: [-3, 3, -3],
+      scale: [1, 1.02, 1],
+      transition: {
+        duration: 8.5,
+        repeat: Infinity,
+        repeatType: "reverse",
+        ease: "easeInOut",
+      },
+    },
+  };
+
+  // Beautiful curved delivery path
+  const path =
+    "M 100 680 Q 120 520, 200 440 Q 280 360, 260 220 Q 240 120, 200 70";
 
   return (
     <section className="relative flex flex-col items-center justify-center overflow-hidden bg-[#fafafa] px-6 pt-32 pb-20 font-['Lufga'] md:pt-48">
@@ -62,9 +82,19 @@ const HeroSection: React.FC = () => {
         >
           Get a Dispatch Rider
           <br />
-          <span className="bg-gradient-to-r from-red-600 via-orange-500 to-red-600 bg-clip-text text-transparent ">
+          <motion.span
+            animate={{
+              backgroundPosition: ["0% 50%", "200% 50%"],
+            }}
+            transition={{
+              duration: 3,
+              repeat: Infinity,
+              ease: "linear",
+            }}
+            className="inline-block bg-gradient-to-r from-red-600 via-orange-500 to-red-600 bg-[length:200%_auto] bg-clip-text text-transparent"
+          >
             Instantly.
-          </span>
+          </motion.span>
         </motion.h1>
 
         <motion.p
@@ -109,108 +139,190 @@ const HeroSection: React.FC = () => {
           </button>
         </motion.div>
 
-        {/* 4. Bottom Content: Centered Phone & Map Animation */}
         <motion.div
-          variants={itemVariants}
-          className="relative mt-12 w-full max-w-[340px] md:max-w-[400px]"
+          variants={phoneFloatVariants}
+          animate="float"
+          className="relative mt-12 w-full max-w-[380px] sm:max-w-[400px] md:max-w-[440px]"
         >
-          {/* Internal Phone Structure */}
-          <div className="relative z-10 aspect-[9/18.5] w-full overflow-hidden rounded-[3.5rem] border-[12px] border-[#121212] bg-[#121212]">
-            {/* The Animated Map View */}
-            <div className="absolute inset-0 bg-[#f3f4f6]">
-              {/* City Grid Background */}
+          {/* Phone frame */}
+          <div className="relative z-10 aspect-[9/19] w-full overflow-hidden rounded-[3.2rem] border-[16px] border-black bg-black ">
+            {/* Map background */}
+            <div className="relative h-full w-full bg-gray-50 overflow-hidden">
+              {/* Light grid */}
               <svg
-                className="absolute inset-0 h-full w-full opacity-20"
+                className="absolute inset-0 h-full w-full opacity-10"
                 viewBox="0 0 400 800"
               >
                 <path
-                  d="M0 100 H400 M0 250 H400 M0 400 H400 M0 550 H400 M0 700 H400"
+                  d="M0 100 H400 M0 300 H400 M0 500 H400 M0 700 H400"
                   stroke="#000"
                   strokeWidth="1"
-                  fill="none"
                 />
                 <path
-                  d="M100 0 V800 M250 0 V800 M350 0 V800"
+                  d="M100 0 V800 M200 0 V800 M300 0 V800"
                   stroke="#000"
                   strokeWidth="1"
-                  fill="none"
                 />
               </svg>
 
-              {/* Path and Rider */}
+              {/* Route path */}
               <svg
                 className="absolute inset-0 h-full w-full"
                 viewBox="0 0 400 800"
               >
+                <defs>
+                  <linearGradient
+                    id="routeGrad"
+                    x1="0%"
+                    y1="0%"
+                    x2="100%"
+                    y2="0%"
+                  >
+                    <stop offset="0%" stopColor="#dc2626" stopOpacity="0.4" />
+                    <stop offset="50%" stopColor="#dc2626" stopOpacity="1" />
+                    <stop offset="100%" stopColor="#f97316" stopOpacity="0.8" />
+                  </linearGradient>
+                </defs>
+
+                {/* Main route - draws once then pulses */}
                 <motion.path
-                  d="M 80 650 Q 150 550, 100 400 T 250 250 T 200 80"
-                  fill="transparent"
-                  stroke="#ef4444"
-                  strokeWidth="8"
+                  d={path}
+                  fill="none"
+                  stroke="url(#routeGrad)"
+                  strokeWidth="12"
                   strokeLinecap="round"
                   initial={{ pathLength: 0 }}
                   animate={{ pathLength: 1 }}
-                  transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+                  transition={{
+                    pathLength: { duration: 3, ease: "easeOut", delay: 0.8 },
+                  }}
                 />
-                <circle cx="200" cy="80" r="8" fill="#ef4444" />
-                <circle
-                  cx="200"
-                  cy="80"
-                  r="16"
+
+                {/* Subtle glow behind path */}
+                <motion.path
+                  d={path}
                   fill="none"
-                  stroke="#ef4444"
-                  strokeWidth="2"
-                  className="animate-ping"
+                  stroke="#dc2626"
+                  strokeWidth="20"
+                  strokeLinecap="round"
+                  initial={{ pathLength: 0 }}
+                  animate={{ pathLength: 1, opacity: [0.15, 0.35, 0.15] }}
+                  transition={{
+                    pathLength: { duration: 3, ease: "easeOut", delay: 0.8 },
+                    opacity: {
+                      duration: 4,
+                      repeat: Infinity,
+                      repeatType: "reverse",
+                    },
+                  }}
+                />
+
+                {/* Destination pulse */}
+                <motion.circle
+                  cx="200"
+                  cy="70"
+                  r="12"
+                  fill="#dc2626"
+                  animate={{ scale: [1, 1.4, 1], opacity: [0.9, 0.4, 0.9] }}
+                  transition={{
+                    duration: 2.5,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
                 />
               </svg>
 
+              {/* Rider following path + bounce */}
               <motion.div
                 style={{
-                  offsetPath:
-                    "path('M 80 650 Q 150 550, 100 400 T 250 250 T 200 80')",
+                  offsetPath: `path('${path}')`,
+                  offsetRotate: "auto",
                 }}
-                animate={{ offsetDistance: ["0%", "100%"] }}
-                transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
-                className="absolute z-20 flex h-12 w-12 items-center justify-center rounded-full bg-white text-red-600  border-2 border-red-500"
+                animate={{
+                  offsetDistance: ["0%", "100%"],
+                  scale: [1, 1.08, 1],
+                  y: [0, -6, 0],
+                }}
+                transition={{
+                  offsetDistance: {
+                    duration: 4.2,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                    repeatDelay: 1.5,
+                  },
+                  scale: {
+                    duration: 1.2,
+                    repeat: Infinity,
+                    repeatType: "reverse",
+                  },
+                  y: { duration: 0.8, repeat: Infinity, repeatType: "reverse" },
+                }}
+                className="absolute left-0 top-0 z-30 flex h-16 w-16 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-white  border-4 border-red-600"
               >
-                <FaMotorcycle size={24} />
+                <FaMotorcycle className="text-red-600" size={32} />
               </motion.div>
             </div>
 
-            {/* App UI Elements */}
-            <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-white/90 to-transparent p-6 flex items-start justify-between">
-              <div className="flex items-center gap-3 rounded-full bg-white/80 p-1 pr-4 backdrop-blur-md">
-                <FaUserCircle size={30} className="text-gray-300" />
-                <span className="text-xs font-black text-[#121212]">
-                  John D. <span className="text-red-600">★ 5.0</span>
-                </span>
-              </div>
-            </div>
-
-            <div className="absolute bottom-6 left-4 right-4">
-              <div className="rounded-3xl bg-[#121212] p-5 border border-white/10 ">
-                <div className="flex items-center justify-between">
-                  <div className="flex flex-col gap-1">
-                    <span className="text-[10px] font-black text-red-500 uppercase tracking-widest">
-                      Estimated Time
-                    </span>
-                    <span className="text-xl font-black text-white">
-                      4 Minutes Away
-                    </span>
-                  </div>
-                  <div className="h-10 w-10 rounded-xl bg-red-600 flex items-center justify-center text-white">
-                    <FaBox size={20} />
-                  </div>
+            {/* Top bar (rider profile) */}
+            <motion.div
+              initial={{ y: -40, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 1.6, duration: 0.9, type: "spring" }}
+              className="absolute top-0 left-0 right-0 h-20 bg-gradient-to-b from-white/95 to-transparent px-6 pt-5 flex items-center justify-between"
+            >
+              <div className="flex items-center gap-3 rounded-full bg-white/90 px-4 py-2  backdrop-blur-md">
+                <FaUserCircle size={38} className="text-gray-400" />
+                <div className="text-sm font-black">
+                  Chidi O. <span className="text-red-600">• 4.9</span>
                 </div>
               </div>
-            </div>
+            </motion.div>
 
-            {/* Top Notch */}
-            <div className="absolute top-0 left-1/2 h-7 w-36 -translate-x-1/2 rounded-b-3xl bg-[#121212]" />
+            {/* Bottom delivery info card */}
+            <motion.div
+              initial={{ y: 60, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 1.9, duration: 1, type: "spring" }}
+              className="absolute bottom-8 left-6 right-6"
+            >
+              <div className="rounded-3xl bg-black/95 p-6 border border-white/10  backdrop-blur-sm">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <span className="block text-xs font-extrabold uppercase tracking-widest text-red-400">
+                      Arriving
+                    </span>
+                    <span className="text-3xl font-black text-white">
+                      2–3 min
+                    </span>
+                  </div>
+                  <motion.div
+                    animate={{ rotate: [0, -15, 15, 0], scale: [1, 1.15, 1] }}
+                    transition={{
+                      duration: 3,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                    }}
+                    className="flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-red-600 to-orange-500 text-white "
+                  >
+                    <FaBox size={28} />
+                  </motion.div>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* iPhone-style notch */}
+            <div className="absolute top-0 left-1/2 h-8 w-44 -translate-x-1/2 rounded-b-3xl bg-black" />
           </div>
 
-          {/* Background Glow */}
-          <div className="absolute -inset-10 -z-10 rounded-full bg-red-600/10 blur-[120px]" />
+          {/* Outer glow + breathing */}
+          <motion.div
+            animate={{
+              opacity: [0.2, 0.45, 0.2],
+              scale: [0.95, 1.15, 0.95],
+            }}
+            transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute inset-0 -z-10 rounded-[4.5rem] bg-gradient-to-br from-red-500/40 via-orange-400/30 to-transparent blur-3xl"
+          />
         </motion.div>
       </motion.div>
 
