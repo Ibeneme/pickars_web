@@ -6,6 +6,7 @@ import { BiLogoPlayStore } from "react-icons/bi";
 const CustomerRiderSection: React.FC = () => {
   const [activeTab, setActiveTab] = useState<"customer" | "rider">("customer");
 
+  console.warn(setActiveTab, "setActiveTab");
   const content = {
     customer: {
       tag: "For You",
