@@ -37,7 +37,7 @@ const CustomerRiderSection: React.FC = () => {
     <section className="relative overflow-hidden bg-[#fafafa] px-6 py-24 font-['Lufga'] md:py-40">
       <div className="mx-auto max-w-7xl">
         {/* REFINED TOGGLE */}
-        <div className="mb-24 flex justify-center">
+        {/* <div className="mb-24 flex justify-center">
           <div className="inline-flex rounded-full bg-gray-200/50 p-1.5 backdrop-blur-md">
             {["customer", "rider"].map((tab) => (
               <button
@@ -58,7 +58,7 @@ const CustomerRiderSection: React.FC = () => {
               </button>
             ))}
           </div>
-        </div>
+        </div> */}
 
         <AnimatePresence mode="wait">
           <motion.div
