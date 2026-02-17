@@ -1,6 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { FaEnvelope, FaChevronUp } from "react-icons/fa";
+import {
+  FaEnvelope,
+  FaChevronUp,
+  FaInstagram,
+  FaXTwitter,
+  FaFacebookF,
+  FaLinkedinIn,
+} from "react-icons/fa6"; // Using Fa6 for X (Twitter) icon
 import logo from "../../assets/images/logo.png";
 import { motion } from "framer-motion";
 
@@ -8,6 +15,29 @@ const Footer: React.FC = () => {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
+
+  const socialLinks = [
+    {
+      name: "Instagram",
+      url: "https://www.instagram.com/pickars_official?igsh=MWY4aTJieHVtMGltYg%3D%3D&utm_source=qr",
+      icon: <FaInstagram size={18} />,
+    },
+    {
+      name: "X (Twitter)",
+      url: "https://x.com/pickars_app?s=21",
+      icon: <FaXTwitter size={18} />,
+    },
+    {
+      name: "Facebook",
+      url: "https://www.facebook.com/share/1cW4kyitrJ/?mibextid=wwXIfr&wa_status_inline=true",
+      icon: <FaFacebookF size={18} />,
+    },
+    {
+      name: "LinkedIn",
+      url: "https://www.linkedin.com/company/pickars/",
+      icon: <FaLinkedinIn size={18} />,
+    },
+  ];
 
   return (
     <footer className="bg-[#080808] pt-24 pb-32 font-['Lufga'] text-white">
@@ -27,7 +57,7 @@ const Footer: React.FC = () => {
               stress-free for everyone.
             </p>
 
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-6">
               <a
                 href="mailto:support@pickars.com"
                 className="group flex w-fit items-center gap-4 rounded-2xl border border-white/5 bg-white/5 p-4 transition-all hover:border-red-600/50 hover:bg-white/10"
@@ -42,6 +72,22 @@ const Footer: React.FC = () => {
                   <p className="text-sm font-bold">support@pickars.com</p>
                 </div>
               </a>
+
+              {/* Social Media Links (Primary) */}
+              <div className="flex gap-3">
+                {socialLinks.map((social) => (
+                  <a
+                    key={social.name}
+                    href={social.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/5 text-gray-400 transition-all hover:bg-red-600 hover:text-white"
+                    aria-label={social.name}
+                  >
+                    {social.icon}
+                  </a>
+                ))}
+              </div>
             </div>
           </div>
 
@@ -136,17 +182,19 @@ const Footer: React.FC = () => {
             forward.
           </p>
 
-          <motion.button
-            whileHover={{ y: -5 }}
-            whileTap={{ scale: 0.9 }}
-            onClick={scrollToTop}
-            className="group flex items-center gap-3 text-xs font-black uppercase tracking-widest text-white"
-          >
-            Back to Top
-            <div className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 group-hover:bg-red-600 group-hover:border-red-600 transition-all">
-              <FaChevronUp />
-            </div>
-          </motion.button>
+          <div className="flex items-center gap-8">
+            <motion.button
+              whileHover={{ y: -5 }}
+              whileTap={{ scale: 0.9 }}
+              onClick={scrollToTop}
+              className="group flex items-center gap-3 text-xs font-black uppercase tracking-widest text-white"
+            >
+              Back to Top
+              <div className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 group-hover:bg-red-600 group-hover:border-red-600 transition-all">
+                <FaChevronUp />
+              </div>
+            </motion.button>
+          </div>
         </div>
       </div>
     </footer>

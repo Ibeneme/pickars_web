@@ -4,7 +4,7 @@ import CompanyComponent from "../sections/CompanyComponent/CompanyComponent";
 import CoreValuesSection from "../sections/DeliverySteps/CoreValuesSection";
 import PickarsJourney from "../sections/PickarsJourney/PickarsJourney";
 import ProblemIdea from "../sections/ProblemIdea/ProblemIdea";
-import TeamSection from "../sections/CompanyComponent/TeamSection";
+//import TeamSection from "../sections/CompanyComponent/TeamSection";
 
 const Company = () => {
   // Smooth scroll to top on mount
@@ -42,7 +42,7 @@ const Company = () => {
         </motion.div>
 
         <PickarsJourney />
-        <TeamSection />
+        {/* <TeamSection /> */}
         <CoreValuesSection />
       </main>
     </div>

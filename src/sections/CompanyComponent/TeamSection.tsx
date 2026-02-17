@@ -1,7 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { FaLinkedinIn, FaXTwitter } from "react-icons/fa6";
-import ikenna from "../../assets/images/team/ikenna.png";
+import ikenna from "../../assets/images/team/ikennaa.png";
 import boma from "../../assets/images/team/boma.png";
 
 export type TeamMember = {
