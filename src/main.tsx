@@ -5,6 +5,7 @@ import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux"; // Import Provider
 import "./index.css";
 import { store } from "./api/store";
+import './assets/fonts/fonts.css'
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
