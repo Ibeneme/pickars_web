@@ -1,63 +1,66 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { motion } from "framer-motion";
-import { FaRocket } from "react-icons/fa";
+import { FaApple, FaGooglePlay } from "react-icons/fa";
+
+export const IOS_URL = "https://apps.apple.com/ng/app/pickars/id6746796884";
+export const ANDROID_URL =
+  "https://play.google.com/store/apps/details?id=com.pickars.app&hl=en";
 
 const Launcher: React.FC = () => {
-  const [timeLeft, setTimeLeft] = useState({ d: 0, h: 0, m: 0, s: 0 });
-
-  useEffect(() => {
-    const target = new Date("February 28, 2026 00:00:00").getTime();
-    const interval = setInterval(() => {
-      const distance = target - new Date().getTime();
-      setTimeLeft({
-        d: Math.floor(distance / (1000 * 60 * 60 * 24)),
-        h: Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
-        m: Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)),
-        s: Math.floor((distance % (1000 * 60)) / 1000),
-      });
-      if (distance < 0) clearInterval(interval);
-    }, 1000);
-    return () => clearInterval(interval);
-  }, []);
-
   return (
-    <div className="relative h-[60px] w-full overflow-hidden bg-[#ff0000] font-sans text-white flex items-center shadow-xl">
-      {/* Moving Background Text */}
+    <div className="relative h-[80px] w-full overflow-hidden bg-[#ff0000] font-sans text-white flex items-center shadow-xl">
+      {/* Moving Background Text - Strategic Branding */}
       <div className="absolute inset-0 flex items-center opacity-10 pointer-events-none">
         <motion.div
           animate={{ x: [0, -1000] }}
-          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-          className="text-3xl font-black whitespace-nowrap  uppercase"
+          transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+          className="text-3xl font-black whitespace-nowrap uppercase"
         >
-          PORT HARCOURT • FEB 28 • PICKARS • PORT HARCOURT • FEB 28 • PICKARS •
-          PORT HARCOURT • FEB 28 • PICKARS •
+          DOWNLOAD THE APP • SHIP NOW • PICKARS LOGISTICS • PORT HARCOURT •
+          DOWNLOAD THE APP • SHIP NOW •
         </motion.div>
       </div>
 
-      <div className="relative z-10 w-full px-6 flex items-center justify-between">
-        {/* Minimal Headline */}
-        <div className="flex items-center gap-3">
-          <FaRocket className="text-xl animate-pulse" />
-          <h2 className="text-[15px] md:text-[24px] font-black tracking-tighter uppercase leading-none">
-            Launching on<span className="text-white/60 "></span>
+      <div className="relative z-10 w-full px-4 md:px-8 flex items-center justify-between">
+        {/* Headline */}
+        <div className="flex items-center gap-2 md:gap-4">
+          {/* <div className="bg-white text-[#ff0000] p-1.5 rounded-full animate-bounce">
+            <FaApple className="text-sm md:text-lg" />
+          </div> */}
+          <h2 className="text-[24px] md:text-[32px] font-black tracking-tighter uppercase leading-none">
+            Get the <span className="hidden md:inline">Pickars</span> App
           </h2>
         </div>
 
-        {/* Compact Countdown */}
-        <div className="flex items-center gap-3 md:gap-6 bg-black/20 px-4 py-2 rounded-full backdrop-blur-sm border border-white/10">
-          {[
-            { l: "D", v: timeLeft.d },
-            { l: "H", v: timeLeft.h },
-            { l: "M", v: timeLeft.m },
-            { l: "S", v: timeLeft.s },
-          ].map((item, i) => (
-            <div key={i} className="flex items-baseline gap-1">
-              <span className="text-lg md:text-xl font-black tabular-nums">
-                {String(item.v).padStart(2, "0")}
-              </span>
-              <span className="text-[10px] font-bold opacity-70">{item.l}</span>
+        {/* Download Buttons */}
+        <div className="flex items-center gap-2 md:gap-4">
+          <a
+            href={IOS_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 bg-black hover:bg-black/50 px-4 py-4 rounded-[120px] backdrop-blur-md border border-white/20 transition-all active:scale-95"
+          >
+            <FaApple className="text-xl" />
+            <div className="hidden sm:block text-left">
+              <p className="text-[12px] leading-none opacity-70">
+                Download on the
+              </p>
+              <p className="text-[16px] font-bold leading-none">App Store</p>
             </div>
-          ))}
+          </a>
+
+          <a
+            href={ANDROID_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 bg-black hover:bg-black/50 px-4 py-4 rounded-[120px] backdrop-blur-md border border-white/20 transition-all active:scale-95"
+          >
+            <FaGooglePlay className="text-lg" />
+            <div className="hidden sm:block text-left">
+              <p className="text-[12px] leading-none opacity-70">Get it on</p>
+              <p className="text-[16px] font-bold leading-none">Google Play</p>
+            </div>
+          </a>
         </div>
       </div>
     </div>

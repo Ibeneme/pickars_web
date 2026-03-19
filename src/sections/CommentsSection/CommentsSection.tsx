@@ -6,10 +6,10 @@ import {
   FaTiktok,
   FaXTwitter,
   FaQuoteLeft,
-  // // FaBoxArchive,
-  // // FaTruckFast,
-  // // FaUsers,
 } from "react-icons/fa6";
+
+// Import your global store constants
+import { ANDROID_URL, IOS_URL } from "../Hero/HeroSection";
 
 // --- Types & Data ---
 interface Comment {
@@ -20,6 +20,7 @@ interface Comment {
   color: string;
 }
 
+// ... row1Data and row2Data remain the same as your snippet ...
 const row1Data: Comment[] = [
   {
     name: "Aishat R.",
@@ -67,28 +68,6 @@ const row2Data: Comment[] = [
     color: "#fff",
   },
 ];
-
-// --- Sub-components ---
-
-// const StatCard = ({
-//   icon: Icon,
-//   label,
-//   value,
-// }: {
-//   icon: any;
-//   label: string;
-//   value: string;
-// }) => (
-//   <div className="flex flex-col items-center p-6 bg-white rounded-3xl border border-gray-100 shadow-sm">
-//     <div className="mb-4 p-3 bg-red-50 text-red-600 rounded-2xl text-2xl">
-//       <Icon />
-//     </div>
-//     <span className="text-3xl font-black text-gray-900">{value}</span>
-//     <span className="text-[10px] md:text-xs font-bold text-gray-400 uppercase tracking-widest mt-1">
-//       {label}
-//     </span>
-//   </div>
-// );
 
 const TickerRow = ({
   items,
@@ -140,8 +119,6 @@ const TickerRow = ({
   );
 };
 
-// --- Main Section ---
-
 const CommentsSection: React.FC = () => {
   const [count, setCount] = useState(150);
   const target = 6349;
@@ -159,12 +136,24 @@ const CommentsSection: React.FC = () => {
     requestAnimationFrame(animate);
   }, []);
 
+  // --- DEVICE REDIRECT LOGIC ---
+  const handleShipNow = () => {
+    const userAgent = navigator.userAgent || navigator.vendor;
+
+    if (/android/i.test(userAgent)) {
+      window.open(ANDROID_URL, "_blank");
+    } else if (/iPad|iPhone|iPod/.test(userAgent)) {
+      window.open(IOS_URL, "_blank");
+    } else {
+      // For Desktop, you can either point to your website booking page or just pick one
+      window.open("https://pickars.com", "_blank");
+    }
+  };
+
   return (
     <section className="relative overflow-hidden bg-[#fafafa] py-20 md:py-32 font-sans">
-      {/* Background Decor */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-[radial-gradient(circle_at_center,_rgba(220,38,38,0.05)_0%,_transparent_70%)] pointer-events-none" />
 
-      {/* 1. Header Section */}
       <div className="relative z-20 px-6 max-w-7xl mx-auto">
         <div className="text-center mb-12 md:mb-20">
           <motion.span
@@ -186,37 +175,26 @@ const CommentsSection: React.FC = () => {
             packages!
           </motion.h2>
         </div>
-        {/* <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-20">
-          <StatCard
-            icon={FaBoxArchive}
-            label="Deliveries Monthly"
-            value="500+"
-          />
-          <StatCard icon={FaTruckFast} label="Average Time" value="45min" />
-          <StatCard icon={FaUsers} label="Active Riders" value="15+" />
-        </div>
-     */}{" "}
       </div>
 
-      {/* 3. Ticker Section */}
       <div className="relative flex flex-col gap-4 md:gap-6">
         <div className="pointer-events-none absolute inset-y-0 left-0 z-30 w-12 md:w-40 bg-gradient-to-r from-[#fafafa] to-transparent" />
         <div className="pointer-events-none absolute inset-y-0 right-0 z-30 w-12 md:w-40 bg-gradient-to-l from-[#fafafa] to-transparent" />
-
         <TickerRow items={row1Data} direction="left" />
         <TickerRow items={row2Data} direction="right" />
       </div>
 
-      {/* 4. Footer & CTA (New Section) */}
+      {/* FOOTER CTA with dynamic redirect */}
       <div className="mt-12 md:mt-24 text-center px-6 max-w-2xl mx-auto">
         <p className="text-gray-400 font-bold text-[10px] md:text-sm tracking-widest uppercase mb-8">
           Trusted by thousands of businesses
         </p>
 
         <motion.button
-          whileHover={{ scale: 1.05 }}
+          onClick={handleShipNow}
+          whileHover={{ scale: 1.05, backgroundColor: "#ef4444" }}
           whileTap={{ scale: 0.95 }}
-          className="bg-gray-900 text-white px-8 py-4 rounded-full font-black uppercase text-xs md:text-sm tracking-widest "
+          className="bg-gray-900 text-white px-10 py-5 rounded-full font-black uppercase text-xs md:text-sm tracking-widest shadow-xl transition-colors"
         >
           Ship Your First Package Now
         </motion.button>

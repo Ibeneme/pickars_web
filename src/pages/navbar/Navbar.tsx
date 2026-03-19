@@ -4,6 +4,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { FaApple } from "react-icons/fa";
 import { BiLogoPlayStore } from "react-icons/bi";
 import navImage from "../../assets/images/logo.png";
+import { ANDROID_URL, IOS_URL } from "../../sections/Hero/HeroSection";
+
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -39,7 +41,6 @@ const Navbar = () => {
           }`}
         >
           {/* Logo Section */}
-          {/* Logo Section */}
           <a href="/" className="flex items-center gap-2 pl-2 group">
             <div className="relative">
               <img
@@ -48,20 +49,17 @@ const Navbar = () => {
                 className="h-8 w-auto transition-transform duration-500 group-hover:rotate-[360deg]"
               />
             </div>
-
-            {/* Brand Name */}
             <h3
-              className={`text-xl font-black tracking-tighter text-[#121212] transition-all duration-500
-    ${
-      scrolled
-        ? "opacity-100 translate-x-0"
-        : "opacity-0 -translate-x-3 pointer-events-none"
-    }
-    sm:opacity-100 sm:translate-x-0`}
+              className={`text-xl font-black tracking-tighter text-[#121212] transition-all duration-500 ${
+                scrolled
+                  ? "opacity-100 translate-x-0"
+                  : "opacity-0 -translate-x-3 pointer-events-none"
+              } sm:opacity-100 sm:translate-x-0`}
             >
               Pickars
             </h3>
           </a>
+
           {/* Desktop Nav Links */}
           <ul className="hidden items-center gap-1 md:flex">
             {navItems.map(({ name, path, highlight }) => (
@@ -87,23 +85,28 @@ const Navbar = () => {
           {/* Download & Toggle */}
           <div className="flex items-center gap-2">
             <div className="hidden items-center gap-2 lg:flex">
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+              <motion.a
+                href={IOS_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
                 className="flex h-10 w-10 items-center justify-center rounded-full bg-[#121212] text-white transition-colors hover:bg-red-600"
               >
                 <FaApple size={18} />
-              </motion.button>
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+              </motion.a>
+              <motion.a
+                href={ANDROID_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
                 className="flex h-10 w-10 items-center justify-center rounded-full bg-[#121212] text-white transition-colors hover:bg-red-600"
               >
                 <BiLogoPlayStore size={18} />
-              </motion.button>
+              </motion.a>
             </div>
 
-            {/* Premium Mobile Trigger */}
             <button
               className={`flex h-10 w-10 items-center justify-center rounded-full transition-all ${
                 isOpen ? "bg-red-600 text-white" : "bg-gray-100 text-black"
@@ -153,6 +156,7 @@ const Navbar = () => {
                   transition={{ delay: i * 0.05 }}
                   key={name}
                   href={path}
+                  onClick={() => setIsOpen(false)}
                   className="flex items-center justify-between text-3xl font-black tracking-tighter text-[#121212]"
                 >
                   {name}
@@ -165,14 +169,24 @@ const Navbar = () => {
                   Get Pickars on your device
                 </p>
                 <div className="flex gap-4">
-                  <button className="flex flex-1 items-center justify-center gap-2 rounded-2xl bg-[#121212] py-4 text-white">
+                  <a
+                    href={IOS_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex flex-1 items-center justify-center gap-2 rounded-2xl bg-[#121212] py-4 text-white"
+                  >
                     <FaApple size={20} />{" "}
                     <span className="text-sm font-bold">iOS</span>
-                  </button>
-                  <button className="flex flex-1 items-center justify-center gap-2 rounded-2xl border border-gray-200 py-4 text-[#121212]">
+                  </a>
+                  <a
+                    href={ANDROID_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex flex-1 items-center justify-center gap-2 rounded-2xl border border-gray-200 py-4 text-[#121212]"
+                  >
                     <BiLogoPlayStore size={20} />{" "}
                     <span className="text-sm font-bold">Android</span>
-                  </button>
+                  </a>
                 </div>
               </div>
             </div>

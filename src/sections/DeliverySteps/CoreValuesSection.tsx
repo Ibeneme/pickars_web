@@ -1,7 +1,11 @@
 import React, { useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { FaPlus, FaMinus } from "react-icons/fa";
+import { FaPlus, FaMinus, FaApple } from "react-icons/fa";
+import { BiLogoPlayStore } from "react-icons/bi";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
+
+// Importing shared constants
+import { ANDROID_URL, IOS_URL } from "../Hero/HeroSection";
 
 interface Value {
   title: string;
@@ -38,7 +42,7 @@ const companyValues: Value[] = [
 
 const CoreValuesSection: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [openIndex, setOpenIndex] = useState<number | null>(0); // Open the first one by default
+  const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   const scroll = (direction: "left" | "right") => {
     if (containerRef.current) {
@@ -141,6 +145,59 @@ const CoreValuesSection: React.FC = () => {
             </motion.div>
           ))}
         </div>
+
+        {/* --- ADDED: DOWNLOAD THE APP CTA --- */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mt-20 flex flex-col items-center justify-between gap-8 rounded-[40px] border border-white/5 bg-white/5 p-8 md:flex-row md:p-12"
+        >
+          <div className="text-center md:text-left">
+            <h4 className="mb-2 text-2xl font-black text-white md:text-3xl">
+              Ready to Send a Package?
+            </h4>
+            <p className="font-bold text-gray-500">
+              Download the Pickars app and book your first dispatch rider today.
+            </p>
+          </div>
+
+          <div className="flex flex-wrap justify-center gap-4">
+            <motion.a
+              href={IOS_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="flex items-center gap-3 rounded-2xl bg-white px-8 py-4 text-black transition-all"
+            >
+              <FaApple size={22} />
+              <div className="text-left">
+                <p className="text-[10px] font-bold uppercase leading-none opacity-60">
+                  App Store
+                </p>
+                <p className="text-sm font-black">Download</p>
+              </div>
+            </motion.a>
+
+            <motion.a
+              href={ANDROID_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-8 py-4 text-white transition-all hover:bg-white/10"
+            >
+              <BiLogoPlayStore size={22} />
+              <div className="text-left">
+                <p className="text-[10px] font-bold uppercase leading-none opacity-60">
+                  Google Play
+                </p>
+                <p className="text-sm font-black">Get it now</p>
+              </div>
+            </motion.a>
+          </div>
+        </motion.div>
       </div>
     </section>
   );

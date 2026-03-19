@@ -10,7 +10,10 @@ import {
   FiTruck,
   FiCreditCard,
 } from "react-icons/fi";
-import { FaWhatsapp, FaTwitter, FaInstagram } from "react-icons/fa";
+import { FaWhatsapp, FaTwitter, FaInstagram, FaApple } from "react-icons/fa";
+import { BiLogoPlayStore } from "react-icons/bi";
+import { ANDROID_URL, IOS_URL } from "../../sections/Hero/HeroSection";
+
 
 interface FAQItem {
   id: string;
@@ -150,6 +153,7 @@ const HelpCenter: React.FC = () => {
         style={{ scaleX }}
       />
 
+      {/* System Status Bar */}
       <div className="bg-gray-50 border-b border-gray-100 py-3 overflow-hidden">
         <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
           <div className="flex items-center gap-3">
@@ -337,6 +341,7 @@ const HelpCenter: React.FC = () => {
           )}
         </AnimatePresence>
 
+        {/* --- Socials & Contact Cards --- */}
         <section className="mt-32">
           <div className="grid md:grid-cols-3 gap-8">
             <div className="bg-[#121212] p-12 rounded-[3.5rem] text-white flex flex-col justify-between group hover:bg-red-600 transition-colors duration-700">
@@ -364,19 +369,23 @@ const HelpCenter: React.FC = () => {
                   Updates
                 </h4>
                 <p className="text-gray-500 font-bold">
-                  Follow us for real-time traffic alerts & holiday hours.
+                  Follow us for real-time alerts in Port Harcourt City.
                 </p>
               </div>
               <div className="mt-12 flex gap-4">
                 <a
-                  href="#"
-                  className="h-12 w-12 rounded-full bg-white border border-gray-200 flex items-center justify-center text-gray-600 hover:bg-red-600 hover:text-white transition-all shadow-sm"
+                  href="https://x.com/pickars_app?s=21"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="h-12 w-12 rounded-full bg-white border border-gray-200 flex items-center justify-center text-gray-600 hover:bg-[#000] hover:text-white transition-all shadow-sm"
                 >
                   <FaTwitter />
                 </a>
                 <a
-                  href="#"
-                  className="h-12 w-12 rounded-full bg-white border border-gray-200 flex items-center justify-center text-gray-600 hover:bg-red-600 hover:text-white transition-all shadow-sm"
+                  href="https://www.instagram.com/pickars_official?igsh=MWY4aTJieHVtMGltYg%3D%3D&utm_source=qr"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="h-12 w-12 rounded-full bg-white border border-gray-200 flex items-center justify-center text-gray-600 hover:bg-[#E1306C] hover:text-white transition-all shadow-sm"
                 >
                   <FaInstagram />
                 </a>
@@ -390,8 +399,7 @@ const HelpCenter: React.FC = () => {
                   Call Dispatch
                 </h4>
                 <p className="text-red-900/60 font-bold">
-                  Urgent issue with an active delivery? Speak to a lead
-                  controller.
+                  Urgent issue with an active delivery? Speak to a controller.
                 </p>
               </div>
               <a
@@ -404,7 +412,44 @@ const HelpCenter: React.FC = () => {
           </div>
         </section>
 
-        <section className="mt-40 relative max-w-7xl ">
+        {/* --- New App Download Section --- */}
+        <section className="mt-20 px-6">
+          <div className="bg-white border-2 border-gray-100 rounded-[3.5rem] p-10 md:p-14 flex flex-col md:flex-row items-center justify-between gap-8 hover:border-red-600/20 transition-all shadow-2xl shadow-gray-200/20">
+            <div className="text-center md:text-left">
+              <h3 className="text-4xl font-black tracking-tighter text-[#121212] mb-3">
+                Experience the app
+              </h3>
+              <p className="text-gray-500 font-bold text-lg">
+                Manage all your Port Harcourt deliveries in one place.
+              </p>
+            </div>
+            <div className="flex flex-wrap justify-center gap-4">
+              <motion.a
+                href={IOS_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="flex items-center gap-3 bg-[#121212] text-white px-8 py-4 rounded-[1.5rem] font-black text-sm shadow-xl"
+              >
+                <FaApple size={22} /> App Store
+              </motion.a>
+              <motion.a
+                href={ANDROID_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="flex items-center gap-3 bg-white border-2 border-gray-100 text-[#121212] px-8 py-4 rounded-[1.5rem] font-black text-sm hover:border-red-600 transition-colors shadow-lg"
+              >
+                <BiLogoPlayStore size={22} /> Play Store
+              </motion.a>
+            </div>
+          </div>
+        </section>
+
+        {/* --- Final WhatsApp CTA --- */}
+        <section className="mt-20 relative max-w-7xl">
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -420,7 +465,7 @@ const HelpCenter: React.FC = () => {
                   <span className="relative inline-flex rounded-full h-3 w-3 bg-[#25D366]"></span>
                 </span>
                 <span className="text-[10px] font-black uppercase tracking-[0.3em] text-white">
-                  Riders & Support Online
+                  Live Support Online
                 </span>
               </div>
 
@@ -429,17 +474,17 @@ const HelpCenter: React.FC = () => {
               </h2>
 
               <p className="text-gray-500 text-lg md:text-xl font-bold max-w-xl mx-auto mb-14 leading-relaxed">
-                Skip the queue. Our average response time is{" "}
-                <span className="text-white">4m 12s</span>. Connect directly
-                with our dispatch controllers.
+                Connect directly with our Port Harcourt dispatch controllers for
+                instant assistance.
               </p>
 
               <motion.a
                 href="https://wa.me/2349164860591"
                 target="_blank"
+                rel="noopener noreferrer"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="inline-flex items-center gap-5 bg-white text-[#0A0A0A] px-6 py-6 rounded-[2.5rem] font-black text-xl md:text-xl transition-all shadow-2xl"
+                className="inline-flex items-center gap-5 bg-white text-[#0A0A0A] px-10 py-6 rounded-[2.5rem] font-black text-xl transition-all shadow-2xl"
               >
                 <FaWhatsapp size={28} className="text-[#25D366]" />
                 Message Now

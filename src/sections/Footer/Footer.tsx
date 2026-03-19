@@ -7,9 +7,13 @@ import {
   FaXTwitter,
   FaFacebookF,
   FaLinkedinIn,
-} from "react-icons/fa6"; // Using Fa6 for X (Twitter) icon
+} from "react-icons/fa6";
+import { FaApple } from "react-icons/fa";
+import { BiLogoPlayStore } from "react-icons/bi";
 import logo from "../../assets/images/logo.png";
 import { motion } from "framer-motion";
+// Importing the shared constants
+import { ANDROID_URL, IOS_URL } from "../Hero/HeroSection";
 
 const Footer: React.FC = () => {
   const scrollToTop = () => {
@@ -58,6 +62,7 @@ const Footer: React.FC = () => {
             </p>
 
             <div className="flex flex-col gap-6">
+              {/* Email Support */}
               <a
                 href="mailto:support@pickars.com"
                 className="group flex w-fit items-center gap-4 rounded-2xl border border-white/5 bg-white/5 p-4 transition-all hover:border-red-600/50 hover:bg-white/10"
@@ -73,7 +78,33 @@ const Footer: React.FC = () => {
                 </div>
               </a>
 
-              {/* Social Media Links (Primary) */}
+              {/* Improved: App Download Links */}
+              <div className="flex flex-wrap gap-4 mt-2">
+                <a
+                  href={IOS_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex items-center gap-2 rounded-xl bg-white/5 px-4 py-3 text-sm font-bold text-white transition-all hover:bg-white/10 hover:shadow-md hover:shadow-red-600/20"
+                >
+                  <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-black text-white transition-transform group-hover:scale-110">
+                    <FaApple size={20} />
+                  </div>
+                  App Store
+                </a>
+                <a
+                  href={ANDROID_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex items-center gap-2 rounded-xl bg-white/5 px-4 py-3 text-sm font-bold text-white transition-all hover:bg-white/10 hover:shadow-md hover:shadow-red-600/20"
+                >
+                  <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-black text-white transition-transform group-hover:scale-110">
+                    <BiLogoPlayStore size={20} />
+                  </div>
+                  Google Play
+                </a>
+              </div>
+
+              {/* Social Media Links */}
               <div className="flex gap-3">
                 {socialLinks.map((social) => (
                   <a
@@ -81,7 +112,7 @@ const Footer: React.FC = () => {
                     href={social.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/5 text-gray-400 transition-all hover:bg-red-600 hover:text-white"
+                    className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/5 text-gray-400 transition-all hover:bg-red-600 hover:text-white hover:shadow-md hover:shadow-red-600/20"
                     aria-label={social.name}
                   >
                     {social.icon}
@@ -100,7 +131,7 @@ const Footer: React.FC = () => {
               <ul className="flex flex-col gap-4">
                 <li>
                   <Link
-                    to="app/our-company"
+                    to="/app/our-company"
                     className="text-sm text-gray-400 transition-colors hover:text-white"
                   >
                     Our Company
@@ -108,7 +139,7 @@ const Footer: React.FC = () => {
                 </li>
                 <li>
                   <Link
-                    to="app/app-features"
+                    to="/app/app-features"
                     className="text-sm text-gray-400 transition-colors hover:text-white"
                   >
                     App Features
@@ -116,7 +147,7 @@ const Footer: React.FC = () => {
                 </li>
                 <li>
                   <Link
-                    to="app/faqs"
+                    to="/app/faqs"
                     className="text-sm text-gray-400 transition-colors hover:text-white"
                   >
                     Our FAQs
@@ -124,7 +155,6 @@ const Footer: React.FC = () => {
                 </li>
               </ul>
             </div>
-
             <div>
               <h4 className="mb-6 text-xs font-bold uppercase tracking-[0.2em] text-red-600">
                 Support
@@ -132,7 +162,7 @@ const Footer: React.FC = () => {
               <ul className="flex flex-col gap-4">
                 <li>
                   <Link
-                    to="app/help-center"
+                    to="/app/help-center"
                     className="text-sm text-gray-400 transition-colors hover:text-white"
                   >
                     Help Center
@@ -140,7 +170,7 @@ const Footer: React.FC = () => {
                 </li>
                 <li>
                   <Link
-                    to="app/find-item"
+                    to="/app/find-item"
                     className="text-sm text-gray-400 transition-colors hover:text-white"
                   >
                     Find a Lost item
@@ -148,7 +178,6 @@ const Footer: React.FC = () => {
                 </li>
               </ul>
             </div>
-
             <div>
               <h4 className="mb-6 text-xs font-bold uppercase tracking-[0.2em] text-red-600">
                 Legal
@@ -156,7 +185,7 @@ const Footer: React.FC = () => {
               <ul className="flex flex-col gap-4">
                 <li>
                   <Link
-                    to="app/terms-of-use"
+                    to="/app/terms-of-use"
                     className="text-sm text-gray-400 transition-colors hover:text-white"
                   >
                     Terms & Conditions
@@ -164,7 +193,7 @@ const Footer: React.FC = () => {
                 </li>
                 <li>
                   <Link
-                    to="app/privacy-policy"
+                    to="/app/privacy-policy"
                     className="text-sm text-gray-400 transition-colors hover:text-white"
                   >
                     Privacy Policy
@@ -181,20 +210,17 @@ const Footer: React.FC = () => {
             © {new Date().getFullYear()} Pickars Courier Limited. Moving PH City
             forward.
           </p>
-
-          <div className="flex items-center gap-8">
-            <motion.button
-              whileHover={{ y: -5 }}
-              whileTap={{ scale: 0.9 }}
-              onClick={scrollToTop}
-              className="group flex items-center gap-3 text-xs font-black uppercase tracking-widest text-white"
-            >
-              Back to Top
-              <div className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 group-hover:bg-red-600 group-hover:border-red-600 transition-all">
-                <FaChevronUp />
-              </div>
-            </motion.button>
-          </div>
+          <motion.button
+            whileHover={{ y: -5 }}
+            whileTap={{ scale: 0.9 }}
+            onClick={scrollToTop}
+            className="group flex items-center gap-3 text-xs font-black uppercase tracking-widest text-white"
+          >
+            Back to Top
+            <div className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 group-hover:bg-red-600 group-hover:border-red-600 transition-all">
+              <FaChevronUp />
+            </div>
+          </motion.button>
         </div>
       </div>
     </footer>

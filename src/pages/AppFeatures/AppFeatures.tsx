@@ -12,6 +12,11 @@ import {
   FiSmartphone,
   FiLayers,
 } from "react-icons/fi";
+import { FaApple } from "react-icons/fa";
+import { BiLogoPlayStore } from "react-icons/bi";
+
+// Importing shared constants
+import { ANDROID_URL, IOS_URL } from "../../sections/Hero/HeroSection";
 
 interface FeatureItem {
   id: string;
@@ -89,7 +94,6 @@ const appFeatures: FeatureItem[] = [
 ];
 
 const AppFeatures: React.FC = () => {
-  // 1. Implementation of the Scroll Progress
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
     stiffness: 100,
@@ -97,16 +101,17 @@ const AppFeatures: React.FC = () => {
     restDelta: 0.001,
   });
 
+  // Device detection for the single "Download App" button in the bento grid
+
+
   return (
     <div className="min-h-screen pt-[180px] bg-[#FAFAFA] font-['Lufga'] py-24 px-6 relative">
-      {/* --- GLOBAL TOP SCROLLER --- */}
       <motion.div
         className="fixed top-0 left-0 right-0 z-[120] h-1.5 bg-red-600 origin-left"
         style={{ scaleX }}
       />
 
       <div className="mx-auto max-w-7xl">
-        {/* Header */}
         <header className="mb-20 text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -148,12 +153,9 @@ const AppFeatures: React.FC = () => {
                 feature.size === "large" ? "md:col-span-2" : "col-span-1"
               }`}
             >
-              {/* Icon Container */}
               <div className="mb-8 h-16 w-16 rounded-2xl bg-[#121212] text-white flex items-center justify-center text-3xl group-hover:bg-red-600 group-hover:rotate-[15deg] group-hover:scale-110 transition-all duration-500 shadow-xl">
                 <feature.icon />
               </div>
-
-              {/* Text Content */}
               <div className="relative z-10">
                 <h3 className="text-3xl font-black mb-4 text-[#121212] tracking-tight">
                   {feature.title}
@@ -162,8 +164,6 @@ const AppFeatures: React.FC = () => {
                   {feature.description}
                 </p>
               </div>
-
-              {/* Ghost Icon Background */}
               <div className="absolute -right-10 -bottom-10 text-gray-100 opacity-5 transition-all duration-700 group-hover:text-red-600 group-hover:opacity-10 group-hover:-rotate-12 group-hover:scale-125">
                 <feature.icon size={220} />
               </div>
@@ -184,17 +184,47 @@ const AppFeatures: React.FC = () => {
               </div>
               <h3 className="text-3xl font-black tracking-tight mb-4">
                 Ready to <br />
-                ship now?
+                Get a Rider now?
               </h3>
               <p className="text-red-100 font-medium">
                 Join thousands moving items with Pickars today.
               </p>
             </div>
-            <button className="bg-white text-[#ff0000] w-full py-5 rounded-3xl font-black text-sm uppercase tracking-widest hover:bg-[#121212] hover:text-white transition-all transform active:scale-95">
-              Download App
-            </button>
+     
           </motion.div>
         </motion.div>
+
+        {/* --- ADDED: FINAL DOWNLOAD STRIP --- */}
+        <section className="mt-24">
+          <div className="bg-[#121212] rounded-[40px] p-8 md:p-12 flex flex-col md:flex-row items-center justify-between gap-8 border border-white/5 shadow-2xl">
+            <div className="text-center md:text-left">
+              <h3 className="text-3xl md:text-4xl font-black text-white tracking-tighter mb-2">
+                Available on all devices
+              </h3>
+              <p className="text-gray-500 font-bold">
+                Pickars is live in Port Harcourt City.
+              </p>
+            </div>
+            <div className="flex flex-wrap justify-center gap-4">
+              <a
+                href={IOS_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-3 bg-white text-black px-8 py-4 rounded-2xl font-black transition-transform hover:scale-105"
+              >
+                <FaApple size={22} /> App Store
+              </a>
+              <a
+                href={ANDROID_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-3 bg-white/10 text-white px-8 py-4 rounded-2xl font-black border border-white/10 transition-transform hover:scale-105"
+              >
+                <BiLogoPlayStore size={22} /> Google Play
+              </a>
+            </div>
+          </div>
+        </section>
 
         {/* Support Section */}
         <motion.div
