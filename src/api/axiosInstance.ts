@@ -1,7 +1,9 @@
 import axios from "axios";
 
-const API_BASE_URL = "http://localhost:5200/api/v1/admin";
+const API_BASE_URL = "https://www.pickars-api.org/api/v1/admin";
 
+//"http://localhost:5200/api/v1/admin";
+//https://www.pickars-api.org
 const axiosInstance = axios.create({
     baseURL: API_BASE_URL,
     headers: {
