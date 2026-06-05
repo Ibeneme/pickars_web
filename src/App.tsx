@@ -23,22 +23,28 @@ import NotFound from "./pages/NotFound";
 import AdminLogin from "./pages/admin/auth/adminLogin";
 import Dashboard from "./pages/admin/dashboard/Dashboard";
 import UsersManagement from "./pages/admin/dashboard/UserManagement";
-import RidersManagement from "./pages/admin/dashboard/RiderManagement"; // ✅ Added import
+import RidersManagement from "./pages/admin/dashboard/RiderManagement";
+import RidesManagement from "./pages/admin/dashboard/RidesManagement";
+import PaymentsManagement from "./pages/admin/dashboard/PaymentsManagement";
+import MarketingCenter from "./pages/admin/dashboard/MarketingCenter";
+
+// Manual Ride Components
+import ManualRideDispatch from "./pages/admin/dashboard/ManualRidesManagement";
+import CreateManualRide from "./pages/admin/manualRides/CreateMR";
+import ViewManualRide from "./pages/admin/manualRides/ViewManualRide";
 
 // Navigation & Security
 import Launcher from "./components/Launcher/Laucher";
 import ProtectedRoute from "./pages/navigation/ProtectedRoute";
-import RidesManagement from "./pages/admin/dashboard/RidesManagement";
-import PaymentsManagement from "./pages/admin/dashboard/PaymentsManagement";
-import MarketingCenter from "./pages/admin/dashboard/MarketingCenter";
 import WhatsAppButton from "./components/whatsapp/WhatsApp";
+import PaymentSuccess from "./pages/TrackingPage/PaymentSuccess";
 
 const App: React.FC = () => {
   const location = useLocation();
-
-  // Hide platform chrome for any route starting with /app/admin
-  const isAdminRoute = location.pathname.startsWith("/app/admin");
-
+  const adminPaths = ["/app/admin", "/admin", "/app/tracking"];
+  const isAdminRoute = adminPaths.some((path) =>
+    location.pathname.startsWith(path)
+  );
   return (
     <div
       className="app-main-wrapper"
@@ -66,24 +72,35 @@ const App: React.FC = () => {
           <Route path="/app/help-center" element={<HelpCenter />} />
           <Route path="/app/app-features" element={<AppFeatures />} />
           <Route path="/app/tracking" element={<TrackingPage />} />
-
-          {/* Admin Auth (Publicly accessible but separate layout) */}
+          <Route path="/track" element={<PaymentSuccess />} />
+          {/* Admin Auth */}
           <Route path="/app/admin" element={<AdminLogin />} />
 
           {/* PROTECTED ADMIN ROUTES */}
           <Route element={<ProtectedRoute />}>
             <Route path="/app/admin/dashboard" element={<Dashboard />} />
+            <Route path="/app/admin/users" element={<UsersManagement />} />
+            <Route path="/app/admin/riders" element={<RidersManagement />} />
+            <Route path="/app/admin/rides" element={<RidesManagement />} />
             <Route
               path="/app/admin/payments"
               element={<PaymentsManagement />}
             />
-            <Route path="/app/admin/users" element={<UsersManagement />} />
             <Route path="/app/admin/marketing" element={<MarketingCenter />} />
+
+            {/* MANUAL RIDES - Consistent Routes */}
             <Route
-              path="/app/admin/riders"
-              element={<RidersManagement />}
-            />{" "}
-            <Route path="/app/admin/rides" element={<RidesManagement />} />{" "}
+              path="/app/admin/manual-booking"
+              element={<ManualRideDispatch />}
+            />
+            <Route
+              path="/admin/manual-rides/create"
+              element={<CreateManualRide />}
+            />
+            <Route
+              path="/admin/manual-rides/:trackingId"
+              element={<ViewManualRide />}
+            />
           </Route>
 
           <Route path="*" element={<NotFound />} />

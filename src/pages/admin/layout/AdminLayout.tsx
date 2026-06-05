@@ -10,6 +10,7 @@ import {
   FiLogOut,
   FiMenu,
   FiShield,
+  FiPlusSquare,
 } from "react-icons/fi";
 import { useDispatch } from "react-redux";
 import { type AppDispatch } from "../../../api/store";
@@ -26,12 +27,21 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
     { name: "Users", path: "/app/admin/users", icon: <FiUsers /> },
     { name: "Riders", path: "/app/admin/riders", icon: <FiTruck /> },
     { name: "Rides", path: "/app/admin/rides", icon: <FiMap /> },
+    {
+      name: "Manual Booking",
+      path: "/app/admin/manual-booking",
+      icon: <FiPlusSquare />,
+    }, // Added Route
     { name: "Payments", path: "/app/admin/payments", icon: <FiCreditCard /> },
-    { name: "Marketing", path: "/app/admin/marketing", icon: <SlEnvolopeLetter /> },
+    {
+      name: "Marketing",
+      path: "/app/admin/marketing",
+      icon: <SlEnvolopeLetter />,
+    },
   ];
 
   return (
-    <div className="min-h-screen bg-[#F8F9FA] flex font-['Lufga',sans-serif]">
+    <div className="h-screen flex bg-[#F8F9FA] font-['Lufga',sans-serif] overflow-hidden">
       {/* MOBILE OVERLAY */}
       <AnimatePresence>
         {isOpen && (
@@ -45,11 +55,11 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
         )}
       </AnimatePresence>
 
-      {/* SIDEBAR */}
+      {/* SIDEBAR - Added h-screen and sticky */}
       <aside
-        className={`fixed inset-y-0 left-0 z-50 w-72 bg-[#0A0A0A] text-white transition-transform duration-300 lg:translate-x-0 ${
+        className={`fixed inset-y-0 left-0 z-50 w-72 bg-[#0A0A0A] text-white transition-transform duration-300 lg:translate-x-0 lg:sticky lg:top-0 h-screen ${
           isOpen ? "translate-x-0" : "-translate-x-full"
-        } lg:static lg:inset-0`}
+        }`}
       >
         <div className="h-full flex flex-col p-8">
           {/* Logo */}
@@ -63,7 +73,7 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
           </div>
 
           {/* Nav Links */}
-          <nav className="flex-1 space-y-2">
+          <nav className="flex-1 space-y-2 overflow-y-auto">
             {menuItems.map((item) => {
               const isActive = location.pathname === item.path;
               return (
@@ -97,10 +107,10 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
         </div>
       </aside>
 
-      {/* CONTENT AREA */}
-      <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
+      {/* CONTENT AREA - Now scrolls independently */}
+      <div className="flex-1 flex flex-col min-w-0 h-full overflow-hidden">
         {/* TOP HEADER */}
-        <header className="h-20 bg-white border-b border-gray-100 flex items-center justify-between px-6 lg:px-12 sticky top-0 z-30">
+        <header className="h-20 bg-white border-b border-gray-100 flex items-center justify-between px-6 lg:px-12 flex-shrink-0">
           <button
             onClick={() => setIsOpen(true)}
             className="lg:hidden p-2 text-gray-600"
@@ -132,8 +142,8 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
           </div>
         </header>
 
-        {/* PAGE CONTENT */}
-        <main className="p-6 lg:p-12 overflow-y-auto">{children}</main>
+        {/* PAGE CONTENT - Added scroll property */}
+        <main className="flex-1 overflow-y-auto p-6 lg:p-12">{children}</main>
       </div>
     </div>
   );
