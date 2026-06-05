@@ -42,6 +42,8 @@ import PaymentSuccess from "./pages/TrackingPage/PaymentSuccess";
 const App: React.FC = () => {
   const location = useLocation();
   const adminPaths = ["/app/admin", "/admin", "/app/tracking"];
+
+  const navRoute = "/app/tracking";
   const isAdminRoute = adminPaths.some((path) =>
     location.pathname.startsWith(path)
   );
@@ -57,7 +59,7 @@ const App: React.FC = () => {
     >
       <ScrollToTop />
 
-      {!isAdminRoute && <Navbar />}
+      {!isAdminRoute || (navRoute && <Navbar />)}
 
       <main className="content-area" style={{ flex: 1 }}>
         <Routes location={location} key={location.pathname}>
@@ -108,7 +110,7 @@ const App: React.FC = () => {
       </main>
 
       {!isAdminRoute && <WhatsAppButton />}
-      {!isAdminRoute && <Footer />}
+      {!isAdminRoute || (navRoute && <Footer />)}
 
       {!isAdminRoute && (
         <div
