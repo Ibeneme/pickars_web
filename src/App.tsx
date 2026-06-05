@@ -41,7 +41,7 @@ import PaymentSuccess from "./pages/TrackingPage/PaymentSuccess";
 
 const App: React.FC = () => {
   const location = useLocation();
-  const adminPaths = ["/app/admin", "/admin", "/app/tracking"];
+  const adminPaths = ["/app/admin", "/admin"];
 
   const navRoute = "/app/tracking";
   const isAdminRoute = adminPaths.some((path) =>
@@ -59,7 +59,7 @@ const App: React.FC = () => {
     >
       <ScrollToTop />
 
-      {!isAdminRoute || (navRoute && <Navbar />)}
+      {!isAdminRoute && <Navbar />}
 
       <main className="content-area" style={{ flex: 1 }}>
         <Routes location={location} key={location.pathname}>
@@ -110,25 +110,26 @@ const App: React.FC = () => {
       </main>
 
       {!isAdminRoute && <WhatsAppButton />}
-      {!isAdminRoute || (navRoute && <Footer />)}
+      {!isAdminRoute && <Footer />}
 
-      {!isAdminRoute && (
-        <div
-          style={{
-            position: "fixed",
-            bottom: 0,
-            left: 0,
-            right: 0,
-            zIndex: 9999,
-            background: "transparent",
-            pointerEvents: "none",
-          }}
-        >
-          <div style={{ pointerEvents: "auto" }}>
-            <Launcher />
+      {!isAdminRoute ||
+        (navRoute && (
+          <div
+            style={{
+              position: "fixed",
+              bottom: 0,
+              left: 0,
+              right: 0,
+              zIndex: 9999,
+              background: "transparent",
+              pointerEvents: "none",
+            }}
+          >
+            <div style={{ pointerEvents: "auto" }}>
+              <Launcher />
+            </div>
           </div>
-        </div>
-      )}
+        ))}
     </div>
   );
 };
