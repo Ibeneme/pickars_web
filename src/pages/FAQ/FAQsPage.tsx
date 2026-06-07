@@ -1,4 +1,4 @@
-import React from "react";
+
 import { Helmet } from "react-helmet-async"; // Imported Helmet
 import FAQPage from "../../sections/Faqs/FAQ";
 

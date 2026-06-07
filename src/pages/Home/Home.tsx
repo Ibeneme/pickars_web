@@ -1,4 +1,4 @@
-import React from "react";
+
 import { motion, useScroll, useSpring } from "framer-motion";
 import { Helmet } from "react-helmet-async"; // Imported Helmet
 import SlidingPage from "../../components/SlidingPgae/SlidingPage";
