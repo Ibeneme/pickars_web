@@ -119,7 +119,7 @@ const Support = () => {
     <div style={styles.pageWrapper}>
       {/* Dynamic SEO Meta Data */}
       <Helmet>
-        <title>Help &amp; Support Concierge | Pickars Logistics</title>
+        <title>Help &amp; Support | Pickars Logistics</title>
         <meta
           name="description"
           content="Get instant answers regarding your Pickars delivery schedules, pricing structures, payments, refunds, and driver help channels."
@@ -127,7 +127,7 @@ const Support = () => {
         <link rel="canonical" href="https://pickars.com/app/support" />
         <meta
           property="og:title"
-          content="Help &amp; Support Concierge | Pickars"
+          content="Help &amp; Support | Pickars"
         />
         <meta
           property="og:description"
