@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence, type Variants } from "framer-motion";
+import { Helmet } from "react-helmet-async"; // Imported Helmet
 import {
   FiSearch,
   FiPlus,
@@ -102,8 +103,38 @@ const Support = () => {
     },
   };
 
+  // Filter FAQs based on search term
+  const filteredCategories = categories
+    .map((cat) => ({
+      ...cat,
+      faqs: cat.faqs.filter(
+        (faq) =>
+          faq.question.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          faq.answer.toLowerCase().includes(searchTerm.toLowerCase())
+      ),
+    }))
+    .filter((cat) => cat.faqs.length > 0);
+
   return (
     <div style={styles.pageWrapper}>
+      {/* Dynamic SEO Meta Data */}
+      <Helmet>
+        <title>Help &amp; Support Concierge | Pickars Logistics</title>
+        <meta
+          name="description"
+          content="Get instant answers regarding your Pickars delivery schedules, pricing structures, payments, refunds, and driver help channels."
+        />
+        <link rel="canonical" href="https://pickars.com/app/support" />
+        <meta
+          property="og:title"
+          content="Help &amp; Support Concierge | Pickars"
+        />
+        <meta
+          property="og:description"
+          content="Find answers to common questions or reach our live 24/7 dispatch desk instantly."
+        />
+      </Helmet>
+
       <motion.div
         variants={containerVars}
         initial="hidden"
@@ -131,7 +162,7 @@ const Support = () => {
 
         {/* Categories Grid */}
         <motion.div variants={itemVars} style={styles.grid}>
-          {categories.map((cat) => (
+          {filteredCategories.map((cat) => (
             <div key={cat.id} style={styles.catCard}>
               <div style={styles.catIcon}>{cat.icon}</div>
               <h3 style={styles.catTitle}>{cat.name}</h3>

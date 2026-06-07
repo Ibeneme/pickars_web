@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
+import { Helmet } from "react-helmet-async"; // Imported Helmet
 import {
   FiFileText,
   FiUserCheck,
@@ -32,6 +33,24 @@ const TermsAndConditionsPage: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-[#FAFAFA] pt-[180px] font-['Lufga'] py-24 px-6 md:px-12">
+      {/* Dynamic SEO Meta Data */}
+      <Helmet>
+        <title>Terms of Service &amp; User Agreement | Pickars Logistics</title>
+        <meta
+          name="description"
+          content="Review the official Terms of Service for Pickars Courier Limited. Understand your operational responsibilities, insurance options, user liabilities, and dispute resolutions."
+        />
+        <link rel="canonical" href="https://pickars.com/legal/terms" />
+        <meta
+          property="og:title"
+          content="Terms of Service &amp; Legal Framework | Pickars"
+        />
+        <meta
+          property="og:description"
+          content="Official user agreement detailing intermediate liability limitations, fragile package protection rules, and booking policies."
+        />
+      </Helmet>
+
       <div className="mx-auto max-w-7xl">
         {/* Header Section */}
         <header className="mb-20">
@@ -318,6 +337,7 @@ const TermsAndConditionsPage: React.FC = () => {
                   <a
                     href={IOS_URL}
                     target="_blank"
+                    rel="noreferrer"
                     className="flex items-center gap-3 bg-white text-black px-6 py-4 rounded-2xl font-black transition-transform hover:scale-105"
                   >
                     <FaApple size={20} /> App Store
@@ -325,6 +345,7 @@ const TermsAndConditionsPage: React.FC = () => {
                   <a
                     href={ANDROID_URL}
                     target="_blank"
+                    rel="noreferrer"
                     className="flex items-center gap-3 bg-white/10 text-white px-6 py-4 rounded-2xl font-black border border-white/10 transition-transform hover:scale-105"
                   >
                     <BiLogoPlayStore size={20} /> Play Store

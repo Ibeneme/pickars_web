@@ -16,7 +16,7 @@ import {
 } from "react-icons/fa";
 import { ChevronDown } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
-
+import { Helmet } from "react-helmet-async"; // Imported Helmet
 import { getManualRide } from "../../api/slices/manualRideSlice";
 import { verifyPayment } from "../../api/slices/paymentSlice";
 import type { AppDispatch, RootState } from "../../api/store";
@@ -194,6 +194,26 @@ const TrackingPage = () => {
 
   return (
     <main className="min-h-screen bg-[#f8f9fa] font-['Lufga'] text-[#121212] pt-[120px]">
+      <Helmet>
+        <title>
+          {currentRide
+            ? `Track Order ${currentRide.trackingId} | Pickars`
+            : "Live Delivery Tracking | Pickars Logistics"}
+        </title>
+        <meta
+          name="description"
+          content="Track your Pickars packages in real-time. Input your courier tracking ID to see your active dispatcher route and delivery status instantly."
+        />
+        <link rel="canonical" href="https://pickars.com/app/tracking" />
+        <meta
+          property="og:title"
+          content="Real-Time Dispatch Tracking | Pickars Logistics"
+        />
+        <meta
+          property="og:description"
+          content="Securely track parcel deliveries and view official invoices instantly."
+        />
+      </Helmet>
       <motion.div
         className="fixed top-0 left-0 right-0 z-[100] h-1 bg-red-600 origin-left"
         style={{ scaleX }}
