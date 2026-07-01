@@ -1,9 +1,9 @@
 import axios from "axios";
 
-const API_BASE_URL = "http://www.pickars-api.org/api/v1/admin";
-const API_BASE_URL_TRACK = "http://www.pickars-api.org/api/";
+const API_BASE_URL = "http://localhost:5200/api/v1/admin";
+const API_BASE_URL_TRACK = "http://localhost:5200/api/";
 //"http://localhost:5200/api/";
-// 1. Admin instance (Authenticated)
+// 1. Admin instance (Authenticated) http://www.pickars-api.org/api/
 const axiosInstance = axios.create({
     baseURL: API_BASE_URL,
     headers: { "Content-Type": "application/json" },

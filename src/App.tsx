@@ -38,6 +38,7 @@ import Launcher from "./components/Launcher/Laucher";
 import ProtectedRoute from "./pages/navigation/ProtectedRoute";
 import WhatsAppButton from "./components/whatsapp/WhatsApp";
 import PaymentSuccess from "./pages/TrackingPage/PaymentSuccess";
+import DispatchRiderTermsPage from "./pages/DispatchRiderTermsPage";
 
 const App: React.FC = () => {
   const location = useLocation();
@@ -77,6 +78,7 @@ const App: React.FC = () => {
           <Route path="/track" element={<PaymentSuccess />} />
           {/* Admin Auth */}
           <Route path="/app/admin" element={<AdminLogin />} />
+          <Route path="/rider-terms" element={<DispatchRiderTermsPage />} />
 
           {/* PROTECTED ADMIN ROUTES */}
           <Route element={<ProtectedRoute />}>
