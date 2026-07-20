@@ -7,8 +7,7 @@ import CommentsSection from "../../sections/CommentsSection/CommentsSection";
 import HeroSection from "../../sections/Hero/HeroSection";
 //import HowItWorksSection from "../../sections/HowItWorksSection/HowItWorksSection";
 import FinalBookingSection from "../../sections/HowItWorksSection/FinalBookingSection";
-import HowItWorksSection from "../../sections/HowItWorksSection/HowItWorksSection";
-import CoreValuesSection from "../../sections/DeliverySteps/CoreValuesSection";
+import RealtimeTrackingMapFull from "../../sections/HowItWorksSection/HowItWorksSection";
 //import MidImage from "../../sections/HeroDelivery/MidImage";
 
 const Home = () => {
@@ -50,7 +49,9 @@ const Home = () => {
       <main className="overflow-x-hidden">
         <HeroSection />
 
-
+        <section className="relative z-10">
+          <SlidingPage />
+        </section>
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
@@ -59,19 +60,15 @@ const Home = () => {
         >
           <FinalBookingSection />
         </motion.div>
-        
-        <CoreValuesSection />
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
           viewport={{ once: true, margin: "-100px" }}
         >
-          <HowItWorksSection />
+          <RealtimeTrackingMapFull />
         </motion.div>
-        <section className="relative z-10">
-          <SlidingPage />
-        </section>
+
         {/* <HowItWorksSection /> */}
         <CommentsSection />
         {/* <MidImage /> */}
