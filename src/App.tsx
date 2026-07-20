@@ -44,7 +44,7 @@ const App: React.FC = () => {
   const location = useLocation();
   const adminPaths = ["/app/admin", "/admin"];
 
-  const navRoute = "/app/tracking";
+  //const navRoute = "/app/tracking";
   const isAdminRoute = adminPaths.some((path) =>
     location.pathname.startsWith(path)
   );
