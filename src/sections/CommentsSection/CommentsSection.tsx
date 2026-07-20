@@ -70,7 +70,7 @@ const CommentsSection: React.FC = () => {
   // Counter animation
   useEffect(() => {
     let startTime: number;
-    count
+    count;
     const duration = 2500;
     const animate = (timestamp: number) => {
       if (!startTime) startTime = timestamp;
@@ -80,7 +80,7 @@ const CommentsSection: React.FC = () => {
       if (progress < 1) requestAnimationFrame(animate);
     };
     requestAnimationFrame(animate);
-  }, []);
+  }, [count, target]);
 
   // --- DEVICE REDIRECT LOGIC ---
   const handleDeliverNow = () => {
@@ -150,11 +150,11 @@ const CommentsSection: React.FC = () => {
                 style={{
                   transform: `rotate(${rotationDegree}deg)`,
                 }}
-                className="relative flex-shrink-0 w-[360px] md:w-[450px] bg-white rounded-[28px] p-6 md:p-7 border border-red-100 flex items-center gap-5 transition-transform duration-300 hover:scale-105"
+                className="relative flex-shrink-0 w-[360px] md:w-[450px] bg-white rounded-[28px] p-6 md:p-7 border border-red-100 flex items-center gap-4 md:gap-5 transition-transform duration-300 hover:scale-105"
               >
                 {/* Yolat-Style Scalloped Starburst Badge */}
                 <div
-                  className="flex-shrink-0 w-14 h-14 bg-red-100 text-red-600 flex items-center justify-center"
+                  className="flex-shrink-0 w-12 h-12 md:w-14 md:h-14 bg-red-100 text-red-600 flex items-center justify-center"
                   style={{
                     maskImage:
                       "radial-gradient(circle 6px at calc(100% - 3px) 50%, #0000 99%, #000 100%)",
@@ -162,18 +162,21 @@ const CommentsSection: React.FC = () => {
                       "conic-gradient(from -45deg at 50% 50%, #000 0 90deg, #0000 0) 0 0/12px 12px repeat",
                   }}
                 >
-                  <FaQuoteLeft className="text-base text-red-600" />
+                  <FaQuoteLeft className="text-sm md:text-base text-red-600" />
                 </div>
 
                 {/* Card Content */}
                 <div className="flex flex-col justify-center min-w-0">
-                  <div className="flex items-center gap-2 font-bold text-gray-900 text-[20px]">
-                    <span className="truncate">{item.name}</span>
-                    <span className="inline-block text-[12px] font-extrabold uppercase px-2 py-0.5 rounded-full bg-red-50 text-red-600 border border-red-100/50">
+                  <div className="flex flex-wrap items-center gap-2 font-bold text-gray-900">
+                    {/* Name: Reduced to 17px on mobile, 20px on desktop */}
+                    <span className="truncate text-[17px] md:text-[20px]">{item.name}</span>
+                    {/* Location Badge: Reduced to 9px on mobile, 12px on desktop */}
+                    <span className="inline-block text-[9px] md:text-[12px] font-extrabold uppercase px-2 py-0.5 rounded-full bg-red-50 text-red-600 border border-red-100/50">
                       {item.location}
                     </span>
                   </div>
-                  <p className="mt-1.5 text-[16px] text-gray-600 font-normal leading-relaxed line-clamp-3">
+                  {/* Comment Body: Reduced to 13px on mobile, 16px on desktop */}
+                  <p className="mt-1.5 text-[13px] md:text-[16px] text-gray-600 font-normal leading-relaxed line-clamp-3">
                     "{item.text}"
                   </p>
                 </div>
@@ -193,7 +196,7 @@ const CommentsSection: React.FC = () => {
           onClick={handleDeliverNow}
           whileHover={{ scale: 1.03 }}
           whileTap={{ scale: 0.97 }}
-          className="bg-[#ff0000] text-white px-10 py-5 rounded-full font-black  text-[20px] md:text-[24px]  transition-colors"
+          className="bg-[#ff0000] text-white px-10 py-5 rounded-full font-black text-[20px] md:text-[24px] transition-colors"
         >
           Send a Package Now
         </motion.button>
