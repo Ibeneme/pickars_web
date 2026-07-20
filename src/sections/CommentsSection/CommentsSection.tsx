@@ -1,130 +1,76 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import {
-  FaInstagram,
-  FaFacebookF,
-  FaTiktok,
-  FaXTwitter,
-  FaQuoteLeft,
-} from "react-icons/fa6";
+import { FaQuoteLeft } from "react-icons/fa6";
 
 // Import your global store constants
-import { ANDROID_URL, IOS_URL } from "../Hero/HeroSection";
+// Updated import path
+import { ANDROID_URL, IOS_URL } from "../../components/Launcher/Laucher";
 
 // --- Types & Data ---
 interface Comment {
   name: string;
+  location: string;
   text: string;
-  icon: React.ReactNode;
-  bg: string;
-  color: string;
 }
 
-// ... row1Data and row2Data remain the same as your snippet ...
-const row1Data: Comment[] = [
+const commentsData: Comment[] = [
   {
-    name: "Aishat R.",
-    text: "Fastest delivery I've ever used in Lagos. My package arrived in under 2 hours!",
-    icon: <FaInstagram />,
-    bg: "#E1306C",
-    color: "#fff",
+    name: "Tamuno S.", // Ijaw
+    location: "Borikiri",
+    text: "Fastest delivery service in Port Harcourt! My package was delivered to Borikiri in under an hour.",
   },
   {
-    name: "Tunde O.",
-    text: "The real-time tracking is a game changer for my small business. Highly recommended.",
-    icon: <FaXTwitter />,
-    bg: "#000",
-    color: "#fff",
+    name: "Nneka O.", // Igbo
+    location: "Garrison",
+    text: "The real-time tracking is a game changer for my online boutique at Garrison market.",
   },
   {
-    name: "Chidi E.",
-    text: "Affordable rates and very professional riders. 10/10 service.",
-    icon: <FaFacebookF />,
-    bg: "#1877F2",
-    color: "#fff",
-  },
-];
-
-const row2Data: Comment[] = [
-  {
-    name: "Blessing W.",
-    text: "I love how easy it is to schedule a pickup. Makes my life so much easier!",
-    icon: <FaTiktok />,
-    bg: "#000",
-    color: "#fff",
+    name: "Baridule K.", // Ogoni
+    location: "Eleme",
+    text: "Affordable door-to-door delivery all the way to Eleme. Very respectful riders!",
   },
   {
-    name: "Sarah K.",
-    text: "Reliable and safe. I never have to worry about my fragile items getting damaged.",
-    icon: <FaInstagram />,
-    bg: "#E1306C",
-    color: "#fff",
+    name: "Musa A.", // Hausa
+    location: "Oil Mill",
+    text: "Reliable and honest. Pickars helps me send stock across PH without any stress.",
   },
   {
-    name: "Ibrahim M.",
-    text: "Finally, a logistics company that actually respects delivery timelines.",
-    icon: <FaXTwitter />,
-    bg: "#000",
-    color: "#fff",
+    name: "Tariere P.", // Ijaw
+    location: "GRA Phase 2",
+    text: "I love how easy it is to book a bike. Makes sending urgent documents so effortless.",
+  },
+  {
+    name: "Chidubem E.", // Igbo
+    location: "Ada George",
+    text: "Safe and dependable. I never worry about fragile items getting damaged when dispatched.",
+  },
+  {
+    name: "Sira M.", // Ogoni
+    location: "Trans-Amadi",
+    text: "Pickars respects delivery schedules better than any other local dispatch service in PH.",
+  },
+  {
+    name: "Ibrahim S.", // Hausa
+    location: "Mile 1, Diobu",
+    text: "Great rates for small business owners. Highly recommended to deliver daily packages.",
   },
 ];
 
-const TickerRow = ({
-  items,
-  direction = "left",
-}: {
-  items: Comment[];
-  direction?: "left" | "right";
-}) => {
-  const loopItems = [...items, ...items, ...items, ...items];
-
-  return (
-    <div className="group flex overflow-hidden py-2 md:py-4">
-      <motion.div
-        initial={{ x: direction === "left" ? 0 : "-50%" }}
-        animate={{ x: direction === "left" ? "-50%" : 0 }}
-        transition={{ duration: 35, repeat: Infinity, ease: "linear" }}
-        className="flex gap-4 md:gap-6 whitespace-nowrap px-2"
-      >
-        {loopItems.map((item, idx) => (
-          <div
-            key={idx}
-            className="relative flex w-[280px] md:w-[380px] flex-col justify-between rounded-[30px] md:rounded-[40px] border border-white bg-white/80 p-6 md:p-10 backdrop-blur-sm transition-all duration-500 hover:border-red-200 hover:shadow-[0_20px_40px_-15px_rgba(220,38,38,0.1)]"
-          >
-            <FaQuoteLeft className="absolute top-4 left-4 md:top-6 md:left-6 text-gray-100 text-3xl md:text-4xl -z-10" />
-            <p className="whitespace-normal text-sm md:text-[15px] font-medium leading-relaxed text-gray-700">
-              {item.text}
-            </p>
-            <div className="mt-6 md:mt-8 flex items-center justify-between border-t border-gray-50 pt-4 md:pt-6">
-              <div className="flex flex-col">
-                <span className="text-[11px] md:text-[13px] font-black uppercase tracking-tighter text-gray-900">
-                  {item.name}
-                </span>
-                <span className="text-[9px] md:text-[10px] font-bold text-gray-400 uppercase tracking-widest">
-                  Verified User
-                </span>
-              </div>
-              <motion.div
-                whileHover={{ rotate: 360 }}
-                className="flex h-9 w-9 md:h-11 md:w-11 items-center justify-center rounded-xl md:rounded-2xl shadow-sm"
-                style={{ backgroundColor: item.bg, color: item.color }}
-              >
-                {item.icon}
-              </motion.div>
-            </div>
-          </div>
-        ))}
-      </motion.div>
-    </div>
-  );
+// Helper to apply subtle dynamic curvature to each card
+const getRotation = (index: number, total: number) => {
+  const middle = (total - 1) / 2;
+  const offset = index - middle;
+  return offset * 2.5;
 };
 
 const CommentsSection: React.FC = () => {
   const [count, setCount] = useState(150);
   const target = 6349;
 
+  // Counter animation
   useEffect(() => {
     let startTime: number;
+    count
     const duration = 2500;
     const animate = (timestamp: number) => {
       if (!startTime) startTime = timestamp;
@@ -137,7 +83,7 @@ const CommentsSection: React.FC = () => {
   }, []);
 
   // --- DEVICE REDIRECT LOGIC ---
-  const handleShipNow = () => {
+  const handleDeliverNow = () => {
     const userAgent = navigator.userAgent || navigator.vendor;
 
     if (/android/i.test(userAgent)) {
@@ -145,58 +91,111 @@ const CommentsSection: React.FC = () => {
     } else if (/iPad|iPhone|iPod/.test(userAgent)) {
       window.open(IOS_URL, "_blank");
     } else {
-      // For Desktop, you can either point to your website booking page or just pick one
       window.open("https://pickars.com", "_blank");
     }
   };
 
+  // Duplicate items for continuous seamless looping
+  const loopItems = [
+    ...commentsData,
+    ...commentsData,
+    ...commentsData,
+    ...commentsData,
+  ];
+
   return (
-    <section className="relative overflow-hidden bg-[#fafafa] py-20 md:py-32 font-sans">
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-[radial-gradient(circle_at_center,_rgba(220,38,38,0.05)_0%,_transparent_70%)] pointer-events-none" />
-
-      <div className="relative z-20 px-6 max-w-7xl mx-auto">
-        <div className="text-center mb-12 md:mb-20">
-          <motion.span
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            className="text-red-600 font-black text-[10px] md:text-sm uppercase tracking-[0.3em]"
-          >
-            Wall of Love
-          </motion.span>
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            className="mt-4 text-5xl md:text-8xl font-black leading-[1.1] tracking-tighter text-gray-900"
-          >
-            Dispatched over <br />
-            <span className="bg-gradient-to-r from-red-600 via-orange-500 to-red-600 bg-[length:200%_auto] animate-gradient-x bg-clip-text text-transparent">
-              {count.toLocaleString()}+
-            </span>{" "}
-            packages!
-          </motion.h2>
-        </div>
+    <section className="relative overflow-hidden bg-[#FFF5F5] py-24 md:py-36 font-sans border-y border-red-100/60">
+      {/* SECTION HEADER */}
+      <div className="relative z-20 px-6 max-w-3xl mx-auto text-center mb-16 md:mb-24">
+        <motion.h2
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          className="text-5xl md:text-6xl font-black leading-[1.2] tracking-tight text-gray-900"
+        >
+          Sending, your Packages are{" "}
+          <span className="text-[#FF0000]">Our Priorities</span>
+        </motion.h2>
+        <motion.p
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ delay: 0.1 }}
+          className="mt-6 text-[20px] text-gray-600 leading-relaxed max-w-2xl mx-auto"
+        >
+          From Diobu market goods to Trans-Amadi, we keep packages moving
+          fast, giving your business good wings and going strong across PH!
+        </motion.p>
       </div>
 
-      <div className="relative flex flex-col gap-4 md:gap-6">
-        <div className="pointer-events-none absolute inset-y-0 left-0 z-30 w-12 md:w-40 bg-gradient-to-r from-[#fafafa] to-transparent" />
-        <div className="pointer-events-none absolute inset-y-0 right-0 z-30 w-12 md:w-40 bg-gradient-to-l from-[#fafafa] to-transparent" />
-        <TickerRow items={row1Data} direction="left" />
-        <TickerRow items={row2Data} direction="right" />
+      {/* INFINITE SCROLLING TICKER */}
+      <div className="relative flex overflow-hidden py-8">
+        {/* Faint red gradient edge fades */}
+        <div className="pointer-events-none absolute inset-y-0 left-0 z-30 w-20 md:w-48 bg-gradient-to-r from-[#FFF5F5] via-[#FFF5F5]/80 to-transparent" />
+        <div className="pointer-events-none absolute inset-y-0 right-0 z-30 w-20 md:w-48 bg-gradient-to-l from-[#FFF5F5] via-[#FFF5F5]/80 to-transparent" />
+
+        <motion.div
+          initial={{ x: 0 }}
+          animate={{ x: "-50%" }}
+          transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
+          className="flex gap-6 whitespace-normal px-4 items-center"
+        >
+          {loopItems.map((item, idx) => {
+            const rotationDegree = getRotation(
+              idx % commentsData.length,
+              commentsData.length
+            );
+
+            return (
+              <div
+                key={idx}
+                style={{
+                  transform: `rotate(${rotationDegree}deg)`,
+                }}
+                className="relative flex-shrink-0 w-[360px] md:w-[450px] bg-white rounded-[28px] p-6 md:p-7 border border-red-100 flex items-center gap-5 transition-transform duration-300 hover:scale-105"
+              >
+                {/* Yolat-Style Scalloped Starburst Badge */}
+                <div
+                  className="flex-shrink-0 w-14 h-14 bg-red-100 text-red-600 flex items-center justify-center"
+                  style={{
+                    maskImage:
+                      "radial-gradient(circle 6px at calc(100% - 3px) 50%, #0000 99%, #000 100%)",
+                    WebkitMaskImage:
+                      "conic-gradient(from -45deg at 50% 50%, #000 0 90deg, #0000 0) 0 0/12px 12px repeat",
+                  }}
+                >
+                  <FaQuoteLeft className="text-base text-red-600" />
+                </div>
+
+                {/* Card Content */}
+                <div className="flex flex-col justify-center min-w-0">
+                  <div className="flex items-center gap-2 font-bold text-gray-900 text-[20px]">
+                    <span className="truncate">{item.name}</span>
+                    <span className="inline-block text-[12px] font-extrabold uppercase px-2 py-0.5 rounded-full bg-red-50 text-red-600 border border-red-100/50">
+                      {item.location}
+                    </span>
+                  </div>
+                  <p className="mt-1.5 text-[16px] text-gray-600 font-normal leading-relaxed line-clamp-3">
+                    "{item.text}"
+                  </p>
+                </div>
+              </div>
+            );
+          })}
+        </motion.div>
       </div>
 
-      {/* FOOTER CTA with dynamic redirect */}
-      <div className="mt-12 md:mt-24 text-center px-6 max-w-2xl mx-auto">
-        <p className="text-gray-400 font-bold text-[10px] md:text-sm tracking-widest uppercase mb-8">
-          Trusted by thousands of businesses
+      {/* FOOTER CTA */}
+      <div className="mt-16 md:mt-24 text-center px-6 max-w-2xl mx-auto">
+        <p className="text-gray-400 font-bold text-[10px] md:text-xs tracking-widest uppercase mb-6">
+          Trusted by thousands of Port Harcourt businesses & residents
         </p>
 
         <motion.button
-          onClick={handleShipNow}
-          whileHover={{ scale: 1.05, backgroundColor: "#ef4444" }}
-          whileTap={{ scale: 0.95 }}
-          className="bg-gray-900 text-white px-10 py-5 rounded-full font-black uppercase text-xs md:text-sm tracking-widest shadow-xl transition-colors"
+          onClick={handleDeliverNow}
+          whileHover={{ scale: 1.03 }}
+          whileTap={{ scale: 0.97 }}
+          className="bg-[#ff0000] text-white px-10 py-5 rounded-full font-black  text-[20px] md:text-[24px]  transition-colors"
         >
-          Ship Your First Package Now
+          Send a Package Now
         </motion.button>
       </div>
     </section>

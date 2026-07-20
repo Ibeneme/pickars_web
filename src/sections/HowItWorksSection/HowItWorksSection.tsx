@@ -1,264 +1,307 @@
-import React, { useRef } from "react";
-import { motion, useScroll, useSpring, type Variants } from "framer-motion";
+import React, { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 import {
-  FaMapMarkerAlt,
-  FaMotorcycle,
-  FaBox,
-  FaRoute,
-  FaCheckCircle,
-} from "react-icons/fa";
+  ArrowRight,
+  Package,
+  Navigation,
+  Lock,
+  Hotel,
+  Wine,
+  Crosshair,
+  Building2,
+} from "lucide-react";
 
-const HowItWorksSection: React.FC = () => {
-  const sectionRef = useRef<HTMLDivElement>(null);
+const RealtimeTrackingMapFull: React.FC = () => {
+  // Animated progress value (0% to 100%) for the rider moving strictly along street lines
+  const [progress, setProgress] = useState(0);
 
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start 70%", "end 30%"],
-  });
+  useEffect(() => {
+    // Smooth, continuous loop moving the rider down the street network
+    const interval = setInterval(() => {
+      setProgress((prev) => (prev >= 100 ? 0 : prev + 0.2));
+    }, 30);
 
-  const pathProgress = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 30,
-    restDelta: 0.001,
-  });
+    return () => clearInterval(interval);
+  }, []);
 
-  const containerVariants: Variants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.4 },
-    },
-  };
-
-  const stepVariants: Variants = {
-    hidden: { scale: 0.8, opacity: 0 },
-    visible: {
-      scale: 1,
-      opacity: 1,
-      transition: { type: "spring", stiffness: 100, damping: 20 },
-    },
-  };
-
-  const steps = [
-    {
-      number: "01",
-      icon: <FaMapMarkerAlt className="text-4xl" />,
-      title: "Set Locations",
-      description:
-        "Tap to pin your pickup. We’ve made it as easy as sending a text.",
-      miniMap: (
-        <div className="relative h-72 w-full max-w-lg rounded-[2.5rem] overflow-hidden bg-white border border-gray-100 group">
-          <div className="absolute inset-0 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:20px_20px] opacity-30" />
-
-          <motion.div
-            animate={{
-              scale: [1, 1.1, 1],
-              rotate: [3, -3, 3],
-            }}
-            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute left-[20%] top-[30%] z-20"
-          >
-            <div className="flex h-16 w-16 items-center justify-center rounded-3xl bg-red-600 text-white">
-              <FaMapMarkerAlt size={28} />
-            </div>
-          </motion.div>
-
-          <svg className="absolute inset-0 h-full w-full" viewBox="0 0 400 300">
-            <motion.path
-              d="M 110 120 Q 200 120, 280 200"
-              fill="none"
-              stroke="#ef4444"
-              strokeWidth="3"
-              strokeLinecap="round"
-              strokeDasharray="10 10"
-              initial={{ pathLength: 0 }}
-              whileInView={{ pathLength: 1 }}
-              transition={{ duration: 2, ease: "easeInOut" }}
-            />
-          </svg>
-
-          <motion.div
-            animate={{ scale: [1, 1.2, 1] }}
-            transition={{ duration: 2, repeat: Infinity }}
-            className="absolute right-[20%] bottom-[25%] h-6 w-6 rounded-full bg-green-500 border-[4px] border-green-100"
-          />
-        </div>
-      ),
-      side: "right",
-    },
-    {
-      number: "02",
-      icon: <FaMotorcycle className="text-4xl" />,
-      title: "Instant Match",
-      description:
-        "Our smart engine finds the best rider for your route in the blink of an eye.",
-      miniMap: (
-        <div className="relative h-72 w-full max-w-lg rounded-[2.5rem] overflow-hidden bg-[#121212]">
-          <motion.div
-            animate={{ opacity: [0.1, 0.3, 0.1] }}
-            transition={{ duration: 3, repeat: Infinity }}
-            className="absolute inset-0 bg-[radial-gradient(circle_at_center,#ef4444_0%,transparent_70%)]"
-          />
-
-          <div className="absolute inset-0 flex items-center justify-center">
-            <motion.div
-              animate={{ rotate: 360 }}
-              transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
-              className="relative h-40 w-40 border border-white/10 rounded-full"
-            >
-              <motion.div className="absolute -top-2 left-1/2 h-4 w-4 bg-red-500 rounded-full shadow-[0_0_15px_rgba(239,68,68,0.8)]" />
-            </motion.div>
-            <motion.div
-              animate={{ scale: [0.9, 1.1, 0.9] }}
-              transition={{ duration: 2, repeat: Infinity }}
-              className="absolute h-16 w-16 rounded-full bg-red-600 flex items-center justify-center text-white"
-            >
-              <FaMotorcycle size={28} />
-            </motion.div>
-          </div>
-        </div>
-      ),
-      side: "left",
-    },
-    {
-      number: "03",
-      icon: <FaBox className="text-4xl" />,
-      title: "Secure Pickup",
-      description:
-        "Every item is verified. No guesswork, just pure transparency.",
-      miniMap: (
-        <div className="relative h-72 w-full max-w-lg rounded-[2.5rem] overflow-hidden bg-red-50 flex items-center justify-center">
-          <motion.div
-            animate={{ y: [0, -10, 0] }}
-            transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-            className="h-36 w-36 rounded-[2rem] bg-white flex items-center justify-center relative"
-          >
-            <FaBox className="text-red-600" size={50} />
-            <motion.div
-              initial={{ scale: 0 }}
-              whileInView={{ scale: 1 }}
-              className="absolute -top-4 -right-4 h-12 w-12 bg-green-500 rounded-full flex items-center justify-center text-white border-4 border-red-50"
-            >
-              <FaCheckCircle size={20} />
-            </motion.div>
-          </motion.div>
-        </div>
-      ),
-      side: "right",
-    },
-    {
-      number: "04",
-      icon: <FaRoute className="text-4xl" />,
-      title: "Track & Deliver",
-      description:
-        "Watch your package glide through the city to its destination.",
-      miniMap: (
-        <div className="relative h-72 w-full max-w-lg rounded-[2.5rem] overflow-hidden bg-gray-900">
-          <svg
-            className="absolute inset-0 h-full w-full opacity-20"
-            viewBox="0 0 400 300"
-          >
-            <path d="M0 150 H400 M200 0 V300" stroke="white" strokeWidth="1" />
-          </svg>
-
-          <motion.div
-            style={{ offsetPath: "path('M 50 150 Q 200 50, 350 150')" }}
-            animate={{ offsetDistance: ["0%", "100%"] }}
-            transition={{ duration: 5, repeat: Infinity, ease: "linear" }}
-            className="absolute h-10 w-10 bg-white rounded-full flex items-center justify-center text-red-600"
-          >
-            <FaMotorcycle size={20} />
-          </motion.div>
-
-          <div className="absolute bottom-6 left-1/2 -translate-x-1/2 bg-white/10 backdrop-blur-md px-6 py-2 rounded-full border border-white/20">
-            <span className="text-white text-xs font-bold tracking-widest uppercase">
-              Live Tracking
-            </span>
-          </div>
-        </div>
-      ),
-      side: "left",
-    },
-  ];
+  // SVG Path following exact map street turns
+  const streetRoutePath =
+    "M 160 700 L 160 540 Q 160 500 200 500 L 480 500 Q 520 500 520 460 L 520 260 Q 520 220 560 220 L 840 220";
 
   return (
-    <section
-      ref={sectionRef}
-      className="relative bg-white py-24 md:py-40 font-['Lufga'] overflow-hidden"
-    >
-      <div className="max-w-6xl mx-auto px-6">
-        <div className="text-center mb-32">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            className="inline-block px-4 py-1.5 rounded-full bg-red-50 text-red-600 text-[10px] font-black uppercase tracking-[0.2em] mb-6"
-          >
-            Simple Steps
-          </motion.div>
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            className="text-5xl md:text-7xl font-black text-[#121212] tracking-tighter"
-          >
-            How It <span className="text-red-600">Works.</span>
-          </motion.h2>
-        </div>
+    <div className="relative w-screen h-[60vh] md:h-screen overflow-hidden bg-[#ffffff] font-sans select-none border-b border-gray-100 md:border-none">
+      {/* 1. CLEAN WHITE MAP WITH FAINT BLUE RIVERS & FLAT STREET NETWORK */}
+      <svg
+        className="absolute inset-0 w-full h-full object-cover"
+        viewBox="0 0 1000 800"
+        preserveAspectRatio="xMidYMid slice"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        {/* Base Canvas */}
+        <rect width="1000" height="800" fill="#ffffff" />
 
-        {/* Sweet vertical line */}
-        <div className="absolute left-1/2 top-[400px] bottom-40 w-[1px] bg-gray-100 -translate-x-1/2 hidden lg:block">
-          <motion.div
-            style={{ scaleY: pathProgress, originY: 0 }}
-            className="w-full h-full bg-red-400"
+        {/* --- FAINT BLUE WATERWAYS & RIVERS (LAYERED UNDER STREETS) --- */}
+        <g strokeLinecap="round" strokeLinejoin="round">
+          {/* Main Meandering River Channel */}
+          <path
+            d="M -50 300 Q 150 280 280 360 T 550 480 T 800 450 T 1050 520"
+            stroke="#e0f2fe"
+            strokeWidth="32"
+            fill="none"
           />
+          {/* Inner River Core Accent */}
+          <path
+            d="M -50 300 Q 150 280 280 360 T 550 480 T 800 450 T 1050 520"
+            stroke="#bae6fd"
+            strokeWidth="12"
+            fill="none"
+            opacity="0.6"
+          />
+
+          {/* Secondary Feeder Creek Branch */}
+          <path
+            d="M 280 360 Q 220 200 180 50"
+            stroke="#e0f2fe"
+            strokeWidth="18"
+            fill="none"
+          />
+          <path
+            d="M 280 360 Q 220 200 180 50"
+            stroke="#bae6fd"
+            strokeWidth="6"
+            fill="none"
+            opacity="0.6"
+          />
+
+          {/* Small Waterfront Lagoon Basin */}
+          <path
+            d="M 780 450 Q 860 380 920 420 Q 960 480 880 500 Z"
+            fill="#e0f2fe"
+            opacity="0.8"
+          />
+        </g>
+
+        {/* Minimal Parks / Greenery accents */}
+        <rect x="80" y="80" width="180" height="90" rx="12" fill="#f8faf6" />
+        <rect x="640" y="600" width="220" height="110" rx="12" fill="#f8faf6" />
+
+        {/* --- ROAD NETWORK LAYER (#f4f4f4 FLAT CANVAS STREETS) --- */}
+        <g stroke="#f4f4f4" strokeLinecap="round">
+          {/* Minor Local Residential Grid Lines */}
+          <g strokeWidth="8">
+            <line x1="80" y1="0" x2="80" y2="800" />
+            <line x1="240" y1="0" x2="240" y2="800" />
+            <line x1="320" y1="0" x2="320" y2="800" />
+            <line x1="400" y1="0" x2="400" y2="800" />
+            <line x1="600" y1="0" x2="600" y2="800" />
+            <line x1="680" y1="0" x2="680" y2="800" />
+            <line x1="760" y1="0" x2="760" y2="800" />
+            <line x1="920" y1="0" x2="920" y2="800" />
+
+            <line x1="0" y1="100" x2="1000" y2="100" />
+            <line x1="0" y1="180" x2="1000" y2="180" />
+            <line x1="0" y1="340" x2="1000" y2="340" />
+            <line x1="0" y1="420" x2="1000" y2="420" />
+            <line x1="0" y1="580" x2="1000" y2="580" />
+            <line x1="0" y1="660" x2="1000" y2="660" />
+          </g>
+
+          {/* Primary Avenue Corridors */}
+          <g strokeWidth="16">
+            <line x1="160" y1="0" x2="160" y2="800" />
+            <line x1="480" y1="0" x2="480" y2="800" />
+            <line x1="520" y1="0" x2="520" y2="800" />
+            <line x1="840" y1="0" x2="840" y2="800" />
+
+            <line x1="0" y1="220" x2="1000" y2="220" />
+            <line x1="0" y1="260" x2="1000" y2="260" />
+            <line x1="0" y1="500" x2="1000" y2="500" />
+          </g>
+        </g>
+
+        {/* --- ACTIVE ROUTE & MOVING RIDER --- */}
+        <path
+          d={streetRoutePath}
+          stroke="#ffe5e5"
+          strokeWidth="14"
+          fill="none"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <path
+          d={streetRoutePath}
+          stroke="#FF0000"
+          strokeWidth="6"
+          fill="none"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+
+        {/* START POINT MARKER */}
+        <g transform="translate(160, 700)">
+          <circle cx="0" cy="0" r="10" fill="#FF0000" opacity="0.2" />
+          <circle
+            cx="0"
+            cy="0"
+            r="5"
+            fill="#FF0000"
+            stroke="#FFFFFF"
+            strokeWidth="2"
+          />
+        </g>
+
+        {/* END POINT MARKER */}
+        <g transform="translate(840, 220)">
+          <circle cx="0" cy="0" r="12" fill="#22c55e" opacity="0.2" />
+          <circle
+            cx="0"
+            cy="0"
+            r="6"
+            fill="#22c55e"
+            stroke="#FFFFFF"
+            strokeWidth="2.5"
+          />
+        </g>
+
+        {/* RIDER MARKER */}
+        <g
+          style={{
+            offsetPath: `path('${streetRoutePath}')`,
+            offsetDistance: `${progress}%`,
+            offsetRotate: "auto",
+          }}
+        >
+          <rect
+            x="-14"
+            y="-14"
+            width="28"
+            height="28"
+            rx="14"
+            fill="#FF0000"
+            stroke="#FFFFFF"
+            strokeWidth="2"
+          />
+        </g>
+      </svg>
+
+      {/* 2. MAP POI MARKERS & OVERLAYS */}
+      <div className="absolute inset-0 pointer-events-none">
+        {/* Stinson Hotel */}
+        <div className="absolute top-[23%] right-[10%] flex items-center gap-2 bg-white px-3 py-1.5 rounded-xl text-xs font-bold text-gray-800 border border-gray-200">
+          <span className="p-1 bg-pink-500 text-white rounded-lg">
+            <Hotel size={12} />
+          </span>
+          <span>Stinson Hotel</span>
         </div>
 
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          className="space-y-32 md:space-y-40"
-        >
-          {steps.map((step, idx) => (
-            <motion.div
-              key={idx}
-              variants={stepVariants}
-              className={`flex flex-col lg:flex-row items-center gap-16 ${
-                step.side === "left" ? "lg:flex-row-reverse" : ""
-              }`}
-            >
-              <div className="flex-1 w-full flex justify-center">
-                {step.miniMap}
-              </div>
+        {/* Sanclin Hotel */}
+        <div className="absolute top-[60%] left-[18%] flex items-center gap-2 bg-white px-3 py-1.5 rounded-xl text-xs font-bold text-gray-800 border border-gray-200">
+          <span className="p-1 bg-pink-500 text-white rounded-lg">
+            <Hotel size={12} />
+          </span>
+          <span>Sanclin Hotel</span>
+        </div>
 
-              <div className="flex-1 text-center lg:text-left">
-                <motion.span
-                  whileInView={{ rotate: [0, 15, 0] }}
-                  className="inline-flex items-center justify-center h-14 w-14 rounded-[1.2rem] bg-gray-50 text-[#121212] mb-8 text-xl font-black"
-                >
-                  {step.number}
-                </motion.span>
+        {/* NIA Lounge */}
+        <div className="absolute top-[30%] right-[42%] flex items-center gap-2 bg-white px-3 py-1.5 rounded-xl text-xs font-bold text-gray-800 border border-gray-200">
+          <span className="p-1 bg-amber-500 text-white rounded-lg">
+            <Wine size={12} />
+          </span>
+          <span>NIA LOUNGE</span>
+        </div>
 
-                <h3 className="text-4xl md:text-5xl font-black text-[#121212] mb-4 tracking-tight">
-                  {step.title}
-                </h3>
+        {/* Trans-Amadi Commercial Hub */}
+        <div className="absolute top-[12%] left-[45%] flex items-center gap-2 bg-white px-3 py-1.5 rounded-xl text-xs font-bold text-gray-800 border border-gray-200">
+          <span className="p-1 bg-blue-600 text-white rounded-lg">
+            <Building2 size={12} />
+          </span>
+          <span>Trans-Amadi Plaza</span>
+        </div>
 
-                <p className="text-lg text-gray-500 leading-relaxed max-w-sm mx-auto lg:mx-0">
-                  {step.description}
-                </p>
-              </div>
-            </motion.div>
-          ))}
-        </motion.div>
+        {/* Street Typography */}
+        <span className="absolute bottom-[20%] left-[10%] text-[10px] font-bold tracking-widest text-gray-400 uppercase">
+          Elioparanwo Road
+        </span>
+        <span className="absolute top-[36%] left-[34%] text-[10px] font-bold tracking-widest text-gray-400 uppercase">
+          ADC Express Road
+        </span>
+        <span className="absolute top-[18%] right-[28%] text-[10px] font-bold tracking-widest text-gray-400 uppercase">
+          Aba - Port Harcourt Expressway
+        </span>
       </div>
 
-      {/* Sweet background pulses */}
-      <div className="absolute top-0 left-0 w-full h-full pointer-events-none -z-10">
-        <div className="absolute top-1/4 -left-20 w-96 h-96 bg-red-50 rounded-full blur-[100px] opacity-50" />
-        <div className="absolute bottom-1/4 -right-20 w-96 h-96 bg-orange-50 rounded-full blur-[100px] opacity-50" />
+      {/* 3. RIDERS NEARBY FLOATING BADGE */}
+      <div className="absolute top-6 left-4 md:left-10 z-20 flex items-center gap-3">
+        <div className="flex -space-x-2">
+          <div className="w-8 h-8 rounded-full bg-red-600 text-white font-black text-xs flex items-center justify-center border-2 border-white">
+            W
+          </div>
+          <div className="w-8 h-8 rounded-full bg-red-600 text-white font-black text-xs flex items-center justify-center border-2 border-white">
+            A
+          </div>
+          <div className="w-8 h-8 rounded-full bg-red-600 text-white font-black text-xs flex items-center justify-center border-2 border-white">
+            J
+          </div>
+        </div>
+        <div className="px-4 py-2 bg-white rounded-full text-xs md:text-sm font-black text-gray-900 border border-gray-200">
+          3 riders nearby on standby
+        </div>
       </div>
-    </section>
+
+      {/* 4. RE-CENTER LOCATION BUTTON */}
+      <button className="absolute bottom-6 md:bottom-28 right-6 z-20 p-3.5 bg-white text-red-600 rounded-full border border-gray-200 active:scale-95 transition-transform">
+        <Crosshair size={20} />
+      </button>
+
+      {/* 5. BOTTOM ACTION PANEL (DESKTOP/TABLET ONLY) */}
+      <div className="hidden md:block absolute bottom-0 inset-x-0 z-30 max-w-lg mx-auto p-4">
+        <div className="bg-white rounded-[32px] p-6 border border-gray-200">
+          <div className="w-10 h-1 bg-gray-200 rounded-full mx-auto mb-4" />
+
+          <div className="mb-5">
+            <h3 className="text-xl font-black text-gray-900 tracking-tight">
+              Find a Dispatch Rider
+            </h3>
+            <p className="text-xs font-medium text-gray-500 mt-0.5">
+              Connect with verified riders nearby for instant pickup
+            </p>
+          </div>
+
+          <motion.button
+            whileTap={{ scale: 0.98 }}
+            className="w-full bg-black text-white p-3 pl-5 rounded-full flex items-center justify-between hover:bg-zinc-900 transition-colors"
+          >
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-full bg-red-600 flex items-center justify-center text-white">
+                <Navigation size={18} className="fill-current rotate-45" />
+              </div>
+              <span className="font-bold text-sm tracking-wide">
+                Get a Dispatch Rider
+              </span>
+            </div>
+            <div className="w-10 h-10 rounded-full bg-white text-black flex items-center justify-center">
+              <ArrowRight size={18} />
+            </div>
+          </motion.button>
+
+          <div className="w-full bg-gray-50 p-3 pl-5 rounded-full flex items-center justify-between border border-gray-200 mt-3">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-full bg-gray-200 text-gray-500 flex items-center justify-center">
+                <Package size={18} />
+              </div>
+              <span className="font-bold text-sm text-gray-500">
+                Track Your Package
+              </span>
+            </div>
+            <div className="px-3 py-1.5 bg-gray-200/70 rounded-full text-[10px] font-black tracking-wider text-gray-500 flex items-center gap-1">
+              <Lock size={10} /> COMING SOON
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };
 
-export default HowItWorksSection;
+export default RealtimeTrackingMapFull;
