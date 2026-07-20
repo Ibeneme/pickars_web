@@ -114,24 +114,23 @@ const App: React.FC = () => {
       {!isAdminRoute && <WhatsAppButton />}
       {!isAdminRoute && <Footer />}
 
-      {!isAdminRoute ||
-        (navRoute && (
-          <div
-            style={{
-              position: "fixed",
-              bottom: 0,
-              left: 0,
-              right: 0,
-              zIndex: 9999,
-              background: "transparent",
-              pointerEvents: "none",
-            }}
-          >
-            <div style={{ pointerEvents: "auto" }}>
-              <Launcher />
-            </div>
+      {!isAdminRoute && (
+        <div
+          style={{
+            position: "fixed",
+            bottom: 0,
+            left: 0,
+            right: 0,
+            zIndex: 9999,
+            background: "transparent",
+            pointerEvents: "none",
+          }}
+        >
+          <div style={{ pointerEvents: "auto" }}>
+            <Launcher />
           </div>
-        ))}
+        </div>
+      )}
     </div>
   );
 };

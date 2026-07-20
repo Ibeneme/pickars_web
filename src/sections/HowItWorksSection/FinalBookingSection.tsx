@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, useScroll, useTransform } from "framer-motion";
 import {
   FaTruckFast,
   FaClock,
@@ -7,6 +7,7 @@ import {
   // FaStar,
   // FaUserCheck,
 } from "react-icons/fa6";
+import phoneImage from "../../assets/images/grup.png";
 
 interface StatItem {
   numericValue: number;
@@ -19,15 +20,15 @@ interface StatItem {
 
 const statsData: StatItem[] = [
   {
-    numericValue: 1000,
-    suffix: "+",
+    numericValue: 50,
+    suffix: "k+",
     label: "Deliveries",
     description: "Successfully landed across Rivers State.",
     icon: <FaTruckFast />,
   },
   {
-    numericValue: 45,
-    suffix: "mins",
+    numericValue: 12,
+    suffix: "m",
     label: "Pickup",
     description: "Our average time to reach your doorstep.",
     icon: <FaClock />,
@@ -57,7 +58,6 @@ const statsData: StatItem[] = [
 ];
 
 // Animated Number Component that counts up when visible
-// Animated Number Component that counts up when visible and formats with commas
 const AnimatedCounter = ({
   target,
   suffix = "",
@@ -92,15 +92,9 @@ const AnimatedCounter = ({
     requestAnimationFrame(animate);
   }, [isInView, target]);
 
-  // Format the animated number with commas and set decimal precision
-  const formattedCount = Number(count.toFixed(decimals)).toLocaleString('en-US', {
-    minimumFractionDigits: decimals,
-    maximumFractionDigits: decimals,
-  });
-
   return (
     <span>
-      {formattedCount}
+      {count.toFixed(decimals)}
       {suffix}
     </span>
   );
@@ -109,6 +103,8 @@ const AnimatedCounter = ({
 const StatsSection: React.FC = () => {
   const ref = React.useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const { scrollYProgress } = useScroll();
+  const backgroundTextX = useTransform(scrollYProgress, [0.8, 1], [100, -100]);
 
   // Separate stats for the 3-top, 2-bottom web layout
   const topStats = statsData.slice(0, 3);
@@ -312,6 +308,82 @@ const StatsSection: React.FC = () => {
           </div>
         </div>
       </div>
+
+      <section className="relative mt-16 overflow-hidden bg-[#000] font-['Lufga'] max-w-7xl mx-auto rounded-[0rem] md:rounded-[3rem]  py-16 md:py-24 px-6 md:px-12">
+        {/* Pattern Backgrounds */}
+        <div
+          className="absolute inset-0 opacity-[0.07] pointer-events-none"
+          style={{
+            backgroundImage: `linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px)`,
+            backgroundSize: "40px 40px",
+          }}
+        />
+
+        <div className="relative z-10 mx-auto max-w-7xl">
+          <div className="grid lg:grid-cols-2 gap-12 md:gap-20 items-center">
+            {/* LEFT SIDE - Text Content */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-white text-left"
+            >
+              <h2 className="text-6xl md:text-8xl font-black leading-[0.9] md:leading-[0.85] tracking-tighter">
+                Get Your <br />
+                <span className="text-white/30">Packages</span> <br />
+                Moving.
+              </h2>
+
+              <div className="mt-8 md:mt-12 space-y-6">
+                <p className="text-xl md:text-2xl font-bold max-w-md">
+                  Experience the fastest dispatch network in Port Harcourt.
+                </p>
+
+                <div className="flex items-center justify-start gap-4">
+                  <div className="hidden md:block h-[2px] w-12 bg-white" />
+                  <p className="text-[10px] md:text-xs font-black uppercase tracking-[0.3em] text-white/70">
+                    Web booking coming soon
+                  </p>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* RIGHT SIDE - Request Card */}
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="relative flex items-center justify-center lg:justify-end w-full"
+            >
+              <div className="relative w-full max-w-[320px] group perspective-[1000px]">
+                {/* CSS Mockup Frame for the Image */}
+                <motion.div
+                  whileHover={{ rotateY: -5, rotateX: 5, scale: 1.02 }}
+                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                  className="relative z-10 overflow-visible"
+                >
+                  {/* The Actual Image */}
+                  <img
+                    src={phoneImage}
+                    alt="Dispatch App Preview"
+                    className="w-full h-auto object-cover rounded-[2rem] bg-black"
+                  />
+                </motion.div>
+
+
+              </div>
+            </motion.div>
+          </div>
+        </div>
+
+        {/* BACKGROUND TEXT - Responsive sizing */}
+        <motion.div
+          style={{ x: backgroundTextX }}
+          className="absolute -bottom-10 md:-bottom-20 left-0 text-[10rem] md:text-[20rem] font-black text-white/[0.11] whitespace-nowrap select-none pointer-events-none"
+        >
+         PICKARS
+        </motion.div>
+      </section>
     </section>
   );
 };
