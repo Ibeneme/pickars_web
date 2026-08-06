@@ -46,7 +46,7 @@ const Navbar = () => {
               <img
                 src={navImage}
                 alt="Pickars Logo"
-                className="h-8 w-auto transition-transform duration-500 group-hover:rotate-[360deg]"
+                className="h-8 w-auto transition-transform duration-500 group-hover:rotate-[360deg] rounded-full"
               />
             </div>
             <h3
