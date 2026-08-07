@@ -1,13 +1,13 @@
-
 import { motion, useScroll, useSpring } from "framer-motion";
 import { Helmet } from "react-helmet-async"; // Imported Helmet
 import SlidingPage from "../../components/SlidingPgae/SlidingPage";
-import CommentsSection from "../../sections/CommentsSection/CommentsSection";
 //import CustomerRiderSection from "../../sections/CustomerRiderSection/CustomerRiderSection";
 import HeroSection from "../../sections/Hero/HeroSection";
 //import HowItWorksSection from "../../sections/HowItWorksSection/HowItWorksSection";
 import FinalBookingSection from "../../sections/HowItWorksSection/FinalBookingSection";
-import RealtimeTrackingMapFull from "../../sections/HowItWorksSection/HowItWorksSection";
+import PickarsPricingStackingScrollSection from "../../components/templates/stack";
+import PickarsTestimonialsSection from "../../sections/CommentsSection/CommentsSection";
+import PickarsFeaturesSection from "../../sections/HeroDelivery/MidImage";
 //import MidImage from "../../sections/HeroDelivery/MidImage";
 
 const Home = () => {
@@ -52,26 +52,10 @@ const Home = () => {
         <section className="relative z-10">
           <SlidingPage />
         </section>
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 1 }}
-          viewport={{ margin: "-100px" }}
-        >
-          <FinalBookingSection />
-        </motion.div>
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          viewport={{ once: true, margin: "-100px" }}
-        >
-          <RealtimeTrackingMapFull />
-        </motion.div>
-
-        {/* <HowItWorksSection /> */}
-        <CommentsSection />
-        {/* <MidImage /> */}
+        <FinalBookingSection />
+        <PickarsPricingStackingScrollSection />
+        <PickarsTestimonialsSection />
+        <PickarsFeaturesSection />
       </main>
     </div>
   );

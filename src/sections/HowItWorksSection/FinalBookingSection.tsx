@@ -1,13 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { motion, useInView, useScroll, useTransform } from "framer-motion";
-import {
-  FaTruckFast,
-  FaClock,
-  FaShieldHalved,
-  // FaStar,
-  // FaUserCheck,
-} from "react-icons/fa6";
-import phoneImage from "../../assets/images/grup.png";
+import { motion, useInView } from "framer-motion";
+import { FaTruckFast, FaClock, FaShieldHalved } from "react-icons/fa6";
 
 interface StatItem {
   numericValue: number;
@@ -23,21 +16,21 @@ const statsData: StatItem[] = [
     numericValue: 50,
     suffix: "k+",
     label: "Deliveries",
-    description: "Successfully landed across Rivers State.",
+    description: "Completed across Port Harcourt & Rivers State.",
     icon: <FaTruckFast />,
   },
   {
     numericValue: 12,
-    suffix: "m",
-    label: "Pickup",
-    description: "Our average time to reach your doorstep.",
+    suffix: " min",
+    label: "Avg Pickup",
+    description: "Average time for a rider to reach your door.",
     icon: <FaClock />,
   },
   {
     numericValue: 100,
     suffix: "%",
-    label: "Security",
-    description: "Military-grade handling for every item.",
+    label: "Safe Hands",
+    description: "Every package handled with care and security.",
     icon: <FaShieldHalved />,
   },
 ];
@@ -88,8 +81,6 @@ const AnimatedCounter = ({
 const StatsSection: React.FC = () => {
   const ref = React.useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
-  const { scrollYProgress } = useScroll();
-  const backgroundTextX = useTransform(scrollYProgress, [0.8, 1], [100, -100]);
 
   return (
     <section
@@ -113,7 +104,7 @@ const StatsSection: React.FC = () => {
       <div className="relative z-10 px-4 sm:px-6 max-w-7xl mx-auto">
         {/* SECTION HEADER */}
         <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16 md:mb-24 flex flex-col items-center">
-          {/* RESTYLED TRACK RECORD BADGE */}
+          {/* TRACK RECORD BADGE */}
           <motion.div
             initial={{ opacity: 0, scale: 0.8, rotate: -5 }}
             animate={isInView ? { opacity: 1, scale: 1, rotate: -2 } : {}}
@@ -136,8 +127,8 @@ const StatsSection: React.FC = () => {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="text-3xl sm:text-4xl md:text-6xl font-black leading-[1.15] tracking-tight text-gray-900"
           >
-            Built for speed, trusted for{" "}
-            <span className="text-[#FF0000]">reliability</span>
+            Built for speed.{" "}
+            <span className="text-[#FF0000]">Trusted every day.</span>
           </motion.h2>
 
           <motion.p
@@ -146,13 +137,12 @@ const StatsSection: React.FC = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="mt-4 sm:mt-5 text-sm sm:text-base text-gray-600 font-medium leading-relaxed max-w-2xl px-2 sm:px-0"
           >
-            From Diobu market goods to Trans-Amadi gear, we keep packages moving
-            fast—giving your local business good wings and going strong across
-            PH!
+            From Diobu to Trans-Amadi, we move packages fast and safely across
+            Port Harcourt.
           </motion.p>
         </div>
 
-        {/* STATS LAYOUT: Fully Responsive Flex/Grid System */}
+        {/* STATS GRID */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6 w-full">
           {statsData.map((stat, idx) => (
             <motion.div
@@ -173,7 +163,7 @@ const StatsSection: React.FC = () => {
             >
               <div>
                 <div className="flex items-center justify-between mb-6 sm:mb-8">
-                  {/* Scalloped Starburst Badge */}
+                  {/* Icon Badge */}
                   <motion.div
                     whileHover={{ rotate: 15, scale: 1.1 }}
                     className="w-12 h-12 sm:w-14 sm:h-14 bg-red-100 text-red-600 flex items-center justify-center text-lg sm:text-xl transition-transform duration-300 shrink-0"
@@ -219,75 +209,6 @@ const StatsSection: React.FC = () => {
           ))}
         </div>
       </div>
-
-      <section className="relative mt-12 sm:mt-16 overflow-hidden bg-[#000] font-sans max-w-7xl mx-auto rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] py-12 sm:py-16 md:py-24 px-5 sm:px-8 md:px-12 mx-4 sm:mx-6 lg:mx-auto">
-        {/* Pattern Backgrounds */}
-        <div
-          className="absolute inset-0 opacity-[0.07] pointer-events-none"
-          style={{
-            backgroundImage: `linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px)`,
-            backgroundSize: "40px 40px",
-          }}
-        />
-
-        <div className="relative z-10 mx-auto max-w-7xl">
-          <div className="grid lg:grid-cols-2 gap-10 md:gap-20 items-center">
-            {/* LEFT SIDE - Text Content */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="text-white text-left"
-            >
-              <h2 className="text-4xl sm:text-6xl md:text-8xl font-black leading-[0.95] md:leading-[0.85] tracking-tighter">
-                {/* Get Your Packages{" "}
-                <span className="text-white/30">Packages</span>{" "} */}
-              Get Your Packages Dispatched.
-              </h2>
-
-              <div className="mt-2 sm:mt-8 md:mt-12 space-y-4 sm:space-y-6">
-                <p className="text-lg sm:text-xl md:text-2xl  max-w-md text-[#ffffff85]">
-                  Experience the fastest dispatch network in Port Harcourt.
-                </p>
-
-
-              </div>
-            </motion.div>
-
-            {/* RIGHT SIDE - Request Card */}
-            <motion.div
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="relative flex items-center justify-center lg:justify-end w-full"
-            >
-              <div className="relative w-full max-w-[280px] sm:max-w-[320px] group perspective-[1000px]">
-                {/* CSS Mockup Frame for the Image */}
-                <motion.div
-                  whileHover={{ rotateY: -5, rotateX: 5, scale: 1.02 }}
-                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                  className="relative z-10 overflow-visible"
-                >
-                  {/* The Actual Image */}
-                  <img
-                    src={phoneImage}
-                    alt="Dispatch App Preview"
-                    className="w-full h-auto object-cover rounded-[1.5rem] sm:rounded-[2rem] bg-black shadow-2xl"
-                  />
-                </motion.div>
-              </div>
-            </motion.div>
-          </div>
-        </div>
-
-        {/* BACKGROUND TEXT - Responsive sizing */}
-        <motion.div
-          style={{ x: backgroundTextX }}
-          className="absolute -bottom-6 sm:-bottom-10 md:-bottom-20 left-0 text-[6rem] sm:text-[10rem] md:text-[20rem] font-black text-white/[0.08] sm:text-white/[0.11] whitespace-nowrap select-none pointer-events-none"
-        >
-          PICKARS
-        </motion.div>
-      </section>
     </section>
   );
 };

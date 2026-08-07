@@ -74,12 +74,9 @@ const QualitiesSection: React.FC = () => {
   const loopItems = [...qualitiesData, ...qualitiesData, ...qualitiesData];
 
   return (
-    <section className="relative overflow-hidden bg-[#FFF5F5] font-sans border-b border-red-100/60">
+    <section className="relative overflow-hidden bg-[#FFF5F5]">
       {/* CONTINUOUS MARQUEE SLIDER */}
       <div className="relative flex overflow-hidden py-4">
-        {/* Soft Fade Edges for Smooth In/Out Effect */}
-        <div className="pointer-events-none absolute inset-y-0 left-0 z-30 w-16 md:w-48 bg-gradient-to-r from-white via-white/80 to-transparent" />
-        <div className="pointer-events-none absolute inset-y-0 right-0 z-30 w-16 md:w-48 bg-gradient-to-l from-white via-white/80 to-transparent" />
 
         <motion.div
           initial={{ x: 0 }}

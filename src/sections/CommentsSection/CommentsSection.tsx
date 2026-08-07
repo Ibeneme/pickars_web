@@ -1,208 +1,367 @@
-import React, { useEffect, useState } from "react";
-import { motion } from "framer-motion";
-import { FaQuoteLeft } from "react-icons/fa6";
+import React, { useEffect, useRef, useState } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { motion, AnimatePresence } from "framer-motion";
 
-// Import your global store constants
-// Updated import path
-import { ANDROID_URL, IOS_URL } from "../../components/Launcher/Laucher";
+gsap.registerPlugin(ScrollTrigger);
 
-// --- Types & Data ---
-interface Comment {
-  name: string;
+interface Testimonial {
+  id: number;
+  quote: string;
+  author: string;
   location: string;
-  text: string;
+  initials: string;
 }
 
-const commentsData: Comment[] = [
+const testimonials: Testimonial[] = [
   {
-    name: "Tamuno S.", // Ijaw
+    id: 1,
+    quote:
+      "Fastest delivery service in Port Harcourt! My package was delivered to Borikiri in under an hour.",
+    author: "Tamuno S.",
     location: "Borikiri",
-    text: "Fastest delivery service in Port Harcourt! My package was delivered to Borikiri in under an hour.",
+    initials: "TS",
   },
   {
-    name: "Nneka O.", // Igbo
+    id: 2,
+    quote:
+      "The real-time tracking is a game changer for my online boutique at Garrison market.",
+    author: "Nneka O.",
     location: "Garrison",
-    text: "The real-time tracking is a game changer for my online boutique at Garrison market.",
+    initials: "NO",
   },
   {
-    name: "Baridule K.", // Ogoni
+    id: 3,
+    quote:
+      "Affordable door-to-door delivery all the way to Eleme. Very respectful riders!",
+    author: "Baridule K.",
     location: "Eleme",
-    text: "Affordable door-to-door delivery all the way to Eleme. Very respectful riders!",
+    initials: "BK",
   },
   {
-    name: "Musa A.", // Hausa
+    id: 4,
+    quote:
+      "Reliable and honest. Pickars helps me send stock across PH without any stress.",
+    author: "Musa A.",
     location: "Oil Mill",
-    text: "Reliable and honest. Pickars helps me send stock across PH without any stress.",
+    initials: "MA",
   },
   {
-    name: "Tariere P.", // Ijaw
+    id: 5,
+    quote:
+      "I love how easy it is to book a bike. Makes sending urgent documents so effortless.",
+    author: "Tariere P.",
     location: "GRA Phase 2",
-    text: "I love how easy it is to book a bike. Makes sending urgent documents so effortless.",
+    initials: "TP",
   },
   {
-    name: "Chidubem E.", // Igbo
+    id: 6,
+    quote:
+      "Safe and dependable. I never worry about fragile items getting damaged when dispatched.",
+    author: "Chidubem E.",
     location: "Ada George",
-    text: "Safe and dependable. I never worry about fragile items getting damaged when dispatched.",
+    initials: "CE",
   },
   {
-    name: "Sira M.", // Ogoni
+    id: 7,
+    quote:
+      "Pickars respects delivery schedules better than any other local dispatch service in PH.",
+    author: "Sira M.",
     location: "Trans-Amadi",
-    text: "Pickars respects delivery schedules better than any other local dispatch service in PH.",
+    initials: "SM",
   },
   {
-    name: "Ibrahim S.", // Hausa
+    id: 8,
+    quote:
+      "Great rates for small business owners. Highly recommended to deliver daily packages.",
+    author: "Ibrahim S.",
     location: "Mile 1, Diobu",
-    text: "Great rates for small business owners. Highly recommended to deliver daily packages.",
+    initials: "IS",
   },
 ];
 
-// Helper to apply subtle dynamic curvature to each card
-const getRotation = (index: number, total: number) => {
-  const middle = (total - 1) / 2;
-  const offset = index - middle;
-  return offset * 2.5;
-};
+const AUTO_ADVANCE_SECONDS = 10;
+const CIRCLE_CIRCUMFERENCE = 131.9;
 
-const CommentsSection: React.FC = () => {
-  const [count, setCount] = useState(150);
-  const target = 6349;
+export default function PickarsTestimonialsSection(): React.JSX.Element {
+  const sectionRef = useRef<HTMLElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const quoteMarkRef = useRef<HTMLSpanElement>(null);
+  const progressCircleRef = useRef<SVGCircleElement>(null);
+  const prevBtnRef = useRef<HTMLButtonElement>(null);
+  const nextBtnRef = useRef<HTMLButtonElement>(null);
+  const progressTweenRef = useRef<gsap.core.Tween | null>(null);
 
-  // Counter animation
+  // Default to index 2 which corresponds to Baridule K. from Eleme (BK)
+  const [currentIndex, setCurrentIndex] = useState(2);
+
   useEffect(() => {
-    let startTime: number;
-    count;
-    const duration = 2500;
-    const animate = (timestamp: number) => {
-      if (!startTime) startTime = timestamp;
-      const progress = Math.min((timestamp - startTime) / duration, 1);
-      const easedProgress = 1 - Math.pow(1 - progress, 3);
-      setCount(Math.floor(easedProgress * (target - 150) + 150));
-      if (progress < 1) requestAnimationFrame(animate);
+    const ctx = gsap.context(() => {
+      gsap.fromTo(
+        containerRef.current,
+        { y: 80, opacity: 0, scale: 0.96 },
+        {
+          y: 0,
+          opacity: 1,
+          scale: 1,
+          duration: 1.2,
+          ease: "power4.out",
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 75%",
+            toggleActions: "play none none reverse",
+          },
+        }
+      );
+
+      gsap.fromTo(
+        quoteMarkRef.current,
+        { opacity: 0, scale: 0.85 },
+        {
+          opacity: 1,
+          scale: 1,
+          duration: 1,
+          delay: 0.3,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 75%",
+            toggleActions: "play none none reverse",
+          },
+        }
+      );
+
+      gsap.to(quoteMarkRef.current, {
+        y: -30,
+        ease: "none",
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top bottom",
+          end: "bottom top",
+          scrub: 1.2,
+        },
+      });
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
+
+  useEffect(() => {
+    progressTweenRef.current?.kill();
+    if (!progressCircleRef.current) return;
+
+    const state = { value: 0 };
+    gsap.set(progressCircleRef.current, {
+      strokeDashoffset: CIRCLE_CIRCUMFERENCE,
+    });
+
+    progressTweenRef.current = gsap.to(state, {
+      value: 1,
+      duration: AUTO_ADVANCE_SECONDS,
+      ease: "none",
+      onUpdate: () => {
+        if (progressCircleRef.current) {
+          progressCircleRef.current.style.strokeDashoffset = String(
+            CIRCLE_CIRCUMFERENCE - CIRCLE_CIRCUMFERENCE * state.value
+          );
+        }
+      },
+      onComplete: () => {
+        setCurrentIndex((prev) => (prev + 1) % testimonials.length);
+      },
+    });
+
+    return () => {
+      progressTweenRef.current?.kill();
     };
-    requestAnimationFrame(animate);
-  }, [count, target]);
+  }, [currentIndex]);
 
-  // --- DEVICE REDIRECT LOGIC ---
-  const handleDeliverNow = () => {
-    const userAgent = navigator.userAgent || navigator.vendor;
+  const pauseAutoAdvance = () => progressTweenRef.current?.pause();
+  const resumeAutoAdvance = () => progressTweenRef.current?.resume();
 
-    if (/android/i.test(userAgent)) {
-      window.open(ANDROID_URL, "_blank");
-    } else if (/iPad|iPhone|iPod/.test(userAgent)) {
-      window.open(IOS_URL, "_blank");
-    } else {
-      window.open("https://pickars.com", "_blank");
-    }
+  const handleNext = () => {
+    setCurrentIndex((prev) => (prev + 1) % testimonials.length);
   };
 
-  // Duplicate items for continuous seamless looping
-  const loopItems = [
-    ...commentsData,
-    ...commentsData,
-    ...commentsData,
-    ...commentsData,
-  ];
+  const handlePrev = () => {
+    setCurrentIndex(
+      (prev) => (prev - 1 + testimonials.length) % testimonials.length
+    );
+  };
+
+  const handleBtnEnter = (btn: HTMLButtonElement | null) => {
+    if (!btn) return;
+    gsap.to(btn, { y: -3, scale: 1.05, duration: 0.25, ease: "power2.out" });
+  };
+  const handleBtnLeave = (btn: HTMLButtonElement | null) => {
+    if (!btn) return;
+    gsap.to(btn, { y: 0, scale: 1, duration: 0.35, ease: "power3.out" });
+  };
+
+  const current = testimonials[currentIndex];
 
   return (
-    <section className="relative overflow-hidden bg-[#FFF5F5] py-24 md:py-36 font-sans border-y border-red-100/60">
-      {/* SECTION HEADER */}
-      <div className="relative z-20 px-6 max-w-3xl mx-auto text-center mb-16 md:mb-24">
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          className="text-4xl md:text-6xl font-black leading-[1.2] tracking-tight text-gray-900"
+    <section
+      ref={sectionRef}
+      className="relative w-full bg-[#FFF5F5] py-20 md:py-28 px-4 sm:px-6 font-sans flex justify-center items-center overflow-hidden"
+    >
+      {/* Main Container Card */}
+      <div
+        ref={containerRef}
+        onMouseEnter={pauseAutoAdvance}
+        onMouseLeave={resumeAutoAdvance}
+        className="w-full max-w-5xl bg-white rounded-[2rem] md:rounded-[2.5rem] border border-red-100 p-6 sm:p-10 md:p-16 flex flex-col justify-between min-h-[520px] relative overflow-hidden "
+      >
+        {/* Decorative oversized quote mark */}
+        <span
+          ref={quoteMarkRef}
+          aria-hidden="true"
+          className="pointer-events-none absolute -top-6 right-6 md:right-14 text-[10rem] md:text-[16rem] font-black leading-none text-red-600/[0.04] select-none"
         >
-          Sending, your Packages are{" "}
-          <span className="text-[#FF0000]">Our Priorities</span>
-        </motion.h2>
-        <motion.p
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ delay: 0.1 }}
-          className="mt-6 text-[20px] text-gray-600 leading-relaxed max-w-2xl mx-auto"
-        >
-          From Diobu market goods to Trans-Amadi, we keep packages moving
-          fast, giving your business good wings and going strong across PH!
-        </motion.p>
-      </div>
+          "
+        </span>
 
-      {/* INFINITE SCROLLING TICKER */}
-      <div className="relative flex overflow-hidden py-8">
-        {/* Faint red gradient edge fades */}
-        <div className="pointer-events-none absolute inset-y-0 left-0 z-30 w-20 md:w-48 bg-gradient-to-r from-[#FFF5F5] via-[#FFF5F5]/80 to-transparent" />
-        <div className="pointer-events-none absolute inset-y-0 right-0 z-30 w-20 md:w-48 bg-gradient-to-l from-[#FFF5F5] via-[#FFF5F5]/80 to-transparent" />
+        {/* Top Header & Control Bar */}
+        <div className="relative flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 border-b border-red-50 pb-8">
+          <div className="flex flex-col gap-1">
+            <span className="text-xs font-bold tracking-widest text-red-400 uppercase">
+              0{currentIndex + 1} / 0{testimonials.length} — Real Stories
+            </span>
+            <h3 className="text-xl md:text-2xl font-extrabold text-gray-900 tracking-tight">
+              Trusted across Port Harcourt
+            </h3>
+          </div>
 
-        <motion.div
-          initial={{ x: 0 }}
-          animate={{ x: "-50%" }}
-          transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
-          className="flex gap-6 whitespace-normal px-4 items-center"
-        >
-          {loopItems.map((item, idx) => {
-            const rotationDegree = getRotation(
-              idx % commentsData.length,
-              commentsData.length
-            );
-
-            return (
-              <div
-                key={idx}
-                style={{
-                  transform: `rotate(${rotationDegree}deg)`,
-                }}
-                className="relative flex-shrink-0 w-[360px] md:w-[450px] bg-white rounded-[28px] p-6 md:p-7 border border-red-100 flex items-center gap-4 md:gap-5 transition-transform duration-300 hover:scale-105"
+          {/* Navigation Controls & Timer Circle */}
+          <div className="flex items-center gap-3 self-end sm:self-auto">
+            <button
+              ref={prevBtnRef}
+              onClick={handlePrev}
+              onMouseEnter={() => handleBtnEnter(prevBtnRef.current)}
+              onMouseLeave={() => handleBtnLeave(prevBtnRef.current)}
+              className="w-12 h-12 rounded-full border border-red-100 flex items-center justify-center text-gray-700 hover:bg-red-50 hover:border-red-200 transition-colors cursor-pointer will-change-transform"
+              aria-label="Previous Testimonial"
+            >
+              <svg
+                className="w-5 h-5 stroke-current stroke-2 fill-none"
+                viewBox="0 0 24 24"
               >
-                {/* Yolat-Style Scalloped Starburst Badge */}
-                <div
-                  className="flex-shrink-0 w-12 h-12 md:w-14 md:h-14 bg-red-100 text-red-600 flex items-center justify-center"
-                  style={{
-                    maskImage:
-                      "radial-gradient(circle 6px at calc(100% - 3px) 50%, #0000 99%, #000 100%)",
-                    WebkitMaskImage:
-                      "conic-gradient(from -45deg at 50% 50%, #000 0 90deg, #0000 0) 0 0/12px 12px repeat",
-                  }}
-                >
-                  <FaQuoteLeft className="text-sm md:text-base text-red-600" />
+                <line x1="19" y1="12" x2="5" y2="12" />
+                <polyline points="12 19 5 12 12 5" />
+              </svg>
+            </button>
+
+            <button
+              ref={nextBtnRef}
+              onClick={handleNext}
+              onMouseEnter={() => handleBtnEnter(nextBtnRef.current)}
+              onMouseLeave={() => handleBtnLeave(nextBtnRef.current)}
+              className="w-12 h-12 rounded-full border border-red-100 flex items-center justify-center text-gray-700 hover:bg-red-50 hover:border-red-200 transition-colors relative cursor-pointer will-change-transform"
+              aria-label="Next Testimonial"
+            >
+              <svg
+                className="absolute inset-0 w-12 h-12 -rotate-90"
+                viewBox="0 0 48 48"
+              >
+                <circle
+                  cx="24"
+                  cy="24"
+                  r="21"
+                  className="stroke-red-100 fill-none"
+                  strokeWidth="2"
+                />
+                <circle
+                  ref={progressCircleRef}
+                  cx="24"
+                  cy="24"
+                  r="21"
+                  className="stroke-[#FF0000] fill-none"
+                  strokeWidth="2.5"
+                  strokeDasharray={CIRCLE_CIRCUMFERENCE}
+                  strokeLinecap="round"
+                />
+              </svg>
+              <svg
+                className="w-5 h-5 stroke-current stroke-2 fill-none relative z-10"
+                viewBox="0 0 24 24"
+              >
+                <line x1="5" y1="12" x2="19" y2="12" />
+                <polyline points="12 5 19 12 12 19" />
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        {/* Dynamic Testimonial Quote Content Area */}
+        <div className="relative py-10 md:py-14 flex flex-col justify-center min-h-[220px]">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={currentIndex}
+              initial={{ opacity: 0, y: 20, filter: "blur(4px)" }}
+              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              exit={{ opacity: 0, y: -20, filter: "blur(4px)" }}
+              transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+              className="max-w-4xl"
+            >
+              <blockquote className="text-2xl sm:text-3xl md:text-4xl lg:text-[2.6rem] font-extrabold tracking-tight text-gray-900 leading-[1.25]">
+                "{current.quote}"
+              </blockquote>
+            </motion.div>
+          </AnimatePresence>
+        </div>
+
+        <div className="relative flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 pt-6 border-t border-red-50">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={currentIndex + "-author"}
+              initial={{ opacity: 0, x: -12 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: 12 }}
+              transition={{ duration: 0.35, ease: "easeOut" }}
+              className="flex items-center gap-4"
+            >
+              <div className="relative shrink-0">
+                <div className="w-12 h-12 p-4 rounded-2xl bg-[#FFF5F5] text-[#ff0000] font-extrabold text-base flex items-center justify-center ">
+                  {current.initials}
+                </div>
+              </div>
+
+              <div className="flex flex-col">
+                <div className="flex items-center gap-2">
+                  <h4 className="text-base font-extrabold text-gray-900">
+                    {current.author}
+                  </h4>
+                  <span className="inline-block text-[11px] font-extrabold uppercase px-2.5 py-0.5 rounded-full bg-red-50 text-red-600 border border-red-100">
+                    {current.location}
+                  </span>
                 </div>
 
-                {/* Card Content */}
-                <div className="flex flex-col justify-center min-w-0">
-                  <div className="flex flex-wrap items-center gap-2 font-bold text-gray-900">
-                    {/* Name: Reduced to 17px on mobile, 20px on desktop */}
-                    <span className="truncate text-[17px] md:text-[20px]">{item.name}</span>
-                    {/* Location Badge: Reduced to 9px on mobile, 12px on desktop */}
-                    <span className="inline-block text-[9px] md:text-[12px] font-extrabold uppercase px-2 py-0.5 rounded-full bg-red-50 text-red-600 border border-red-100/50">
-                      {item.location}
-                    </span>
-                  </div>
-                  {/* Comment Body: Reduced to 13px on mobile, 16px on desktop */}
-                  <p className="mt-1.5 text-[13px] md:text-[16px] text-gray-600 font-normal leading-relaxed line-clamp-3">
-                    "{item.text}"
+                <div className="flex items-center gap-2 mt-0.5">
+                  <p className="text-xs sm:text-sm font-medium text-gray-500">
+                    Port Harcourt
                   </p>
                 </div>
               </div>
-            );
-          })}
-        </motion.div>
-      </div>
+            </motion.div>
+          </AnimatePresence>
 
-      {/* FOOTER CTA */}
-      <div className="mt-16 md:mt-24 text-center px-6 max-w-2xl mx-auto">
-        <p className="text-gray-400 font-bold text-[10px] md:text-xs tracking-widest uppercase mb-6">
-          Trusted by thousands of Port Harcourt businesses & residents
-        </p>
-
-        <motion.button
-          onClick={handleDeliverNow}
-          whileHover={{ scale: 1.03 }}
-          whileTap={{ scale: 0.97 }}
-          className="bg-[#ff0000] text-white px-10 py-5 rounded-full font-black text-[20px] md:text-[24px] transition-colors"
-        >
-          Send a Package Now
-        </motion.button>
+          {/* Quick Jump Pagination Dots */}
+          <div className="flex items-center gap-2">
+            {testimonials.map((_, idx) => (
+              <button
+                key={idx}
+                onClick={() => setCurrentIndex(idx)}
+                className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${
+                  idx === currentIndex
+                    ? "w-8 bg-[#FF0000]"
+                    : "w-2 bg-red-100 hover:bg-red-200"
+                }`}
+                aria-label={`Go to testimonial ${idx + 1}`}
+              />
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   );
-};
-
-export default CommentsSection;
+}
