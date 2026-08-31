@@ -34,7 +34,7 @@ import CreateManualRide from "./pages/admin/manualRides/CreateMR";
 import ViewManualRide from "./pages/admin/manualRides/ViewManualRide";
 
 // Navigation & Security
-import Launcher from "./components/Launcher/Laucher";
+// import Launcher from "./components/Launcher/Laucher";
 import ProtectedRoute from "./pages/navigation/ProtectedRoute";
 //import WhatsAppButton from "./components/whatsapp/WhatsApp";
 import PaymentSuccess from "./pages/TrackingPage/PaymentSuccess";
@@ -114,7 +114,7 @@ const App: React.FC = () => {
       {/* {!isAdminRoute && <WhatsAppButton />} */}
       {!isAdminRoute && <Footer />}
 
-      {!isAdminRoute && (
+      {/* {!isAdminRoute && (
         <div
           style={{
             position: "fixed",
@@ -130,7 +130,7 @@ const App: React.FC = () => {
             <Launcher />
           </div>
         </div>
-      )}
+      )} */}
     </div>
   );
 };
