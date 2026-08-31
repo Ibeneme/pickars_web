@@ -36,6 +36,8 @@ const FAQPage: React.FC = () => {
     faq.question.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+  
+
   return (
     <>
       <section className="bg-[#FAFAFA] py-24 px-6 font-['Lufga'] pt-[160px]">
