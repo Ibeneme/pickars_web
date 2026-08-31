@@ -193,6 +193,7 @@ export default function PickarsTestimonialsSection(): React.JSX.Element {
     if (!btn) return;
     gsap.to(btn, { y: -3, scale: 1.05, duration: 0.25, ease: "power2.out" });
   };
+
   const handleBtnLeave = (btn: HTMLButtonElement | null) => {
     if (!btn) return;
     gsap.to(btn, { y: 0, scale: 1, duration: 0.35, ease: "power3.out" });
@@ -203,14 +204,26 @@ export default function PickarsTestimonialsSection(): React.JSX.Element {
   return (
     <section
       ref={sectionRef}
-      className="relative w-full bg-[#FFF5F5] py-20 md:py-28 px-4 sm:px-6 font-sans flex justify-center items-center overflow-hidden"
+      className="relative w-full bg-[#FFF5F5] py-20 md:py-28 px-4 sm:px-6 font-sans flex flex-col justify-center items-center overflow-hidden"
     >
+      {/* Section Header Placed at the Very Top */}
+      <div className="w-full max-w-7xl mb-8 text-left">
+        <h3 className="max-w-4xl text-4xl md:text-8xl font-extrabold text-gray-950 tracking-tight">
+          Trusted across <br />{" "}
+          <span style={{ color: "#ff0000" }}>Port Harcourt.</span>
+        </h3>
+        <p className="text-sm md:text-[20px] text-gray-600 mt-1">
+          Hear what our everyday users and business partners say about our
+          dispatch service.
+        </p>
+      </div>
+
       {/* Main Container Card */}
       <div
         ref={containerRef}
         onMouseEnter={pauseAutoAdvance}
         onMouseLeave={resumeAutoAdvance}
-        className="w-full max-w-5xl bg-white rounded-[2rem] md:rounded-[2.5rem] border border-red-100 p-6 sm:p-10 md:p-16 flex flex-col justify-between min-h-[520px] relative overflow-hidden "
+        className="w-full max-w-7xl bg-white rounded-[2rem] md:rounded-[2.5rem] border border-red-100 p-6 sm:p-10 md:p-16 flex flex-col justify-between min-h-[520px] relative overflow-hidden shadow-sm"
       >
         {/* Decorative oversized quote mark */}
         <span
@@ -221,15 +234,12 @@ export default function PickarsTestimonialsSection(): React.JSX.Element {
           "
         </span>
 
-        {/* Top Header & Control Bar */}
+        {/* Top Header & Control Bar Inside Card */}
         <div className="relative flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 border-b border-red-50 pb-8">
           <div className="flex flex-col gap-1">
             <span className="text-xs font-bold tracking-widest text-red-400 uppercase">
               0{currentIndex + 1} / 0{testimonials.length} — Real Stories
             </span>
-            <h3 className="text-xl md:text-2xl font-extrabold text-gray-900 tracking-tight">
-              Trusted across Port Harcourt
-            </h3>
           </div>
 
           {/* Navigation Controls & Timer Circle */}
@@ -250,7 +260,6 @@ export default function PickarsTestimonialsSection(): React.JSX.Element {
                 <polyline points="12 19 5 12 12 5" />
               </svg>
             </button>
-
             <button
               ref={nextBtnRef}
               onClick={handleNext}
@@ -321,11 +330,10 @@ export default function PickarsTestimonialsSection(): React.JSX.Element {
               className="flex items-center gap-4"
             >
               <div className="relative shrink-0">
-                <div className="w-12 h-12 p-4 rounded-2xl bg-[#FFF5F5] text-[#ff0000] font-extrabold text-base flex items-center justify-center ">
+                <div className="w-12 h-12 p-4 rounded-2xl bg-[#FFF5F5] text-[#ff0000] font-extrabold text-base flex items-center justify-center">
                   {current.initials}
                 </div>
               </div>
-
               <div className="flex flex-col">
                 <div className="flex items-center gap-2">
                   <h4 className="text-base font-extrabold text-gray-900">
@@ -335,7 +343,6 @@ export default function PickarsTestimonialsSection(): React.JSX.Element {
                     {current.location}
                   </span>
                 </div>
-
                 <div className="flex items-center gap-2 mt-0.5">
                   <p className="text-xs sm:text-sm font-medium text-gray-500">
                     Port Harcourt

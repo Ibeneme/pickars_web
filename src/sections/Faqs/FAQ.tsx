@@ -3,96 +3,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { FiPlus, FiMinus, FiSearch, FiPhoneCall, FiMail } from "react-icons/fi";
 import { FaShieldAlt, FaMapMarkedAlt, FaUserCheck } from "react-icons/fa";
 
-// --- NEW SECTION: SAFETY & TRUST ---
-const SafetySection: React.FC = () => {
-  const safetyFeatures = [
-    {
-      icon: <FaShieldAlt />,
-      title: "Secure Goods",
-      desc: "Every package is handled with military-grade care and tracked until it reaches the hands of your recipient.",
-    },
-    {
-      icon: <FaUserCheck />,
-      title: "Verified Riders",
-      desc: "Our riders undergo rigorous background checks and training to ensure professionalism and security.",
-    },
-    {
-      icon: <FaMapMarkedAlt />,
-      title: "Geofenced Pathing",
-      desc: "Smart routing ensures riders stay on path, giving you accurate ETAs and complete peace of mind.",
-    },
-  ];
-
-  return (
-    <section className="bg-white py-24 md:py-32 font-['Lufga']">
-      <div className="mx-auto max-w-7xl px-6">
-        <div className="grid lg:grid-cols-3 gap-8">
-          {safetyFeatures.map((item, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.1 }}
-              className="p-10 rounded-[3rem] bg-[#fafafa] border border-gray-100 transition-all group"
-            >
-              <div className="h-16 w-16 rounded-2xl bg-white  flex items-center justify-center text-2xl text-red-600 mb-8 group-hover:bg-red-600 group-hover:text-white transition-all duration-500">
-                {item.icon}
-              </div>
-              <h3 className="text-2xl font-black text-[#121212] mb-4 uppercase tracking-tighter">
-                {item.title}
-              </h3>
-              <p className="text-gray-500 font-bold leading-relaxed lowercase">
-                {item.desc}
-              </p>
-            </motion.div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-};
-
-// --- NEW SECTION: CONTACT CTA ---
-const ContactCTA: React.FC = () => {
-  return (
-    <section className="bg-white py-20 font-['Lufga']">
-      <div className="mx-auto max-w-7xl px-6">
-        <div className="rounded-[4rem] bg-[#121212] p-12 md:p-24 overflow-hidden relative">
-          {/* Decorative background text */}
-          <div className="absolute top-0 right-0 text-[15rem] font-black text-white/[0.02] leading-none pointer-events-none translate-x-1/4 select-none">
-            HELP
-          </div>
-
-          <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-12">
-            <div className="text-center lg:text-left">
-              <h2 className="text-5xl md:text-7xl font-black text-white tracking-tighter leading-none mb-6">
-                Still <span className="text-red-600">Stuck?</span>
-              </h2>
-              <p className="text-gray-400 text-xl font-bold max-w-md mx-auto lg:mx-0">
-                Our support experts are ready to assist you 24/7.
-              </p>
-            </div>
-
-            <div className="flex flex-col sm:flex-row gap-6">
-              <a
-                href="mailto:support@pickars.com"
-                className="flex items-center gap-4 bg-white text-[#121212] px-10 py-6 rounded-3xl font-black text-lg hover:scale-105 transition-transform "
-              >
-                <FiMail size={24} /> Email Us
-              </a>
-              <a
-                href="tel:+2340000000"
-                className="flex items-center gap-4 bg-red-600 text-white px-10 py-6 rounded-3xl font-black text-lg hover:scale-105 transition-transform "
-              >
-                <FiPhoneCall size={24} /> Call Now
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-};
 
 // --- EXISTING FAQ PAGE ---
 const faqs = [
@@ -215,9 +125,6 @@ const FAQPage: React.FC = () => {
           </div>
         </div>
       </section>
-
-      <SafetySection />
-      <ContactCTA />
     </>
   );
 };

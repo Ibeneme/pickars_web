@@ -4,10 +4,12 @@ import SlidingPage from "../../components/SlidingPgae/SlidingPage";
 //import CustomerRiderSection from "../../sections/CustomerRiderSection/CustomerRiderSection";
 import HeroSection from "../../sections/Hero/HeroSection";
 //import HowItWorksSection from "../../sections/HowItWorksSection/HowItWorksSection";
-import FinalBookingSection from "../../sections/HowItWorksSection/FinalBookingSection";
-import PickarsPricingStackingScrollSection from "../../components/templates/stack";
+//import FinalBookingSection from "../../sections/HowItWorksSection/FinalBookingSection";
+//import PickarsPricingStackingScrollSection from "../../components/templates/stack";
 import PickarsTestimonialsSection from "../../sections/CommentsSection/CommentsSection";
-import PickarsFeaturesSection from "../../sections/HeroDelivery/MidImage";
+import HowItWorks from "../../sections/HowItWorksSection/HowItWorksSection";
+import PackageDeliverySection from "../../sections/HowItWorksSection/PackageDeliverySection";
+// import PickarsFeaturesSection from "../../sections/HeroDelivery/MidImage";
 //import MidImage from "../../sections/HeroDelivery/MidImage";
 
 const Home = () => {
@@ -52,10 +54,12 @@ const Home = () => {
         <section className="relative z-10">
           <SlidingPage />
         </section>
-        <FinalBookingSection />
-        <PickarsPricingStackingScrollSection />
+        <HowItWorks />
+        <PackageDeliverySection />
+        {/* <FinalBookingSection /> */}
+        {/* <PickarsPricingStackingScrollSection /> */}
         <PickarsTestimonialsSection />
-        <PickarsFeaturesSection />
+        {/* <PickarsFeaturesSection /> */}
       </main>
     </div>
   );

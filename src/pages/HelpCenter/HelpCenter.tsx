@@ -9,11 +9,10 @@ import {
   FiUser,
   FiTruck,
   FiCreditCard,
+  FiMessageSquare,
+  FiMail,
+  FiX,
 } from "react-icons/fi";
-import { FaWhatsapp, FaTwitter, FaInstagram, FaApple } from "react-icons/fa";
-import { BiLogoPlayStore } from "react-icons/bi";
-import { ANDROID_URL, IOS_URL } from "../../sections/Hero/HeroSection";
-
 
 interface FAQItem {
   id: string;
@@ -58,6 +57,12 @@ const categories: Category[] = [
           },
         ],
       },
+      {
+        id: "gen3",
+        question: "Are my packages insured during transit?",
+        answer:
+          "Yes! All packages booked directly through the Pickars app are covered against loss or damage up to specified limits based on declared package value.",
+      },
     ],
   },
   {
@@ -76,7 +81,13 @@ const categories: Category[] = [
         id: "cust7",
         question: "Can I send to multiple locations?",
         answer:
-          "Yes — use **Multi-Stop** feature.\nAdd up to 5 stops. Our system automatically optimizes the route to save time & money.",
+          "Yes — use our **Multi-Stop** feature.\nAdd up to 5 stops. Our system automatically optimizes the route to save time & money.",
+      },
+      {
+        id: "cust8",
+        question: "How do I track my active delivery?",
+        answer:
+          "Once a rider accepts your order, tap **Live Tracking** on the home screen. You'll see their exact GPS location moving on the map in real time.",
       },
     ],
   },
@@ -91,6 +102,12 @@ const categories: Category[] = [
         question: "How do I become a Pickars Rider?",
         answer:
           "1. Download **Pickars Rider** app\n2. Upload valid Driver’s License + Bike/Car documents\n3. Complete short safety & service training\n4. Get verified (usually 24–48h) → start accepting orders",
+      },
+      {
+        id: "rider2",
+        question: "When and how do I receive my earnings?",
+        answer:
+          "Earnings are tracked instantly in-app after every completed drop-off. Payouts are processed directly to your registered bank account daily or weekly.",
       },
     ],
   },
@@ -111,6 +128,12 @@ const categories: Category[] = [
             text: "Wallet refunds are instant — choose Wallet for faster access",
           },
         ],
+      },
+      {
+        id: "pay2",
+        question: "What payment methods do you accept?",
+        answer:
+          "We accept debit/credit cards, bank transfers, USSD, and direct funding via your in-app Pickars Wallet.",
       },
     ],
   },
@@ -140,7 +163,10 @@ const HelpCenter: React.FC = () => {
 
   const formatAnswer = (text: string) => {
     return text
-      .replace(/\*\*(.*?)\*\*/g, '<strong class="text-red-600">$1</strong>')
+      .replace(
+        /\*\*(.*?)\*\*/g,
+        '<strong class="text-red-600 font-extrabold">$1</strong>'
+      )
       .replace(/\n/g, "<br/>");
   };
 
@@ -153,72 +179,65 @@ const HelpCenter: React.FC = () => {
         style={{ scaleX }}
       />
 
-      {/* System Status Bar */}
-      <div className="bg-gray-50 border-b border-gray-100 py-3 overflow-hidden">
-        <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
-            </span>
-            <p className="text-[10px] font-black uppercase tracking-widest text-gray-500">
-              System Status: All Services Operational
-            </p>
-          </div>
-          <div className="hidden md:flex items-center gap-6">
-            <p className="text-[10px] font-bold text-gray-400">
-              Current Wait: <span className="text-gray-900">~4 mins</span>
-            </p>
-            <p className="text-[10px] font-bold text-gray-400">
-              Riders Online: <span className="text-gray-900">1,240+</span>
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <header className="pt-24 pb-16 px-6 text-center relative overflow-hidden">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[500px] bg-gradient-to-b from-red-50/50 to-transparent -z-10" />
+      {/* Hero Header */}
+      <header className="pt-28 pb-16 px-6 text-center relative overflow-hidden">
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[600px] bg-gradient-to-b from-red-50/70 via-red-50/20 to-transparent -z-10 pointer-events-none" />
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
+          className="max-w-4xl mx-auto"
         >
-          <span className="inline-block text-[10px] font-black uppercase tracking-[0.4em] text-red-600 mb-6 px-4 py-2 bg-red-50 rounded-full">
-            Pickars Concierge
+          <span className="inline-block text-[11px] font-black uppercase tracking-[0.4em] text-red-600 mb-6 px-5 py-2.5 bg-white shadow-sm border border-red-100 rounded-full">
+            Pickars Concierge Hub
           </span>
-          <h1 className="text-6xl md:text-[7rem] font-black tracking-[-0.04em] text-[#121212] leading-[0.85] mb-8">
+          <h1 className="text-5xl md:text-7xl lg:text-[7rem] font-black tracking-[-0.04em] text-[#121212] leading-[0.9] mb-8">
             How can we <br /> <span className="text-gray-300">assist you?</span>
           </h1>
+          <p className="text-gray-500 font-bold max-w-xl mx-auto text-lg mb-10">
+            Find fast answers about dispatch tracking, wallet top-ups, rider
+            onboarding, and merchant solutions.
+          </p>
 
-          <div className="max-w-2xl mx-auto relative group mt-12">
+          <div className="max-w-2xl mx-auto relative group mt-6">
             <FiSearch
               className="absolute left-6 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-red-600 transition-colors"
               size={24}
             />
             <input
               type="search"
-              placeholder="Describe your issue (e.g. 'refunds', 'rider tracking')..."
+              placeholder="Search issues (e.g. 'refunds', 'rider tracking')..."
               value={searchTerm}
               onChange={(e) => {
                 setSearchTerm(e.target.value);
                 setOpenFAQ(null);
               }}
-              className="w-full bg-white border-2 border-gray-100 rounded-3xl py-7 pl-16 pr-8 text-xl focus:border-red-600 outline-none transition-all duration-500 shadow-xl shadow-gray-200/10"
+              className="w-full bg-white border-2 border-gray-100 rounded-3xl py-6 pl-16 pr-14 text-lg md:text-xl focus:border-red-600 outline-none transition-all duration-300 shadow-2xl shadow-gray-200/20 placeholder:text-gray-400"
             />
+            {searchTerm && (
+              <button
+                onClick={() => setSearchTerm("")}
+                className="absolute right-5 top-1/2 -translate-y-1/2 p-2 bg-gray-100 hover:bg-gray-200 rounded-full text-gray-500 transition-colors"
+                aria-label="Clear search"
+              >
+                <FiX size={18} />
+              </button>
+            )}
           </div>
         </motion.div>
       </header>
 
+      {/* Main Container */}
       <main className="max-w-7xl mx-auto px-6 pb-32">
         <AnimatePresence mode="wait">
           {!hasSearch && !selectedCategory && (
             <motion.div
               key="categories"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95 }}
-              className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
+              className="grid md:grid-cols-2 lg:grid-cols-4 gap-6"
             >
               {categories.map((cat, i) => (
                 <motion.div
@@ -227,18 +246,20 @@ const HelpCenter: React.FC = () => {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: i * 0.05 }}
                   onClick={() => setSelectedCategory(cat)}
-                  className="group cursor-pointer bg-gray-50/50 border border-gray-100 p-10 rounded-[3rem] hover:bg-white hover:border-red-100 transition-all duration-500 hover:shadow-2xl hover:shadow-red-500/5"
+                  className="group cursor-pointer bg-gray-50/50 border border-gray-100 p-8 rounded-[2.5rem] hover:bg-white hover:border-red-100 transition-all duration-500 hover:shadow-2xl hover:shadow-red-500/5 flex flex-col justify-between"
                 >
-                  <div className="mb-10 text-3xl text-red-600 group-hover:scale-110 transition-transform origin-left">
-                    {cat.icon}
+                  <div>
+                    <div className="mb-8 h-14 w-14 flex items-center justify-center rounded-2xl bg-white shadow-md text-2xl text-red-600 group-hover:scale-110 group-hover:bg-red-600 group-hover:text-white transition-all duration-300">
+                      {cat.icon}
+                    </div>
+                    <h3 className="text-2xl font-black text-[#121212] mb-3 tracking-tight">
+                      {cat.name}
+                    </h3>
+                    <p className="text-gray-500 font-bold text-sm leading-relaxed">
+                      {cat.description}
+                    </p>
                   </div>
-                  <h3 className="text-3xl font-black text-[#121212] mb-3 tracking-tighter">
-                    {cat.name}
-                  </h3>
-                  <p className="text-gray-500 font-bold leading-tight lowercase">
-                    {cat.description}
-                  </p>
-                  <div className="mt-8 flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-red-600 opacity-0 group-hover:opacity-100 transition-opacity">
+                  <div className="mt-8 flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-red-600 opacity-70 group-hover:opacity-100 transition-opacity">
                     View Topics <FiArrowLeft className="rotate-180" />
                   </div>
                 </motion.div>
@@ -253,35 +274,78 @@ const HelpCenter: React.FC = () => {
               animate={{ opacity: 1, x: 0 }}
               className="max-w-4xl mx-auto"
             >
-              <button
-                onClick={() => {
-                  setSelectedCategory(null);
-                  setSearchTerm("");
-                }}
-                className="flex items-center gap-3 text-[#121212] font-black text-sm uppercase tracking-widest mb-12 hover:text-red-600 transition-colors"
-              >
-                <FiArrowLeft size={20} /> Back to Categories
-              </button>
+              <div className="flex items-center justify-between mb-10">
+                <button
+                  onClick={() => {
+                    setSelectedCategory(null);
+                    setSearchTerm("");
+                  }}
+                  className="flex items-center gap-3 text-[#121212] font-black text-xs uppercase tracking-widest hover:text-red-600 transition-colors"
+                >
+                  <FiArrowLeft size={18} /> Back to Categories
+                </button>
+                {hasSearch && (
+                  <span className="text-xs font-bold text-gray-400">
+                    Found {filteredFaqs.length} result
+                    {filteredFaqs.length === 1 ? "" : "s"} for "{searchTerm}"
+                  </span>
+                )}
+              </div>
+
+              {selectedCategory && (
+                <div className="mb-8 p-8 bg-red-50/50 border border-red-100 rounded-3xl flex items-center gap-4">
+                  <div className="text-3xl text-red-600">
+                    {selectedCategory.icon}
+                  </div>
+                  <div>
+                    <h2 className="text-2xl font-black text-[#121212]">
+                      {selectedCategory.name}
+                    </h2>
+                    <p className="text-gray-500 font-bold text-sm">
+                      {selectedCategory.description}
+                    </p>
+                  </div>
+                </div>
+              )}
+
+              {/* Empty Search State */}
+              {hasSearch && filteredFaqs.length === 0 && (
+                <div className="text-center py-20 bg-gray-50 rounded-3xl border border-gray-100">
+                  <p className="text-2xl font-black text-[#121212] mb-2">
+                    No matching questions found
+                  </p>
+                  <p className="text-gray-500 font-bold mb-6">
+                    Try searching with alternative keywords or contact us
+                    directly.
+                  </p>
+                  <button
+                    onClick={() => setSearchTerm("")}
+                    className="px-6 py-3 bg-red-600 text-white rounded-xl font-black text-sm uppercase tracking-wider shadow-lg shadow-red-600/20 hover:bg-red-700 transition-colors"
+                  >
+                    Clear Search
+                  </button>
+                </div>
+              )}
 
               <div className="space-y-4">
                 {(selectedCategory ? selectedCategory.faqs : filteredFaqs).map(
                   (faq) => (
                     <div
                       key={faq.id}
-                      className={`rounded-[2.5rem] border transition-all duration-500 ${
+                      className={`rounded-[2rem] border transition-all duration-300 ${
                         openFAQ === faq.id
-                          ? "bg-white border-red-100 shadow-lg shadow-red-500/5"
-                          : "bg-gray-50/50 border-gray-100 hover:bg-white"
+                          ? "bg-white border-red-200 shadow-xl shadow-red-500/5"
+                          : "bg-gray-50/50 border-gray-100 hover:bg-white hover:border-gray-200"
                       }`}
                     >
                       <button
                         onClick={() =>
                           setOpenFAQ(openFAQ === faq.id ? null : faq.id)
                         }
-                        className="w-full p-8 md:p-10 flex items-center justify-between text-left outline-none"
+                        className="w-full p-6 md:p-8 flex items-center justify-between text-left outline-none gap-4"
                       >
                         <span
-                          className={`text-xl md:text-2xl font-black tracking-tight ${
+                          className={`text-lg md:text-xl font-black tracking-tight transition-colors ${
                             openFAQ === faq.id
                               ? "text-red-600"
                               : "text-[#121212]"
@@ -290,13 +354,17 @@ const HelpCenter: React.FC = () => {
                           {faq.question}
                         </span>
                         <div
-                          className={`h-12 w-12 flex items-center justify-center rounded-2xl transition-all ${
+                          className={`h-10 w-10 flex-shrink-0 flex items-center justify-center rounded-xl transition-all ${
                             openFAQ === faq.id
-                              ? "bg-red-600 text-white shadow-lg shadow-red-600/30"
-                              : "bg-white text-gray-400 shadow-sm"
+                              ? "bg-red-600 text-white shadow-md shadow-red-600/30"
+                              : "bg-white text-gray-400 shadow-sm border border-gray-100"
                           }`}
                         >
-                          {openFAQ === faq.id ? <FiMinus /> : <FiPlus />}
+                          {openFAQ === faq.id ? (
+                            <FiMinus size={16} />
+                          ) : (
+                            <FiPlus size={16} />
+                          )}
                         </div>
                       </button>
                       <AnimatePresence>
@@ -305,10 +373,10 @@ const HelpCenter: React.FC = () => {
                             initial={{ height: 0, opacity: 0 }}
                             animate={{ height: "auto", opacity: 1 }}
                             exit={{ height: 0, opacity: 0 }}
-                            className="px-8 md:px-10 pb-10"
+                            className="px-6 md:px-8 pb-8"
                           >
                             <div
-                              className="pt-6 border-t border-gray-50 text-gray-500 font-bold text-lg leading-relaxed"
+                              className="pt-4 border-t border-gray-100 text-gray-600 font-bold text-base md:text-lg leading-relaxed"
                               dangerouslySetInnerHTML={{
                                 __html: formatAnswer(faq.answer),
                               }}
@@ -316,16 +384,16 @@ const HelpCenter: React.FC = () => {
                             {faq.annotations?.map((note, idx) => (
                               <div
                                 key={idx}
-                                className={`mt-6 p-6 rounded-3xl border-l-4 ${
+                                className={`mt-6 p-5 rounded-2xl border-l-4 ${
                                   note.type === "warning"
-                                    ? "bg-orange-50 border-orange-500 text-orange-800"
+                                    ? "bg-orange-50 border-orange-500 text-orange-900"
                                     : "bg-red-50 border-red-600 text-red-900"
                                 }`}
                               >
-                                <p className="text-sm font-black uppercase tracking-widest mb-1">
+                                <p className="text-xs font-black uppercase tracking-widest mb-1">
                                   {note.type}
                                 </p>
-                                <p className="text-sm font-bold opacity-80">
+                                <p className="text-sm font-bold opacity-90">
                                   {note.text}
                                 </p>
                               </div>
@@ -341,161 +409,45 @@ const HelpCenter: React.FC = () => {
           )}
         </AnimatePresence>
 
-        {/* --- Socials & Contact Cards --- */}
-        <section className="mt-32">
-          <div className="grid md:grid-cols-3 gap-8">
-            <div className="bg-[#121212] p-12 rounded-[3.5rem] text-white flex flex-col justify-between group hover:bg-red-600 transition-colors duration-700">
-              <div>
-                <h4 className="text-4xl font-black tracking-tighter mb-4 leading-none">
-                  Corporate <br />
-                  Logistics
-                </h4>
-                <p className="text-gray-400 font-bold group-hover:text-white/80 transition-colors">
-                  Custom business solutions & bulk delivery contracts.
-                </p>
-              </div>
-              <a
-                href="mailto:biz@pickars.com"
-                className="mt-12 inline-flex items-center gap-3 font-black uppercase tracking-[0.2em] text-xs"
-              >
-                Email Sales <FiArrowLeft className="rotate-180" />
-              </a>
-            </div>
+        {/* Support Help Banner */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mt-32 bg-[#121212] text-white rounded-[3rem] p-10 md:p-16 flex flex-col md:flex-row items-center justify-between gap-8 relative overflow-hidden shadow-2xl"
+        >
+          <div className="absolute right-0 top-0 w-96 h-96 bg-red-600/10 rounded-full blur-3xl pointer-events-none" />
 
-            <div className="bg-gray-50 p-12 rounded-[3.5rem] border border-gray-100 flex flex-col justify-between group hover:border-red-100 transition-all">
-              <div>
-                <h4 className="text-4xl font-black tracking-tighter mb-4 leading-none text-[#121212]">
-                  Social <br />
-                  Updates
-                </h4>
-                <p className="text-gray-500 font-bold">
-                  Follow us for real-time alerts in Port Harcourt City.
-                </p>
-              </div>
-              <div className="mt-12 flex gap-4">
-                <a
-                  href="https://x.com/pickars_app?s=21"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="h-12 w-12 rounded-full bg-white border border-gray-200 flex items-center justify-center text-gray-600 hover:bg-[#000] hover:text-white transition-all shadow-sm"
-                >
-                  <FaTwitter />
-                </a>
-                <a
-                  href="https://www.instagram.com/pickars_official?igsh=MWY4aTJieHVtMGltYg%3D%3D&utm_source=qr"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="h-12 w-12 rounded-full bg-white border border-gray-200 flex items-center justify-center text-gray-600 hover:bg-[#E1306C] hover:text-white transition-all shadow-sm"
-                >
-                  <FaInstagram />
-                </a>
-              </div>
-            </div>
-
-            <div className="bg-red-50 p-12 rounded-[3.5rem] border border-red-100 flex flex-col justify-between group">
-              <div>
-                <div className="h-2 w-2 bg-red-600 rounded-full animate-pulse mb-6" />
-                <h4 className="text-4xl font-black tracking-tighter mb-4 leading-none text-red-600">
-                  Call Dispatch
-                </h4>
-                <p className="text-red-900/60 font-bold">
-                  Urgent issue with an active delivery? Speak to a controller.
-                </p>
-              </div>
-              <a
-                href="tel:+2349164860591"
-                className="mt-12 text-[#121212] font-black text-2xl tracking-tighter hover:text-red-600 transition-colors"
-              >
-                +234 916 486 0591
-              </a>
-            </div>
+          <div className="text-center md:text-left z-10">
+            <span className="text-red-500 font-black uppercase tracking-widest text-xs mb-3 block">
+              Still have questions?
+            </span>
+            <h3 className="text-3xl md:text-4xl font-black tracking-tight mb-2">
+              We're available round-the-clock
+            </h3>
+            <p className="text-gray-400 font-bold max-w-md">
+              Reach out directly to our support engineers via WhatsApp or send
+              us an email for immediate assistance.
+            </p>
           </div>
-        </section>
 
-        {/* --- New App Download Section --- */}
-        <section className="mt-20 px-6">
-          <div className="bg-white border-2 border-gray-100 rounded-[3.5rem] p-10 md:p-14 flex flex-col md:flex-row items-center justify-between gap-8 hover:border-red-600/20 transition-all shadow-2xl shadow-gray-200/20">
-            <div className="text-center md:text-left">
-              <h3 className="text-4xl font-black tracking-tighter text-[#121212] mb-3">
-                Experience the app
-              </h3>
-              <p className="text-gray-500 font-bold text-lg">
-                Manage all your Port Harcourt deliveries in one place.
-              </p>
-            </div>
-            <div className="flex flex-wrap justify-center gap-4">
-              <motion.a
-                href={IOS_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="flex items-center gap-3 bg-[#121212] text-white px-8 py-4 rounded-[1.5rem] font-black text-sm shadow-xl"
-              >
-                <FaApple size={22} /> App Store
-              </motion.a>
-              <motion.a
-                href={ANDROID_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="flex items-center gap-3 bg-white border-2 border-gray-100 text-[#121212] px-8 py-4 rounded-[1.5rem] font-black text-sm hover:border-red-600 transition-colors shadow-lg"
-              >
-                <BiLogoPlayStore size={22} /> Play Store
-              </motion.a>
-            </div>
+          <div className="flex flex-wrap items-center justify-center gap-4 z-10 w-full md:w-auto">
+            <a
+              href="https://wa.me/2349164860591"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-3 bg-red-600 hover:bg-red-700 text-white px-8 py-4 rounded-2xl font-black text-sm uppercase tracking-wider transition-all shadow-lg shadow-red-600/30 hover:scale-105"
+            >
+              <FiMessageSquare size={18} /> WhatsApp Chat
+            </a>
+            <a
+              href="mailto:support@pickars.com"
+              className="flex items-center gap-3 bg-white/10 hover:bg-white/15 text-white border border-white/20 px-8 py-4 rounded-2xl font-black text-sm uppercase tracking-wider transition-all backdrop-blur-sm hover:scale-105"
+            >
+              <FiMail size={18} /> Send Email
+            </a>
           </div>
-        </section>
-
-        {/* --- Final WhatsApp CTA --- */}
-        <section className="mt-20 relative max-w-7xl">
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="relative group overflow-hidden rounded-[4rem] bg-[#0A0A0A] shadow-2xl"
-          >
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,#25D366_0%,transparent_50%)] opacity-0 group-hover:opacity-10 transition-opacity duration-700" />
-
-            <div className="relative z-10 bg-[#0A0A0A] rounded-[3.8rem] px-8 py-20 md:py-28 text-center border border-white/5">
-              <div className="inline-flex items-center gap-3 bg-white/5 backdrop-blur-xl px-6 py-3 rounded-full border border-white/10 mb-10">
-                <span className="relative flex h-3 w-3">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#25D366] opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-3 w-3 bg-[#25D366]"></span>
-                </span>
-                <span className="text-[10px] font-black uppercase tracking-[0.3em] text-white">
-                  Live Support Online
-                </span>
-              </div>
-
-              <h2 className="text-6xl md:text-7xl font-black text-white tracking-tighter leading-[0.85] mb-8">
-                Immediate Support.
-              </h2>
-
-              <p className="text-gray-500 text-lg md:text-xl font-bold max-w-xl mx-auto mb-14 leading-relaxed">
-                Connect directly with our Port Harcourt dispatch controllers for
-                instant assistance.
-              </p>
-
-              <motion.a
-                href="https://wa.me/2349164860591"
-                target="_blank"
-                rel="noopener noreferrer"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="inline-flex items-center gap-5 bg-white text-[#0A0A0A] px-10 py-6 rounded-[2.5rem] font-black text-xl transition-all shadow-2xl"
-              >
-                <FaWhatsapp size={28} className="text-[#25D366]" />
-                Message Now
-              </motion.a>
-
-              <div className="absolute -bottom-10 -right-10 opacity-[0.03] text-white rotate-12 pointer-events-none">
-                <FaWhatsapp size={400} />
-              </div>
-            </div>
-          </motion.div>
-        </section>
+        </motion.div>
       </main>
     </div>
   );

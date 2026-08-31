@@ -44,7 +44,7 @@ const Footer: React.FC = () => {
   ];
 
   return (
-    <footer className="bg-[#080808] pt-24 pb-32 font-['Lufga'] text-white">
+    <footer className="bg-[#080808] pt-24 pb-16 font-['Lufga'] text-white overflow-hidden">
       <div className="mx-auto max-w-[1400px] px-6">
         <div className="grid grid-cols-1 gap-16 lg:grid-cols-12">
           {/* Brand Identity Section */}
@@ -78,7 +78,7 @@ const Footer: React.FC = () => {
                 </div>
               </a>
 
-              {/* Improved: App Download Links */}
+              {/* App Download Links */}
               <div className="flex flex-wrap gap-4 mt-2">
                 <a
                   href={IOS_URL}
@@ -204,9 +204,16 @@ const Footer: React.FC = () => {
           </div>
         </div>
 
+        {/* Ultra-Bold and Fluid Responsive Brand Typography */}
+        <div className="mt-16 select-none w-full overflow-hidden">
+          <h1 className="w-full text-center sm:text-left text-[clamp(4.5rem,19vw,17rem)] font-[900] tracking-tighter leading-[0.8] text-white opacity-95">
+            Pickars
+          </h1>
+        </div>
+
         {/* Bottom Bar */}
-        <div className="mt-24 flex flex-col items-center justify-between gap-8 border-t border-white/5 pt-12 md:flex-row">
-          <p className="text-xs font-medium text-gray-600">
+        <div className="mt-12 flex flex-col items-center justify-between gap-8 border-t border-white/10 pt-8 md:flex-row">
+          <p className="text-xs font-medium text-gray-500">
             © {new Date().getFullYear()} Pickars Courier Limited. Moving PH City
             forward.
           </p>

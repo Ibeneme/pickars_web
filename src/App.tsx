@@ -36,7 +36,7 @@ import ViewManualRide from "./pages/admin/manualRides/ViewManualRide";
 // Navigation & Security
 import Launcher from "./components/Launcher/Laucher";
 import ProtectedRoute from "./pages/navigation/ProtectedRoute";
-import WhatsAppButton from "./components/whatsapp/WhatsApp";
+//import WhatsAppButton from "./components/whatsapp/WhatsApp";
 import PaymentSuccess from "./pages/TrackingPage/PaymentSuccess";
 import DispatchRiderTermsPage from "./pages/DispatchRiderTermsPage";
 
@@ -111,7 +111,7 @@ const App: React.FC = () => {
         </Routes>
       </main>
 
-      {!isAdminRoute && <WhatsAppButton />}
+      {/* {!isAdminRoute && <WhatsAppButton />} */}
       {!isAdminRoute && <Footer />}
 
       {!isAdminRoute && (
