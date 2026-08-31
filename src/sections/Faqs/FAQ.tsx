@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { FiPlus, FiMinus, FiSearch, FiPhoneCall, FiMail } from "react-icons/fi";
-import { FaShieldAlt, FaMapMarkedAlt, FaUserCheck } from "react-icons/fa";
+import { FiPlus, FiMinus, FiSearch, } from "react-icons/fi";
+
 
 
 // --- EXISTING FAQ PAGE ---

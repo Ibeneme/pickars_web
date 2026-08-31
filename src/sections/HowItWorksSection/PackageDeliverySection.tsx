@@ -4,7 +4,6 @@ import {
   FaBoxes,
   FaUserCheck,
   FaMotorcycle,
-  FaArrowRight,
 } from "react-icons/fa";
 import { IOS_URL, ANDROID_URL } from "./HowItWorksSection";
 
@@ -71,11 +70,7 @@ const audienceData: ConsignmentType[] = [
   },
 ];
 
-// Perforated-tag notch mask, reused from the ticket edge already used elsewhere on the site
-const notchMask = (radius: number, pitch: number) => ({
-  maskImage: `radial-gradient(circle ${radius}px at calc(100% - ${radius}px) 50%, #0000 99%, #000 100%)`,
-  WebkitMaskImage: `conic-gradient(from -45deg at 50% 50%, #000 0 90deg, #0000 0) 0 0/${pitch}px ${pitch}px repeat`,
-});
+
 
 const PackageDeliverySection: React.FC = () => {
   return (
