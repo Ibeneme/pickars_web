@@ -6,7 +6,6 @@ export const IOS_URL = "https://apps.apple.com/ng/app/pickars/id6746796884";
 export const ANDROID_URL =
   "https://play.google.com/store/apps/details?id=com.pickars.app&hl=en";
 
-  
 const PackageDeliverySection: React.FC = () => {
   const ref = React.useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
@@ -67,14 +66,14 @@ const PackageDeliverySection: React.FC = () => {
             initial={{ opacity: 0, y: 15 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="mt-2 flex flex-col sm:flex-row items-center justify-center gap-4 w-full"
+            className="mt-2 flex flex-row items-center justify-center gap-4 w-full"
           >
-            {/* App Store Button (Forced longer on mobile using min-w, fit-content on sm+) */}
+            {/* App Store Button - Fit content, forced slightly longer */}
             <a
               href={IOS_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full sm:w-auto min-w-[185px] px-6 py-3.5 bg-black hover:bg-[#ff0000] text-white rounded-2xl hover:translate-x-[2px] hover:translate-y-[2px] transition-all flex items-center justify-center space-x-3 group shadow-md"
+              className="w-auto min-w-[170px] px-5 py-3.5 bg-black hover:bg-[#ff0000] text-white rounded-2xl hover:translate-x-[2px] hover:translate-y-[2px] transition-all flex items-center justify-center space-x-3 group "
             >
               <svg
                 className="w-7 h-7 fill-current shrink-0"
@@ -91,12 +90,12 @@ const PackageDeliverySection: React.FC = () => {
               </div>
             </a>
 
-            {/* Google Play Button */}
+            {/* Google Play Button - Fit content */}
             <a
               href={ANDROID_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full sm:w-auto px-6 py-3.5 bg-black hover:bg-[#ff0000] text-white rounded-2xl hover:translate-x-[2px] hover:translate-y-[2px] transition-all flex items-center justify-center space-x-3 group shadow-md"
+              className="w-auto px-5 py-3.5 bg-black hover:bg-[#ff0000] text-white rounded-2xl hover:translate-x-[2px] hover:translate-y-[2px] transition-all flex items-center justify-center space-x-3 group "
             >
               <svg
                 className="w-7 h-7 fill-current shrink-0"
