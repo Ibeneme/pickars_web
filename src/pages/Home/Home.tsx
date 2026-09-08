@@ -53,12 +53,11 @@ const Home = () => {
       <main className="overflow-x-hidden">
         <HeroSection />
 
-
-        <PackageDeliverySection />
-
         <section className="relative z-10">
           <SlidingPage />
         </section>
+        <PackageDeliverySection />
+
         <HowItWorks />
         <NeverLateBanner />
         <PickarsTestimonialsSection />
