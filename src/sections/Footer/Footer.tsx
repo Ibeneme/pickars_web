@@ -88,7 +88,7 @@ const Footer: React.FC = () => {
                   href={IOS_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group flex items-center gap-2 rounded-xl bg-white/5 px-4 py-3 text-sm font-bold text-white transition-all hover:bg-white/10 hover:shadow-md hover:shadow-red-600/20"
+                  className="group flex items-center gap-2 rounded-xl bg-white/5 px-4 py-3 text-sm font-bold text-white transition-all hover:bg-white/10 "
                 >
                   <div className="flex h-8 w-8 items-center justify-center rounded-lg  text-white transition-transform group-hover:scale-110">
                     <FaApple size={20} />
@@ -99,7 +99,7 @@ const Footer: React.FC = () => {
                   href={ANDROID_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group flex items-center gap-2 rounded-xl bg-white/5 px-4 py-3 text-sm font-bold text-white transition-all hover:bg-white/10 hover:shadow-md hover:shadow-red-600/20"
+                  className="group flex items-center gap-2 rounded-xl bg-white/5 px-4 py-3 text-sm font-bold text-white transition-all hover:bg-white/10 "
                 >
                   <div className="flex h-8 w-8 items-center justify-center rounded-lg text-white transition-transform group-hover:scale-110">
                     <BiLogoPlayStore size={20} />
@@ -116,7 +116,7 @@ const Footer: React.FC = () => {
                     href={social.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/5 text-gray-400 transition-all hover:bg-red-600 hover:text-white hover:shadow-md hover:shadow-red-600/20"
+                    className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/5 text-gray-400 transition-all hover:bg-red-600 hover:text-white "
                     aria-label={social.name}
                   >
                     {social.icon}
