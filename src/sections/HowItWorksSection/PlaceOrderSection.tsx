@@ -105,7 +105,7 @@ const PlaceOrderSection: React.FC = () => {
             </div>
 
             {/* Bottom Section with Side-View Moving Rider Animation */}
-            <div className="relative z-10 mt-12 w-full mb-[-120px]">
+            <div className="relative z-10 mt-12 w-full md:mb-[-84px] mb-[-36px]">
               <img src={riders_head} alt="pickars" />
             </div>
           </motion.div>
