@@ -44,7 +44,7 @@ const Footer: React.FC = () => {
   ];
 
   return (
-    <footer className="bg-[#080808] pt-24 pb-16 font-['Lufga'] text-white overflow-hidden">
+    <footer className="bg-[#000] pt-24 pb-16 font-['Lufga'] text-white overflow-hidden">
       <div className="mx-auto max-w-[1400px] px-6">
         <div className="grid grid-cols-1 gap-16 lg:grid-cols-12">
           {/* Brand Identity Section */}
@@ -90,7 +90,7 @@ const Footer: React.FC = () => {
                   rel="noopener noreferrer"
                   className="group flex items-center gap-2 rounded-xl bg-white/5 px-4 py-3 text-sm font-bold text-white transition-all hover:bg-white/10 hover:shadow-md hover:shadow-red-600/20"
                 >
-                  <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-black text-white transition-transform group-hover:scale-110">
+                  <div className="flex h-8 w-8 items-center justify-center rounded-lg  text-white transition-transform group-hover:scale-110">
                     <FaApple size={20} />
                   </div>
                   App Store
@@ -101,7 +101,7 @@ const Footer: React.FC = () => {
                   rel="noopener noreferrer"
                   className="group flex items-center gap-2 rounded-xl bg-white/5 px-4 py-3 text-sm font-bold text-white transition-all hover:bg-white/10 hover:shadow-md hover:shadow-red-600/20"
                 >
-                  <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-black text-white transition-transform group-hover:scale-110">
+                  <div className="flex h-8 w-8 items-center justify-center rounded-lg text-white transition-transform group-hover:scale-110">
                     <BiLogoPlayStore size={20} />
                   </div>
                   Google Play
