@@ -62,15 +62,17 @@ const PackageDeliverySection: React.FC = () => {
             initial={{ opacity: 0, y: 15 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4"
+            className="mt-2 flex flex-col sm:flex-row items-center justify-center gap-4 w-full"
           >
-            {/* App Store Button */}
+            {/* App Store Button (Forced longer on mobile using min-w, fit-content on sm+) */}
             <a
-              href="#app-store"
-              className="w-full sm:w-auto px-6 py-3 bg-black hover:bg-[#ff0000] text-white rounded-2xl hover:translate-x-[2px] hover:translate-y-[2px] transition-all flex items-center justify-center space-x-3 group"
+              href={IOS_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full sm:w-auto min-w-[185px] px-6 py-3.5 bg-black hover:bg-[#ff0000] text-white rounded-2xl hover:translate-x-[2px] hover:translate-y-[2px] transition-all flex items-center justify-center space-x-3 group shadow-md"
             >
               <svg
-                className="w-7 h-7 fill-current"
+                className="w-7 h-7 fill-current shrink-0"
                 viewBox="0 0 384 512"
                 xmlns="http://www.w3.org/2000/svg"
               >
@@ -86,11 +88,13 @@ const PackageDeliverySection: React.FC = () => {
 
             {/* Google Play Button */}
             <a
-              href="#play-store"
-              className="w-full sm:w-auto px-6 py-3 bg-black hover:bg-[#ff0000] text-white rounded-2xl hover:translate-x-[2px] hover:translate-y-[2px] transition-all flex items-center justify-center space-x-3 group"
+              href={ANDROID_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full sm:w-auto px-6 py-3.5 bg-black hover:bg-[#ff0000] text-white rounded-2xl hover:translate-x-[2px] hover:translate-y-[2px] transition-all flex items-center justify-center space-x-3 group shadow-md"
             >
               <svg
-                className="w-7 h-7 fill-current"
+                className="w-7 h-7 fill-current shrink-0"
                 viewBox="0 0 512 512"
                 xmlns="http://www.w3.org/2000/svg"
               >

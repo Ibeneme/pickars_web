@@ -3,7 +3,8 @@ import { motion, useInView } from "framer-motion";
 
 // Constants provided for App download buttons
 export const IOS_URL = "https://apps.apple.com/ng/app/pickars/id6746796884";
-export const ANDROID_URL = "https://play.google.com/store/apps/details?id=com.pickars.app&hl=en";
+export const ANDROID_URL =
+  "https://play.google.com/store/apps/details?id=com.pickars.app&hl=en";
 
 const NeverLateBanner: React.FC = () => {
   const [seconds, setSeconds] = useState(new Date().getSeconds());
@@ -20,14 +21,16 @@ const NeverLateBanner: React.FC = () => {
   const secondDegrees = seconds * 6;
 
   return (
-    <section ref={ref} className="relative w-full overflow-hidden bg-[#FFF5F5] py-12 px-6 md:px-12 font-['Lufga'] text-[#111111]">
+    <section
+      ref={ref}
+      className="relative w-full overflow-hidden bg-[#FFF5F5] py-12 px-6 md:px-12 font-['Lufga'] text-[#111111]"
+    >
       {/* Background ambient red glow accents */}
       <div className="absolute top-1/4 left-10 w-96 h-96 bg-red-500/10 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute bottom-1/4 right-10 w-80 h-80 bg-red-600/10 rounded-full blur-[100px] pointer-events-none" />
 
       {/* Main Container: Single Vertical Flex Column */}
       <div className="max-w-[1000px] mx-auto flex flex-col items-center text-center gap-16 relative z-10">
-        
         {/* Top Section: Copy and Custom Download Buttons */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -42,8 +45,10 @@ const NeverLateBanner: React.FC = () => {
             transition={{ type: "spring", stiffness: 200, damping: 15 }}
             className="mb-4 sm:mb-6 px-5 sm:px-6 py-2 sm:py-2.5 bg-[#FF0000] text-white font-black text-[11px] sm:text-xs md:text-sm uppercase tracking-widest cursor-default select-none shadow-lg shadow-red-600/25"
             style={{
-              maskImage: "radial-gradient(circle 5px at calc(100% - 2.5px) 50%, #0000 99%, #000 100%)",
-              WebkitMaskImage: "conic-gradient(from -45deg at 50% 50%, #000 0 90deg, #0000 0) 0 0/10px 10px repeat",
+              maskImage:
+                "radial-gradient(circle 5px at calc(100% - 2.5px) 50%, #0000 99%, #000 100%)",
+              WebkitMaskImage:
+                "conic-gradient(from -45deg at 50% 50%, #000 0 90deg, #0000 0) 0 0/10px 10px repeat",
             }}
           >
             Express Delivery Guarantee
@@ -58,7 +63,9 @@ const NeverLateBanner: React.FC = () => {
           </h2>
 
           <p className="text-gray-700 text-lg sm:text-xl font-normal leading-relaxed max-w-2xl mb-8">
-            We value your time as much as you do. Backed by real-time route tracking and an elite network of riders across Port Harcourt and beyond, your deliveries always arrive right on schedule.
+            We value your time as much as you do. Backed by real-time route
+            tracking and an elite network of riders across Port Harcourt and
+            beyond, your deliveries always arrive right on schedule.
           </p>
 
           {/* DOWNLOAD BUTTONS */}
@@ -68,15 +75,15 @@ const NeverLateBanner: React.FC = () => {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="mt-2 flex flex-col sm:flex-row items-center justify-center gap-4 w-full"
           >
-            {/* App Store Button */}
+            {/* App Store Button (Forced longer on mobile using min-w, fit-content on sm+) */}
             <a
               href={IOS_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full sm:w-auto px-6 py-3.5 bg-black hover:bg-[#ff0000] text-white rounded-2xl hover:translate-x-[2px] hover:translate-y-[2px] transition-all flex items-center justify-center space-x-3 group shadow-md"
+              className="w-full sm:w-auto min-w-[185px] px-6 py-3.5 bg-black hover:bg-[#ff0000] text-white rounded-2xl hover:translate-x-[2px] hover:translate-y-[2px] transition-all flex items-center justify-center space-x-3 group shadow-md"
             >
               <svg
-                className="w-7 h-7 fill-current"
+                className="w-7 h-7 fill-current shrink-0"
                 viewBox="0 0 384 512"
                 xmlns="http://www.w3.org/2000/svg"
               >
@@ -98,7 +105,7 @@ const NeverLateBanner: React.FC = () => {
               className="w-full sm:w-auto px-6 py-3.5 bg-black hover:bg-[#ff0000] text-white rounded-2xl hover:translate-x-[2px] hover:translate-y-[2px] transition-all flex items-center justify-center space-x-3 group shadow-md"
             >
               <svg
-                className="w-7 h-7 fill-current"
+                className="w-7 h-7 fill-current shrink-0"
                 viewBox="0 0 512 512"
                 xmlns="http://www.w3.org/2000/svg"
               >
@@ -126,10 +133,8 @@ const NeverLateBanner: React.FC = () => {
         >
           {/* Added transform rotate to tilt the watch element */}
           <div className="relative w-full max-w-[420px] h-[520px] flex flex-col items-center justify-center overflow-hidden group rotate-12">
-            
             <div className="relative z-10 flex flex-col items-center justify-center my-auto">
               <div className="relative w-64 h-64 rounded-full bg-gray-900 border-4 border-red-600/40 flex items-center justify-center shadow-2xl">
-                
                 {/* Top Extended Watch Strap */}
                 <div className="absolute -top-32 w-28 h-36 bg-[#3d2314] rounded-t-2xl border-t border-x border-white/20 flex flex-col items-center pt-3 shadow-inner">
                   <div className="w-10 h-5 bg-gray-300 rounded-sm border border-gray-500" />
@@ -155,19 +160,17 @@ const NeverLateBanner: React.FC = () => {
                 <div className="absolute w-1.5 h-22 bg-gray-300 rounded-full origin-bottom bottom-1/2 left-[calc(50%-3px)] -rotate-12 transition-transform" />
 
                 {/* Live Second Hand */}
-                <div 
-                  className="absolute w-0.5 h-24 bg-red-500 rounded-full origin-bottom bottom-1/2 left-[calc(50%-1px)] transition-transform duration-300" 
-                  style={{ transform: `rotate(${secondDegrees}deg)` }} 
+                <div
+                  className="absolute w-0.5 h-24 bg-red-500 rounded-full origin-bottom bottom-1/2 left-[calc(50%-1px)] transition-transform duration-300"
+                  style={{ transform: `rotate(${secondDegrees}deg)` }}
                 />
 
                 {/* Center Pin */}
                 <div className="w-4 h-4 rounded-full bg-red-600 border-2 border-white z-20 shadow-md" />
               </div>
             </div>
-
           </div>
         </motion.div>
-
       </div>
     </section>
   );
