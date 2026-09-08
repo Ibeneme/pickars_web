@@ -1,7 +1,12 @@
 import React from "react";
 import { motion, useInView } from "framer-motion";
 import PortHarcourtMapComponent from "./PortHarcourtMapComponent";
+// Constants provided for App download buttons
+export const IOS_URL = "https://apps.apple.com/ng/app/pickars/id6746796884";
+export const ANDROID_URL =
+  "https://play.google.com/store/apps/details?id=com.pickars.app&hl=en";
 
+  
 const PackageDeliverySection: React.FC = () => {
   const ref = React.useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
