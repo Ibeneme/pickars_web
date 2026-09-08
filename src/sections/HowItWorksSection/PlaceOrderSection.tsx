@@ -80,9 +80,7 @@ const PlaceOrderSection: React.FC = () => {
                     <p className="text-[10px] uppercase tracking-wider text-gray-500 font-medium">
                       Download on
                     </p>
-                    <p className="text-sm font-bold leading-none">
-                      Google Play
-                    </p>
+                    <p className="text-sm font-bold leading-none">Play Store</p>
                   </div>
                 </motion.a>
 

@@ -124,7 +124,7 @@ const HeroSection: React.FC = () => {
             />
             <div className="text-left">
               <p className="text-[10px] font-bold opacity-70">Get it on</p>
-              <p className="text-lg font-black leading-none">Google Play</p>
+              <p className="text-lg font-black leading-none">Play Store</p>
             </div>
           </a>
         </motion.div>

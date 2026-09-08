@@ -108,9 +108,7 @@ const PackageDeliverySection: React.FC = () => {
                 <p className="text-[10px] uppercase font-bold text-gray-300 leading-none">
                   Get it on
                 </p>
-                <p className="text-base font-black leading-tight">
-                  Google Play
-                </p>
+                <p className="text-base font-black leading-tight">Play Store</p>
               </div>
             </a>
           </motion.div>
