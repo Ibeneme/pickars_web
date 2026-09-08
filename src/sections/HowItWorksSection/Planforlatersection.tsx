@@ -20,7 +20,7 @@ const NeverLateBanner: React.FC = () => {
   const secondDegrees = seconds * 6;
 
   return (
-    <section ref={ref} className="relative w-full overflow-hidden bg-[#FFF5F5] py-24 px-6 md:px-12 font-['Lufga'] text-[#111111]">
+    <section ref={ref} className="relative w-full overflow-hidden bg-[#FFF5F5] py-12 px-6 md:px-12 font-['Lufga'] text-[#111111]">
       {/* Background ambient red glow accents */}
       <div className="absolute top-1/4 left-10 w-96 h-96 bg-red-500/10 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute bottom-1/4 right-10 w-80 h-80 bg-red-600/10 rounded-full blur-[100px] pointer-events-none" />

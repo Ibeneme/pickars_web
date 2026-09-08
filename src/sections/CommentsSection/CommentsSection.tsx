@@ -205,12 +205,12 @@ export default function PickarsTestimonialsSection(): React.JSX.Element {
       ref={sectionRef}
       className="relative w-full bg-[#FFF5F5] py-16 sm:py-20 md:py-28 px-4 sm:px-6 lg:px-8 font-sans flex flex-col justify-center items-center overflow-hidden"
     >
-      {/* Header */}
-      <div className="w-full max-w-7xl mb-6 sm:mb-8 md:mb-10 text-left">
+      {/* Header - Centered */}
+      <div className="w-full max-w-7xl mb-10 sm:mb-12 md:mb-16 flex flex-col items-center text-center">
         <h3 className="max-w-4xl text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-extrabold text-gray-950 tracking-tight leading-[1.1]">
           Got questions about <span className="text-[#ff0000]">Pickars?</span>
         </h3>
-        <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-600 mt-2 sm:mt-3 max-w-2xl">
+        <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-600 mt-3 sm:mt-4 max-w-2xl">
           Everything you need to know about our dispatch rider service in Port
           Harcourt.
         </p>
@@ -261,7 +261,6 @@ export default function PickarsTestimonialsSection(): React.JSX.Element {
                 <polyline points="12 19 5 12 12 5" />
               </svg>
             </button>
-
             <button
               ref={nextBtnRef}
               onClick={handleNext}

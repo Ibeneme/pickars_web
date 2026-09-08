@@ -13,9 +13,9 @@ const HowItWorks: React.FC = () => {
   return (
     <section
       ref={ref}
-      className="relative overflow-hidden bg-[#FFF5F5] py-16 sm:py-24 md:py-32 font-['Lufga'] text-gray-900"
+      className="relative overflow-hidden bg-[#FFF5F5] py-16 font-['Lufga'] text-gray-900"
     >
-      <div className="relative z-10 px-4 sm:px-6 max-w-7xl mx-auto">
+      <div className="relative z-10 px-4  max-w-7xl mx-auto">
         {/* SECTION HEADER */}
         <div className="text-center max-w-4xl mx-auto mb-12 sm:mb-16 md:mb-24 flex flex-col items-center">
           {/* TRACK RECORD BADGE */}
