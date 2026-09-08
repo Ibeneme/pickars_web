@@ -63,12 +63,15 @@ const Footer: React.FC = () => {
 
             <div className="flex flex-col gap-6">
               {/* Email Support */}
-              <a
+           <motion.a
                 href="mailto:support@pickars.com"
-                className="group flex w-fit items-center gap-4 rounded-2xl border border-white/5 bg-white/5 p-4 transition-all hover:border-red-600/50 hover:bg-white/10"
+                whileHover={{ x: 3 }}
+                transition={{ type: "spring", stiffness: 300, damping: 22 }}
+                className="group flex w-fit items-center gap-4 rounded-2xl border border-white/5 bg-white/5 p-4 transition-colors duration-300 hover:border-red-600/50 hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600"
               >
-                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-red-600 text-white transition-transform group-hover:scale-110">
+                <div className="relative flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-red-600 text-white transition-transform duration-300 group-hover:scale-110">
                   <FaEnvelope size={14} />
+                  <span className="absolute -right-0.5 -top-0.5 h-2 w-2 rounded-full bg-emerald-400 ring-2 ring-[#080808]" />
                 </div>
                 <div>
                   <p className="text-[10px] font-bold uppercase tracking-widest text-gray-500">
@@ -76,7 +79,8 @@ const Footer: React.FC = () => {
                   </p>
                   <p className="text-sm font-bold">support@pickars.com</p>
                 </div>
-              </a>
+              </motion.a>
+
 
               {/* App Download Links */}
               <div className="flex flex-wrap gap-4 mt-2">
@@ -129,14 +133,7 @@ const Footer: React.FC = () => {
                 Company
               </h4>
               <ul className="flex flex-col gap-4">
-                <li>
-                  <Link
-                    to="/app/our-company"
-                    className="text-sm text-gray-400 transition-colors hover:text-white"
-                  >
-                    Our Company
-                  </Link>
-                </li>
+       
                 <li>
                   <Link
                     to="/app/app-features"
@@ -206,8 +203,8 @@ const Footer: React.FC = () => {
 
         {/* Ultra-Bold and Fluid Responsive Brand Typography */}
         <div className="mt-16 select-none w-full overflow-hidden">
-          <h1 className="w-full text-center sm:text-left text-[clamp(4.5rem,19vw,17rem)] font-[900] tracking-tighter leading-[0.8] text-white opacity-95">
-            Pickars
+          <h1 className="w-full text-center sm:text-left text-[clamp(4.3rem,19vw,17rem)] font-[900] tracking-tighter leading-[0.8] text-white opacity-95">
+            Pickars <span style={{color:'#ff0000'}}>.</span>
           </h1>
         </div>
 

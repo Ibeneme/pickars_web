@@ -9,6 +9,8 @@ import HeroSection from "../../sections/Hero/HeroSection";
 import PickarsTestimonialsSection from "../../sections/CommentsSection/CommentsSection";
 import HowItWorks from "../../sections/HowItWorksSection/HowItWorksSection";
 import PackageDeliverySection from "../../sections/HowItWorksSection/PackageDeliverySection";
+import NeverLateBanner from "../../sections/HowItWorksSection/Planforlatersection";
+//import PickarsQRCode from "../PickarsQRCode/PickarsQRCode";
 // import PickarsFeaturesSection from "../../sections/HeroDelivery/MidImage";
 //import MidImage from "../../sections/HeroDelivery/MidImage";
 
@@ -51,15 +53,15 @@ const Home = () => {
       <main className="overflow-x-hidden">
         <HeroSection />
 
+
+        <PackageDeliverySection />
+
         <section className="relative z-10">
           <SlidingPage />
         </section>
         <HowItWorks />
-        <PackageDeliverySection />
-        {/* <FinalBookingSection /> */}
-        {/* <PickarsPricingStackingScrollSection /> */}
+        <NeverLateBanner />
         <PickarsTestimonialsSection />
-        {/* <PickarsFeaturesSection /> */}
       </main>
     </div>
   );

@@ -2,81 +2,83 @@ import React, { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { motion, AnimatePresence } from "framer-motion";
+import packageImg from "../../assets/images/driver/package.png";
 
 gsap.registerPlugin(ScrollTrigger);
 
-interface Testimonial {
+interface FaqItem {
   id: number;
-  quote: string;
-  author: string;
-  location: string;
-  initials: string;
+  question: string;
+  answer: string;
+  category: string;
+  tag: string;
 }
 
-const testimonials: Testimonial[] = [
+const faqs: FaqItem[] = [
   {
     id: 1,
-    quote:
-      "Fastest delivery service in Port Harcourt! My package was delivered to Borikiri in under an hour.",
-    author: "Tamuno S.",
-    location: "Borikiri",
-    initials: "TS",
+    question: "How fast is delivery with Pickars in Port Harcourt?",
+    answer:
+      "Pickars delivers packages across Port Harcourt in under an hour depending on the route, connecting you instantly with riders near you for lightning-fast dispatch.",
+    category: "Delivery Speed",
+    tag: "Speed",
   },
   {
     id: 2,
-    quote:
-      "The real-time tracking is a game changer for my online boutique at Garrison market.",
-    author: "Nneka O.",
-    location: "Garrison",
-    initials: "NO",
+    question: "Can I track my package in real-time while it's being delivered?",
+    answer:
+      "Yes! Real-time tracking is built directly into Pickars so you can monitor your rider's exact location from pickup to final drop-off at your destination.",
+    category: "Tracking",
+    tag: "Live Map",
   },
   {
     id: 3,
-    quote:
-      "Affordable door-to-door delivery all the way to Eleme. Very respectful riders!",
-    author: "Baridule K.",
-    location: "Eleme",
-    initials: "BK",
+    question: "What areas in Port Harcourt does Pickars cover?",
+    answer:
+      "Pickars covers all major areas across Port Harcourt including Borikiri, Garrison, Eleme, Oil Mill, GRA, Ada George, Trans-Amadi, Diobu, and beyond.",
+    category: "Coverage",
+    tag: "PH Coverage",
   },
   {
     id: 4,
-    quote:
-      "Reliable and honest. Pickars helps me send stock across PH without any stress.",
-    author: "Musa A.",
-    location: "Oil Mill",
-    initials: "MA",
+    question:
+      "Is Pickars reliable for sending business stock and daily orders?",
+    answer:
+      "Absolutely. Many online boutique owners and small businesses rely on Pickars daily to dispatch products securely and efficiently across PH without stress.",
+    category: "Business",
+    tag: "Merchants",
   },
   {
     id: 5,
-    quote:
-      "I love how easy it is to book a bike. Makes sending urgent documents so effortless.",
-    author: "Tariere P.",
-    location: "GRA Phase 2",
-    initials: "TP",
+    question: "How do I book a dispatch rider on the app?",
+    answer:
+      "Booking a bike is effortless—just open the app, enter your pickup and drop-off locations, view upfront pricing, and tap to match with an available rider instantly.",
+    category: "Booking",
+    tag: "Easy Steps",
   },
   {
     id: 6,
-    quote:
-      "Safe and dependable. I never worry about fragile items getting damaged when dispatched.",
-    author: "Chidubem E.",
-    location: "Ada George",
-    initials: "CE",
+    question: "Are fragile items safe with Pickars dispatch riders?",
+    answer:
+      "Yes, our trained riders handle every package with care, ensuring fragile items, documents, and valuables arrive safely without any damage.",
+    category: "Safety",
+    tag: "Secure",
   },
   {
     id: 7,
-    quote:
-      "Pickars respects delivery schedules better than any other local dispatch service in PH.",
-    author: "Sira M.",
-    location: "Trans-Amadi",
-    initials: "SM",
+    question: "Do Pickars riders stick to delivery schedules?",
+    answer:
+      "Pickars takes time management seriously, respecting delivery windows and schedules better than standard local dispatch services in Port Harcourt.",
+    category: "Schedule",
+    tag: "Punctual",
   },
   {
     id: 8,
-    quote:
-      "Great rates for small business owners. Highly recommended to deliver daily packages.",
-    author: "Ibrahim S.",
-    location: "Mile 1, Diobu",
-    initials: "IS",
+    question: "Are the delivery rates affordable for small business owners?",
+    answer:
+      "We offer competitive, budget-friendly rates designed specifically to help small business owners scale their daily deliveries without breaking the bank.",
+    category: "Pricing",
+    tag: "Affordable",
   },
 ];
 
@@ -92,23 +94,22 @@ export default function PickarsTestimonialsSection(): React.JSX.Element {
   const nextBtnRef = useRef<HTMLButtonElement>(null);
   const progressTweenRef = useRef<gsap.core.Tween | null>(null);
 
-  // Default to index 2 which corresponds to Baridule K. from Eleme (BK)
   const [currentIndex, setCurrentIndex] = useState(2);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
       gsap.fromTo(
         containerRef.current,
-        { y: 80, opacity: 0, scale: 0.96 },
+        { y: 60, opacity: 0, scale: 0.97 },
         {
           y: 0,
           opacity: 1,
           scale: 1,
-          duration: 1.2,
+          duration: 1.1,
           ease: "power4.out",
           scrollTrigger: {
             trigger: sectionRef.current,
-            start: "top 75%",
+            start: "top 78%",
             toggleActions: "play none none reverse",
           },
         }
@@ -116,29 +117,29 @@ export default function PickarsTestimonialsSection(): React.JSX.Element {
 
       gsap.fromTo(
         quoteMarkRef.current,
-        { opacity: 0, scale: 0.85 },
+        { opacity: 0, scale: 0.9 },
         {
           opacity: 1,
           scale: 1,
-          duration: 1,
-          delay: 0.3,
+          duration: 0.9,
+          delay: 0.25,
           ease: "power3.out",
           scrollTrigger: {
             trigger: sectionRef.current,
-            start: "top 75%",
+            start: "top 78%",
             toggleActions: "play none none reverse",
           },
         }
       );
 
       gsap.to(quoteMarkRef.current, {
-        y: -30,
+        y: -24,
         ease: "none",
         scrollTrigger: {
           trigger: sectionRef.current,
           start: "top bottom",
           end: "bottom top",
-          scrub: 1.2,
+          scrub: 1.1,
         },
       });
     }, sectionRef);
@@ -167,7 +168,7 @@ export default function PickarsTestimonialsSection(): React.JSX.Element {
         }
       },
       onComplete: () => {
-        setCurrentIndex((prev) => (prev + 1) % testimonials.length);
+        setCurrentIndex((prev) => (prev + 1) % faqs.length);
       },
     });
 
@@ -180,96 +181,97 @@ export default function PickarsTestimonialsSection(): React.JSX.Element {
   const resumeAutoAdvance = () => progressTweenRef.current?.resume();
 
   const handleNext = () => {
-    setCurrentIndex((prev) => (prev + 1) % testimonials.length);
+    setCurrentIndex((prev) => (prev + 1) % faqs.length);
   };
 
   const handlePrev = () => {
-    setCurrentIndex(
-      (prev) => (prev - 1 + testimonials.length) % testimonials.length
-    );
+    setCurrentIndex((prev) => (prev - 1 + faqs.length) % faqs.length);
   };
 
   const handleBtnEnter = (btn: HTMLButtonElement | null) => {
     if (!btn) return;
-    gsap.to(btn, { y: -3, scale: 1.05, duration: 0.25, ease: "power2.out" });
+    gsap.to(btn, { y: -2, scale: 1.04, duration: 0.22, ease: "power2.out" });
   };
 
   const handleBtnLeave = (btn: HTMLButtonElement | null) => {
     if (!btn) return;
-    gsap.to(btn, { y: 0, scale: 1, duration: 0.35, ease: "power3.out" });
+    gsap.to(btn, { y: 0, scale: 1, duration: 0.3, ease: "power3.out" });
   };
 
-  const current = testimonials[currentIndex];
+  const current = faqs[currentIndex];
 
   return (
     <section
       ref={sectionRef}
-      className="relative w-full bg-[#FFF5F5] py-20 md:py-28 px-4 sm:px-6 font-sans flex flex-col justify-center items-center overflow-hidden"
+      className="relative w-full bg-[#FFF5F5] py-16 sm:py-20 md:py-28 px-4 sm:px-6 lg:px-8 font-sans flex flex-col justify-center items-center overflow-hidden"
     >
-      {/* Section Header Placed at the Very Top */}
-      <div className="w-full max-w-7xl mb-8 text-left">
-        <h3 className="max-w-4xl text-4xl md:text-8xl font-extrabold text-gray-950 tracking-tight">
-          Trusted across <br />{" "}
-          <span style={{ color: "#ff0000" }}>Port Harcourt.</span>
+      {/* Header */}
+      <div className="w-full max-w-7xl mb-6 sm:mb-8 md:mb-10 text-left">
+        <h3 className="max-w-4xl text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-extrabold text-gray-950 tracking-tight leading-[1.1]">
+          Got questions about <span className="text-[#ff0000]">Pickars?</span>
         </h3>
-        <p className="text-sm md:text-[20px] text-gray-600 mt-1">
-          Hear what our everyday users and business partners say about our
-          dispatch service.
+        <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-600 mt-2 sm:mt-3 max-w-2xl">
+          Everything you need to know about our dispatch rider service in Port
+          Harcourt.
         </p>
       </div>
 
-      {/* Main Container Card */}
+      {/* Card */}
       <div
         ref={containerRef}
         onMouseEnter={pauseAutoAdvance}
         onMouseLeave={resumeAutoAdvance}
-        className="w-full max-w-7xl bg-white rounded-[2rem] md:rounded-[2.5rem] border border-red-100 p-6 sm:p-10 md:p-16 flex flex-col justify-between min-h-[520px] relative overflow-hidden shadow-sm"
+        className="w-full max-w-7xl bg-white rounded-2xl sm:rounded-3xl md:rounded-[2.5rem] border border-red-100 p-5 sm:p-8 md:p-12 lg:p-16 flex flex-col justify-between min-h-[480px] sm:min-h-[520px] relative overflow-hidden"
       >
-        {/* Decorative oversized quote mark */}
+        {/* Decorative ? */}
         <span
           ref={quoteMarkRef}
           aria-hidden="true"
-          className="pointer-events-none absolute -top-6 right-6 md:right-14 text-[10rem] md:text-[16rem] font-black leading-none text-red-600/[0.04] select-none"
+          className="pointer-events-none absolute -top-4 right-4 sm:right-8 md:right-12 text-[8rem] sm:text-[12rem] md:text-[16rem] font-black leading-none text-red-600/[0.035] select-none"
         >
-          "
+          ?
         </span>
 
-        {/* Top Header & Control Bar Inside Card */}
-        <div className="relative flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 border-b border-red-50 pb-8">
-          <div className="flex flex-col gap-1">
-            <span className="text-xs font-bold tracking-widest text-red-400 uppercase">
-              0{currentIndex + 1} / 0{testimonials.length} — Real Stories
+        {/* Top bar */}
+        <div className="relative flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 sm:gap-6 border-b border-red-50 pb-6 sm:pb-8">
+          <div className="flex flex-col gap-1 min-w-0">
+            <span className="text-[11px] sm:text-xs font-bold tracking-widest text-red-400 uppercase truncate">
+              0{currentIndex + 1} / 0{faqs.length} — {current.tag}
             </span>
+            <p className="text-sm sm:text-base text-gray-500 font-medium truncate max-w-md">
+              {current.question}
+            </p>
           </div>
 
-          {/* Navigation Controls & Timer Circle */}
-          <div className="flex items-center gap-3 self-end sm:self-auto">
+          {/* Controls */}
+          <div className="flex items-center gap-2.5 sm:gap-3 self-end sm:self-auto shrink-0">
             <button
               ref={prevBtnRef}
               onClick={handlePrev}
               onMouseEnter={() => handleBtnEnter(prevBtnRef.current)}
               onMouseLeave={() => handleBtnLeave(prevBtnRef.current)}
-              className="w-12 h-12 rounded-full border border-red-100 flex items-center justify-center text-gray-700 hover:bg-red-50 hover:border-red-200 transition-colors cursor-pointer will-change-transform"
-              aria-label="Previous Testimonial"
+              className="w-11 h-11 sm:w-12 sm:h-12 rounded-full border border-red-100 flex items-center justify-center text-gray-700 hover:bg-red-50 hover:border-red-200 transition-colors cursor-pointer will-change-transform"
+              aria-label="Previous Question"
             >
               <svg
-                className="w-5 h-5 stroke-current stroke-2 fill-none"
+                className="w-4.5 h-4.5 sm:w-5 sm:h-5 stroke-current stroke-2 fill-none"
                 viewBox="0 0 24 24"
               >
                 <line x1="19" y1="12" x2="5" y2="12" />
                 <polyline points="12 19 5 12 12 5" />
               </svg>
             </button>
+
             <button
               ref={nextBtnRef}
               onClick={handleNext}
               onMouseEnter={() => handleBtnEnter(nextBtnRef.current)}
               onMouseLeave={() => handleBtnLeave(nextBtnRef.current)}
-              className="w-12 h-12 rounded-full border border-red-100 flex items-center justify-center text-gray-700 hover:bg-red-50 hover:border-red-200 transition-colors relative cursor-pointer will-change-transform"
-              aria-label="Next Testimonial"
+              className="w-11 h-11 sm:w-12 sm:h-12 rounded-full border border-red-100 flex items-center justify-center text-gray-700 hover:bg-red-50 hover:border-red-200 transition-colors relative cursor-pointer will-change-transform"
+              aria-label="Next Question"
             >
               <svg
-                className="absolute inset-0 w-12 h-12 -rotate-90"
+                className="absolute inset-0 w-full h-full -rotate-90"
                 viewBox="0 0 48 48"
               >
                 <circle
@@ -291,7 +293,7 @@ export default function PickarsTestimonialsSection(): React.JSX.Element {
                 />
               </svg>
               <svg
-                className="w-5 h-5 stroke-current stroke-2 fill-none relative z-10"
+                className="w-4.5 h-4.5 sm:w-5 sm:h-5 stroke-current stroke-2 fill-none relative z-10"
                 viewBox="0 0 24 24"
               >
                 <line x1="5" y1="12" x2="19" y2="12" />
@@ -301,72 +303,48 @@ export default function PickarsTestimonialsSection(): React.JSX.Element {
           </div>
         </div>
 
-        {/* Dynamic Testimonial Quote Content Area */}
-        <div className="relative py-10 md:py-14 flex flex-col justify-center min-h-[220px]">
+        {/* Answer */}
+        <div className="relative py-8 sm:py-10 md:py-14 flex flex-col justify-center min-h-[180px] sm:min-h-[220px]">
           <AnimatePresence mode="wait">
             <motion.div
               key={currentIndex}
-              initial={{ opacity: 0, y: 20, filter: "blur(4px)" }}
+              initial={{ opacity: 0, y: 16, filter: "blur(3px)" }}
               animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-              exit={{ opacity: 0, y: -20, filter: "blur(4px)" }}
-              transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+              exit={{ opacity: 0, y: -16, filter: "blur(3px)" }}
+              transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
               className="max-w-4xl"
             >
-              <blockquote className="text-2xl sm:text-3xl md:text-4xl lg:text-[2.6rem] font-extrabold tracking-tight text-gray-900 leading-[1.25]">
-                "{current.quote}"
-              </blockquote>
+              <p className="text-xl sm:text-2xl md:text-3xl lg:text-[2.4rem] xl:text-[2.6rem] font-extrabold tracking-tight text-gray-900 leading-[1.3] sm:leading-[1.25]">
+                {current.answer}
+              </p>
             </motion.div>
           </AnimatePresence>
         </div>
 
-        <div className="relative flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 pt-6 border-t border-red-50">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={currentIndex + "-author"}
-              initial={{ opacity: 0, x: -12 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: 12 }}
-              transition={{ duration: 0.35, ease: "easeOut" }}
-              className="flex items-center gap-4"
-            >
-              <div className="relative shrink-0">
-                <div className="w-12 h-12 p-4 rounded-2xl bg-[#FFF5F5] text-[#ff0000] font-extrabold text-base flex items-center justify-center">
-                  {current.initials}
-                </div>
-              </div>
-              <div className="flex flex-col">
-                <div className="flex items-center gap-2">
-                  <h4 className="text-base font-extrabold text-gray-900">
-                    {current.author}
-                  </h4>
-                  <span className="inline-block text-[11px] font-extrabold uppercase px-2.5 py-0.5 rounded-full bg-red-50 text-red-600 border border-red-100">
-                    {current.location}
-                  </span>
-                </div>
-                <div className="flex items-center gap-2 mt-0.5">
-                  <p className="text-xs sm:text-sm font-medium text-gray-500">
-                    Port Harcourt
-                  </p>
-                </div>
-              </div>
-            </motion.div>
-          </AnimatePresence>
-
-          {/* Quick Jump Pagination Dots */}
-          <div className="flex items-center gap-2">
-            {testimonials.map((_, idx) => (
+        {/* Bottom */}
+        <div className="relative flex flex-col sm:flex-row items-center sm:items-end justify-between gap-6 sm:gap-8 pt-6 border-t border-red-50">
+          {/* Dots */}
+          <div className="flex items-center gap-1.5 sm:gap-2 order-2 sm:order-1">
+            {faqs.map((_, idx) => (
               <button
                 key={idx}
                 onClick={() => setCurrentIndex(idx)}
-                className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${
+                className={`h-1.5 sm:h-2 rounded-full transition-all duration-300 cursor-pointer ${
                   idx === currentIndex
-                    ? "w-8 bg-[#FF0000]"
-                    : "w-2 bg-red-100 hover:bg-red-200"
+                    ? "w-6 sm:w-8 bg-[#FF0000]"
+                    : "w-1.5 sm:w-2 bg-red-100 hover:bg-red-200"
                 }`}
-                aria-label={`Go to testimonial ${idx + 1}`}
+                aria-label={`Go to question ${idx + 1}`}
               />
             ))}
           </div>
+
+          {/* Package image – responsive, no shadow */}
+          <img
+            src={packageImg}
+            alt="Package"
+            className="w-40 h-40 sm:w-52 sm:h-52 md:w-64 md:h-64 lg:w-72 lg:h-72 object-contain order-1 sm:order-2 -mb-2 sm:-mb-4 md:-mb-6"
+          />
         </div>
       </div>
     </section>

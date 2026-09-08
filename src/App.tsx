@@ -12,7 +12,6 @@ import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsConditions from "./pages/TermsConditions";
 import Support from "./pages/Support";
 import FAQsPage from "./pages/FAQ/FAQsPage";
-import Company from "./pages/Company";
 import LostItemPage from "./pages/LostItemPage/LostItemPage";
 import HelpCenter from "./pages/HelpCenter/HelpCenter";
 import AppFeatures from "./pages/AppFeatures/AppFeatures";
@@ -70,7 +69,7 @@ const App: React.FC = () => {
           <Route path="/app/terms-of-use" element={<TermsConditions />} />
           <Route path="/app/support" element={<Support />} />
           <Route path="/app/faqs" element={<FAQsPage />} />
-          <Route path="/app/our-company" element={<Company />} />
+          {/* <Route path="/app/our-company" element={<Company />} /> */}
           <Route path="/app/find-item" element={<LostItemPage />} />
           <Route path="/app/help-center" element={<HelpCenter />} />
           <Route path="/app/app-features" element={<AppFeatures />} />
