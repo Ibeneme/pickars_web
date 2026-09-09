@@ -33,7 +33,7 @@ const Home = () => {
         </title>
         <meta
           name="description"
-          content="Ship packages across the city instantly. Pickars connects you with reliable independent delivery professionals for secure, real-time tracked, and cost-effective dispatch services."
+          content=""
         />
         <link rel="canonical" href="https://pickars.com" />
         <meta property="og:type" content="website" />
@@ -43,7 +43,7 @@ const Home = () => {
         />
         <meta
           property="og:description"
-          content="Real-time bike and vehicular dispatch tracking across town. Fast onboarding for riders, transparent pricing structures for consumers."
+          content="."
         />
       </Helmet>
 
