@@ -3,15 +3,14 @@ import { motion } from "framer-motion";
 
 /**
  * PickarsRefinedBounceCarousel Component
- * Features 5 vector elements (Food basket with grapes, Paper bag, Burger, Green basket, Black Controller)
- * scrolling seamlessly in an endless loop with reduced spacing, even larger sizes, transparent background,
- * zero shadows, and individual staggered bouncing animations.
+ * Features vector illustrations scrolling seamlessly in an endless loop with
+ * increased element size, closer spacing, transparent background, zero shadows,
+ * and slowed down, gentle floating animations.
  */
 const PickarsRefinedBounceCarousel: React.FC = () => {
-  // Array of 5 illustration SVGs/JSX elements (Further increased sizes for a massive look)
+  // Array of illustration SVGs/JSX elements (Massive sizing)
   const items = [
-    // 1. Food & Fruit Basket (with Grapes bunch)
-    // 2. Paper Delivery Bag
+    // 1. Paper Delivery Bag with location tags
     <svg
       viewBox="0 0 450 420"
       fill="none"
@@ -142,6 +141,7 @@ const PickarsRefinedBounceCarousel: React.FC = () => {
       </g>
     </svg>,
 
+    // 2. Red Basket with Groceries
     <svg
       viewBox="0 0 500 420"
       fill="none"
@@ -241,7 +241,7 @@ const PickarsRefinedBounceCarousel: React.FC = () => {
       </g>
     </svg>,
 
-    // 3. Gourmet Burger (Cocktail removed, centered & scaled up)
+    // 3. Gourmet Burger
     <svg
       viewBox="0 0 450 420"
       fill="none"
@@ -372,14 +372,14 @@ const PickarsRefinedBounceCarousel: React.FC = () => {
 
   return (
     <div className="w-full bg-transparent py-20 overflow-hidden relative select-none">
-      {/* Infinite Scrolling Track with further enlarged element sizes */}
+      {/* Infinite Scrolling Track with even larger element sizes and closer gap spacing */}
       <div className="flex overflow-hidden w-full items-center">
         <motion.div
-          className="flex gap-8 md:gap-10 items-center flex-shrink-0"
+          className="flex gap-4 md:gap-6 items-center flex-shrink-0"
           animate={{ x: ["0%", "-50%"] }}
           transition={{
             repeat: Infinity,
-            duration: 30,
+            duration: 48, // Slower marquee scroll speed
             ease: "linear",
           }}
         >
@@ -387,16 +387,16 @@ const PickarsRefinedBounceCarousel: React.FC = () => {
             <motion.div
               key={index}
               animate={{
-                y: [0, -18, 0],
+                y: [0, -12, 0], // Gentler, smoother bounce height
               }}
               transition={{
-                duration: 2.2,
+                duration: 3.5, // Slower float/bounce duration
                 repeat: Infinity,
                 ease: "easeInOut",
-                delay: (index % items.length) * 0.35,
+                delay: (index % items.length) * 0.4,
               }}
-              whileHover={{ scale: 1.12 }}
-              className="w-[390px] md:w-[460px] flex-shrink-0 flex items-center justify-center  cursor-pointer"
+              whileHover={{ scale: 1.08 }}
+              className="w-[460px] md:w-[560px] flex-shrink-0 flex items-center justify-center cursor-pointer"
             >
               {svgElement}
             </motion.div>

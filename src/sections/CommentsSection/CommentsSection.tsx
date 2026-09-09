@@ -204,6 +204,22 @@ export default function PickarsTestimonialsSection(): React.JSX.Element {
       ref={sectionRef}
       className="relative w-full bg-[#FFF5F5] py-16 sm:py-20 md:py-28 px-4 sm:px-6 lg:px-8 font-sans flex flex-col justify-center items-center overflow-hidden"
     >
+      <motion.div
+        initial={{ opacity: 0, scale: 0.8, rotate: -5 }}
+        animate={{ opacity: 1, scale: 1, rotate: -2 }}
+        whileHover={{ scale: 1.08, rotate: 0 }}
+        transition={{ type: "spring", stiffness: 200, damping: 15 }}
+        className="mb-4 sm:mb-6 px-5 sm:px-6 py-2 sm:py-2.5 bg-[#FF0000] text-white font-black text-[11px] sm:text-xs md:text-sm uppercase tracking-widest cursor-default select-none"
+        style={{
+          maskImage:
+            "radial-gradient(circle 5px at calc(100% - 2.5px) 50%, #0000 99%, #000 100%)",
+          WebkitMaskImage:
+            "conic-gradient(from -45deg at 50% 50%, #000 0 90deg, #0000 0) 0 0/10px 10px repeat",
+        }}
+      >
+        FREQUENTLY ASKED QUESTIONS
+      </motion.div>
+
       {/* Header - Centered */}
       <div className="w-full max-w-6xl mb-10 sm:mb-12 md:mb-16 flex flex-col items-center text-center">
         <h3 className="text-5xl sm:text-6xl md:text-8xl font-black leading-[1.15] tracking-tight text-gray-900">

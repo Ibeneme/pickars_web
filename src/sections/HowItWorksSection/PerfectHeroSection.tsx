@@ -13,7 +13,7 @@ const PerfectHeroSection: React.FC = () => {
   return (
     <section
       ref={ref}
-      className="relative overflow-hidden bg-[#FFF5F5] py-24 sm:py-32 md:py-48 font-['Lufga'] text-gray-900"
+      className="relative overflow-hidden bg-[#FFF5F5] py-12 sm:py-16 md:py-32 font-['Lufga'] text-gray-900"
     >
       {/* Background ambient red glow accents for high visual depth */}
       <div className="absolute top-1/4 left-10 w-96 h-96 bg-red-500/10 rounded-full blur-[120px] pointer-events-none" />
@@ -36,7 +36,7 @@ const PerfectHeroSection: React.FC = () => {
                 "conic-gradient(from -45deg at 50% 50%, #000 0 90deg, #0000 0) 0 0/10px 10px repeat",
             }}
           >
-            PICKARS LOGISTICS • PORT HARCOURT
+            EVERYWHERE
           </motion.div>
 
           {/* Main Hero Headline */}
@@ -46,10 +46,10 @@ const PerfectHeroSection: React.FC = () => {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="text-5xl sm:text-6xl md:text-8xl font-black leading-[1.15] tracking-tight text-gray-900"
           >
-            Need a rider right now? {" "}
+            Bringing Your Items Right to Your{" "}
             <span className="relative inline-block text-transparent bg-clip-text bg-gradient-to-r from-red-600 via-red-500 to-rose-600">
               {" "}
-              We’ve got you
+              Doorstep
               {/* Paper corner fold effect */}
               <span
                 aria-hidden

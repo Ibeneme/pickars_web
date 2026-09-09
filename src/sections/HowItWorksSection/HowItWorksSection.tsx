@@ -17,7 +17,7 @@ const HowItWorks: React.FC = () => {
     >
       <div className="relative z-10 px-4  max-w-7xl mx-auto">
         {/* SECTION HEADER */}
-        <div className="text-center max-w-4xl mx-auto mb-12 sm:mb-16 md:mb-24 flex flex-col items-center">
+        <div className="text-center max-w-5xl mx-auto mb-12 sm:mb-16 md:mb-24 flex flex-col items-center">
           {/* TRACK RECORD BADGE */}
           <motion.div
             initial={{ opacity: 0, scale: 0.8, rotate: -5 }}
@@ -32,7 +32,7 @@ const HowItWorks: React.FC = () => {
                 "conic-gradient(from -45deg at 50% 50%, #000 0 90deg, #0000 0) 0 0/10px 10px repeat",
             }}
           >
-            Pickars Logistics • PH
+            AS SOON AS POSSIBLE{" "}
           </motion.div>
 
           <motion.h2
@@ -41,8 +41,8 @@ const HowItWorks: React.FC = () => {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="text-5xl sm:text-6xl md:text-8xl font-black leading-[1.15] tracking-tight text-gray-900"
           >
-            Get a dispatch rider.{" "}
-            <span className="text-[#FF0000]">Instantly.</span>
+            Tap. Request. Delivered in{" "}
+            <span className="text-[#FF0000]">Minutes.</span>
           </motion.h2>
 
           <motion.p

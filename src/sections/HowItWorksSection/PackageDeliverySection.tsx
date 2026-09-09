@@ -32,7 +32,7 @@ const PackageDeliverySection: React.FC = () => {
                 "conic-gradient(from -45deg at 50% 50%, #000 0 90deg, #0000 0) 0 0/10px 10px repeat",
             }}
           >
-            Pickars Logistics • PH
+            AFFORDABLE
           </motion.div>
 
           <motion.h2
