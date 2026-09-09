@@ -6,241 +6,241 @@ const portHarcourtLocations = [
   {
     name: "GRA Phase 1",
     bg: "bg-rose-500",
-    dot: "bg-rose-950",
+   // dot: "bg-rose-950",
     text: "text-white",
   },
   {
     name: "GRA Phase 2",
     bg: "bg-amber-500",
-    dot: "bg-amber-950",
+   // dot: "bg-amber-950",
     text: "text-white",
   },
   {
     name: "GRA Phase 3",
     bg: "bg-emerald-500",
-    dot: "bg-emerald-950",
+   // dot: "bg-emerald-950",
     text: "text-white",
   },
   {
     name: "Rumuola",
     bg: "bg-sky-500",
-    dot: "bg-sky-950",
+   // dot: "bg-sky-950",
     text: "text-white",
   },
   {
     name: "Woji",
     bg: "bg-orange-500",
-    dot: "bg-orange-950",
+   // dot: "bg-orange-950",
     text: "text-white",
   },
   {
     name: "Peter Odili",
     bg: "bg-purple-500",
-    dot: "bg-purple-950",
+   // dot: "bg-purple-950",
     text: "text-white",
   },
   {
     name: "Ada George",
     bg: "bg-teal-500",
-    dot: "bg-teal-950",
+   // dot: "bg-teal-950",
     text: "text-white",
   },
   {
     name: "D-Line",
     bg: "bg-indigo-500",
-    dot: "bg-indigo-950",
+   // dot: "bg-indigo-950",
     text: "text-white",
   },
   {
     name: "Old GRA",
     bg: "bg-yellow-500",
-    dot: "bg-yellow-950",
+   // dot: "bg-yellow-950",
     text: "text-black",
   },
   {
     name: "Trans Amadi",
     bg: "bg-cyan-500",
-    dot: "bg-cyan-950",
+   // dot: "bg-cyan-950",
     text: "text-white",
   },
   {
     name: "Rumuomasi",
     bg: "bg-pink-500",
-    dot: "bg-pink-950",
+   // dot: "bg-pink-950",
     text: "text-white",
   },
   {
     name: "Rumuokoro",
     bg: "bg-lime-500",
-    dot: "bg-lime-950",
+   // dot: "bg-lime-950",
     text: "text-black",
   },
   {
     name: "Choba",
     bg: "bg-rose-600",
-    dot: "bg-rose-950",
+   // dot: "bg-rose-950",
     text: "text-white",
   },
   {
     name: "Elekahia",
     bg: "bg-sky-600",
-    dot: "bg-sky-950",
+   // dot: "bg-sky-950",
     text: "text-white",
   },
   {
     name: "Mgbuoba",
     bg: "bg-emerald-600",
-    dot: "bg-emerald-950",
+   // dot: "bg-emerald-950",
     text: "text-white",
   },
   {
     name: "Rumuigbo",
     bg: "bg-amber-600",
-    dot: "bg-amber-950",
+   // dot: "bg-amber-950",
     text: "text-white",
   },
   {
     name: "Iwofe",
     bg: "bg-purple-600",
-    dot: "bg-purple-950",
+   // dot: "bg-purple-950",
     text: "text-white",
   },
   {
     name: "Garrison",
     bg: "bg-orange-600",
-    dot: "bg-orange-950",
+   // dot: "bg-orange-950",
     text: "text-white",
   },
   {
     name: "Abuloma",
     bg: "bg-yellow-600",
-    dot: "bg-yellow-950",
+   // dot: "bg-yellow-950",
     text: "text-white",
   },
   {
     name: "Borokiri",
     bg: "bg-teal-600",
-    dot: "bg-teal-950",
+   // dot: "bg-teal-950",
     text: "text-white",
   },
   {
     name: "Oil Mill",
     bg: "bg-pink-600",
-    dot: "bg-pink-950",
+   // dot: "bg-pink-950",
     text: "text-white",
   },
   {
     name: "Eliozu",
     bg: "bg-indigo-600",
-    dot: "bg-indigo-950",
+   // dot: "bg-indigo-950",
     text: "text-white",
   },
   {
     name: "Eleme Junction",
     bg: "bg-cyan-600",
-    dot: "bg-cyan-950",
+   // dot: "bg-cyan-950",
     text: "text-white",
   },
   {
     name: "Rumueme",
     bg: "bg-lime-600",
-    dot: "bg-lime-950",
+   // dot: "bg-lime-950",
     text: "text-white",
   },
   {
     name: "Agip",
     bg: "bg-amber-500",
-    dot: "bg-black",
+   // dot: "bg-black",
     text: "text-white",
   },
   {
     name: "Okija",
     bg: "bg-orange-500",
-    dot: "bg-black",
+   // dot: "bg-black",
     text: "text-white",
   },
   {
     name: "Town (PH)",
     bg: "bg-purple-500",
-    dot: "bg-black",
+   // dot: "bg-black",
     text: "text-white",
   },
   {
     name: "Rumuepirikom",
     bg: "bg-rose-500",
-    dot: "bg-black",
+   // dot: "bg-black",
     text: "text-white",
   },
   {
     name: "NTA Road",
     bg: "bg-teal-500",
-    dot: "bg-black",
+   // dot: "bg-black",
     text: "text-white",
   },
   {
     name: "Oroworukwo",
     bg: "bg-yellow-500",
-    dot: "bg-black",
+   // dot: "bg-black",
     text: "text-black",
   },
   {
     name: "Oroazi",
     bg: "bg-pink-500",
-    dot: "bg-black",
+   // dot: "bg-black",
     text: "text-white",
   },
   {
     name: "Rukpokwu",
     bg: "bg-sky-500",
-    dot: "bg-black",
+   // dot: "bg-black",
     text: "text-white",
   },
   {
     name: "Aluu",
     bg: "bg-emerald-500",
-    dot: "bg-black",
+   // dot: "bg-black",
     text: "text-white",
   },
   {
     name: "Ozuoba",
     bg: "bg-indigo-500",
-    dot: "bg-black",
+   // dot: "bg-black",
     text: "text-white",
   },
   {
     name: "Eneka",
     bg: "bg-amber-600",
-    dot: "bg-amber-950",
+   // dot: "bg-amber-950",
     text: "text-white",
   },
   {
     name: "Rumudara",
     bg: "bg-orange-600",
-    dot: "bg-orange-950",
+   // dot: "bg-orange-950",
     text: "text-white",
   },
   {
     name: "Okporo Road",
     bg: "bg-purple-600",
-    dot: "bg-purple-950",
+   // dot: "bg-purple-950",
     text: "text-white",
   },
   {
     name: "Location",
     bg: "bg-rose-600",
-    dot: "bg-rose-950",
+   // dot: "bg-rose-950",
     text: "text-white",
   },
   {
     name: "Shell Location",
     bg: "bg-teal-600",
-    dot: "bg-teal-950",
+   // dot: "bg-teal-950",
     text: "text-white",
   },
   {
     name: "St. John's",
     bg: "bg-yellow-600",
-    dot: "bg-yellow-950",
+   // dot: "bg-yellow-950",
     text: "text-white",
   },
 ];
@@ -248,14 +248,13 @@ const portHarcourtLocations = [
 interface LocationBadgeProps {
   name: string;
   bg: string;
-  dot: string;
+ // dot: string;
   textColor: string;
 }
 
 const TicketBadge: React.FC<LocationBadgeProps> = ({
   name,
   bg,
-  dot,
   textColor,
 }) => (
   <div
@@ -319,7 +318,6 @@ const InfiniteTownsMarquee: React.FC = () => {
                 key={`r1-${idx}`}
                 name={loc.name}
                 bg={loc.bg}
-                dot={loc.dot}
                 textColor={loc.text}
               />
             ))}
@@ -338,7 +336,6 @@ const InfiniteTownsMarquee: React.FC = () => {
                 key={`r2-${idx}`}
                 name={loc.name}
                 bg={loc.bg}
-                dot={loc.dot}
                 textColor={loc.text}
               />
             ))}
@@ -357,7 +354,6 @@ const InfiniteTownsMarquee: React.FC = () => {
                 key={`r3-${idx}`}
                 name={loc.name}
                 bg={loc.bg}
-                dot={loc.dot}
                 textColor={loc.text}
               />
             ))}
