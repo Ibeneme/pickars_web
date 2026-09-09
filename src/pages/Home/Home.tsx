@@ -2,7 +2,7 @@ import { motion, useScroll, useSpring } from "framer-motion";
 import { Helmet } from "react-helmet-async"; // Imported Helmet
 import SlidingPage from "../../components/SlidingPgae/SlidingPage";
 //import CustomerRiderSection from "../../sections/CustomerRiderSection/CustomerRiderSection";
-import HeroSection from "../../sections/Hero/HeroSection";
+//import HeroSection from "../../sections/Hero/HeroSection";
 //import HowItWorksSection from "../../sections/HowItWorksSection/HowItWorksSection";
 //import FinalBookingSection from "../../sections/HowItWorksSection/FinalBookingSection";
 //import PickarsPricingStackingScrollSection from "../../components/templates/stack";
@@ -10,6 +10,8 @@ import PickarsTestimonialsSection from "../../sections/CommentsSection/CommentsS
 import HowItWorks from "../../sections/HowItWorksSection/HowItWorksSection";
 import PackageDeliverySection from "../../sections/HowItWorksSection/PackageDeliverySection";
 import NeverLateBanner from "../../sections/HowItWorksSection/Planforlatersection";
+import PerfectHeroSection from "../../sections/HowItWorksSection/PerfectHeroSection";
+import InfiniteTownsMarquee from "../../sections/HowItWorksSection/InfiniteTowns";
 //import PickarsQRCode from "../PickarsQRCode/PickarsQRCode";
 // import PickarsFeaturesSection from "../../sections/HeroDelivery/MidImage";
 //import MidImage from "../../sections/HeroDelivery/MidImage";
@@ -51,7 +53,7 @@ const Home = () => {
       />
 
       <main className="overflow-x-hidden">
-        <HeroSection />
+        <PerfectHeroSection />
 
         <section className="relative z-10">
           <SlidingPage />
@@ -59,7 +61,9 @@ const Home = () => {
         <PackageDeliverySection />
 
         <HowItWorks />
+        <InfiniteTownsMarquee />
         <NeverLateBanner />
+
         <PickarsTestimonialsSection />
       </main>
     </div>

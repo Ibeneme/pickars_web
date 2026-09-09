@@ -46,18 +46,16 @@ const PlaceOrderSection: React.FC = () => {
       ref={ref}
       className="relative overflow-hidden  py-8 sm:py-8 md:py-8 font-['Lufga'] text-gray-900 "
     >
-      <div className="px-4 sm:px-6 max-w-7xl mx-auto">
+      <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
           {/* ── LEFT DARK CARD ────────────────────────────────────────────── */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.6, ease: "easeOut" }}
-            className="relative bg-[#ff0000] rounded-[32px] sm:rounded-[40px] p-8 sm:p-12 md:p-16 flex flex-col justify-between overflow-hidden min-h-[500px] sm:min-h-[580px]"
+            className="relative bg-[#000] rounded-[32px] sm:rounded-[40px] p-8 sm:p-12 md:p-16 flex flex-col justify-between overflow-hidden min-h-[500px] sm:min-h-[580px]"
           >
-            {/* Background decorative soft ambient light effect */}
-            <div className="absolute -top-24 -left-24 w-72 h-72 bg-[#ff0000] rounded-full blur-3xl pointer-events-none" />
-
+ 
             {/* Top Text Content with constrained max-width */}
             <div className="relative z-10 max-w-lg mx-auto w-full">
               <h2 className="text-4xl sm:text-6xl md:text-7xl font-black text-white tracking-tight leading-[1.08]">

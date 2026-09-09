@@ -1,24 +1,28 @@
 import React from "react";
 import { motion, useInView } from "framer-motion";
-import PickarsShoppingBasket from "./PickarsShoppingBasket";
-// Constants provided for App download buttons
+import PortHarcourtMapComponent from "./PortHarcourtMapComponent";
 
 export const IOS_URL = "https://apps.apple.com/ng/app/pickars/id6746796884";
 export const ANDROID_URL =
   "https://play.google.com/store/apps/details?id=com.pickars.app&hl=en";
 
-const PackageDeliverySection: React.FC = () => {
+const PerfectHeroSection: React.FC = () => {
   const ref = React.useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
     <section
       ref={ref}
-      className="relative overflow-hidden bg-[#FFF5F5] pt-16 sm:pt-24 md:pt-32 font-['Lufga'] text-gray-900"
+      className="relative overflow-hidden bg-[#FFF5F5] py-24 sm:py-32 md:py-48 font-['Lufga'] text-gray-900"
     >
+      {/* Background ambient red glow accents for high visual depth */}
+      <div className="absolute top-1/4 left-10 w-96 h-96 bg-red-500/10 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-1/4 right-10 w-80 h-80 bg-red-600/10 rounded-full blur-[100px] pointer-events-none" />
+
       <div className="relative z-10 px-4 sm:px-6 max-w-7xl mx-auto">
-        {/* ── HEADER ─────────────────────────────────────────────────────── */}
+        {/* ── HEADER / HERO COPY ─────────────────────────────────────── */}
         <div className="text-center max-w-4xl mx-auto mb-12 sm:mb-16 md:mb-20 flex flex-col items-center">
+          {/* Badge with stylized cutout edge effects */}
           <motion.div
             initial={{ opacity: 0, scale: 0.8, rotate: -5 }}
             animate={isInView ? { opacity: 1, scale: 1, rotate: -2 } : {}}
@@ -32,26 +36,29 @@ const PackageDeliverySection: React.FC = () => {
                 "conic-gradient(from -45deg at 50% 50%, #000 0 90deg, #0000 0) 0 0/10px 10px repeat",
             }}
           >
-            Pickars Logistics • PH
+            PICKARS LOGISTICS • PORT HARCOURT
           </motion.div>
 
-          <motion.h2
+          {/* Main Hero Headline */}
+          <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.1 }}
             className="text-5xl sm:text-6xl md:text-8xl font-black leading-[1.15] tracking-tight text-gray-900"
           >
-            Send packages starting at{" "}
-            <span className="relative inline-block text-[#FF0000]">
-              ₦3,000
+            Need a rider right now? {" "}
+            <span className="relative inline-block text-transparent bg-clip-text bg-gradient-to-r from-red-600 via-red-500 to-rose-600">
+              {" "}
+              We’ve got you
               {/* Paper corner fold effect */}
               <span
                 aria-hidden
                 className="absolute -bottom-1 -right-1 w-3 h-3 bg-red-700 transform rotate-45 pointer-events-none opacity-40"
               />
             </span>
-          </motion.h2>
+          </motion.h1>
 
+          {/* Subtitle / Value Proposition */}
           <motion.p
             initial={{ opacity: 0, y: 15 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -59,22 +66,23 @@ const PackageDeliverySection: React.FC = () => {
             style={{ lineHeight: 1.8 }}
             className="mt-4 sm:mt-5 text-[16px] sm:text-[20px] text-gray-600 font-medium leading-relaxed max-w-2xl px-2 sm:px-0"
           >
-            Need to ship items for your online business or send a parcel across
-            Port Harcourt? Pickars has a verified rider ready for you in
-            minutes.{" "}
+            Whether you run a busy online store or just need to drop a package
+            across town, Pickars connects you with a verified rider in minutes.
           </motion.p>
 
+          {/* Primary Action Buttons (App Store & Play Store) */}
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="mt-8 flex flex-row items-center justify-center gap-4 w-full"
+            className="mt-8 flex flex-row items-center justify-center gap-4 w-full flex-wrap"
           >
+            {/* Apple App Store Download Button */}
             <a
               href={IOS_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-auto min-w-[170px] px-5 py-3.5 bg-black hover:bg-[#ff0000] text-white rounded-2xl hover:translate-x-[2px] hover:translate-y-[2px] transition-all flex items-center justify-center space-x-3 group "
+              className="w-auto min-w-[170px] px-5 py-3.5 bg-black hover:bg-[#ff0000] text-white rounded-2xl hover:translate-x-[2px] hover:translate-y-[2px] transition-all flex items-center justify-center space-x-3 group"
             >
               <svg
                 className="w-7 h-7 fill-current shrink-0"
@@ -91,12 +99,12 @@ const PackageDeliverySection: React.FC = () => {
               </div>
             </a>
 
-            {/* Google Play Button - Fit content */}
+            {/* Google Play Store Download Button */}
             <a
               href={ANDROID_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-auto px-5 py-3.5 bg-black hover:bg-[#ff0000] text-white rounded-2xl hover:translate-x-[2px] hover:translate-y-[2px] transition-all flex items-center justify-center space-x-3 group "
+              className="w-auto px-5 py-3.5 bg-black hover:bg-[#ff0000] text-white rounded-2xl hover:translate-x-[2px] hover:translate-y-[2px] transition-all flex items-center justify-center space-x-3 group"
             >
               <svg
                 className="w-7 h-7 fill-current shrink-0"
@@ -114,18 +122,19 @@ const PackageDeliverySection: React.FC = () => {
             </a>
           </motion.div>
         </div>
-      </div>
 
-      {/* ── MAP CONTAINER ──────────────────────────────────────────────── */}
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        animate={isInView ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 0.7, delay: 0.35 }}
-      >
-        <PickarsShoppingBasket />
-      </motion.div>
+        {/* ── INTERACTIVE PH MAP HERO VISUAL ────────────────────────── */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.7, delay: 0.35 }}
+          className="relative  rounded-3xl overflow-hidden"
+        >
+          <PortHarcourtMapComponent />
+        </motion.div>
+      </div>
     </section>
   );
 };
 
-export default PackageDeliverySection;
+export default PerfectHeroSection;

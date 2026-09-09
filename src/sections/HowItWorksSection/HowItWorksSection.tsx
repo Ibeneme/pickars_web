@@ -39,7 +39,7 @@ const HowItWorks: React.FC = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-4xl sm:text-6xl md:text-8xl font-black leading-[1.15] tracking-tight text-gray-900"
+            className="text-5xl sm:text-6xl md:text-8xl font-black leading-[1.15] tracking-tight text-gray-900"
           >
             Get a dispatch rider.{" "}
             <span className="text-[#FF0000]">Instantly.</span>
@@ -49,6 +49,7 @@ const HowItWorks: React.FC = () => {
             initial={{ opacity: 0, y: 15 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.2 }}
+            style={{ lineHeight: 1.8 }}
             className="mt-4 sm:mt-5 text-[16px] sm:text-[20px] text-gray-600 font-medium leading-relaxed max-w-2xl px-2 sm:px-0"
           >
             Download the Pickars app today for the smartest package delivery
@@ -58,9 +59,7 @@ const HowItWorks: React.FC = () => {
         <div style={{ marginTop: 32 }}>
           <PlaceOrderSection />
         </div>
-  
       </div>
-
     </section>
   );
 };
