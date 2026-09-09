@@ -52,9 +52,9 @@ const HeroSection: React.FC = () => {
             variants={itemVariants}
             className="mb-5 text-5xl font-black leading-[1.05] tracking-tight text-gray-900 sm:text-6xl md:text-7xl lg:text-8xl"
           >
-            A Faster Way to Move What{" "}
+            Your package, delivered faster than you{" "}
             <span className="relative inline-block text-[#FF0000]">
-              Matters.
+              think.
               <span
                 aria-hidden
                 className="absolute -bottom-1 -right-1 h-3 w-3 bg-red-700 opacity-40 rotate-45 pointer-events-none"
