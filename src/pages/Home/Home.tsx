@@ -33,7 +33,7 @@ const Home = () => {
         </title>
         <meta
           name="description"
-          content=""
+          content="Connect instantly with verified dispatch riders in Port Harcourt. Fast, reliable, and stress-free delivery for your packages and online store orders."
         />
         <link rel="canonical" href="https://pickars.com" />
         <meta property="og:type" content="website" />
@@ -43,8 +43,9 @@ const Home = () => {
         />
         <meta
           property="og:description"
-          content="."
+          content="Connect instantly with verified dispatch riders in Port Harcourt. Fast, reliable, and stress-free delivery for your packages and online store orders."
         />
+        <meta property="og:image" content="http://pickars.com/box.png" />
       </Helmet>
 
       <motion.div
