@@ -1,9 +1,7 @@
 import React from "react";
 import { motion, type Variants } from "framer-motion";
-//import sendVideo from "../../assets/send.mp4";
 import DownloadButtons from "../../components/buttons/DownloadButtons";
 import photo from "../../assets/images/use_app/nice.svg";
-//import navImage from "../../assets/images/logo.png";
 
 const HeroSection: React.FC = () => {
   const containerVariants: Variants = {
@@ -102,7 +100,7 @@ const HeroSection: React.FC = () => {
             className="absolute bottom-6 left-6 sm:bottom-10 sm:left-10 z-10 flex items-end gap-4"
           >
             {/* Imported Logo Image (Assuming square or shield logo) */}
-     
+
             {/* Pickars Text */}
             <h3 className="text-white text-7xl sm:text-9xl font-black tracking-tighter font-['Lufga'] leading-none">
               Pickars<span style={{ color: "#ff0000" }}>.</span>

@@ -1,7 +1,6 @@
 import React from "react";
 import { motion, type Variants } from "framer-motion";
 import DownloadButtons from "../../components/buttons/DownloadButtons";
-//import PortHarcourtMapComponent from "../HowItWorksSection/PortHarcourtMapComponent";
 
 export const CompanyHero: React.FC = () => {
   const itemVariants: Variants = {
