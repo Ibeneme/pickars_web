@@ -34,9 +34,9 @@ const Navbar = () => {
     >
       <div className="mx-auto max-w-4xl px-6 flex justify-center">
         <div
-          className={`flex items-center justify-between gap-8 rounded-full border border-white/20 bg-white/70 px-4 py-2.5 backdrop-blur-2xl transition-all duration-500 shadow-[0_10px_30px_rgba(0,0,0,0.08)] ${
+          className={`flex items-center justify-between gap-8 rounded-full  bg-white/70 px-4 py-2.5 backdrop-blur-2xl  transition-all duration-500  ${
             scrolled
-              ? "md:w-auto md:gap-20 border-[2px] shadow-[0_15px_40px_rgba(0,0,0,0.12)]"
+              ? "md:w-auto md:gap-20 gap-24 shadow-2xl"
               : "w-full"
           }`}
         >
@@ -85,7 +85,7 @@ const Navbar = () => {
                     {isActive && !disabled && (
                       <motion.div
                         layoutId="navPill"
-                        className="absolute inset-0 rounded-full bg-[#FF0000] -z-10 shadow-lg shadow-red-600/30"
+                        className="absolute inset-0 rounded-full bg-[#FF0000] -z-10"
                         transition={{
                           type: "spring",
                           stiffness: 300,
