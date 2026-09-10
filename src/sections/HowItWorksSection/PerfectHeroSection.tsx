@@ -52,7 +52,7 @@ const PerfectHeroSection: React.FC = () => {
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.2 }}
             style={{ lineHeight: 1.8 }}
-            className="mt-4 sm:mt-5 text-[16px] sm:text-[20px] text-gray-600 font-medium leading-relaxed max-w-2xl px-2 sm:px-0"
+            className="text-[16px] sm:text-[20px] text-gray-600 font-medium leading-relaxed max-w-2xl px-2 sm:px-0"
           >
             Whether you run a busy online store or just need to drop a package
             across town, Pickars connects you with a verified rider in minutes.
