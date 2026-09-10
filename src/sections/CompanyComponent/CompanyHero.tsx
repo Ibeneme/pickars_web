@@ -1,7 +1,7 @@
 import React from "react";
 import { IOS_URL, ANDROID_URL } from "../../constants";
 import { motion, type Variants } from "framer-motion";
-import PortHarcourtMapComponent from "../HowItWorksSection/PortHarcourtMapComponent";
+//import PortHarcourtMapComponent from "../HowItWorksSection/PortHarcourtMapComponent";
 
 export const CompanyHero: React.FC = () => {
   const itemVariants: Variants = {
@@ -102,11 +102,11 @@ export const CompanyHero: React.FC = () => {
       </div>
 
       {/* CompanyHero Banner Image - Expanded Width */}
-      <div className="w-full max-w-6xl px-4 sm:px-6 mt-12">
+      {/* <div className="w-full max-w-6xl px-4 sm:px-6 mt-12">
         <div className="rounded-3xl overflow-hidden w-full">
           <PortHarcourtMapComponent />
         </div>
-      </div>
+      </div> */}
     </section>
   );
 };
