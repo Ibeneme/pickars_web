@@ -47,7 +47,7 @@ const portHarcourtLocations = [
     left: "75%",
     badgeBg: "bg-emerald-700",
     textColor: "text-white font-extrabold",
-    dotColor: "bg-amber-300",
+    dotColor: "bg-gray-300",
     pinColor: "#047857",
     pinTop: "55%",
     pinLeft: "80%",
@@ -60,7 +60,7 @@ const portHarcourtLocations = [
     left: "44%",
     badgeBg: "bg-sky-400",
     textColor: "text-black font-extrabold",
-    dotColor: "bg-amber-700",
+    dotColor: "bg-gray-700",
     pinColor: "#38bdf8",
     pinTop: "60%",
     pinLeft: "49%",
@@ -71,10 +71,10 @@ const portHarcourtLocations = [
     name: "Ada George",
     top: "52%",
     left: "10%",
-    badgeBg: "bg-amber-100",
+    badgeBg: "bg-gray-200",
     textColor: "text-black font-bold",
-    dotColor: "bg-amber-600",
-    pinColor: "#fde68a",
+    dotColor: "bg-gray-600",
+    pinColor: "#e5e7eb",
     pinTop: "64%",
     pinLeft: "16%",
     showOnMobile: false,
@@ -99,7 +99,7 @@ const portHarcourtLocations = [
     left: "55%",
     badgeBg: "bg-teal-100",
     textColor: "text-black font-extrabold",
-    dotColor: "bg-amber-800",
+    dotColor: "bg-gray-800",
     pinColor: "#99f6e4",
     pinTop: "96%",
     pinLeft: "58%",
@@ -110,10 +110,10 @@ const portHarcourtLocations = [
     name: "Eleme Junction",
     top: "74%",
     left: "74%",
-    badgeBg: "bg-[#d7ccc8]", // Changed from pink-300 to a warm light brown/taupe
+    badgeBg: "bg-gray-300", // Changed to neutral cool gray shade
     textColor: "text-black font-extrabold",
     dotColor: "bg-purple-900",
-    pinColor: "#8d6e63", // Changed from pink pin to a medium brown hex code
+    pinColor: "#6b7280", // Changed to medium gray pin hex code
     pinTop: "86%",
     pinLeft: "79%",
     showOnMobile: false,
@@ -251,7 +251,7 @@ function DeliveryRider() {
 
 export default function PortHarcourtMapComponent() {
   return (
-    <div className="relative w-full aspect-[4/5] sm:aspect-[4/3] md:aspect-[16/9] min-h-[420px] max-h-[750px] bg-[#EFEBE9] overflow-hidden rounded-xl md:rounded-3xl border-2 sm:border-4 border-black font-sans select-none">
+    <div className="relative w-full aspect-[4/5] sm:aspect-[4/3] md:aspect-[16/9] min-h-[420px] max-h-[750px] bg-[#f3f4f6] overflow-hidden rounded-xl md:rounded-3xl border-2 sm:border-4 border-black font-sans select-none">
       <style>{`
         @keyframes popIn {
           0% { opacity: 0; transform: scale(0) translateY(15px); }
@@ -280,30 +280,30 @@ export default function PortHarcourtMapComponent() {
         viewBox="0 0 1000 700"
         preserveAspectRatio="xMidYMid slice"
       >
-        {/* Secondary dark bypass roads (Deep dark chocolate brown) */}
+        {/* Secondary dark bypass roads (Deep charcoal gray) */}
         <path
           d="M 120 0 L 120 700"
-          stroke="#3E2723"
+          stroke="#1f2937"
           strokeWidth="24"
           strokeLinecap="round"
         />
         <path
           d="M 380 0 L 360 700"
-          stroke="#3E2723"
+          stroke="#1f2937"
           strokeWidth="18"
           strokeLinecap="round"
         />
         <path
           d="M 700 0 L 720 700"
-          stroke="#3E2723"
+          stroke="#1f2937"
           strokeWidth="22"
           strokeLinecap="round"
         />
 
-        {/* Straight Horizontal Main Road across screen (Warm caramel/tan) */}
+        {/* Straight Horizontal Main Road across screen (Light gray) */}
         <path
           d="M 0 350 L 1000 350"
-          stroke="#D7CCC8"
+          stroke="#d1d5db"
           strokeWidth="26"
           strokeLinecap="round"
         />
@@ -311,27 +311,27 @@ export default function PortHarcourtMapComponent() {
         {/* Primary arterial roads */}
         <path
           d={RIDER_PATH}
-          stroke="#D7CCC8"
+          stroke="#d1d5db"
           strokeWidth="28"
           strokeLinecap="round"
           fill="none"
         />
         <path
           d="M 0 620 Q 350 580 1000 820"
-          stroke="#D7CCC8"
+          stroke="#d1d5db"
           strokeWidth="26"
           strokeLinecap="round"
           fill="none"
         />
         <path
           d="M 100 0 L 140 700"
-          stroke="#D7CCC8"
+          stroke="#d1d5db"
           strokeWidth="22"
           strokeLinecap="round"
         />
         <path
           d="M 560 0 L 530 700"
-          stroke="#D7CCC8"
+          stroke="#d1d5db"
           strokeWidth="22"
           strokeLinecap="round"
         />
@@ -404,7 +404,7 @@ export default function PortHarcourtMapComponent() {
                 style={{
                   background:
                     "radial-gradient(circle at center, transparent 40%, black 41%, black 100%)",
-                  backgroundColor: "#f5f2f0",
+                  backgroundColor: "#f9fafb",
                 }}
               />
 
@@ -430,7 +430,7 @@ export default function PortHarcourtMapComponent() {
                 style={{
                   background:
                     "radial-gradient(circle at center, transparent 40%, black 41%, black 100%)",
-                  backgroundColor: "#f5f2f0",
+                  backgroundColor: "#f9fafb",
                 }}
               />
             </div>
@@ -442,7 +442,7 @@ export default function PortHarcourtMapComponent() {
       <div className="absolute bottom-2 left-2 sm:bottom-4 sm:left-4 bg-white/90 backdrop-blur-sm border sm:border-2 border-black px-2 py-1 sm:px-4 sm:py-2 rounded-lg sm:rounded-xl z-30 flex items-center space-x-1.5 sm:space-x-2">
         <span className="w-2 h-2 sm:w-3 sm:h-3 bg-red-600 rounded-full border border-black animate-ping" />
         <span className="text-[9px] sm:text-xs font-black tracking-wider text-black uppercase">
-          Port Harcourt Logistics Network
+         PICKARS
         </span>
       </div>
     </div>
