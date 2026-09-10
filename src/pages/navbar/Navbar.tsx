@@ -66,7 +66,7 @@ const Navbar = () => {
                       disabled
                         ? "text-gray-400 cursor-not-allowed pointer-events-none opacity-60"
                         : isActive
-                        ? "bg-[#FF0000] text-white shadow-md shadow-red-600/20"
+                        ? "bg-[#FF0000] text-white"
                         : "text-gray-600 hover:bg-black/5"
                     }`}
                   >
