@@ -6,7 +6,6 @@ import { BiLogoPlayStore } from "react-icons/bi";
 import navImage from "../../assets/images/logo.png";
 import { ANDROID_URL, IOS_URL } from "../../sections/Hero/HeroSection";
 
-
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -20,9 +19,9 @@ const Navbar = () => {
 
   const navItems = [
     { name: "Home", path: "/" },
-    // { name: "About", path: "/app/our-company" },
+    { name: "About", path: "/app/our-company" },
     { name: "FAQs", path: "/app/faqs" },
-   // { name: "Support", path: "/app/help-center" },
+    // { name: "Support", path: "/app/help-center" },
     { name: "Track", path: "/app/tracking", highlight: true },
   ];
 

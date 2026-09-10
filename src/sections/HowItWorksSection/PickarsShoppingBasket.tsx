@@ -73,7 +73,8 @@ const PickarsRefinedBounceCarousel: React.FC = () => {
           textAnchor="middle"
           fontFamily="sans-serif"
         >
-          Choba
+          {" "}
+          Choba{" "}
         </text>
       </g>
       <g transform="translate(20, 160)">
@@ -94,7 +95,8 @@ const PickarsRefinedBounceCarousel: React.FC = () => {
           textAnchor="middle"
           fontFamily="sans-serif"
         >
-          Borikiri
+          {" "}
+          Borikiri{" "}
         </text>
       </g>
       <g transform="translate(280, 220)">
@@ -115,7 +117,8 @@ const PickarsRefinedBounceCarousel: React.FC = () => {
           textAnchor="middle"
           fontFamily="sans-serif"
         >
-          Rumu-Okoro
+          {" "}
+          Rumu-Okoro{" "}
         </text>
       </g>
       <g transform="translate(15, 310)">
@@ -136,7 +139,8 @@ const PickarsRefinedBounceCarousel: React.FC = () => {
           textAnchor="middle"
           fontFamily="sans-serif"
         >
-          Ada George
+          {" "}
+          Ada George{" "}
         </text>
       </g>
     </svg>,
@@ -246,7 +250,8 @@ const PickarsRefinedBounceCarousel: React.FC = () => {
       viewBox="0 0 450 420"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className="w-full h-auto"
+      className="w-full h-auto ml-[-120px] mr-[-120px]"
+      
     >
       <g transform="translate(15, 10)">
         <path d="M 110 180 Q 225 60 340 180 Z" fill="#D97706" />
@@ -372,14 +377,14 @@ const PickarsRefinedBounceCarousel: React.FC = () => {
 
   return (
     <div className="w-full bg-transparent py-20 overflow-hidden relative select-none">
-      {/* Infinite Scrolling Track with even larger element sizes and closer gap spacing */}
+      {/* Infinite Scrolling Track with 10px gap on mobile */}
       <div className="flex overflow-hidden w-full items-center">
         <motion.div
-          className="flex gap-4 md:gap-6 items-center flex-shrink-0"
+          className="flex items-center flex-shrink-0"
           animate={{ x: ["0%", "-50%"] }}
           transition={{
             repeat: Infinity,
-            duration: 48, // Slower marquee scroll speed
+            duration: 24, // Slower marquee scroll speed
             ease: "linear",
           }}
         >
@@ -396,7 +401,7 @@ const PickarsRefinedBounceCarousel: React.FC = () => {
                 delay: (index % items.length) * 0.4,
               }}
               whileHover={{ scale: 1.08 }}
-              className="w-[460px] md:w-[560px] flex-shrink-0 flex items-center justify-center cursor-pointer"
+              className="min-w-[300px] md:w-[300px] flex-shrink-0 flex items-center justify-center cursor-pointer"
             >
               {svgElement}
             </motion.div>

@@ -58,8 +58,8 @@ const PlaceOrderSection: React.FC = () => {
  
             {/* Top Text Content with constrained max-width */}
             <div className="relative z-10 max-w-lg mx-auto w-full">
-              <h2 className="text-4xl sm:text-6xl md:text-7xl font-black text-white tracking-tight leading-[1.08]">
-                Send your package in seconds
+              <h2 className="text-5xl sm:text-6xl md:text-8xl font-black text-white tracking-tight leading-[1.08]">
+                Send your packages asap
               </h2>
 
               {/* App Store Buttons */}

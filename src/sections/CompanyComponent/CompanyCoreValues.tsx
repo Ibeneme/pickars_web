@@ -1,0 +1,147 @@
+import React, { useRef } from "react";
+import { motion, useInView, type Variants } from "framer-motion";
+import { FiShield, FiZap, FiUsers, FiCompass } from "react-icons/fi";
+
+interface ValueCardData {
+  icon: React.ReactNode;
+  title: string;
+  description: string;
+}
+
+export const CompanyCoreValues: React.FC = () => {
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
+
+  const values: ValueCardData[] = [
+    {
+      icon: <FiZap className="w-5 h-5 sm:w-6 sm:h-6" />,
+      title: "Speed & Reliability",
+      description:
+        "We know time is money in Garden City. Our optimized routing ensures your packages arrive swiftly and safely every single time.",
+    },
+    {
+      icon: <FiShield className="w-5 h-5 sm:w-6 sm:h-6" />,
+      title: "Absolute Accountability",
+      description:
+        "From pickup to the final doorstep, your items are fully tracked, secured, and handled by elite vetted riders you can trust.",
+    },
+    {
+      icon: <FiUsers className="w-5 h-5 sm:w-6 sm:h-6" />,
+      title: "Vendor & Community First",
+      description:
+        "We build tools specifically tailored to empower local Port Harcourt businesses, creators, and everyday senders to scale without stress.",
+    },
+    {
+      icon: <FiCompass className="w-5 h-5 sm:w-6 sm:h-6" />,
+      title: "Relentless Innovation",
+      description:
+        "We continuously refine our logistics infrastructure with cutting-edge tech to eliminate tracking anxiety and logistical friction.",
+    },
+  ];
+
+  const headerVariant: Variants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.6, ease: "easeOut" },
+    },
+  };
+
+  return (
+    <section
+      ref={ref}
+      className="relative overflow-hidden bg-[#FFF5F5] py-8 sm:py-10 md:py-12 font-['Lufga']"
+    >
+      <div className="max-w-6xl mx-auto px-4 sm:px-6">
+        {/* Section Header */}
+        <motion.div
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
+          variants={headerVariant}
+          className="flex flex-col items-center text-center max-w-4xl mx-auto mb-12 sm:mb-16"
+        >
+          <div
+            className="mb-4 px-5 py-2 bg-[#FF0000] text-white font-black text-[11px] sm:text-xs uppercase tracking-widest cursor-default select-none"
+            style={{
+              maskImage:
+                "radial-gradient(circle 5px at calc(100% - 2.5px) 50%, #0000 99%, #000 100%)",
+              WebkitMaskImage:
+                "conic-gradient(from -45deg at 50% 50%, #000 0 90deg, #0000 0) 0 0/10px 10px repeat",
+            }}
+          >
+            OUR PRINCIPLES
+          </div>
+
+          <h2 className="text-5xl sm:text-6xl md:text-8xl font-black text-gray-900 tracking-tight leading-[1.08]">
+            Igniting and driving the ultimate{" "}
+            <span style={{ color: "#ff0000" }}>goal</span>
+          </h2>
+          <p className="mt-4 text-base sm:text-lg text-gray-600 font-medium">
+            The core values that keep Pickars moving forward for Port Harcourt.
+          </p>
+        </motion.div>
+
+        {/* Values Grid */}
+        <div className="grid sm:grid-cols-2 gap-6 md:gap-8">
+          {values.map((stat, idx) => (
+            <motion.div
+              key={idx}
+              initial={{ opacity: 0, y: 40, scale: 0.95 }}
+              animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
+              transition={{
+                duration: 0.6,
+                delay: 0.2 + idx * 0.1,
+                type: "spring",
+                stiffness: 100,
+              }}
+              className="relative overflow-hidden bg-white rounded-[24px] sm:rounded-[32px] p-6 sm:p-8 border border-red-100 flex flex-col justify-between"
+            >
+              {/* Overflowing Background Arrows Pattern */}
+              <div
+                className="absolute inset-y-0 -left-10 -right-10 flex items-center justify-around pointer-events-none select-none overflow-hidden text-red-600 font-black text-6xl sm:text-7xl opacity-[0.04] tracking-widest uppercase whitespace-nowrap rotate-[-6deg]"
+                aria-hidden="true"
+              >
+                <span>→ ← → ← → ← → ←</span>
+              </div>
+
+              <div className="relative z-10">
+                <div className="flex items-center justify-between mb-6 sm:mb-8">
+                  {/* Jagged Icon Badge */}
+                  <div
+                    className="w-12 h-12 sm:w-14 sm:h-14 bg-red-100 text-red-600 flex items-center justify-center shrink-0"
+                    style={{
+                      maskImage:
+                        "radial-gradient(circle 6px at calc(100% - 3px) 50%, #0000 99%, #000 100%)",
+                      WebkitMaskImage:
+                        "conic-gradient(from -45deg at 50% 50%, #000 0 90deg, #0000 0) 0 0/12px 12px repeat",
+                    }}
+                  >
+                    <motion.div
+                      animate={{ y: [0, -2, 0] }}
+                      transition={{
+                        duration: 2,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                      }}
+                    >
+                      {stat.icon}
+                    </motion.div>
+                  </div>
+                </div>
+
+                <h3 className="text-lg sm:text-xl font-black text-gray-900 tracking-tight">
+                  {stat.title}
+                </h3>
+              </div>
+
+              <p className="relative z-10 mt-3 sm:mt-4 text-xs sm:text-sm text-gray-600 font-normal leading-relaxed">
+                {stat.description}
+              </p>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};

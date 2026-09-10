@@ -38,6 +38,7 @@ import ProtectedRoute from "./pages/navigation/ProtectedRoute";
 //import WhatsAppButton from "./components/whatsapp/WhatsApp";
 import PaymentSuccess from "./pages/TrackingPage/PaymentSuccess";
 import DispatchRiderTermsPage from "./pages/DispatchRiderTermsPage";
+import CompanyPage from "./pages/OurCompany";
 
 const App: React.FC = () => {
   const location = useLocation();
@@ -69,7 +70,8 @@ const App: React.FC = () => {
           <Route path="/app/terms-of-use" element={<TermsConditions />} />
           <Route path="/app/support" element={<Support />} />
           <Route path="/app/faqs" element={<FAQsPage />} />
-          {/* <Route path="/app/our-company" element={<Company />} /> */}
+          <Route path="/app/our-company" element={<CompanyPage />} />
+
           <Route path="/app/find-item" element={<LostItemPage />} />
           <Route path="/app/help-center" element={<HelpCenter />} />
           <Route path="/app/app-features" element={<AppFeatures />} />
