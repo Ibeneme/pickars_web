@@ -2,6 +2,7 @@ import React from "react";
 import { CompanyHero } from "../sections/CompanyComponent/CompanyHero";
 import { Mission } from "../sections/CompanyComponent/Mission";
 import { CompanyCoreValues } from "../sections/CompanyComponent/CompanyCoreValues";
+import UberDispatchFlow from "../sections/CompanyComponent/PickarsDispatchMap";
 
 const CompanyPage: React.FC = () => {
   return (
@@ -9,6 +10,7 @@ const CompanyPage: React.FC = () => {
       <CompanyHero />
       <Mission />
       <CompanyCoreValues />
+      <UberDispatchFlow/>
     </div>
   );
 };
