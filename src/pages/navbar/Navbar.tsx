@@ -34,8 +34,10 @@ const Navbar = () => {
     >
       <div className="mx-auto max-w-4xl px-6 flex justify-center">
         <div
-          className={`flex items-center justify-between gap-8 rounded-full border border-white/20 bg-white/70 px-4 py-2.5 backdrop-blur-2xl transition-all duration-500 ${
-            scrolled ? "md:w-auto md:gap-20 border-[2px]" : "w-full"
+          className={`flex items-center justify-between gap-8 rounded-full border border-white/20 bg-white/70 px-4 py-2.5 backdrop-blur-2xl transition-all duration-500 shadow-[0_10px_30px_rgba(0,0,0,0.08)] ${
+            scrolled
+              ? "md:w-auto md:gap-20 border-[2px] shadow-[0_15px_40px_rgba(0,0,0,0.12)]"
+              : "w-full"
           }`}
         >
           {/* Logo Section - always visible */}
@@ -64,7 +66,7 @@ const Navbar = () => {
                       disabled
                         ? "text-gray-400 cursor-not-allowed pointer-events-none opacity-60"
                         : isActive
-                        ? "bg-[#FF0000] text-white"
+                        ? "bg-[#FF0000] text-white shadow-md shadow-red-600/20"
                         : "text-gray-600 hover:bg-black/5"
                     }`}
                   >
@@ -83,7 +85,7 @@ const Navbar = () => {
                     {isActive && !disabled && (
                       <motion.div
                         layoutId="navPill"
-                        className="absolute inset-0 rounded-full bg-[#FF0000] -z-10"
+                        className="absolute inset-0 rounded-full bg-[#FF0000] -z-10 shadow-lg shadow-red-600/30"
                         transition={{
                           type: "spring",
                           stiffness: 300,
@@ -106,7 +108,7 @@ const Navbar = () => {
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
-                className="flex h-10 w-10 items-center justify-center rounded-full bg-[#121212] text-white transition-colors hover:bg-[#FF0000]"
+                className="flex h-10 w-10 items-center justify-center rounded-full bg-[#121212] text-white transition-colors hover:bg-[#FF0000] shadow-md shadow-black/10"
               >
                 <FaApple size={18} />
               </motion.a>
@@ -116,15 +118,17 @@ const Navbar = () => {
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
-                className="flex h-10 w-10 items-center justify-center rounded-full bg-[#121212] text-white transition-colors hover:bg-[#FF0000]"
+                className="flex h-10 w-10 items-center justify-center rounded-full bg-[#121212] text-white transition-colors hover:bg-[#FF0000] shadow-md shadow-black/10"
               >
                 <BiLogoPlayStore size={18} />
               </motion.a>
             </div>
 
             <button
-              className={`flex h-10 w-10 items-center justify-center rounded-full transition-all ${
-                isOpen ? "bg-[#FF0000] text-white" : "bg-gray-100 text-black"
+              className={`flex h-10 w-10 items-center justify-center rounded-full transition-all shadow-sm ${
+                isOpen
+                  ? "bg-[#FF0000] text-white shadow-red-600/30"
+                  : "bg-gray-100 text-black hover:bg-gray-200"
               } md:hidden`}
               onClick={() => setIsOpen(!isOpen)}
             >
@@ -161,7 +165,7 @@ const Navbar = () => {
             initial={{ opacity: 0, scale: 0.95, y: -20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: -20 }}
-            className="absolute left-6 right-6 top-24 z-[-1] overflow-hidden rounded-[40px] border border-white/20 bg-white/95 p-10 backdrop-blur-3xl md:hidden"
+            className="absolute left-6 right-6 top-24 z-[-1] overflow-hidden rounded-[40px] border border-white/20 bg-white/95 p-10 backdrop-blur-3xl shadow-[0_20px_50px_rgba(0,0,0,0.15)] md:hidden"
           >
             <div className="flex flex-col gap-6">
               {navItems.map(({ name, path, disabled, badge }, i) => {
@@ -211,7 +215,7 @@ const Navbar = () => {
                     href={IOS_URL}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex flex-1 items-center justify-center gap-2 rounded-2xl bg-[#121212] py-4 text-white"
+                    className="flex flex-1 items-center justify-center gap-2 rounded-2xl bg-[#121212] py-4 text-white shadow-md shadow-black/10"
                   >
                     <FaApple size={20} />{" "}
                     <span className="text-sm font-bold">iOS</span>
@@ -220,7 +224,7 @@ const Navbar = () => {
                     href={ANDROID_URL}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex flex-1 items-center justify-center gap-2 rounded-2xl border border-gray-200 py-4 text-[#121212]"
+                    className="flex flex-1 items-center justify-center gap-2 rounded-2xl border border-gray-200 bg-white py-4 text-[#121212] shadow-sm"
                   >
                     <BiLogoPlayStore size={20} />{" "}
                     <span className="text-sm font-bold">Android</span>
