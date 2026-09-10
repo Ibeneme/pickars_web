@@ -1,8 +1,8 @@
 import React from "react";
 import { motion } from "framer-motion";
-import food_a from "../../assets/images/foods/food_a.svg";
-import food_b from "../../assets/images/foods/food_b.svg";
-import food_c from "../../assets/images/foods/food_c.svg";
+// import food_a from "../../assets/images/foods/food_a.svg";
+// import food_b from "../../assets/images/foods/food_b.svg";
+// import food_c from "../../assets/images/foods/food_c.svg";
 import food_d from "../../assets/images/foods/food_d.svg";
 
 /**
@@ -165,7 +165,7 @@ const PickarsRefinedBounceCarousel: React.FC = () => {
       <img
         src={food_d}
         alt="Food Illustration D"
-        className="w-[288px] h-[288px] max-w-[288px] max-h-[288px] object-contain shadow-none drop-shadow-none"
+        className="w-[400px] h-[400px] max-w-[500px] max-h-[500px] object-contain shadow-none drop-shadow-none"
       />
     </div>,
 
@@ -436,7 +436,7 @@ const PickarsRefinedBounceCarousel: React.FC = () => {
                 delay: (index % items.length) * 0.4,
               }}
               whileHover={{ scale: 1.08 }}
-              className="min-w-[300px] md:w-[300px] flex-shrink-0 flex items-center justify-center cursor-pointer px-4"
+              className="min-w-[440px] md:w-[550px] flex-shrink-0 flex items-center justify-center cursor-pointer px-4"
             >
               {element}
             </motion.div>
