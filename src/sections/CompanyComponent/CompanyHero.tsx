@@ -46,14 +46,8 @@ export const CompanyHero: React.FC = () => {
             variants={itemVariants}
             className="mb-5 text-5xl font-black leading-[1.05] tracking-tight text-gray-900 sm:text-6xl md:text-7xl lg:text-8xl"
           >
-            Getting your goods going,{" "}
-            <span className="relative inline-block text-[#FF0000]">
-              Port Harcourt.
-              <span
-                aria-hidden
-                className="absolute -bottom-1 -right-1 h-3 w-3 bg-red-700 opacity-40 rotate-45 pointer-events-none"
-              />
-            </span>
+            Getting your goods going{" "}
+            <span className="relative inline-block text-[#FF0000]">.</span>
           </motion.h1>
           <motion.p
             variants={itemVariants}
@@ -63,7 +57,7 @@ export const CompanyHero: React.FC = () => {
             of traditional logistics, empowering vendors, creators, and everyday
             senders with instant, dependable doorstep dispatch.
           </motion.p>
-          <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
+          <div className="mt-0 flex flex-wrap items-center justify-center gap-4">
             <a
               href={IOS_URL}
               target="_blank"

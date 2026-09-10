@@ -119,7 +119,6 @@ export const Mission: React.FC = () => {
           </motion.div>
         </div>
 
-        {/* Bottom Row: Second Image */}
         <motion.div
           initial="hidden"
           whileInView="visible"
@@ -132,6 +131,22 @@ export const Mission: React.FC = () => {
             alt="Pickars service showcase"
             className="w-full h-auto object-cover block"
           />
+
+          {/* Optional Gradient Overlay for better text readability */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+
+          {/* Pickars Text Overlay */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            viewport={{ once: true }}
+            className="absolute bottom-6 left-6 sm:bottom-10 sm:left-10 z-10"
+          >
+            <h3 className="text-white text-7xl sm:text-9xl font-black tracking-tighter font-['Lufga']">
+              Pickars<span style={{ color: "#ff0000" }}>.</span>
+            </h3>
+          </motion.div>
         </motion.div>
       </div>
     </section>

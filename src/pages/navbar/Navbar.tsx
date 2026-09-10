@@ -18,11 +18,12 @@ const Navbar = () => {
   }, []);
 
   const navItems = [
-    { name: "Home", path: "/", highlight: true },
+    { name: "Home", path: "/" },
     { name: "About", path: "/app/our-company" },
     { name: "FAQs", path: "/app/faqs" },
+    { name: "Blog", path: "#", disabled: true, badge: "Soon" },
     // { name: "Support", path: "/app/help-center" },
-    // { name: "Track", path: "/app/tracking", highlight: true },
+    // { name: "Track", path: "/app/tracking" },
   ];
 
   return (
@@ -34,12 +35,10 @@ const Navbar = () => {
       <div className="mx-auto max-w-4xl px-6 flex justify-center">
         <div
           className={`flex items-center justify-between gap-8 rounded-full border border-white/20 bg-white/70 px-4 py-2.5 backdrop-blur-2xl transition-all duration-500 ${
-            scrolled
-              ? "shadow-[0_20px_50px_rgba(0,0,0,0.1)] md:w-auto border-[2px]"
-              : "w-full"
+            scrolled ? "md:w-auto md:gap-20 border-[2px]" : "w-full"
           }`}
         >
-          {/* Logo Section */}
+          {/* Logo Section - always visible */}
           <a href="/" className="flex items-center gap-2 pl-2 group">
             <div className="relative">
               <img
@@ -48,37 +47,54 @@ const Navbar = () => {
                 className="h-8 w-auto transition-transform duration-500 group-hover:rotate-[360deg] rounded-full"
               />
             </div>
-            <h3
-              className={`text-xl font-black tracking-tighter text-[#121212] transition-all duration-500 ${
-                scrolled
-                  ? "opacity-100 translate-x-0"
-                  : "opacity-0 -translate-x-3 pointer-events-none"
-              } sm:opacity-100 sm:translate-x-0`}
-            >
+            <h3 className="text-xl font-black tracking-tighter text-[#121212]">
               Pickars
             </h3>
           </a>
 
           {/* Desktop Nav Links */}
           <ul className="hidden items-center gap-1 md:flex">
-            {navItems.map(({ name, path, highlight }) => (
-              <li key={name}>
-                <a
-                  href={path}
-                  className={`relative px-4 py-2 text-sm font-bold transition-all duration-300 rounded-full hover:bg-black/5 ${
-                    currentPath === path ? "text-red-600" : "text-gray-600"
-                  } ${highlight ? "bg-red-50 text-red-600" : ""}`}
-                >
-                  {name}
-                  {currentPath === path && !highlight && (
-                    <motion.div
-                      layoutId="navUnderline"
-                      className="absolute bottom-0 left-1/2 h-1 w-1 -translate-x-1/2 rounded-full bg-red-600"
-                    />
-                  )}
-                </a>
-              </li>
-            ))}
+            {navItems.map(({ name, path, disabled, badge }) => {
+              const isActive = currentPath === path;
+              return (
+                <li key={name}>
+                  <a
+                    href={disabled ? undefined : path}
+                    className={`relative px-4 py-2 text-sm font-bold transition-all duration-300 rounded-full flex items-center gap-1.5 ${
+                      disabled
+                        ? "text-gray-400 cursor-not-allowed pointer-events-none opacity-60"
+                        : isActive
+                        ? "bg-[#FF0000] text-white"
+                        : "text-gray-600 hover:bg-black/5"
+                    }`}
+                  >
+                    {name}
+                    {badge && (
+                      <span
+                        className={`text-[9px] font-extrabold px-1.5 py-0.5 rounded-full uppercase tracking-wider ${
+                          isActive
+                            ? "bg-white/20 text-white"
+                            : "bg-gray-200 text-gray-600"
+                        }`}
+                      >
+                        {badge}
+                      </span>
+                    )}
+                    {isActive && !disabled && (
+                      <motion.div
+                        layoutId="navPill"
+                        className="absolute inset-0 rounded-full bg-[#FF0000] -z-10"
+                        transition={{
+                          type: "spring",
+                          stiffness: 300,
+                          damping: 30,
+                        }}
+                      />
+                    )}
+                  </a>
+                </li>
+              );
+            })}
           </ul>
 
           {/* Download & Toggle */}
@@ -90,7 +106,7 @@ const Navbar = () => {
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
-                className="flex h-10 w-10 items-center justify-center rounded-full bg-[#121212] text-white transition-colors hover:bg-red-600"
+                className="flex h-10 w-10 items-center justify-center rounded-full bg-[#121212] text-white transition-colors hover:bg-[#FF0000]"
               >
                 <FaApple size={18} />
               </motion.a>
@@ -100,7 +116,7 @@ const Navbar = () => {
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
-                className="flex h-10 w-10 items-center justify-center rounded-full bg-[#121212] text-white transition-colors hover:bg-red-600"
+                className="flex h-10 w-10 items-center justify-center rounded-full bg-[#121212] text-white transition-colors hover:bg-[#FF0000]"
               >
                 <BiLogoPlayStore size={18} />
               </motion.a>
@@ -108,7 +124,7 @@ const Navbar = () => {
 
             <button
               className={`flex h-10 w-10 items-center justify-center rounded-full transition-all ${
-                isOpen ? "bg-red-600 text-white" : "bg-gray-100 text-black"
+                isOpen ? "bg-[#FF0000] text-white" : "bg-gray-100 text-black"
               } md:hidden`}
               onClick={() => setIsOpen(!isOpen)}
             >
@@ -145,23 +161,46 @@ const Navbar = () => {
             initial={{ opacity: 0, scale: 0.95, y: -20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: -20 }}
-            className="absolute left-6 right-6 top-24 z-[-1] overflow-hidden rounded-[40px] border border-white/20 bg-white/95 p-10 shadow-[0_40px_80px_rgba(0,0,0,0.1)] backdrop-blur-3xl md:hidden"
+            className="absolute left-6 right-6 top-24 z-[-1] overflow-hidden rounded-[40px] border border-white/20 bg-white/95 p-10 backdrop-blur-3xl md:hidden"
           >
             <div className="flex flex-col gap-6">
-              {navItems.map(({ name, path }, i) => (
-                <motion.a
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: i * 0.05 }}
-                  key={name}
-                  href={path}
-                  onClick={() => setIsOpen(false)}
-                  className="flex items-center justify-between text-3xl font-black tracking-tighter text-[#121212]"
-                >
-                  {name}
-                  <ArrowRight className="text-red-600" size={24} />
-                </motion.a>
-              ))}
+              {navItems.map(({ name, path, disabled, badge }, i) => {
+                const isActive = currentPath === path;
+                return (
+                  <motion.a
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: i * 0.05 }}
+                    key={name}
+                    href={disabled ? undefined : path}
+                    onClick={() => !disabled && setIsOpen(false)}
+                    className={`flex items-center justify-between text-3xl font-black tracking-tighter ${
+                      disabled
+                        ? "text-gray-300 pointer-events-none"
+                        : isActive
+                        ? "text-[#FF0000]"
+                        : "text-[#121212]"
+                    }`}
+                  >
+                    <div className="flex items-center gap-3">
+                      {name}
+                      {badge && (
+                        <span className="text-[10px] bg-gray-200 text-gray-600 font-extrabold px-2 py-0.5 rounded-full uppercase tracking-wider">
+                          {badge}
+                        </span>
+                      )}
+                    </div>
+                    {!disabled && (
+                      <ArrowRight
+                        className={
+                          isActive ? "text-[#FF0000]" : "text-gray-400"
+                        }
+                        size={24}
+                      />
+                    )}
+                  </motion.a>
+                );
+              })}
 
               <div className="mt-6 flex flex-col gap-4 border-t border-gray-100 pt-8">
                 <p className="text-xs font-bold uppercase tracking-widest text-gray-400">

@@ -1,16 +1,18 @@
 import React from "react";
 import { motion } from "framer-motion";
+import food_a from "../../assets/images/foods/food_a.svg";
+import food_b from "../../assets/images/foods/food_b.svg";
+import food_c from "../../assets/images/foods/food_c.svg";
+import food_d from "../../assets/images/foods/food_d.svg";
 
 /**
  * PickarsRefinedBounceCarousel Component
- * Features vector illustrations scrolling seamlessly in an endless loop with
- * increased element size, closer spacing, transparent background, zero shadows,
- * and slowed down, gentle floating animations.
+ * Features vector illustrations and imported external food SVGs scrolling seamlessly in an endless loop.
  */
 const PickarsRefinedBounceCarousel: React.FC = () => {
-  // Array of illustration SVGs/JSX elements (Massive sizing)
+  // Array combining inline SVGs and the imported external food SVGs
   const items = [
-    // 1. Paper Delivery Bag with location tags
+    // 1. Paper Delivery Bag with location tags (Inline)
     <svg
       viewBox="0 0 450 420"
       fill="none"
@@ -73,8 +75,7 @@ const PickarsRefinedBounceCarousel: React.FC = () => {
           textAnchor="middle"
           fontFamily="sans-serif"
         >
-          {" "}
-          Choba{" "}
+          Choba
         </text>
       </g>
       <g transform="translate(20, 160)">
@@ -95,8 +96,7 @@ const PickarsRefinedBounceCarousel: React.FC = () => {
           textAnchor="middle"
           fontFamily="sans-serif"
         >
-          {" "}
-          Borikiri{" "}
+          Borikiri
         </text>
       </g>
       <g transform="translate(280, 220)">
@@ -117,8 +117,7 @@ const PickarsRefinedBounceCarousel: React.FC = () => {
           textAnchor="middle"
           fontFamily="sans-serif"
         >
-          {" "}
-          Rumu-Okoro{" "}
+          Rumu-Okoro
         </text>
       </g>
       <g transform="translate(15, 310)">
@@ -139,13 +138,39 @@ const PickarsRefinedBounceCarousel: React.FC = () => {
           textAnchor="middle"
           fontFamily="sans-serif"
         >
-          {" "}
-          Ada George{" "}
+          Ada George
         </text>
       </g>
     </svg>,
 
-    // 2. Red Basket with Groceries
+    // 2. Imported Food A (`food_a.svg`) – reduced size + no shadow
+    // <div className="w-full flex items-center justify-center p-4">
+    //   <img
+    //     src={food_a}
+    //     alt="Food Illustration A"
+    //     className="w-[288px] h-[288px] max-w-[288px] max-h-[288px] object-contain shadow-none drop-shadow-none"
+    //   />
+    // </div>,
+
+    // 3. Imported Food B (`food_b.svg`) – reduced size + no shadow
+    // <div className="w-full flex items-center justify-center p-4">
+    //   <img
+    //     src={food_b}
+    //     alt="Food Illustration B"
+    //     className="w-[288px] h-[288px] max-w-[288px] max-h-[288px] object-contain shadow-none drop-shadow-none"
+    //   />
+    // </div>,
+
+    <div className="w-full flex items-center justify-center p-4">
+      <img
+        src={food_d}
+        alt="Food Illustration D"
+        className="w-[288px] h-[288px] max-w-[288px] max-h-[288px] object-contain shadow-none drop-shadow-none"
+      />
+    </div>,
+
+    // 4. Red Basket with Groceries
+
     <svg
       viewBox="0 0 500 420"
       fill="none"
@@ -245,13 +270,12 @@ const PickarsRefinedBounceCarousel: React.FC = () => {
       </g>
     </svg>,
 
-    // 3. Gourmet Burger
+    // 5. Gourmet Burger
     <svg
       viewBox="0 0 450 420"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       className="w-full h-auto ml-[-120px] mr-[-120px]"
-      
     >
       <g transform="translate(15, 10)">
         <path d="M 110 180 Q 225 60 340 180 Z" fill="#D97706" />
@@ -289,7 +313,7 @@ const PickarsRefinedBounceCarousel: React.FC = () => {
       </g>
     </svg>,
 
-    // 4. Green Produce Basket
+    // 6. Green Produce Basket
     <svg
       viewBox="0 0 500 420"
       fill="none"
@@ -340,7 +364,7 @@ const PickarsRefinedBounceCarousel: React.FC = () => {
         <ellipse cx="31" cy="15" rx="16" ry="6" fill="#BBF7D0" />
         <circle cx="75" cy="45" r="32" fill="#22C55E" />
         <path
-          d="M 75 13 C 73 8 77 4 80 4"
+          d="M 75 13 C 73 8 77 4 80 0"
           stroke="#14532D"
           strokeWidth="3.5"
           strokeLinecap="round"
@@ -370,40 +394,51 @@ const PickarsRefinedBounceCarousel: React.FC = () => {
         ))}
       </g>
     </svg>,
+
+    // 7. Imported Food C (`food_c.svg`) – reduced size + no shadow
+    // <div className="w-full flex items-center justify-center p-4">
+    //   <img
+    //     src={food_c}
+    //     alt="Food Illustration C"
+    //     className="w-[288px] h-[288px] max-w-[288px] max-h-[288px] object-contain shadow-none drop-shadow-none"
+    //   />
+    // </div>,
+
+    // 8. Imported Food D (`food_d.svg`) – reduced size + no shadow
   ];
 
-  // Duplicate items array for seamless looping
+  // Duplicate items array for seamless infinite looping
   const duplicatedItems = [...items, ...items];
 
   return (
-    <div className="w-full bg-transparent py-20 overflow-hidden relative select-none">
-      {/* Infinite Scrolling Track with 10px gap on mobile */}
+    <div className="w-full bg-transparent pb-20 overflow-hidden relative select-none">
+      {/* Infinite Scrolling Track */}
       <div className="flex overflow-hidden w-full items-center">
         <motion.div
           className="flex items-center flex-shrink-0"
           animate={{ x: ["0%", "-50%"] }}
           transition={{
             repeat: Infinity,
-            duration: 24, // Slower marquee scroll speed
+            duration: 30,
             ease: "linear",
           }}
         >
-          {duplicatedItems.map((svgElement, index) => (
+          {duplicatedItems.map((element, index) => (
             <motion.div
               key={index}
               animate={{
-                y: [0, -12, 0], // Gentler, smoother bounce height
+                y: [0, -12, 0],
               }}
               transition={{
-                duration: 3.5, // Slower float/bounce duration
+                duration: 3.5,
                 repeat: Infinity,
                 ease: "easeInOut",
                 delay: (index % items.length) * 0.4,
               }}
               whileHover={{ scale: 1.08 }}
-              className="min-w-[300px] md:w-[300px] flex-shrink-0 flex items-center justify-center cursor-pointer"
+              className="min-w-[300px] md:w-[300px] flex-shrink-0 flex items-center justify-center cursor-pointer px-4"
             >
-              {svgElement}
+              {element}
             </motion.div>
           ))}
         </motion.div>
