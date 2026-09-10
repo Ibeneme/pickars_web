@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import  { useState, useEffect } from "react";
 
 const towns = [
   { id: "gra", name: "GRA", top: "12%", left: "18%", color: "#a855f7" },
@@ -61,7 +61,7 @@ function PackageIcon() {
   );
 }
 
-function PersonComingOut({ active }) {
+function PersonComingOut({ active }: any) {
   return (
     <g
       style={{
