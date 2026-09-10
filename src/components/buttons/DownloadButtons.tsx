@@ -1,15 +1,20 @@
-
+import { IOS_URL, ANDROID_URL } from "../../constants";
 
 export default function DownloadButtons({
-  iosUrl = "#",
-  androidUrl = "#",
+  iosUrl = IOS_URL,
+  androidUrl = ANDROID_URL,
   dark = false,
   alignLeft = false,
+}: {
+  iosUrl?: string;
+  androidUrl?: string;
+  dark?: boolean;
+  alignLeft?: boolean;
 }) {
-  const buttonStyles = `flex flex-1 sm:flex-none min-w-[140px] sm:min-w-[180px] items-center justify-center gap-2.5 sm:gap-3 rounded-[120px] px-3 sm:px-4 py-3 transition-all ${
+  const buttonStyles = `flex flex-1 sm:flex-none min-w-[140px] sm:min-w-[180px] items-center justify-center gap-2.5 sm:gap-3 rounded-[120px] px-3 sm:px-4 py-3 transition-all shadow-md ${
     dark
-      ? "bg-white text-black hover:bg-[#FF0000] hover:text-white"
-      : "bg-black text-white hover:bg-[#FF0000]"
+      ? "bg-white text-black hover:bg-[#FF0000] hover:text-white shadow-black/5"
+      : "bg-black text-white hover:bg-[#FF0000] shadow-black/10"
   }`;
 
   const subtitleStyles = `text-[9px] sm:text-[10px] font-semibold uppercase tracking-wider ${
