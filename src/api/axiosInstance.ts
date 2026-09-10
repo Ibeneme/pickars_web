@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const API_BASE_URL = "http://localhost:5200/api/v1/admin";
-const API_BASE_URL_TRACK = "http://localhost:5200/api/";
+const API_BASE_URL = `https://pickurps-server.onrender.com/api/v1/admin/`;
+const API_BASE_URL_TRACK = `https://pickurps-server.onrender.com/api/`;
 //"http://localhost:5200/api/";
 // 1. Admin instance (Authenticated) http://www.pickars-api.org/api/
 const axiosInstance = axios.create({
