@@ -110,10 +110,10 @@ const portHarcourtLocations = [
     name: "Eleme Junction",
     top: "74%",
     left: "74%",
-    badgeBg: "bg-pink-300",
+    badgeBg: "bg-[#d7ccc8]", // Changed from pink-300 to a warm light brown/taupe
     textColor: "text-black font-extrabold",
     dotColor: "bg-purple-900",
-    pinColor: "#f472b6",
+    pinColor: "#8d6e63", // Changed from pink pin to a medium brown hex code
     pinTop: "86%",
     pinLeft: "79%",
     showOnMobile: false,
@@ -251,7 +251,7 @@ function DeliveryRider() {
 
 export default function PortHarcourtMapComponent() {
   return (
-    <div className="relative w-full aspect-[4/5] sm:aspect-[4/3] md:aspect-[16/9] min-h-[420px] max-h-[750px] bg-[#FBE3E3] overflow-hidden rounded-xl md:rounded-3xl border-2 sm:border-4 border-black font-sans select-none">
+    <div className="relative w-full aspect-[4/5] sm:aspect-[4/3] md:aspect-[16/9] min-h-[420px] max-h-[750px] bg-[#EFEBE9] overflow-hidden rounded-xl md:rounded-3xl border-2 sm:border-4 border-black font-sans select-none">
       <style>{`
         @keyframes popIn {
           0% { opacity: 0; transform: scale(0) translateY(15px); }
@@ -280,30 +280,30 @@ export default function PortHarcourtMapComponent() {
         viewBox="0 0 1000 700"
         preserveAspectRatio="xMidYMid slice"
       >
-        {/* Secondary dark bypass roads */}
+        {/* Secondary dark bypass roads (Deep dark chocolate brown) */}
         <path
           d="M 120 0 L 120 700"
-          stroke="#3D0000"
+          stroke="#3E2723"
           strokeWidth="24"
           strokeLinecap="round"
         />
         <path
           d="M 380 0 L 360 700"
-          stroke="#3D0000"
+          stroke="#3E2723"
           strokeWidth="18"
           strokeLinecap="round"
         />
         <path
           d="M 700 0 L 720 700"
-          stroke="#3D0000"
+          stroke="#3E2723"
           strokeWidth="22"
           strokeLinecap="round"
         />
 
-        {/* Straight Horizontal Main Road across screen */}
+        {/* Straight Horizontal Main Road across screen (Warm caramel/tan) */}
         <path
           d="M 0 350 L 1000 350"
-          stroke="#FFBFBF"
+          stroke="#D7CCC8"
           strokeWidth="26"
           strokeLinecap="round"
         />
@@ -311,27 +311,27 @@ export default function PortHarcourtMapComponent() {
         {/* Primary arterial roads */}
         <path
           d={RIDER_PATH}
-          stroke="#FFBFBF"
+          stroke="#D7CCC8"
           strokeWidth="28"
           strokeLinecap="round"
           fill="none"
         />
         <path
           d="M 0 620 Q 350 580 1000 820"
-          stroke="#FFBFBF"
+          stroke="#D7CCC8"
           strokeWidth="26"
           strokeLinecap="round"
           fill="none"
         />
         <path
           d="M 100 0 L 140 700"
-          stroke="#FFBFBF"
+          stroke="#D7CCC8"
           strokeWidth="22"
           strokeLinecap="round"
         />
         <path
           d="M 560 0 L 530 700"
-          stroke="#FFBFBF"
+          stroke="#D7CCC8"
           strokeWidth="22"
           strokeLinecap="round"
         />
@@ -404,7 +404,7 @@ export default function PortHarcourtMapComponent() {
                 style={{
                   background:
                     "radial-gradient(circle at center, transparent 40%, black 41%, black 100%)",
-                  backgroundColor: "#fceceb",
+                  backgroundColor: "#f5f2f0",
                 }}
               />
 
@@ -430,7 +430,7 @@ export default function PortHarcourtMapComponent() {
                 style={{
                   background:
                     "radial-gradient(circle at center, transparent 40%, black 41%, black 100%)",
-                  backgroundColor: "#fceceb",
+                  backgroundColor: "#f5f2f0",
                 }}
               />
             </div>

@@ -1,6 +1,7 @@
 import React, { useRef } from "react";
 import { motion, useInView, type Variants } from "framer-motion";
 import { FiShield, FiZap, FiUsers, FiCompass } from "react-icons/fi";
+import DownloadButtons from "../../components/buttons/DownloadButtons";
 
 interface ValueCardData {
   icon: React.ReactNode;
@@ -51,7 +52,7 @@ export const CompanyCoreValues: React.FC = () => {
   return (
     <section
       ref={ref}
-      className="relative overflow-hidden bg-[#FFF5F5] py-8 sm:py-10 md:py-12 font-['Lufga']"
+      className="relative overflow-hidden bg-[#fff] py-8 sm:py-10 md:py-12 font-['Lufga']"
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         {/* Section Header */}
@@ -59,7 +60,7 @@ export const CompanyCoreValues: React.FC = () => {
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
           variants={headerVariant}
-          className="flex flex-col items-center text-center max-w-4xl mx-auto mb-12 sm:mb-16"
+          className="flex flex-col items-center text-center max-w-2xl mx-auto mb-12 sm:mb-16"
         >
           <div
             className="mb-4 px-5 py-2 bg-[#FF0000] text-white font-black text-[11px] sm:text-xs uppercase tracking-widest cursor-default select-none"
@@ -73,13 +74,19 @@ export const CompanyCoreValues: React.FC = () => {
             OUR PRINCIPLES
           </div>
 
-          <h2 className="text-5xl sm:text-6xl md:text-8xl font-black text-gray-900 tracking-tight leading-[1.08]">
+          <h2 className="mb-5 text-5xl font-black leading-[1.05] tracking-tight text-gray-900 sm:text-6xl md:text-6xl lg:text-7xl">
             Igniting and driving the ultimate{" "}
             <span style={{ color: "#ff0000" }}>goal</span>
           </h2>
           <p className="mt-4 text-base sm:text-lg text-gray-600 font-medium">
-            The core values that keep Pickars moving forward for Port Harcourt.
+            The core values that keep Pickars moving forward for Port
+            Harcourt,What keeps Pickars moving: the values behind every
+            delivery.
           </p>
+
+          <div style={{ marginTop: 16 }}>
+            <DownloadButtons />
+          </div>
         </motion.div>
 
         {/* Values Grid */}

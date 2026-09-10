@@ -12,8 +12,8 @@ import { FaApple } from "react-icons/fa";
 import { BiLogoPlayStore } from "react-icons/bi";
 import logo from "../../assets/images/logo.png";
 import { motion } from "framer-motion";
+import { ANDROID_URL, IOS_URL } from "../../constants";
 // Importing the shared constants
-import { ANDROID_URL, IOS_URL } from "../Hero/HeroSection";
 
 const Footer: React.FC = () => {
   const scrollToTop = () => {

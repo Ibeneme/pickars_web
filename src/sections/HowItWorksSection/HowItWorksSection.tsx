@@ -13,11 +13,11 @@ const HowItWorks: React.FC = () => {
   return (
     <section
       ref={ref}
-      className="relative overflow-hidden bg-[#FFF5F5] py-16 font-['Lufga'] text-gray-900"
+      className="relative overflow-hidden bg-[#fff] py-16 font-['Lufga'] text-gray-900"
     >
       <div className="relative z-10 px-4  max-w-7xl mx-auto">
         {/* SECTION HEADER */}
-        <div className="text-center max-w-5xl mx-auto mb-12 sm:mb-16 md:mb-24 flex flex-col items-center">
+        <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16 md:mb-24 flex flex-col items-center">
           {/* TRACK RECORD BADGE */}
           <motion.div
             initial={{ opacity: 0, scale: 0.8, rotate: -5 }}
@@ -39,8 +39,8 @@ const HowItWorks: React.FC = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-5xl sm:text-6xl md:text-8xl font-black leading-[1.15] tracking-tight text-gray-900"
-          >
+            className="mb-5 text-5xl font-black leading-[1.05] tracking-tight text-gray-900 sm:text-6xl md:text-6xl lg:text-7xl"
+        >
             Tap. Request. Delivered in{" "}
             <span className="text-[#FF0000]">Minutes.</span>
           </motion.h2>

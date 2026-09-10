@@ -1,10 +1,7 @@
 import React from "react";
 import { motion, useInView } from "framer-motion";
 import PortHarcourtMapComponent from "./PortHarcourtMapComponent";
-
-export const IOS_URL = "https://apps.apple.com/ng/app/pickars/id6746796884";
-export const ANDROID_URL =
-  "https://play.google.com/store/apps/details?id=com.pickars.app&hl=en";
+import DownloadButtons from "../../components/buttons/DownloadButtons";
 
 const PerfectHeroSection: React.FC = () => {
   const ref = React.useRef(null);
@@ -13,15 +10,11 @@ const PerfectHeroSection: React.FC = () => {
   return (
     <section
       ref={ref}
-      className="relative overflow-hidden bg-[#FFF5F5] py-12 sm:py-16 md:py-32 font-['Lufga'] text-gray-900"
+      className="relative overflow-hidden bg-[#fff] py-12 sm:py-16 md:py-32 font-['Lufga'] text-gray-900"
     >
-      {/* Background ambient red glow accents for high visual depth */}
-      <div className="absolute top-1/4 left-10 w-96 h-96 bg-red-500/10 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-1/4 right-10 w-80 h-80 bg-red-600/10 rounded-full blur-[100px] pointer-events-none" />
-
       <div className="relative z-10 px-4 sm:px-6 max-w-7xl mx-auto">
         {/* ── HEADER / HERO COPY ─────────────────────────────────────── */}
-        <div className="text-center max-w-4xl mx-auto mb-12 sm:mb-16 md:mb-20 flex flex-col items-center">
+        <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16 md:mb-20 flex flex-col items-center">
           {/* Badge with stylized cutout edge effects */}
           <motion.div
             initial={{ opacity: 0, scale: 0.8, rotate: -5 }}
@@ -44,17 +37,12 @@ const PerfectHeroSection: React.FC = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-5xl sm:text-6xl md:text-8xl font-black leading-[1.15] tracking-tight text-gray-900"
+            className="mb-5 text-5xl font-black leading-[1.05] tracking-tight text-gray-900 sm:text-6xl md:text-6xl lg:text-7xl"
           >
             Bringing Your Items Right to Your{" "}
-            <span className="relative inline-block text-transparent bg-clip-text bg-gradient-to-r from-red-600 via-red-500 to-rose-600">
+            <span className="relative inline-block text-transparent bg-clip-text bg-gradient-to-r from-[#ff0000] via-[#ff0000] to-[#ff0000]">
               {" "}
               Doorstep
-              {/* Paper corner fold effect */}
-              <span
-                aria-hidden
-                className="absolute -bottom-1 -right-1 w-3 h-3 bg-red-700 transform rotate-45 pointer-events-none opacity-40"
-              />
             </span>
           </motion.h1>
 
@@ -77,49 +65,7 @@ const PerfectHeroSection: React.FC = () => {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="mt-8 flex flex-row items-center justify-center gap-4 w-full flex-wrap"
           >
-            {/* Apple App Store Download Button */}
-            <a
-              href={IOS_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-auto min-w-[170px] px-5 py-3.5 bg-black hover:bg-[#ff0000] text-white rounded-2xl hover:translate-x-[2px] hover:translate-y-[2px] transition-all flex items-center justify-center space-x-3 group"
-            >
-              <svg
-                className="w-7 h-7 fill-current shrink-0"
-                viewBox="0 0 384 512"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 52.3-12 69.5-34.3z" />
-              </svg>
-              <div className="text-left">
-                <p className="text-[10px] uppercase font-bold text-gray-300 leading-none">
-                  Download on the
-                </p>
-                <p className="text-base font-black leading-tight">App Store</p>
-              </div>
-            </a>
-
-            {/* Google Play Store Download Button */}
-            <a
-              href={ANDROID_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-auto px-5 py-3.5 bg-black hover:bg-[#ff0000] text-white rounded-2xl hover:translate-x-[2px] hover:translate-y-[2px] transition-all flex items-center justify-center space-x-3 group"
-            >
-              <svg
-                className="w-7 h-7 fill-current shrink-0"
-                viewBox="0 0 512 512"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path d="M325.3 234.3L104.6 13l280.8 161.2-60.1 60.1zM47 0C34 6.8 25.3 19.2 25.3 35.3v441.3c0 16.1 8.7 28.5 21.7 35.3l256.6-256L47 0zm425.2 225.6l-58.9-34.1-65.7 64.5 65.7 64.5 60.1-34.1c18-14.3 18-46.5-1.2-60.8zM104.6 499l220.7-221.3 60.1 60.1L104.6 499z" />
-              </svg>
-              <div className="text-left">
-                <p className="text-[10px] uppercase font-bold text-gray-300 leading-none">
-                  Get it on
-                </p>
-                <p className="text-base font-black leading-tight">Play Store</p>
-              </div>
-            </a>
+            <DownloadButtons />
           </motion.div>
         </div>
 

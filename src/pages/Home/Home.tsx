@@ -11,6 +11,7 @@ import HowItWorks from "../../sections/HowItWorksSection/HowItWorksSection";
 import PackageDeliverySection from "../../sections/HowItWorksSection/PackageDeliverySection";
 import NeverLateBanner from "../../sections/HowItWorksSection/Planforlatersection";
 import PerfectHeroSection from "../../sections/HowItWorksSection/PerfectHeroSection";
+// import { CatchyHeader } from "../../sections/HowItWorksSection/CatchyHeader";
 //import InfiniteTownsMarquee from "../../sections/HowItWorksSection/InfiniteTowns";
 //import PickarsQRCode from "../PickarsQRCode/PickarsQRCode";
 // import PickarsFeaturesSection from "../../sections/HeroDelivery/MidImage";
@@ -53,7 +54,7 @@ const Home = () => {
         style={{ scaleX }}
       />
 
-      <main className="overflow-x-hidden">
+      <main className="">
         <HeroSection />
 
         <section className="relative z-10">
@@ -66,6 +67,7 @@ const Home = () => {
 
         <HowItWorks />
         {/* <InfiniteTownsMarquee /> */}
+        {/* <CatchyHeader /> */}
         <NeverLateBanner />
 
         <PickarsTestimonialsSection />

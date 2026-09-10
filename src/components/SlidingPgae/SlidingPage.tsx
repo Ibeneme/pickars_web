@@ -74,7 +74,7 @@ const QualitiesSection: React.FC = () => {
   const loopItems = [...qualitiesData, ...qualitiesData, ...qualitiesData];
 
   return (
-    <section className="relative overflow-hidden bg-[#FFF5F5]">
+    <section className="relative overflow-hidden bg-[#fff]">
       {/* CONTINUOUS MARQUEE SLIDER */}
       <div className="relative flex overflow-hidden py-4">
 

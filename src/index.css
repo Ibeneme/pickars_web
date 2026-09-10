@@ -11,8 +11,6 @@
 body {
   font-family: "Lufga";
   background-color: #fff;
-  margin: 0;
-  padding: 0;
 }
 /* Custom utility to hide scrollbars while maintaining functionality */
 @layer utilities {

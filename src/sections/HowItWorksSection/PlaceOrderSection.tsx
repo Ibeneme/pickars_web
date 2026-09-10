@@ -4,10 +4,9 @@ import { FaApple } from "react-icons/fa";
 import { BiLogoPlayStore } from "react-icons/bi";
 import redRiderImg from "../../assets/images/driver/image.png";
 import riders_head from "../../assets/images/driver/riders_head.png";
+import DownloadButtons from "../../components/buttons/DownloadButtons";
+import { ANDROID_URL, IOS_URL } from "../../constants";
 
-export const IOS_URL = "https://apps.apple.com/ng/app/pickars/id6746796884";
-export const ANDROID_URL =
-  "https://play.google.com/store/apps/details?id=com.pickars.app&hl=en";
 
 const PlaceOrderSection: React.FC = () => {
   const ref = React.useRef(null);
@@ -44,7 +43,7 @@ const PlaceOrderSection: React.FC = () => {
   return (
     <section
       ref={ref}
-      className="relative overflow-hidden  py-8 sm:py-8 md:py-8 font-['Lufga'] text-gray-900 "
+      className="relative overflow-hidden font-['Lufga'] text-gray-900 "
     >
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
@@ -53,52 +52,17 @@ const PlaceOrderSection: React.FC = () => {
             initial={{ opacity: 0, x: -30 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.6, ease: "easeOut" }}
-            className="relative bg-[#000] rounded-[32px] sm:rounded-[40px] p-8 sm:p-12 md:p-16 flex flex-col justify-between overflow-hidden min-h-[500px] sm:min-h-[580px]"
+            className="relative bg-[#000] rounded-[32px] sm:rounded-[40px] p-4 sm:p-8 md:p-8 flex flex-col justify-between overflow-hidden min-h-[500px] sm:min-h-[580px]"
           >
- 
             {/* Top Text Content with constrained max-width */}
             <div className="relative z-10 max-w-lg mx-auto w-full">
-              <h2 className="text-5xl sm:text-6xl md:text-8xl font-black text-white tracking-tight leading-[1.08]">
+              <h2 className="mb-5 text-5xl font-black leading-[1.05] tracking-tight text-white sm:text-6xl md:text-6xl lg:text-7xl">
                 Send your packages asap
               </h2>
 
               {/* App Store Buttons */}
               <div className="mt-8 flex flex-col sm:flex-row items-start sm:items-center gap-3.5">
-                {/* Google Play Button */}
-                <motion.a
-                  href={ANDROID_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  whileHover={{ scale: 1.03 }}
-                  whileTap={{ scale: 0.97 }}
-                  className="bg-white hover:bg-gray-100 text-gray-900 px-5 py-3 rounded-xl font-semibold inline-flex items-center justify-center space-x-3 transition-colors shadow-sm"
-                >
-                  <BiLogoPlayStore className="w-6 h-6 shrink-0 text-gray-900" />
-                  <div className="text-left">
-                    <p className="text-[10px] uppercase tracking-wider text-gray-500 font-medium">
-                      Download on
-                    </p>
-                    <p className="text-sm font-bold leading-none">Play Store</p>
-                  </div>
-                </motion.a>
-
-                {/* App Store Button */}
-                <motion.a
-                  href={IOS_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  whileHover={{ scale: 1.03 }}
-                  whileTap={{ scale: 0.97 }}
-                  className="bg-white hover:bg-gray-100 text-gray-900 px-5 py-3 rounded-xl font-semibold inline-flex items-center justify-center space-x-3 transition-colors shadow-sm"
-                >
-                  <FaApple className="w-5 h-5 shrink-0 text-gray-900" />
-                  <div className="text-left">
-                    <p className="text-[10px] uppercase tracking-wider text-gray-500 font-medium">
-                      Download on
-                    </p>
-                    <p className="text-sm font-bold leading-none">App Store</p>
-                  </div>
-                </motion.a>
+                <DownloadButtons dark="true" alignLeft="true" />
               </div>
             </div>
 

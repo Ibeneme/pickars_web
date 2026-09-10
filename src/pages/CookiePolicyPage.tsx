@@ -5,7 +5,7 @@ import { FaApple } from "react-icons/fa";
 import { BiLogoPlayStore } from "react-icons/bi";
 import { Cookie } from "lucide-react";
 
-import { ANDROID_URL, IOS_URL } from "../sections/Hero/HeroSection";
+import { ANDROID_URL, IOS_URL } from "../constants";
 
 const CookiePolicyPage: React.FC = () => {
   return (

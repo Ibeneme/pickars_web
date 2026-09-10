@@ -52,10 +52,12 @@ const App: React.FC = () => {
     <div
       className="app-main-wrapper"
       style={{
-        backgroundColor: "#FAFAFA",
-        minHeight: "100vh",
+        background: "linear-gradient(to bottom, #FFF5F5 0%, #000000 100%)",
+        backgroundAttachment: "fixed",
+        minHeight: "100dvh", // Fixes mobile browser address bar / bottom bar layout bugs
         display: "flex",
         flexDirection: "column",
+        overflowX: "hidden",
       }}
     >
       <ScrollToTop />

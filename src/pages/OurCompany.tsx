@@ -6,7 +6,7 @@ import UberDispatchFlow from "../sections/CompanyComponent/PickarsDispatchMap";
 
 const CompanyPage: React.FC = () => {
   return (
-    <div className="bg-[#FFF5F5] font-['Lufga'] text-black overflow-hidden">
+    <div className="bg-[#fff] font-['Lufga'] text-black overflow-hidden">
       <CompanyHero />
       <Mission />
       <CompanyCoreValues />

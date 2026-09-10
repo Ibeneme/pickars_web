@@ -436,7 +436,7 @@ const PickarsRefinedBounceCarousel: React.FC = () => {
                 delay: (index % items.length) * 0.4,
               }}
               whileHover={{ scale: 1.08 }}
-              className="min-w-[440px] md:w-[550px] flex-shrink-0 flex items-center justify-center cursor-pointer px-4"
+              className="min-w-[340px] md:w-[400px] flex-shrink-0 flex items-center justify-center cursor-pointer px-4"
             >
               {element}
             </motion.div>

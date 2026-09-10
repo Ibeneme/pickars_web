@@ -16,7 +16,7 @@ import { FaApple } from "react-icons/fa";
 import { BiLogoPlayStore } from "react-icons/bi";
 
 // Importing shared constants
-import { ANDROID_URL, IOS_URL } from "../../sections/Hero/HeroSection";
+import { ANDROID_URL, IOS_URL } from "../../constants";
 
 interface FeatureItem {
   id: string;
