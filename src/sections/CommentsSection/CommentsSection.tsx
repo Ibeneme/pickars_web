@@ -222,7 +222,7 @@ export default function PickarsTestimonialsSection(): React.JSX.Element {
 
       {/* Header - Centered */}
       <div className="w-full max-w-3xl mb-10 sm:mb-12 md:mb-16 flex flex-col items-center text-center">
-        <h3 className="mb-5 text-5xl font-black leading-[1.05] tracking-tight text-gray-900 sm:text-6xl md:text-6xl lg:text-7xl">
+        <h3 className="mb-5 text-4xl font-black leading-[1.05] tracking-tight text-gray-900 sm:text-6xl md:text-6xl lg:text-6xl">
           Got questions about <span className="text-[#ff0000]">Pickars?</span>
         </h3>
         <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-600 mt-3 sm:mt-4 max-w-2xl">

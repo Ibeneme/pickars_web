@@ -45,11 +45,11 @@ const PackageDeliverySection: React.FC = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="mb-5 text-5xl font-black leading-[1.05] tracking-tight text-gray-900 sm:text-6xl md:text-6xl lg:text-7xl"
+            className="mb-5 text-4xl font-black leading-[1.05] tracking-tight text-gray-900 sm:text-6xl md:text-6xl lg:text-6xl"
           >
-            Just Book a Rider,{" "}
+            We Pick It Up. We Deliver It.{" "}
             <span className="relative inline-block text-[#FF0000]">
-              You've got Pickars.
+              Simple.
             </span>
           </motion.h2>
 
@@ -57,7 +57,7 @@ const PackageDeliverySection: React.FC = () => {
             initial={{ opacity: 0, y: 15 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.2 }}
-            style={{ lineHeight: 1.8 }}
+            style={{ lineHeight: 1.6 }}
             className="mt-[-8px] text-[16px] sm:text-[20px] text-gray-600 font-medium leading-relaxed max-w-2xl px-2 sm:px-0"
           >
             Got something to send? Pickars gets a trusted rider to you in
@@ -94,7 +94,7 @@ const PackageDeliverySection: React.FC = () => {
             viewport={{ once: true }}
             className="absolute bottom-6 left-6 sm:bottom-10 sm:left-10 z-10"
           >
-            <h3 className="text-white text-7xl sm:text-9xl font-black tracking-tighter font-['Lufga']">
+            <h3 className="text-white text-4xl sm:text-6xl font-black tracking-tighter font-['Lufga']">
               Pickars<span style={{ color: "#ff0000" }}>.</span>
             </h3>
           </motion.div>

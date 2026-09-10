@@ -44,7 +44,7 @@ export const CompanyHero: React.FC = () => {
 
           <motion.h1
             variants={itemVariants}
-            className="mb-5 text-5xl font-black leading-[1.05] tracking-tight text-gray-900 sm:text-6xl md:text-6xl lg:text-7xl"
+            className="mb-5 text-4xl font-black leading-[1.05] tracking-tight text-gray-900 sm:text-6xl md:text-6xl lg:text-6xl"
           >
             get your goods{" "}
             <span className="relative inline-block text-[#FF0000]">going.</span>

@@ -74,7 +74,7 @@ export const CompanyCoreValues: React.FC = () => {
             OUR PRINCIPLES
           </div>
 
-          <h2 className="mb-5 text-5xl font-black leading-[1.05] tracking-tight text-gray-900 sm:text-6xl md:text-6xl lg:text-7xl">
+          <h2 className="mb-5 text-4xl font-black leading-[1.05] tracking-tight text-gray-900 sm:text-6xl md:text-6xl lg:text-6xl">
             Igniting and driving the ultimate{" "}
             <span style={{ color: "#ff0000" }}>goal</span>
           </h2>

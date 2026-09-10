@@ -29,7 +29,7 @@ const HeroSection: React.FC = () => {
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="flex w-full flex-col items-center text-center max-w-5xl"
+          className="flex w-full flex-col items-center text-center max-w-4xl"
         >
           {/* Ticket-style badge */}
           <motion.div
@@ -47,11 +47,11 @@ const HeroSection: React.FC = () => {
 
           <motion.h1
             variants={itemVariants}
-            className="mb-5 text-5xl font-black leading-[1.05] tracking-tight text-gray-900 sm:text-6xl md:text-6xl lg:text-7xl"
+            className="mb-5 text-4xl font-black leading-[1.05] tracking-tight text-gray-900 sm:text-6xl md:text-6xl lg:text-6xl"
           >
-            Doorstep deliveries,{" "}
+            Your doorstep deliveries,{" "}
             <span className="relative inline-block text-[#FF0000]">
-              got different.
+              redefined.
             </span>
           </motion.h1>
 
@@ -102,7 +102,7 @@ const HeroSection: React.FC = () => {
             {/* Imported Logo Image (Assuming square or shield logo) */}
 
             {/* Pickars Text */}
-            <h3 className="text-white text-7xl sm:text-9xl font-black tracking-tighter font-['Lufga'] leading-none">
+            <h3 className="text-white text-4xl sm:text-6xl font-black tracking-tighter font-['Lufga'] leading-none">
               Pickars<span style={{ color: "#ff0000" }}>.</span>
             </h3>
           </motion.div>

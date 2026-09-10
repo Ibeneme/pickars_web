@@ -46,7 +46,7 @@ const NeverLateBanner: React.FC = () => {
             SAFE & DURABLE
           </motion.div>
 
-          <h2 className="mb-5 text-5xl font-black leading-[1.05] tracking-tight text-gray-900 sm:text-6xl md:text-6xl lg:text-7xl">
+          <h2 className="mb-5 text-4xl font-black leading-[1.05] tracking-tight text-gray-900 sm:text-6xl md:text-6xl lg:text-6xl">
             The fast way to send it. Always on time with{" "}
             <span className="relative inline-block text-transparent bg-clip-text bg-gradient-to-r from-[#ff0000] via-[#ff0000] to-[#ff0000]">
               Pickars.

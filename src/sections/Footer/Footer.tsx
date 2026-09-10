@@ -203,7 +203,7 @@ const Footer: React.FC = () => {
 
         {/* Ultra-Bold and Fluid Responsive Brand Typography */}
         <div className="mt-16 select-none w-full overflow-hidden">
-          <h1 className="w-full text-center sm:text-left text-[clamp(4.3rem,19vw,17rem)] font-[900] tracking-tighter leading-[0.8] text-white opacity-95">
+          <h1 className="w-full text-center sm:text-left text-[clamp(4.3rem,15vw,16rem)] font-[900] tracking-tighter leading-[0.8] text-white opacity-95">
             Pickars <span style={{color:'#ff0000'}}>.</span>
           </h1>
         </div>

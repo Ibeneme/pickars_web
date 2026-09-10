@@ -50,7 +50,7 @@ export const Mission: React.FC = () => {
             </div>
 
             <div className="my-6">
-              <h2 className="text-4xl sm:text-5xl md:text-7xl font-black text-white tracking-tight leading-[1.08]">
+              <h2 className="text-4xl sm:text-5xl md:text-6xl font-black text-white tracking-tight leading-[1.08]">
                 The Pickars Mission
               </h2>
               <p className="mt-5 text-base sm:text-lg font-normal leading-relaxed text-zinc-300">
@@ -109,7 +109,7 @@ export const Mission: React.FC = () => {
             viewport={{ once: true }}
             className="absolute bottom-6 left-6 sm:bottom-10 sm:left-10 z-10"
           >
-            <h3 className="text-white text-7xl sm:text-9xl font-black tracking-tighter font-['Lufga']">
+            <h3 className="text-white text-4xl sm:text-6xl font-black tracking-tighter font-['Lufga']">
               Pickars<span style={{ color: "#ff0000" }}>.</span>
             </h3>
           </motion.div>

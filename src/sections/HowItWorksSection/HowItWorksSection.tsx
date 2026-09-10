@@ -2,10 +2,6 @@ import React from "react";
 import { motion, useInView } from "framer-motion";
 import PlaceOrderSection from "./PlaceOrderSection";
 
-export const IOS_URL = "https://apps.apple.com/ng/app/pickars/id6746796884";
-export const ANDROID_URL =
-  "https://play.google.com/store/apps/details?id=com.pickars.app&hl=en";
-
 const HowItWorks: React.FC = () => {
   const ref = React.useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
@@ -39,8 +35,8 @@ const HowItWorks: React.FC = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="mb-5 text-5xl font-black leading-[1.05] tracking-tight text-gray-900 sm:text-6xl md:text-6xl lg:text-7xl"
-        >
+            className="mb-5 text-4xl font-black leading-[1.05] tracking-tight text-gray-900 sm:text-6xl md:text-6xl lg:text-6xl"
+          >
             Tap. Request. Delivered in{" "}
             <span className="text-[#FF0000]">Minutes.</span>
           </motion.h2>
@@ -49,8 +45,8 @@ const HowItWorks: React.FC = () => {
             initial={{ opacity: 0, y: 15 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.2 }}
-            style={{ lineHeight: 1.8 }}
-            className=" mt-[-24px] text-[16px] sm:text-[20px] text-gray-600 font-medium leading-relaxed max-w-2xl px-2 sm:px-0"
+            style={{ lineHeight: 1.6 }}
+            className=" mt-[-20] text-[16px] sm:text-[20px] text-gray-600 font-medium leading-relaxed max-w-2xl px-2 sm:px-0"
           >
             Download the Pickars app today for the smartest package delivery
             experience across Port Harcourt.
