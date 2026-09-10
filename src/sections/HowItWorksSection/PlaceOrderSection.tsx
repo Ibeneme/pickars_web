@@ -1,11 +1,8 @@
 import React from "react";
 import { motion, useInView } from "framer-motion";
-import { FaApple } from "react-icons/fa";
-import { BiLogoPlayStore } from "react-icons/bi";
 import redRiderImg from "../../assets/images/driver/image.png";
 import riders_head from "../../assets/images/driver/riders_head.png";
 import DownloadButtons from "../../components/buttons/DownloadButtons";
-import { ANDROID_URL, IOS_URL } from "../../constants";
 
 
 const PlaceOrderSection: React.FC = () => {
@@ -62,7 +59,7 @@ const PlaceOrderSection: React.FC = () => {
 
               {/* App Store Buttons */}
               <div className="mt-8 flex flex-col sm:flex-row items-start sm:items-center gap-3.5">
-                <DownloadButtons dark="true" alignLeft="true" />
+                <DownloadButtons dark={true} alignLeft={true} />
               </div>
             </div>
 

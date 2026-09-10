@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { motion, useInView } from "framer-motion";
+import { motion } from "framer-motion";
 import DownloadButtons from "../../components/buttons/DownloadButtons";
-import image from '../../assets/images/use_app/nice.svg'
 
 const NeverLateBanner: React.FC = () => {
   const [seconds, setSeconds] = useState(new Date().getSeconds());
   const ref = React.useRef(null);
-  const isInView = useInView(ref, { once: true });
 
   useEffect(() => {
     const interval = setInterval(() => {

@@ -62,7 +62,7 @@ export const CatchyHeader: React.FC = () => {
             </div>
 
             {/* App Download Buttons */}
-            <DownloadButtons dark="true" alignLeft="true" />
+            <DownloadButtons dark={true} alignLeft={true} />
           </motion.div>
 
           {/* Right Column: Featured Image */}

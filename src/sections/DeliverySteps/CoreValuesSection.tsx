@@ -5,7 +5,7 @@ import { BiLogoPlayStore } from "react-icons/bi";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 
 // Importing shared constants
-import { ANDROID_URL, IOS_URL } from "../Hero/HeroSection";
+import { ANDROID_URL, IOS_URL } from "../../constants";
 
 interface Value {
   title: string;

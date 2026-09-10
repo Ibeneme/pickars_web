@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { ArrowLeft, ArrowRight } from "lucide-react";
-import { IOS_URL, ANDROID_URL } from "../../constants";
 import phone_a from "../../assets/images/use_app/phone_a.svg";
 import phone_b from "../../assets/images/use_app/phone_b.svg";
 import phone_c from "../../assets/images/use_app/phone_c.svg";
@@ -163,7 +162,7 @@ export default function UberDispatchFlow() {
 
               {/* App Store Links Section */}
               <div className="flex mt-4 flex-col lg:flex-row items-center justify-start pt-6 border-t border-zinc-800 gap-6">
-                <DownloadButtons dark="true" alignLeft="true" />
+                <DownloadButtons dark={true} alignLeft={true} />
               </div>
             </div>
           </div>
