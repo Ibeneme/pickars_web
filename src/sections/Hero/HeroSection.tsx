@@ -1,9 +1,28 @@
-import React from "react";
-import { motion, type Variants } from "framer-motion";
+import React, { useRef } from "react";
+import { motion, useScroll, useTransform, type Variants } from "framer-motion";
 import DownloadButtons from "../../components/buttons/DownloadButtons";
 import photo from "../../assets/images/use_app/nice.svg";
 
 const HeroSection: React.FC = () => {
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  // Scroll tracking for parallax effects
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"],
+  });
+
+  // Main parallax for the image (moves slower than text)
+  const imageY = useTransform(scrollYProgress, [0, 1], ["-15%", "15%"]);
+
+  // Parallax + fade-in for the "Pickars." text overlay
+  const pickarsY = useTransform(scrollYProgress, [0, 1], ["-8%", "8%"]);
+  const pickarsOpacity = useTransform(
+    scrollYProgress,
+    [0, 0.4, 0.8, 1],
+    [0, 0.3, 0.9, 1]
+  );
+
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
@@ -22,9 +41,12 @@ const HeroSection: React.FC = () => {
   };
 
   return (
-    <section className="relative isolate overflow-hidden bg-[#fff] pt-36 pb-16 font-['Lufga'] text-gray-900 md:pt-48 md:pb-24">
+    <section
+      ref={containerRef}
+      className="relative isolate overflow-hidden bg-[#fff] pt-36 pb-16 font-['Lufga'] text-gray-900 md:pt-48 md:pb-24"
+    >
       <div className="relative z-10 mx-auto flex max-w-7xl flex-col items-center gap-12 px-4 sm:px-6 lg:gap-16">
-        {/* ——— TOP: Centered bold header ——— */}
+        {/* ——— TOP: Centered bold header + buttons (Framer parallax + scroll trigger) ——— */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
@@ -72,68 +94,42 @@ const HeroSection: React.FC = () => {
           </motion.div>
         </motion.div>
 
-        {/* ——— BOTTOM: Video ——— */}
-        {/* ——— BOTTOM: Video ——— */}
-
+        {/* ——— BOTTOM: Parallax Image Showcase ——— */}
         <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
-          //  variants={fadeUpVariant}
-          className="relative overflow-hidden rounded-[32px] sm:rounded-[40px] w-full max-h-[700px] max-w-7xl mx-auto "
+          className="relative overflow-hidden rounded-[32px] sm:rounded-[40px] w-full max-h-[700px] max-w-7xl mx-auto"
         >
-          <img
-            src={photo}
-            alt="Pickars service showcase"
-            className="w-full h-auto object-cover block"
-          />
+          {/* Parallax moving image wrapper */}
+          <motion.div style={{ y: imageY }} className="w-full h-full scale-110">
+            <img
+              src={photo}
+              alt="Pickars service showcase"
+              className="w-full h-auto object-cover block"
+            />
+          </motion.div>
 
-          {/* Optional Gradient Overlay for better text readability */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+          {/* Gradient Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
 
-          {/* Pickars Text Overlay */}
+          {/* Pickars Text Overlay - GSAP-style parallax + fade (Framer scroll trigger) */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            viewport={{ once: true }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            viewport={{ once: true, margin: "-150px" }}
+            style={{
+              y: pickarsY,
+              opacity: pickarsOpacity,
+            }}
             className="absolute bottom-6 left-6 sm:bottom-10 sm:left-10 z-10 flex items-end gap-4"
           >
-            {/* Imported Logo Image (Assuming square or shield logo) */}
-
-            {/* Pickars Text */}
             <h3 className="text-white text-4xl sm:text-6xl font-black tracking-tighter font-['Lufga'] leading-none">
               Pickars<span style={{ color: "#ff0000" }}>.</span>
             </h3>
           </motion.div>
         </motion.div>
-
-        {/* <motion.div
-          initial={{ opacity: 0, y: 28 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.65, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-          className="relative w-full max-w-7xl"
-        >
-          <div className="relative overflow-hidden rounded-3xl border border-gray-200 bg-black ">
-            <video
-              autoPlay
-              loop
-              muted
-              playsInline
-              preload="auto"
-              className="aspect-[16/10] w-full object-cover sm:aspect-[16/9]"
-            >
-              <source src={sendVideo} type="video/mp4" />
-              Your browser does not support the video tag.
-            </video>
-          </div>
-
-
-          <div className="absolute -bottom-4 left-1/2 flex -translate-x-1/2 items-center gap-2 rounded-full border border-gray-100 bg-white/95 px-4 py-2.5 text-xs font-semibold text-gray-800 backdrop-blur-md">
-            <span className="h-2 w-2 rounded-full bg-emerald-500" />
-            Logistics made easy
-          </div>
-        </motion.div> */}
       </div>
     </section>
   );

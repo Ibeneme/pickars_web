@@ -86,12 +86,16 @@ const PackageDeliverySection: React.FC = () => {
           {/* Optional Gradient Overlay for better text readability */}
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
 
-          {/* Pickars Text Overlay */}
+          {/* Pickars Text Overlay - GSAP-style parallax + scroll trigger */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            viewport={{ once: true }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            viewport={{ once: true, margin: "-150px" }}
+            style={{
+              y: isInView ? 0 : 20,
+              opacity: isInView ? 1 : 0,
+            }}
             className="absolute bottom-6 left-6 sm:bottom-10 sm:left-10 z-10"
           >
             <h3 className="text-white text-4xl sm:text-6xl font-black tracking-tighter font-['Lufga']">

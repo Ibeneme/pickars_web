@@ -1,21 +1,12 @@
 import { motion, useScroll, useSpring } from "framer-motion";
-import { Helmet } from "react-helmet-async"; // Imported Helmet
+import { Helmet } from "react-helmet-async";
 import SlidingPage from "../../components/SlidingPgae/SlidingPage";
-//import CustomerRiderSection from "../../sections/CustomerRiderSection/CustomerRiderSection";
 import HeroSection from "../../sections/Hero/HeroSection";
-//import HowItWorksSection from "../../sections/HowItWorksSection/HowItWorksSection";
-//import FinalBookingSection from "../../sections/HowItWorksSection/FinalBookingSection";
-//import PickarsPricingStackingScrollSection from "../../components/templates/stack";
 import PickarsTestimonialsSection from "../../sections/CommentsSection/CommentsSection";
 import HowItWorks from "../../sections/HowItWorksSection/HowItWorksSection";
 import PackageDeliverySection from "../../sections/HowItWorksSection/PackageDeliverySection";
 import NeverLateBanner from "../../sections/HowItWorksSection/Planforlatersection";
 import PerfectHeroSection from "../../sections/HowItWorksSection/PerfectHeroSection";
-// import { CatchyHeader } from "../../sections/HowItWorksSection/CatchyHeader";
-//import InfiniteTownsMarquee from "../../sections/HowItWorksSection/InfiniteTowns";
-//import PickarsQRCode from "../PickarsQRCode/PickarsQRCode";
-// import PickarsFeaturesSection from "../../sections/HeroDelivery/MidImage";
-//import MidImage from "../../sections/HeroDelivery/MidImage";
 
 const Home = () => {
   const { scrollYProgress } = useScroll();
@@ -27,34 +18,55 @@ const Home = () => {
 
   return (
     <div className="relative bg-[#fff] selection:bg-red-600 selection:text-white">
-      {/* Dynamic SEO Meta Data */}
+      {/* Enhanced SEO & Social Meta Data */}
       <Helmet>
         <title>
-          Pickars | On-Demand Delivery &amp; Urban Logistics Ecosystem
+          Pickars | Fast On-Demand Delivery & Urban Logistics in Port Harcourt
         </title>
         <meta
           name="description"
-          content="Connect instantly with verified dispatch riders in Port Harcourt. Fast, reliable, and stress-free delivery for your packages and online store orders."
+          content="Connect instantly with verified dispatch riders in Port Harcourt. Fast, reliable, and stress-free package delivery for individuals and online stores."
+        />
+        <meta
+          name="keywords"
+          content="delivery service Port Harcourt, dispatch riders, logistics ecosystem, send packages, online store delivery, Pickars"
         />
         <link rel="canonical" href="https://pickars.com" />
+
+        {/* Open Graph / Facebook */}
         <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://pickars.com" />
         <meta
           property="og:title"
-          content="Pickars | On-Demand Delivery &amp; Urban Logistics"
+          content="Pickars | Fast On-Demand Delivery & Urban Logistics in Port Harcourt"
         />
         <meta
           property="og:description"
-          content="Connect instantly with verified dispatch riders in Port Harcourt. Fast, reliable, and stress-free delivery for your packages and online store orders."
+          content="Connect instantly with verified dispatch riders in Port Harcourt. Fast, reliable, and stress-free package delivery."
         />
-        <meta property="og:image" content="http://pickars.com/box.png" />
+        <meta property="og:image" content="https://pickars.com/box.png" />
+
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:url" content="https://pickars.com" />
+        <meta
+          name="twitter:title"
+          content="Pickars | Fast On-Demand Delivery & Urban Logistics in Port Harcourt"
+        />
+        <meta
+          name="twitter:description"
+          content="Connect instantly with verified dispatch riders in Port Harcourt. Fast, reliable, and stress-free package delivery."
+        />
+        <meta name="twitter:image" content="https://pickars.com/box.png" />
       </Helmet>
 
+      {/* Scroll Progress Bar */}
       <motion.div
         className="fixed top-0 left-0 right-0 z-[110] h-1 bg-red-600 origin-left"
         style={{ scaleX }}
       />
 
-      <main className="">
+      <main>
         <HeroSection />
 
         <section className="relative z-10">
@@ -62,14 +74,9 @@ const Home = () => {
         </section>
 
         <PerfectHeroSection />
-
         <PackageDeliverySection />
-
         <HowItWorks />
-        {/* <InfiniteTownsMarquee /> */}
-        {/* <CatchyHeader /> */}
         <NeverLateBanner />
-
         <PickarsTestimonialsSection />
       </main>
     </div>
