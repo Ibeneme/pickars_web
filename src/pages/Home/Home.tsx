@@ -44,7 +44,7 @@ const Home = () => {
           property="og:description"
           content="Connect instantly with verified dispatch riders in Port Harcourt. Fast, reliable, and stress-free package delivery."
         />
-        <meta property="og:image" content="https://pickars.com/box.png" />
+        <meta property="og:image" content="https://pickars.com/box.svg" />
 
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
@@ -57,7 +57,7 @@ const Home = () => {
           name="twitter:description"
           content="Connect instantly with verified dispatch riders in Port Harcourt. Fast, reliable, and stress-free package delivery."
         />
-        <meta name="twitter:image" content="https://pickars.com/box.png" />
+        <meta name="twitter:image" content="https://pickars.com/box.svg" />
       </Helmet>
 
       {/* Scroll Progress Bar */}

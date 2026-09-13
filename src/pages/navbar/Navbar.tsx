@@ -3,7 +3,7 @@ import { Menu, X, ArrowRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaApple } from "react-icons/fa";
 import { BiLogoPlayStore } from "react-icons/bi";
-import navImage from "../../assets/images/logo.png";
+import navImage from "../../assets/images/logo.svg";
 import { ANDROID_URL, IOS_URL } from "../../constants";
 
 const Navbar = () => {

@@ -42,7 +42,7 @@ const Company = () => {
           property="og:description"
           content="Discover the Pickars journey and our core values of innovation, speed, and reliability in urban logistics."
         />
-        <meta property="og:image" content="https://pickars.com/box.png" />
+        <meta property="og:image" content="https://pickars.com/box.svg" />
 
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
@@ -58,7 +58,7 @@ const Company = () => {
           name="twitter:description"
           content="Discover the Pickars journey and our core values of innovation, speed, and reliability in urban logistics."
         />
-        <meta name="twitter:image" content="https://pickars.com/box.png" />
+        <meta name="twitter:image" content="https://pickars.com/box.svg" />
       </Helmet>
 
       {/* Scroll Progress Bar */}

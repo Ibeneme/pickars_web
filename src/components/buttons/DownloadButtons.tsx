@@ -1,4 +1,3 @@
-import React from "react";
 import { motion } from "framer-motion";
 import { IOS_URL, ANDROID_URL } from "../../constants";
 

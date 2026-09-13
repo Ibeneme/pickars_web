@@ -18,7 +18,7 @@ const FAQsPage = () => {
           property="og:description"
           content="Explore documentation on delivery coverage, rates, driver requirements, and immediate support channels."
         />
-        <meta property="og:image" content="http://pickars.com/box.png" />
+        <meta property="og:image" content="http://pickars.com/box.svg" />
       </Helmet>
 
       <FAQPage />

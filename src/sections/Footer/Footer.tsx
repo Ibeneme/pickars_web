@@ -10,7 +10,7 @@ import {
 } from "react-icons/fa6";
 import { FaApple } from "react-icons/fa";
 import { BiLogoPlayStore } from "react-icons/bi";
-import logo from "../../assets/images/logo.png";
+import logo from "../../assets/images/logo.svg";
 import { motion } from "framer-motion";
 import { ANDROID_URL, IOS_URL } from "../../constants";
 import AppDownloadCTA from "./Contact"; // Or wherever your AppDownloadCTA component lives
