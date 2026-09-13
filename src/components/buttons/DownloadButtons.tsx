@@ -1,3 +1,5 @@
+import React from "react";
+import { motion } from "framer-motion";
 import { IOS_URL, ANDROID_URL } from "../../constants";
 
 export default function DownloadButtons({
@@ -11,18 +13,14 @@ export default function DownloadButtons({
   dark?: boolean;
   alignLeft?: boolean;
 }) {
-  // Added 'group' so children can listen to the parent hover state
-  const buttonStyles = `group flex flex-1 sm:flex-none min-w-[140px] sm:min-w-[180px] items-center justify-center gap-2.5 sm:gap-3 rounded-[120px] px-3 sm:px-4 py-3 transition-all ${
-    dark
-      ? "bg-white text-black hover:bg-[#ff0000] hover:text-white"
-      : "bg-black text-white hover:bg-[#ff0000]"
-  }`;
+  // Base button styles
+  const buttonStyles = `group flex flex-1 sm:flex-none min-w-[140px] sm:min-w-[180px] items-center justify-center gap-2.5 sm:gap-3 rounded-[120px] px-4 sm:px-5 py-3 cursor-pointer shadow-sm transition-colors duration-300`;
 
-  // Updated to group-hover with dynamic text color based on button state
-  const subtitleStyles = `text-[9px] sm:text-[10px] font-semibold uppercase tracking-wider transition-colors duration-200 ${
+  // Subtitle styling responding to group hover states
+  const subtitleStyles = `text-[9px] sm:text-[10px] font-semibold uppercase tracking-wider transition-colors duration-300 ${
     dark
-      ? "text-zinc-500 group-hover:text-white/80"
-      : "text-zinc-400 group-hover:text-white/80"
+      ? "text-zinc-400 group-hover:text-white/90"
+      : "text-zinc-400 group-hover:text-white/90"
   }`;
 
   // Alignment: centered on mobile, left-aligned on web if alignLeft is true
@@ -35,11 +33,19 @@ export default function DownloadButtons({
       className={`mt-0 flex flex-row items-center gap-3 sm:gap-4 w-full ${alignmentClass}`}
     >
       {/* iOS App Store Button */}
-      <a
+      <motion.a
         href={iosUrl}
         target="_blank"
         rel="noopener noreferrer"
-        className={buttonStyles}
+        initial={false}
+        whileHover={{ y: -2, scale: 1 }} // Ensures scale stays strictly at 1 (no resizing)
+        whileTap={{ scale: 0.97 }}
+        transition={{ type: "spring", stiffness: 400, damping: 25 }}
+        className={`${buttonStyles} ${
+          dark
+            ? "bg-white text-black hover:bg-[#ff0000] hover:text-white"
+            : "bg-black text-white hover:bg-[#ff0000]"
+        }`}
       >
         <svg
           className="h-5 w-5 sm:h-6 sm:w-6 shrink-0 fill-current"
@@ -53,14 +59,22 @@ export default function DownloadButtons({
             App Store
           </p>
         </div>
-      </a>
+      </motion.a>
 
       {/* Android Play Store Button */}
-      <a
+      <motion.a
         href={androidUrl}
         target="_blank"
         rel="noopener noreferrer"
-        className={buttonStyles}
+        initial={false}
+        whileHover={{ y: -2, scale: 1 }} // Ensures scale stays strictly at 1 (no resizing)
+        whileTap={{ scale: 0.97 }}
+        transition={{ type: "spring", stiffness: 400, damping: 25 }}
+        className={`${buttonStyles} ${
+          dark
+            ? "bg-white text-black hover:bg-[#ff0000] hover:text-white"
+            : "bg-black text-white hover:bg-[#ff0000]"
+        }`}
       >
         <svg
           className="h-5 w-5 sm:h-6 sm:w-6 shrink-0 fill-current"
@@ -74,7 +88,7 @@ export default function DownloadButtons({
             Play Store
           </p>
         </div>
-      </a>
+      </motion.a>
     </div>
   );
 }

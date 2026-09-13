@@ -1,7 +1,7 @@
 import React from "react";
 import { motion, useInView } from "framer-motion";
-import redRiderImg from "../../assets/images/driver/image.png";
-import riders_head from "../../assets/images/driver/riders_head.png";
+import redRiderImg from "../../assets/images/driver/image.svg";
+import riders_head from "../../assets/images/driver/riders_head.svg";
 import DownloadButtons from "../../components/buttons/DownloadButtons";
 
 

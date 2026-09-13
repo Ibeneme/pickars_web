@@ -1,6 +1,6 @@
 import React from "react";
 import { motion, type Variants } from "framer-motion";
-import woman_and_phone from "../../assets/images/about/phone_in_pocket.jpeg";
+import woman_and_phone from "../../assets/images/about/phone_in_pocket.svg";
 import photo from "../../assets/images/about/photo.svg";
 import DownloadButtons from "../../components/buttons/DownloadButtons";
 

@@ -3,6 +3,7 @@ import { motion, useScroll, useSpring } from "framer-motion";
 import AFHero from "../../sections/AppFeaturesSection/AF_Hero";
 import AFNotifications from "../../sections/AppFeaturesSection/AFNotifications";
 import UberDispatchFlow from "../../sections/CompanyComponent/PickarsDispatchMap";
+import AFDeliveryOptions from "../../sections/AppFeaturesSection/AFDeliveryOptions";
 
 const AppFeatures: React.FC = () => {
   const { scrollYProgress } = useScroll();
@@ -21,6 +22,7 @@ const AppFeatures: React.FC = () => {
       />
 
       <AFHero />
+      <AFDeliveryOptions />
       <AFNotifications />
       <UberDispatchFlow />
     </div>
