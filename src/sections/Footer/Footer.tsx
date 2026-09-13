@@ -13,7 +13,7 @@ import { BiLogoPlayStore } from "react-icons/bi";
 import logo from "../../assets/images/logo.png";
 import { motion } from "framer-motion";
 import { ANDROID_URL, IOS_URL } from "../../constants";
-// Importing the shared constants
+import AppDownloadCTA from "./Contact"; // Or wherever your AppDownloadCTA component lives
 
 const Footer: React.FC = () => {
   const scrollToTop = () => {
@@ -24,99 +24,102 @@ const Footer: React.FC = () => {
     {
       name: "Instagram",
       url: "https://www.instagram.com/pickars_official?igsh=MWY4aTJieHVtMGltYg%3D%3D&utm_source=qr",
-      icon: <FaInstagram size={18} />,
+      icon: <FaInstagram size={16} />,
     },
     {
       name: "X (Twitter)",
       url: "https://x.com/pickars_app?s=21",
-      icon: <FaXTwitter size={18} />,
+      icon: <FaXTwitter size={16} />,
     },
     {
       name: "Facebook",
       url: "https://www.facebook.com/share/1cW4kyitrJ/?mibextid=wwXIfr&wa_status_inline=true",
-      icon: <FaFacebookF size={18} />,
+      icon: <FaFacebookF size={16} />,
     },
     {
       name: "LinkedIn",
       url: "https://www.linkedin.com/company/pickars/",
-      icon: <FaLinkedinIn size={18} />,
+      icon: <FaLinkedinIn size={16} />,
     },
   ];
 
   return (
-    <footer className="bg-[#000] pt-24 pb-16 font-['Lufga'] text-white overflow-hidden">
-      <div className="mx-auto max-w-[1400px] px-6">
+    <footer className="relative w-full overflow-hidden bg-black font-['Lufga'] text-white">
+      {/* Full-width Red Download Banner CTA */}
+      <AppDownloadCTA />
+
+      {/* Main Footer Container */}
+      <div className="mx-auto max-w-7xl md:px-0 px-6 pb-16 pt-20">
         <div className="grid grid-cols-1 gap-16 lg:grid-cols-12">
           {/* Brand Identity Section */}
-          <div className="lg:col-span-5">
-            <div className="mb-8 flex items-center gap-3">
-              <img src={logo} alt="Pickars Logo" className="h-10 w-auto" />
-              <h2 className="text-2xl font-black tracking-tighter">Pickars</h2>
+          <div className="flex flex-col items-start lg:col-span-5">
+            <div className="mb-6 flex items-center gap-3">
+              <img src={logo} alt="Pickars Logo" className="h-9 w-auto" />
+              <h2 className="text-2xl font-black tracking-tight text-white">
+                Pickars
+              </h2>
             </div>
 
-            <p className="mb-10 max-w-md text-sm leading-relaxed text-gray-400">
+            <p className="mb-8 max-w-md text-sm font-normal leading-relaxed text-gray-400">
               At Pickars, we make doorstep deliveries simple, fast, and
               reliable. With a network of trained riders across Nigeria, we make
               sending and receiving packages seamless, convenient, and
               stress-free for everyone.
             </p>
 
-            <div className="flex flex-col gap-6">
+            <div className="flex w-full flex-col gap-5">
               {/* Email Support */}
-           <motion.a
+              <motion.a
                 href="mailto:support@pickars.com"
                 whileHover={{ x: 3 }}
                 transition={{ type: "spring", stiffness: 300, damping: 22 }}
-                className="group flex w-fit items-center gap-4 rounded-2xl border border-white/5 bg-white/5 p-4 transition-colors duration-300 hover:border-red-600/50 hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600"
+                className="group flex w-fit items-center gap-3.5 rounded-2xl bg-white/5 p-3.5 transition-colors hover:bg-white/10"
               >
-                <div className="relative flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-red-600 text-white transition-transform duration-300 group-hover:scale-110">
+                <div className="relative flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#FF0000] text-white">
                   <FaEnvelope size={14} />
-                  <span className="absolute -right-0.5 -top-0.5 h-2 w-2 rounded-full bg-emerald-400 ring-2 ring-[#080808]" />
+                  <span className="absolute -right-0.5 -top-0.5 h-2 w-2 rounded-full bg-emerald-400 ring-2 ring-black" />
                 </div>
                 <div>
                   <p className="text-[10px] font-bold uppercase tracking-widest text-gray-500">
                     Email us
                   </p>
-                  <p className="text-sm font-bold">support@pickars.com</p>
+                  <p className="text-sm font-bold text-white">
+                    support@pickars.com
+                  </p>
                 </div>
               </motion.a>
 
-
               {/* App Download Links */}
-              <div className="flex flex-wrap gap-4 mt-2">
+              <div className="flex flex-wrap items-center gap-3">
                 <a
                   href={IOS_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group flex items-center gap-2 rounded-xl bg-white/5 px-4 py-3 text-sm font-bold text-white transition-all hover:bg-white/10 "
+                  className="group flex items-center gap-2.5 rounded-xl bg-white/5 px-4 py-2.5 text-xs font-bold text-white transition-colors hover:bg-white/10"
                 >
-                  <div className="flex h-8 w-8 items-center justify-center rounded-lg  text-white transition-transform group-hover:scale-110">
-                    <FaApple size={20} />
-                  </div>
+                  <FaApple size={18} />
                   App Store
                 </a>
                 <a
                   href={ANDROID_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group flex items-center gap-2 rounded-xl bg-white/5 px-4 py-3 text-sm font-bold text-white transition-all hover:bg-white/10 "
+                  className="group flex items-center gap-2.5 rounded-xl bg-white/5 px-4 py-2.5 text-xs font-bold text-white transition-colors hover:bg-white/10"
                 >
-                  <div className="flex h-8 w-8 items-center justify-center rounded-lg text-white transition-transform group-hover:scale-110">
-                    <BiLogoPlayStore size={20} />
-                  </div>
+                  <BiLogoPlayStore size={18} />
                   Google Play
                 </a>
               </div>
 
               {/* Social Media Links */}
-              <div className="flex gap-3">
+              <div className="mt-1 flex items-center gap-2.5">
                 {socialLinks.map((social) => (
                   <a
                     key={social.name}
                     href={social.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/5 text-gray-400 transition-all hover:bg-red-600 hover:text-white "
+                    className="flex h-9 w-9 items-center justify-center rounded-xl bg-white/5 text-gray-400 transition-colors hover:bg-[#FF0000] hover:text-white"
                     aria-label={social.name}
                   >
                     {social.icon}
@@ -127,17 +130,16 @@ const Footer: React.FC = () => {
           </div>
 
           {/* Links Grid */}
-          <div className="grid grid-cols-2 gap-8 lg:col-span-7 lg:grid-cols-3">
+          <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 lg:col-span-7">
             <div>
-              <h4 className="mb-6 text-xs font-bold uppercase tracking-[0.2em] text-red-600">
+              <h3 className="mb-5 text-xs font-black uppercase tracking-widest text-[#fff]">
                 Company
-              </h4>
-              <ul className="flex flex-col gap-4">
-       
+              </h3>
+              <ul className="flex flex-col gap-3.5">
                 <li>
                   <Link
                     to="/app/app-features"
-                    className="text-sm text-gray-400 transition-colors hover:text-white"
+                    className="text-sm font-medium text-gray-400 transition-colors hover:text-white"
                   >
                     App Features
                   </Link>
@@ -145,22 +147,23 @@ const Footer: React.FC = () => {
                 <li>
                   <Link
                     to="/app/faqs"
-                    className="text-sm text-gray-400 transition-colors hover:text-white"
+                    className="text-sm font-medium text-gray-400 transition-colors hover:text-white"
                   >
                     Our FAQs
                   </Link>
                 </li>
               </ul>
             </div>
+
             <div>
-              <h4 className="mb-6 text-xs font-bold uppercase tracking-[0.2em] text-red-600">
+              <h3 className="mb-5 text-xs font-black uppercase tracking-widest text-[#fff]">
                 Support
-              </h4>
-              <ul className="flex flex-col gap-4">
+              </h3>
+              <ul className="flex flex-col gap-3.5">
                 <li>
                   <Link
                     to="/app/help-center"
-                    className="text-sm text-gray-400 transition-colors hover:text-white"
+                    className="text-sm font-medium text-gray-400 transition-colors hover:text-white"
                   >
                     Help Center
                   </Link>
@@ -168,22 +171,23 @@ const Footer: React.FC = () => {
                 <li>
                   <Link
                     to="/app/find-item"
-                    className="text-sm text-gray-400 transition-colors hover:text-white"
+                    className="text-sm font-medium text-gray-400 transition-colors hover:text-white"
                   >
                     Find a Lost item
                   </Link>
                 </li>
               </ul>
             </div>
+
             <div>
-              <h4 className="mb-6 text-xs font-bold uppercase tracking-[0.2em] text-red-600">
+              <h3 className="mb-5 text-xs font-black uppercase tracking-widest text-[#fff]">
                 Legal
-              </h4>
-              <ul className="flex flex-col gap-4">
+              </h3>
+              <ul className="flex flex-col gap-3.5">
                 <li>
                   <Link
                     to="/app/terms-of-use"
-                    className="text-sm text-gray-400 transition-colors hover:text-white"
+                    className="text-sm font-medium text-gray-400 transition-colors hover:text-white"
                   >
                     Terms & Conditions
                   </Link>
@@ -191,7 +195,7 @@ const Footer: React.FC = () => {
                 <li>
                   <Link
                     to="/app/privacy-policy"
-                    className="text-sm text-gray-400 transition-colors hover:text-white"
+                    className="text-sm font-medium text-gray-400 transition-colors hover:text-white"
                   >
                     Privacy Policy
                   </Link>
@@ -201,28 +205,28 @@ const Footer: React.FC = () => {
           </div>
         </div>
 
-        {/* Ultra-Bold and Fluid Responsive Brand Typography */}
-        <div className="mt-16 select-none w-full overflow-hidden">
-          <h1 className="w-full text-center sm:text-left text-[clamp(3.3rem,12vw,14rem)] font-[900] tracking-tighter leading-[0.8] text-white opacity-95">
-            Pickars <span style={{color:'#ff0000'}}>.</span>
+        {/* Big Brand Typography */}
+        <div className="mt-16 w-full select-none overflow-hidden">
+          <h1 className="w-full text-center sm:text-left text-[clamp(3.3rem,12vw,14rem)] font-black leading-[0.8] tracking-tighter text-white">
+            Pickars<span className="text-[#ff0000]">.</span>
           </h1>
         </div>
 
         {/* Bottom Bar */}
-        <div className="mt-12 flex flex-col items-center justify-between gap-8 border-t border-white/10 pt-8 md:flex-row">
+        <div className="mt-12 flex flex-col items-center justify-between gap-6 border-t border-white/10 pt-8 sm:flex-row">
           <p className="text-xs font-medium text-gray-500">
             © {new Date().getFullYear()} Pickars Courier Limited. Moving PH City
             forward.
           </p>
           <motion.button
-            whileHover={{ y: -5 }}
-            whileTap={{ scale: 0.9 }}
+            whileHover={{ y: -3 }}
+            whileTap={{ scale: 0.95 }}
             onClick={scrollToTop}
-            className="group flex items-center gap-3 text-xs font-black uppercase tracking-widest text-white"
+            className="group flex items-center gap-3 text-xs font-black uppercase tracking-widest text-white transition-colors hover:text-[#FF0000]"
           >
             Back to Top
-            <div className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 group-hover:bg-red-600 group-hover:border-red-600 transition-all">
-              <FaChevronUp />
+            <div className="flex h-9 w-9 items-center justify-center rounded-full bg-white/5 transition-colors group-hover:bg-[#FF0000] group-hover:text-white">
+              <FaChevronUp className="h-3.5 w-3.5" />
             </div>
           </motion.button>
         </div>

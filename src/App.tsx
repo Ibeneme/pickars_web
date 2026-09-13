@@ -15,7 +15,7 @@ import FAQsPage from "./pages/FAQ/FAQsPage";
 import LostItemPage from "./pages/LostItemPage/LostItemPage";
 import HelpCenter from "./pages/HelpCenter/HelpCenter";
 import AppFeatures from "./pages/AppFeatures/AppFeatures";
-import TrackingPage from "./pages/TrackingPage/TrackingPage";
+//import TrackingPage from "./pages/TrackingPage/TrackingPage";
 import NotFound from "./pages/NotFound";
 
 // Admin Components
@@ -39,6 +39,7 @@ import ProtectedRoute from "./pages/navigation/ProtectedRoute";
 import PaymentSuccess from "./pages/TrackingPage/PaymentSuccess";
 import DispatchRiderTermsPage from "./pages/DispatchRiderTermsPage";
 import CompanyPage from "./pages/OurCompany";
+import TrackingPageMain from "./pages/TrackingPage/TrackingPageMain";
 
 const App: React.FC = () => {
   const location = useLocation();
@@ -77,7 +78,7 @@ const App: React.FC = () => {
           <Route path="/app/find-item" element={<LostItemPage />} />
           <Route path="/app/help-center" element={<HelpCenter />} />
           <Route path="/app/app-features" element={<AppFeatures />} />
-          <Route path="/app/tracking" element={<TrackingPage />} />
+          <Route path="/app/tracking" element={<TrackingPageMain />} />
           <Route path="/track" element={<PaymentSuccess />} />
           {/* Admin Auth */}
           <Route path="/app/admin" element={<AdminLogin />} />

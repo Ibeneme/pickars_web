@@ -6,16 +6,13 @@ import photo from "../../assets/images/use_app/nice.svg";
 const HeroSection: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // Scroll tracking for parallax effects
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start end", "end start"],
   });
 
-  // Main parallax for the image (moves slower than text)
   const imageY = useTransform(scrollYProgress, [0, 1], ["-15%", "15%"]);
 
-  // Parallax + fade-in for the "Pickars." text overlay
   const pickarsY = useTransform(scrollYProgress, [0, 1], ["-8%", "8%"]);
   const pickarsOpacity = useTransform(
     scrollYProgress,

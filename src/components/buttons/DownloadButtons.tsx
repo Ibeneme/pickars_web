@@ -11,14 +11,18 @@ export default function DownloadButtons({
   dark?: boolean;
   alignLeft?: boolean;
 }) {
-  const buttonStyles = `flex flex-1 sm:flex-none min-w-[140px] sm:min-w-[180px] items-center justify-center gap-2.5 sm:gap-3 rounded-[120px] px-3 sm:px-4 py-3 transition-all shadow-md ${
+  // Added 'group' so children can listen to the parent hover state
+  const buttonStyles = `group flex flex-1 sm:flex-none min-w-[140px] sm:min-w-[180px] items-center justify-center gap-2.5 sm:gap-3 rounded-[120px] px-3 sm:px-4 py-3 transition-all ${
     dark
-      ? "bg-white text-black hover:bg-[#FF0000] hover:text-white shadow-black/5"
-      : "bg-black text-white hover:bg-[#FF0000] shadow-black/10"
+      ? "bg-white text-black hover:bg-[#ff0000] hover:text-white"
+      : "bg-black text-white hover:bg-[#ff0000]"
   }`;
 
-  const subtitleStyles = `text-[9px] sm:text-[10px] font-semibold uppercase tracking-wider ${
-    dark ? "text-zinc-500" : "text-zinc-400"
+  // Updated to group-hover with dynamic text color based on button state
+  const subtitleStyles = `text-[9px] sm:text-[10px] font-semibold uppercase tracking-wider transition-colors duration-200 ${
+    dark
+      ? "text-zinc-500 group-hover:text-white/80"
+      : "text-zinc-400 group-hover:text-white/80"
   }`;
 
   // Alignment: centered on mobile, left-aligned on web if alignLeft is true

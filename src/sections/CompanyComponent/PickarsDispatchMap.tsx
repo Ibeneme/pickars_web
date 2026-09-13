@@ -88,7 +88,7 @@ export default function UberDispatchFlow() {
   };
 
   return (
-    <div className="min-h-screen bg-[#fff] mb-48 flex flex-col items-center justify-center p-4 font-sans">
+    <div className="min-h-screen bg-[#000] py-12 flex flex-col items-center justify-center p-4 font-sans">
       <div className="w-full max-w-6xl bg-black text-white rounded-3xl border border-red-900/50 flex flex-col justify-between p-8 md:p-16 relative overflow-hidden">
         {/* Main Content Layout */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start mb-8">

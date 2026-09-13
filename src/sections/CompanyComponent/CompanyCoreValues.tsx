@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import { motion, useInView, type Variants } from "framer-motion";
-import { FiShield, FiZap, FiUsers, FiCompass } from "react-icons/fi";
+import { FiShield, FiZap, FiHeadphones, FiCompass } from "react-icons/fi";
 import DownloadButtons from "../../components/buttons/DownloadButtons";
 
 interface ValueCardData {
@@ -15,28 +15,28 @@ export const CompanyCoreValues: React.FC = () => {
 
   const values: ValueCardData[] = [
     {
-      icon: <FiZap className="w-5 h-5 sm:w-6 sm:h-6" />,
-      title: "Speed & Reliability",
+      icon: <FiZap className="h-5 w-5 sm:h-6 sm:w-6" />,
+      title: "Fast & Reliable",
       description:
-        "We know time is money in Garden City. Our optimized routing ensures your packages arrive swiftly and safely every single time.",
+        "No long waiting times. We match you with nearby riders so your items get delivered quickly and on time, every time.",
     },
     {
-      icon: <FiShield className="w-5 h-5 sm:w-6 sm:h-6" />,
-      title: "Absolute Accountability",
+      icon: <FiShield className="h-5 w-5 sm:h-6 sm:w-6" />,
+      title: "Safe & Secure",
       description:
-        "From pickup to the final doorstep, your items are fully tracked, secured, and handled by elite vetted riders you can trust.",
+        "Your package is in good hands. We work only with trusted, verified riders who make sure your items arrive damage-free.",
     },
     {
-      icon: <FiUsers className="w-5 h-5 sm:w-6 sm:h-6" />,
-      title: "Vendor & Community First",
+      icon: <FiHeadphones className="h-5 w-5 sm:h-6 sm:w-6" />,
+      title: "24/7 Helpful Support",
       description:
-        "We build tools specifically tailored to empower local Port Harcourt businesses, creators, and everyday senders to scale without stress.",
+        "Have a question or run into an issue? Our friendly support team is always available to help you out immediately.",
     },
     {
-      icon: <FiCompass className="w-5 h-5 sm:w-6 sm:h-6" />,
-      title: "Relentless Innovation",
+      icon: <FiCompass className="h-5 w-5 sm:h-6 sm:w-6" />,
+      title: "Live GPS Tracking",
       description:
-        "We continuously refine our logistics infrastructure with cutting-edge tech to eliminate tracking anxiety and logistical friction.",
+        "Know exactly where your package is. Follow your rider's journey on the map in real time from pickup to delivery.",
     },
   ];
 
@@ -52,7 +52,7 @@ export const CompanyCoreValues: React.FC = () => {
   return (
     <section
       ref={ref}
-      className="relative overflow-hidden bg-[#fff] py-8 sm:py-10 md:py-12 font-['Lufga']"
+      className="relative overflow-hidden bg-[#fff] pb-24 pt-12 font-['Lufga']"
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         {/* Section Header */}
@@ -71,7 +71,7 @@ export const CompanyCoreValues: React.FC = () => {
                 "conic-gradient(from -45deg at 50% 50%, #000 0 90deg, #0000 0) 0 0/10px 10px repeat",
             }}
           >
-            OUR PRINCIPLES
+            OUR CORE VALUES
           </div>
 
           <h2 className="mb-5 text-4xl font-black leading-[1.05] tracking-tight text-gray-900 sm:text-6xl md:text-6xl lg:text-6xl">
@@ -116,7 +116,7 @@ export const CompanyCoreValues: React.FC = () => {
                 <div className="flex items-center justify-between mb-6 sm:mb-8">
                   {/* Jagged Icon Badge */}
                   <div
-                    className="w-12 h-12 sm:w-14 sm:h-14 bg-red-100 text-red-600 flex items-center justify-center shrink-0"
+                    className="w-12 h-12 sm:w-14 sm:h-14 bg-[#ff0000] text-[#fff] flex items-center justify-center shrink-0"
                     style={{
                       maskImage:
                         "radial-gradient(circle 6px at calc(100% - 3px) 50%, #0000 99%, #000 100%)",

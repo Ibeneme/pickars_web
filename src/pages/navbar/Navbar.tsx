@@ -20,10 +20,12 @@ const Navbar = () => {
   const navItems = [
     { name: "Home", path: "/" },
     { name: "About", path: "/app/our-company" },
+
+    { name: "Our App", path: "/app/app-features" },
     { name: "FAQs", path: "/app/faqs" },
-    { name: "Blog", path: "#", disabled: true, badge: "Soon" },
     // { name: "Support", path: "/app/help-center" },
-    // { name: "Track", path: "/app/tracking" },
+    { name: "Track", path: "/app/tracking" },
+    { name: "Blog", path: "#", disabled: true, badge: "Soon" },
   ];
 
   return (
@@ -32,12 +34,10 @@ const Navbar = () => {
         scrolled ? "pt-4" : "pt-8"
       }`}
     >
-      <div className="mx-auto max-w-4xl px-6 flex justify-center">
+      <div className="mx-auto max-w-5xl px-6 flex justify-center">
         <div
           className={`flex items-center justify-between gap-8 rounded-full  bg-white/70 px-4 py-2.5 backdrop-blur-2xl  transition-all duration-500  ${
-            scrolled
-              ? "md:w-auto md:gap-20 gap-24 shadow-2xl"
-              : "w-full"
+            scrolled ? "md:w-auto md:gap-20 gap-24 shadow-2xl" : "w-full"
           }`}
         >
           {/* Logo Section - always visible */}
