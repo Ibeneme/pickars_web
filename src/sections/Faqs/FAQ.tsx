@@ -73,7 +73,7 @@ const FAQPage: React.FC = () => {
   };
 
   return (
-    <section className="relative min-h-[85vh] w-full bg-white px-4 pb-20 pt-28 font-['Lufga'] text-gray-900 sm:px-6 sm:pt-32 lg:px-8">
+    <section className="relative min-h-[85vh] w-full bg-white px-4 pb-20 pt-40 md:pt-48 font-['Lufga'] text-gray-900 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
         <motion.div
           variants={containerVariants}
@@ -139,9 +139,7 @@ const FAQPage: React.FC = () => {
                     <div
                       key={faq.id}
                       className={`overflow-hidden rounded-2xl transition-all duration-300 ${
-                        isOpen
-                          ? "bg-gray-50/90"
-                          : "bg-gray-50/50"
+                        isOpen ? "bg-gray-50/90" : "bg-gray-50/50"
                       }`}
                     >
                       <button
