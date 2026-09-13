@@ -47,9 +47,9 @@ const PackageDeliverySection: React.FC = () => {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="mb-5 text-4xl font-black leading-[1.05] tracking-tight text-gray-900 sm:text-6xl md:text-6xl lg:text-6xl"
           >
-            We Pick It Up. We Deliver It.{" "}
+         Delivering by the clock. Backed by our word. {" "}
             <span className="relative inline-block text-[#FF0000]">
-              Simple.
+              Pickars.
             </span>
           </motion.h2>
 
