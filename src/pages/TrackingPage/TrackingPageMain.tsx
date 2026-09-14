@@ -1,11 +1,17 @@
 import React, { useState } from "react";
 import { motion, useScroll, useSpring, type Variants } from "framer-motion";
+import { Helmet } from "react-helmet-async";
+import { useLocation } from "react-router-dom";
 import { FiSearch, FiTruck, FiClock } from "react-icons/fi";
 import PortHarcourtMapComponent from "../../sections/HowItWorksSection/PortHarcourtMapComponent";
 
 const TrackingPageMain: React.FC = () => {
   const [trackingId, setTrackingId] = useState("");
   const [showComingSoon, setShowComingSoon] = useState(false);
+  const location = useLocation();
+
+  // Dynamic canonical URL matching active path
+  const canonicalUrl = `https://www.pickars.com${location.pathname}`;
 
   // Top scroll progress spring animation
   const { scrollYProgress } = useScroll();
@@ -19,6 +25,55 @@ const TrackingPageMain: React.FC = () => {
     e.preventDefault();
     if (!trackingId.trim()) return;
     setShowComingSoon(true);
+  };
+
+  // Structured Data Schema for Tracking Action & Delivery Service
+  const trackingPageSchema = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebPage",
+        "@id": `${canonicalUrl}#webpage`,
+        url: canonicalUrl,
+        name: "Live Dispatch Rider & Parcel Tracking | Pickars Port Harcourt",
+        description:
+          "Track your dispatch rider and parcel status live across Port Harcourt with Pickars. Enter your tracking ID for real-time GPS updates.",
+        isPartOf: {
+          "@type": "WebSite",
+          "@id": "https://www.pickars.com/#website",
+          url: "https://www.pickars.com/",
+          name: "Pickars",
+        },
+        potentialAction: {
+          "@type": "SearchAction",
+          target: `${canonicalUrl}?id={tracking_id}`,
+          "query-input": "required name=tracking_id",
+        },
+        inLanguage: "en-NG",
+      },
+      {
+        "@type": "DeliveryService",
+        "@id": "https://www.pickars.com/#trackingservice",
+        name: "Pickars Live GPS Parcel Tracking",
+        provider: {
+          "@type": "LocalBusiness",
+          name: "Pickars Logistics",
+          telephone: "+2349164860591",
+          address: {
+            "@type": "PostalAddress",
+            addressLocality: "Port Harcourt",
+            addressRegion: "Rivers State",
+            addressCountry: "NG",
+          },
+        },
+        areaServed: {
+          "@type": "City",
+          name: "Port Harcourt",
+        },
+        description:
+          "Real-time dispatch rider location, parcel status monitoring, and express last-mile package tracking in Port Harcourt.",
+      },
+    ],
   };
 
   const containerVariants: Variants = {
@@ -46,6 +101,67 @@ const TrackingPageMain: React.FC = () => {
 
   return (
     <section className="relative flex flex-col min-h-screen w-full bg-white text-gray-900 overflow-hidden">
+      {/* Advanced SEO Metadata */}
+      <Helmet>
+        {/* Core Metadata */}
+        <title>
+          Live Dispatch Rider & Parcel Tracking | Pickars Port Harcourt
+        </title>
+        <meta
+          name="description"
+          content="Track your Pickars dispatch rider in real-time. Enter your tracking ID for live GPS updates, estimated pickup times, and package status in Port Harcourt."
+        />
+        <meta
+          name="keywords"
+          content="Pickars tracking, track dispatch rider Port Harcourt, live delivery tracking PH, parcel status Nigeria, bike courier tracking Port Harcourt, Pickars order tracking"
+        />
+        <meta name="robots" content="index, follow, max-image-preview:large" />
+        <link rel="canonical" href={canonicalUrl} />
+
+        {/* Geo Targeting */}
+        <meta name="geo.region" content="NG-RI" />
+        <meta name="geo.placename" content="Port Harcourt" />
+        <meta name="geo.position" content="4.824167;7.080833" />
+        <meta name="ICBM" content="4.824167, 7.080833" />
+
+        {/* Open Graph / Facebook / WhatsApp */}
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={canonicalUrl} />
+        <meta property="og:site_name" content="Pickars Logistics" />
+        <meta property="og:locale" content="en_NG" />
+        <meta
+          property="og:title"
+          content="Live Dispatch Rider & Parcel Tracking | Pickars Logistics"
+        />
+        <meta
+          property="og:description"
+          content="Track your package and dispatch rider live in Port Harcourt. Get instant updates on pickup, transit status, and delivery completion."
+        />
+        <meta property="og:image" content="https://www.pickars.com/box.png" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+
+        {/* Twitter Card */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:site" content="@pickars_app" />
+        <meta name="twitter:creator" content="@pickars_app" />
+        <meta name="twitter:url" content={canonicalUrl} />
+        <meta
+          name="twitter:title"
+          content="Live Dispatch Rider Tracking | Pickars"
+        />
+        <meta
+          name="twitter:description"
+          content="Monitor your rider's live location and parcel status across Port Harcourt in real-time."
+        />
+        <meta name="twitter:image" content="https://www.pickars.com/box.png" />
+
+        {/* Structured Data Graph */}
+        <script type="application/ld+json">
+          {JSON.stringify(trackingPageSchema)}
+        </script>
+      </Helmet>
+
       {/* Top Scroll Progress Bar */}
       <motion.div
         style={{ scaleX }}
@@ -53,7 +169,7 @@ const TrackingPageMain: React.FC = () => {
       />
 
       {/* Main Flex Column Container */}
-      <div className="flex flex-col w-full items-center pt-48 pb-12 px-4 sm:px-6 lg:px-8">
+      <main className="flex flex-col w-full items-center pt-48 pb-12 px-4 sm:px-6 lg:px-8">
         <div className="mx-auto flex w-full max-w-4xl flex-col items-center">
           <motion.div
             variants={containerVariants}
@@ -69,7 +185,7 @@ const TrackingPageMain: React.FC = () => {
                 className="mb-6 inline-block cursor-default select-none bg-[#ff0000] px-5 py-2 text-[11px] font-black uppercase tracking-widest text-white sm:text-xs"
                 style={{
                   maskImage:
-                    "radial-gradient(circle 5px at calc(100% - 2.5px) 50%, #0000 99%, #000 100%)",
+                    "radial-gradient(circle 5px at calc(100% - 2.5px) 50%, #000 99%, #000 100%)",
                   WebkitMaskImage:
                     "conic-gradient(from -45deg at 50% 50%, #000 0 90deg, #0000 0) 0 0/10px 10px repeat",
                 }}
@@ -148,7 +264,7 @@ const TrackingPageMain: React.FC = () => {
             </div>
           </motion.div>
         </div>
-      </div>
+      </main>
 
       {/* Map Component Container with max-width and bottom padding */}
       <div className="mx-auto w-full max-w-7xl mt-auto px-4 pb-20 sm:px-6 lg:px-8">

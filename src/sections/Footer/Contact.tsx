@@ -156,7 +156,7 @@ const AppDownloadCTA: React.FC = () => {
   const isDesktop = typeof window !== "undefined" && window.innerWidth >= 768;
 
   return (
-    <div className="w-full px-4 sm:px-6 lg:px-8">
+    <div className="w-full px-8 sm:px-6 lg:px-8">
       <section className="relative mx-auto mt-8 mb-16 w-full max-w-7xl overflow-hidden rounded-3xl bg-[#ff0000] font-['Lufga'] text-white sm:mt-12  lg:mt-16 shadow-2xl">
         {/* ========== VISIBLE DELIVERY BACKGROUND ANIMATIONS ========== */}
         <div className="pointer-events-none absolute inset-0 overflow-hidden">

@@ -212,11 +212,19 @@ const Footer: React.FC = () => {
           </h1>
         </div>
 
-        {/* Bottom Bar */}
+        {/* Bottom Bar Pickars Courier Limited */}
         <div className="mt-12 flex flex-col items-center justify-between gap-6 border-t border-white/10 pt-8 sm:flex-row">
           <p className="text-xs font-medium text-gray-500">
-            © {new Date().getFullYear()} Pickars Courier Limited. Moving PH City
-            forward.
+            © {new Date().getFullYear()} Pickars. Built by{" "}
+            <a
+              href="https://www.boringthinkers.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-semibold text-gray-400 hover:text-white transition-colors"
+            >
+              BORING THINKERS LIMITED
+            </a>
+            . All rights reserved.
           </p>
           <motion.button
             whileHover={{ y: -3 }}

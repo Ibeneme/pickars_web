@@ -1,6 +1,6 @@
-"use client";
-
 import { useMemo, useState } from "react";
+import { Helmet } from "react-helmet-async";
+import { useLocation } from "react-router-dom";
 import {
   FiHelpCircle,
   FiUser,
@@ -16,8 +16,6 @@ import {
   FiX,
 } from "react-icons/fi";
 
-// Font classes below assume "Space Grotesk" and "Inter" are loaded globally
-// (see setup note at the bottom of this file for the two ways to do that in Vite).
 const heading = "font-heading";
 const body = "font-body";
 
@@ -230,6 +228,27 @@ export default function HelpCenterPage() {
   const [activeCategory, setActiveCategory] = useState<string>("all");
   const [openIds, setOpenIds] = useState<Set<string>>(new Set());
 
+  const location = useLocation();
+
+  // Dynamic canonical URL matching active route path
+  const canonicalUrl = `https://www.pickars.com${location.pathname}`;
+
+  // Automatically extract all questions and answers into JSON-LD Schema
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: categories.flatMap((cat) =>
+      cat.faqs.map((faq) => ({
+        "@type": "Question",
+        name: faq.question,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: faq.answer.replace(/\*\*/g, ""), // Remove bold formatting characters for standard schema string
+        },
+      }))
+    ),
+  };
+
   const toggleFaq = (id: string) => {
     setOpenIds((prev) => {
       const next = new Set(prev);
@@ -276,7 +295,7 @@ export default function HelpCenterPage() {
 
   return (
     <div
-      className={`${body} min-h-screen bg-[var(--paper)] text-[var(--ink)]`}
+      className={`${body} min-h-screen bg-[var(--paper)] text-[var(--ink)] selection:bg-red-600 selection:text-white`}
       style={
         {
           "--ink": "#141416",
@@ -288,6 +307,65 @@ export default function HelpCenterPage() {
         } as React.CSSProperties
       }
     >
+      {/* ----------------------------- Advanced SEO ----------------------------- */}
+      <Helmet>
+        {/* Core Metadata */}
+        <title>
+          Help Center & FAQs | Pickars Delivery Support Port Harcourt
+        </title>
+        <meta
+          name="description"
+          content="Find fast answers to questions about booking dispatch riders, tracking parcels live, payments, refunds, and rider onboarding at the Pickars Help Center."
+        />
+        <meta
+          name="keywords"
+          content="Pickars help center, dispatch rider support Port Harcourt, parcel tracking help, logistics customer service PH, Pickars support contact"
+        />
+        <meta name="robots" content="index, follow, max-image-preview:large" />
+        <link rel="canonical" href={canonicalUrl} />
+
+        {/* Local Geo Signals */}
+        <meta name="geo.region" content="NG-RI" />
+        <meta name="geo.placename" content="Port Harcourt" />
+        <meta name="geo.position" content="4.824167;7.080833" />
+        <meta name="ICBM" content="4.824167, 7.080833" />
+
+        {/* Open Graph / Facebook / WhatsApp */}
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={canonicalUrl} />
+        <meta property="og:site_name" content="Pickars Logistics" />
+        <meta property="og:locale" content="en_NG" />
+        <meta
+          property="og:title"
+          content="Help Center & Customer Support | Pickars Logistics"
+        />
+        <meta
+          property="og:description"
+          content="Get instant answers on booking, payments, tracking, and customer support for dispatch rider services in Port Harcourt."
+        />
+        <meta property="og:image" content="https://www.pickars.com/box.png" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+
+        {/* Twitter Card */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:site" content="@pickars_app" />
+        <meta name="twitter:creator" content="@pickars_app" />
+        <meta name="twitter:url" content={canonicalUrl} />
+        <meta
+          name="twitter:title"
+          content="Help Center & Support | Pickars Logistics"
+        />
+        <meta
+          name="twitter:description"
+          content="Find instant answers on booking, payments, tracking, and rider onboarding."
+        />
+        <meta name="twitter:image" content="https://www.pickars.com/box.png" />
+
+        {/* Dynamic JSON-LD Structured Data Schema */}
+        <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
+      </Helmet>
+
       {/* ------------------------------- Hero ------------------------------- */}
       <header className="relative overflow-hidden bg-[var(--ink)] px-6 pb-20 pt-16 sm:px-10 sm:pt-24">
         <div
@@ -527,34 +605,3 @@ export default function HelpCenterPage() {
     </div>
   );
 }
-
-/* -----------------------------------------------------------------------
-   SETUP NOTE (Vite, not Next.js — no next/font here)
-
-   1) Load the two fonts. Easiest: add this to your index.html <head>:
-
-      <link rel="preconnect" href="https://fonts.googleapis.com">
-      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-      <link
-        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap"
-        rel="stylesheet"
-      >
-
-      (Or use @fontsource/space-grotesk + @fontsource/inter and import them
-      in main.tsx if you'd rather bundle instead of using Google's CDN.)
-
-   2) Register the two Tailwind font families in tailwind.config.js:
-
-      theme: {
-        extend: {
-          fontFamily: {
-            heading: ["Space Grotesk", "sans-serif"],
-            body: ["Inter", "sans-serif"],
-          },
-        },
-      },
-
-   Without step 2, "font-heading" / "font-body" are no-op classes and the
-   page falls back to your default Tailwind sans font — it'll still work,
-   just without the intended type contrast.
------------------------------------------------------------------------- */
