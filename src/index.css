@@ -1,9 +1,9 @@
 @import "tailwindcss";
 @import "./assets/fonts/fonts.css";
 
-@theme {
+/* @theme {
   --font-sans: "Lufga", system-ui, sans-serif;
-}
+} */
 
 @layer utilities {
   .no-scrollbar::-webkit-scrollbar {
