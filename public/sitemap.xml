@@ -2,137 +2,121 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 	<!-- Public Home & Core Pages -->
 	<url>
-		<loc>
-			https://pickars.com/
-		</loc>
-		<changefreq>
-			weekly
-		</changefreq>
-		<priority>
-			1.0
-		</priority>
+		<loc>https://pickars.com/</loc>
+		<changefreq>weekly</changefreq>
+		<priority>1.0</priority>
 	</url>
 	<url>
-		<loc>
-			https://pickars.com/app/app-features
-		</loc>
-		<changefreq>
-			monthly
-		</changefreq>
-		<priority>
-			0.8
-		</priority>
+		<loc>https://pickars.com/app/app-features</loc>
+		<changefreq>monthly</changefreq>
+		<priority>0.8</priority>
 	</url>
 	<url>
-		<loc>
-			https://pickars.com/app/our-company
-		</loc>
-		<changefreq>
-			monthly
-		</changefreq>
-		<priority>
-			0.8
-		</priority>
+		<loc>https://pickars.com/app/our-company</loc>
+		<changefreq>monthly</changefreq>
+		<priority>0.8</priority>
 	</url>
 	<url>
-		<loc>
-			https://pickars.com/app/tracking
-		</loc>
-		<changefreq>
-			daily
-		</changefreq>
-		<priority>
-			0.8
-		</priority>
+		<loc>https://pickars.com/app/tracking</loc>
+		<changefreq>daily</changefreq>
+		<priority>0.8</priority>
 	</url>
+
+	<!-- High-Priority Targeted Search URLs -->
+	<url>
+		<loc>https://pickars.com/quick-delivery/dispatch-rider-and-delivery/port-harcourt</loc>
+		<changefreq>daily</changefreq>
+		<priority>0.9</priority>
+	</url>
+	<url>
+		<loc>https://pickars.com/dispatch-riders-in-port-harcourt</loc>
+		<changefreq>daily</changefreq>
+		<priority>0.9</priority>
+	</url>
+	<url>
+		<loc>https://pickars.com/dispatch-rider-near-me</loc>
+		<changefreq>daily</changefreq>
+		<priority>0.9</priority>
+	</url>
+	<url>
+		<loc>https://pickars.com/get-a-rider</loc>
+		<changefreq>daily</changefreq>
+		<priority>0.9</priority>
+	</url>
+	<url>
+		<loc>https://pickars.com/fast-delivery-port-harcourt</loc>
+		<changefreq>daily</changefreq>
+		<priority>0.9</priority>
+	</url>
+	<url>
+		<loc>https://pickars.com/same-day-delivery-port-harcourt</loc>
+		<changefreq>daily</changefreq>
+		<priority>0.9</priority>
+	</url>
+	<url>
+		<loc>https://pickars.com/bike-delivery-services</loc>
+		<changefreq>daily</changefreq>
+		<priority>0.8</priority>
+	</url>
+
+	<!-- Key Location Hubs -->
+	<url>
+		<loc>https://pickars.com/dispatch-rider-gra-port-harcourt</loc>
+		<changefreq>weekly</changefreq>
+		<priority>0.8</priority>
+	</url>
+	<url>
+		<loc>https://pickars.com/dispatch-rider-trans-amadi</loc>
+		<changefreq>weekly</changefreq>
+		<priority>0.8</priority>
+	</url>
+	<url>
+		<loc>https://pickars.com/dispatch-rider-woji</loc>
+		<changefreq>weekly</changefreq>
+		<priority>0.8</priority>
+	</url>
+
 	<!-- Support & Help Center -->
 	<url>
-		<loc>
-			https://pickars.com/app/support
-		</loc>
-		<changefreq>
-			monthly
-		</changefreq>
-		<priority>
-			0.7
-		</priority>
+		<loc>https://pickars.com/app/support</loc>
+		<changefreq>monthly</changefreq>
+		<priority>0.7</priority>
 	</url>
 	<url>
-		<loc>
-			https://pickars.com/app/faqs
-		</loc>
-		<changefreq>
-			weekly
-		</changefreq>
-		<priority>
-			0.7
-		</priority>
+		<loc>https://pickars.com/app/faqs</loc>
+		<changefreq>weekly</changefreq>
+		<priority>0.7</priority>
 	</url>
 	<url>
-		<loc>
-			https://pickars.com/app/help-center
-		</loc>
-		<changefreq>
-			monthly
-		</changefreq>
-		<priority>
-			0.7
-		</priority>
+		<loc>https://pickars.com/app/help-center</loc>
+		<changefreq>monthly</changefreq>
+		<priority>0.7</priority>
 	</url>
 	<url>
-		<loc>
-			https://pickars.com/app/find-item
-		</loc>
-		<changefreq>
-			monthly
-		</changefreq>
-		<priority>
-			0.5
-		</priority>
+		<loc>https://pickars.com/app/find-item</loc>
+		<changefreq>monthly</changefreq>
+		<priority>0.5</priority>
 	</url>
 	<url>
-		<loc>
-			https://pickars.com/track
-		</loc>
-		<changefreq>
-			monthly
-		</changefreq>
-		<priority>
-			0.5
-		</priority>
+		<loc>https://pickars.com/track</loc>
+		<changefreq>monthly</changefreq>
+		<priority>0.5</priority>
 	</url>
+
 	<!-- Legal & Policy Pages -->
 	<url>
-		<loc>
-			https://pickars.com/app/privacy-policy
-		</loc>
-		<changefreq>
-			yearly
-		</changefreq>
-		<priority>
-			0.3
-		</priority>
+		<loc>https://pickars.com/app/privacy-policy</loc>
+		<changefreq>yearly</changefreq>
+		<priority>0.3</priority>
 	</url>
 	<url>
-		<loc>
-			https://pickars.com/app/terms-of-use
-		</loc>
-		<changefreq>
-			yearly
-		</changefreq>
-		<priority>
-			0.3
-		</priority>
+		<loc>https://pickars.com/app/terms-of-use</loc>
+		<changefreq>yearly</changefreq>
+		<priority>0.3</priority>
 	</url>
 	<url>
-		<loc>
-			https://pickars.com/rider-terms
-		</loc>
-		<changefreq>
-			yearly
-		</changefreq>
-		<priority>
-			0.3
-		</priority>
+		<loc>https://pickars.com/rider-terms</loc>
+		<changefreq>yearly</changefreq>
+		<priority>0.3</priority>
 	</url>
 </urlset>

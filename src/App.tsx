@@ -1,5 +1,5 @@
 import React from "react";
-import { Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route, useLocation, Navigate } from "react-router-dom";
 
 // Static imports
 import Navbar from "./pages/navbar/Navbar";
@@ -15,8 +15,6 @@ import FAQsPage from "./pages/FAQ/FAQsPage";
 import LostItemPage from "./pages/LostItemPage/LostItemPage";
 import HelpCenter from "./pages/HelpCenter/HelpCenter";
 import AppFeatures from "./pages/AppFeatures/AppFeatures";
-//import TrackingPage from "./pages/TrackingPage/TrackingPage";
-import NotFound from "./pages/NotFound";
 
 // Admin Components
 import AdminLogin from "./pages/admin/auth/adminLogin";
@@ -33,9 +31,7 @@ import CreateManualRide from "./pages/admin/manualRides/CreateMR";
 import ViewManualRide from "./pages/admin/manualRides/ViewManualRide";
 
 // Navigation & Security
-// import Launcher from "./components/Launcher/Laucher";
 import ProtectedRoute from "./pages/navigation/ProtectedRoute";
-//import WhatsAppButton from "./components/whatsapp/WhatsApp";
 import PaymentSuccess from "./pages/TrackingPage/PaymentSuccess";
 import DispatchRiderTermsPage from "./pages/DispatchRiderTermsPage";
 import CompanyPage from "./pages/OurCompany";
@@ -45,17 +41,17 @@ const App: React.FC = () => {
   const location = useLocation();
   const adminPaths = ["/app/admin", "/admin"];
 
-  //const navRoute = "/app/tracking";
   const isAdminRoute = adminPaths.some((path) =>
     location.pathname.startsWith(path)
   );
+
   return (
     <div
       className="app-main-wrapper"
       style={{
         background: "linear-gradient(to bottom, #FFF5F5 0%, #000000 100%)",
         backgroundAttachment: "fixed",
-        minHeight: "100dvh", // Fixes mobile browser address bar / bottom bar layout bugs
+        minHeight: "100dvh",
         display: "flex",
         flexDirection: "column",
         overflowX: "hidden",
@@ -67,7 +63,7 @@ const App: React.FC = () => {
 
       <main className="content-area" style={{ flex: 1 }}>
         <Routes location={location} key={location.pathname}>
-          {/* Public Routes */}
+          {/* Public Core Routes */}
           <Route path="/" element={<Home />} />
           <Route path="/app/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/app/terms-of-use" element={<TermsConditions />} />
@@ -80,9 +76,25 @@ const App: React.FC = () => {
           <Route path="/app/app-features" element={<AppFeatures />} />
           <Route path="/app/tracking" element={<TrackingPageMain />} />
           <Route path="/track" element={<PaymentSuccess />} />
+          <Route path="/rider-terms" element={<DispatchRiderTermsPage />} />
+
+          {/* Explicit Sitemap SEO Routes - Static render Home while preserving URL */}
+          <Route
+            path="/quick-delivery/dispatch-rider-and-delivery/port-harcourt"
+            element={<Home />}
+          />
+          <Route path="/dispatch-riders-in-port-harcourt" element={<Home />} />
+          <Route path="/dispatch-rider-near-me" element={<Home />} />
+          <Route path="/get-a-rider" element={<Home />} />
+          <Route path="/fast-delivery-port-harcourt" element={<Home />} />
+          <Route path="/same-day-delivery-port-harcourt" element={<Home />} />
+          <Route path="/bike-delivery-services" element={<Home />} />
+          <Route path="/dispatch-rider-gra-port-harcourt" element={<Home />} />
+          <Route path="/dispatch-rider-trans-amadi" element={<Home />} />
+          <Route path="/dispatch-rider-woji" element={<Home />} />
+
           {/* Admin Auth */}
           <Route path="/app/admin" element={<AdminLogin />} />
-          <Route path="/rider-terms" element={<DispatchRiderTermsPage />} />
 
           {/* PROTECTED ADMIN ROUTES */}
           <Route element={<ProtectedRoute />}>
@@ -96,7 +108,7 @@ const App: React.FC = () => {
             />
             <Route path="/app/admin/marketing" element={<MarketingCenter />} />
 
-            {/* MANUAL RIDES - Consistent Routes */}
+            {/* MANUAL RIDES */}
             <Route
               path="/app/admin/manual-booking"
               element={<ManualRideDispatch />}
@@ -111,30 +123,12 @@ const App: React.FC = () => {
             />
           </Route>
 
-          <Route path="*" element={<NotFound />} />
+          {/* Catch-all fallback for any other unhandled paths */}
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </main>
 
-      {/* {!isAdminRoute && <WhatsAppButton />} */}
       {!isAdminRoute && <Footer />}
-
-      {/* {!isAdminRoute && (
-        <div
-          style={{
-            position: "fixed",
-            bottom: 0,
-            left: 0,
-            right: 0,
-            zIndex: 9999,
-            background: "transparent",
-            pointerEvents: "none",
-          }}
-        >
-          <div style={{ pointerEvents: "auto" }}>
-            <Launcher />
-          </div>
-        </div>
-      )} */}
     </div>
   );
 };
