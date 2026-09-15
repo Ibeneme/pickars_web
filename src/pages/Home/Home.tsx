@@ -11,12 +11,13 @@ import PerfectHeroSection from "../../sections/HowItWorksSection/PerfectHeroSect
 
 const Home = () => {
   const { scrollYProgress } = useScroll();
-  const location = useLocation();
-
   const scaleX = useSpring(scrollYProgress, {
     stiffness: 100,
     damping: 30,
+    restDelta: 0.001,
   });
+
+  const location = useLocation();
 
   // Dynamic canonical URL to preserve exact path indexing for landing page aliases
   const canonicalUrl = `https://www.pickars.com${
@@ -128,9 +129,7 @@ const Home = () => {
 
   return (
     <div className="relative bg-[#fff] selection:bg-red-600 selection:text-white">
-      {/* Enhanced SEO & Social Meta Data */}
       <Helmet>
-        {/* Core SEO */}
         <title>
           Get fast, affordable dispatch riders in Port Harcourt | Pickars
         </title>
@@ -144,14 +143,10 @@ const Home = () => {
         />
         <meta name="robots" content="index, follow, max-image-preview:large" />
         <link rel="canonical" href={canonicalUrl} />
-
-        {/* Geo Targeting for Local Search */}
         <meta name="geo.region" content="NG-RI" />
         <meta name="geo.placename" content="Port Harcourt" />
         <meta name="geo.position" content="4.8156;7.0498" />
         <meta name="ICBM" content="4.8156, 7.0498" />
-
-        {/* Open Graph / Facebook / LinkedIn / WhatsApp */}
         <meta property="og:type" content="website" />
         <meta property="og:url" content={canonicalUrl} />
         <meta property="og:site_name" content="Pickars" />
@@ -167,8 +162,6 @@ const Home = () => {
         <meta property="og:image" content="https://www.pickars.com/box.png" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
-
-        {/* Twitter (X) */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:site" content="@pickars_app" />
         <meta name="twitter:creator" content="@pickars_app" />
@@ -182,8 +175,6 @@ const Home = () => {
           content="Book verified dispatch riders in Port Harcourt for fast, same-day delivery across GRA, Trans Amadi, and Woji."
         />
         <meta name="twitter:image" content="https://www.pickars.com/box.png" />
-
-        {/* Structured Data Injections */}
         <script type="application/ld+json">
           {JSON.stringify(webpageSchema)}
         </script>
@@ -192,11 +183,9 @@ const Home = () => {
         </script>
         <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
       </Helmet>
-
-      {/* Scroll Progress Bar */}
       <motion.div
-        className="fixed top-0 left-0 right-0 z-[110] h-1 bg-red-600 origin-left"
         style={{ scaleX }}
+        className="fixed inset-x-0 top-0 z-50 h-1.5 origin-left bg-[#ff0000]"
       />
 
       <main>

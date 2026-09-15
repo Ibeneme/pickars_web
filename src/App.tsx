@@ -12,8 +12,6 @@ import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsConditions from "./pages/TermsConditions";
 import Support from "./pages/Support";
 import FAQsPage from "./pages/FAQ/FAQsPage";
-import LostItemPage from "./pages/LostItemPage/LostItemPage";
-import HelpCenter from "./pages/HelpCenter/HelpCenter";
 import AppFeatures from "./pages/AppFeatures/AppFeatures";
 
 // Admin Components
@@ -71,8 +69,8 @@ const App: React.FC = () => {
           <Route path="/app/faqs" element={<FAQsPage />} />
           <Route path="/app/our-company" element={<CompanyPage />} />
 
-          <Route path="/app/find-item" element={<LostItemPage />} />
-          <Route path="/app/help-center" element={<HelpCenter />} />
+          <Route path="/app/find-item" element={<FAQsPage />} />
+          <Route path="/app/help-center" element={<FAQsPage />} />
           <Route path="/app/app-features" element={<AppFeatures />} />
           <Route path="/app/tracking" element={<TrackingPageMain />} />
           <Route path="/track" element={<PaymentSuccess />} />
