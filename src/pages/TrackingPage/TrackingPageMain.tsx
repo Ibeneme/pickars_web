@@ -170,7 +170,7 @@ const TrackingPageMain: React.FC = () => {
 
       {/* Main Flex Column Container */}
       <main className="flex flex-col w-full items-center pt-48 pb-12 px-4 sm:px-6 lg:px-8">
-        <div className="mx-auto flex w-full max-w-4xl flex-col items-center">
+        <div className="mx-auto flex w-full max-w-2xl flex-col items-center">
           <motion.div
             variants={containerVariants}
             initial="hidden"
@@ -179,13 +179,12 @@ const TrackingPageMain: React.FC = () => {
           >
             {/* Major Header Items in a Flex Column */}
             <div className="flex w-full flex-col items-center">
-              {/* Ticket-style Badge */}
               <motion.div
                 variants={itemVariants}
-                className="mb-6 inline-block cursor-default select-none bg-[#ff0000] px-5 py-2 text-[11px] font-black uppercase tracking-widest text-white sm:text-xs"
+                className="mb-5 px-5 py-2 bg-[#FF0000] text-white font-black text-[11px] sm:text-xs uppercase tracking-widest cursor-default select-none"
                 style={{
                   maskImage:
-                    "radial-gradient(circle 5px at calc(100% - 2.5px) 50%, #000 99%, #000 100%)",
+                    "radial-gradient(circle 5px at calc(100% - 2.5px) 50%, #0000 99%, #000 100%)",
                   WebkitMaskImage:
                     "conic-gradient(from -45deg at 50% 50%, #000 0 90deg, #0000 0) 0 0/10px 10px repeat",
                 }}
@@ -198,7 +197,8 @@ const TrackingPageMain: React.FC = () => {
                 variants={itemVariants}
                 className="text-4xl font-black leading-none tracking-tight text-gray-900 sm:text-6xl md:text-6xl"
               >
-                Track your <span className="text-[#ff0000]">Delivery</span>
+                Tracking your <span className="text-[#ff0000]">Package</span>{" "}
+                got easier
               </motion.h1>
 
               {/* Subtitle */}
