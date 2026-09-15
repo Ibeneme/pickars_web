@@ -1,10 +1,8 @@
 import { useState, useEffect } from "react";
 import { Menu, X, ArrowRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import { FaApple } from "react-icons/fa";
-import { BiLogoPlayStore } from "react-icons/bi";
 import navImage from "../../assets/images/logo.svg";
-import { ANDROID_URL, IOS_URL } from "../../constants";
+import DownloadButtons from "../../components/buttons/DownloadButtons";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -102,33 +100,12 @@ const Navbar = () => {
           {/* Download & Toggle */}
           <div className="flex items-center gap-2">
             <div className="hidden items-center gap-2 lg:flex">
-              <motion.a
-                href={IOS_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-                className="flex h-10 w-10 items-center justify-center rounded-full bg-[#121212] text-white transition-colors hover:bg-[#FF0000] shadow-md shadow-black/10"
-              >
-                <FaApple size={18} />
-              </motion.a>
-              <motion.a
-                href={ANDROID_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-                className="flex h-10 w-10 items-center justify-center rounded-full bg-[#121212] text-white transition-colors hover:bg-[#FF0000] shadow-md shadow-black/10"
-              >
-                <BiLogoPlayStore size={18} />
-              </motion.a>
+              <DownloadButtons isHalf={true} />
             </div>
 
             <button
-              className={`flex h-10 w-10 items-center justify-center rounded-full transition-all shadow-sm ${
-                isOpen
-                  ? "bg-[#FF0000] text-white shadow-red-600/30"
-                  : "bg-gray-100 text-black hover:bg-gray-200"
+              className={`flex h-10 w-10 items-center justify-center rounded-full transition-all  ${
+                isOpen ? "bg-[#FF0000] text-white" : "bg-gray-100 text-black"
               } md:hidden`}
               onClick={() => setIsOpen(!isOpen)}
             >
@@ -211,24 +188,7 @@ const Navbar = () => {
                   Get Pickars on your device
                 </p>
                 <div className="flex gap-4">
-                  <a
-                    href={IOS_URL}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex flex-1 items-center justify-center gap-2 rounded-2xl bg-[#121212] py-4 text-white shadow-md shadow-black/10"
-                  >
-                    <FaApple size={20} />{" "}
-                    <span className="text-sm font-bold">iOS</span>
-                  </a>
-                  <a
-                    href={ANDROID_URL}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex flex-1 items-center justify-center gap-2 rounded-2xl border border-gray-200 bg-white py-4 text-[#121212] shadow-sm"
-                  >
-                    <BiLogoPlayStore size={20} />{" "}
-                    <span className="text-sm font-bold">Android</span>
-                  </a>
+                  <DownloadButtons alignLeft={true} />
                 </div>
               </div>
             </div>

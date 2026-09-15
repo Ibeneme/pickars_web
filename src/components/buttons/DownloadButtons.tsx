@@ -1,4 +1,6 @@
 import { motion } from "framer-motion";
+import { FaApple } from "react-icons/fa";
+import { BiLogoPlayStore } from "react-icons/bi";
 import { IOS_URL, ANDROID_URL } from "../../constants";
 
 export default function DownloadButtons({
@@ -6,38 +8,65 @@ export default function DownloadButtons({
   androidUrl = ANDROID_URL,
   dark = false,
   alignLeft = false,
+  isHalf = false,
 }: {
   iosUrl?: string;
   androidUrl?: string;
   dark?: boolean;
   alignLeft?: boolean;
+  isHalf?: boolean;
 }) {
-  // Base button styles
-  const buttonStyles = `group flex flex-1 sm:flex-none min-w-[140px] sm:min-w-[180px] items-center justify-center gap-2.5 sm:gap-3 rounded-[120px] px-4 sm:px-5 py-3 cursor-pointer shadow-sm transition-colors duration-300`;
+  const buttonStyles = `group flex flex-1 sm:flex-none min-w-[140px] sm:min-w-[180px] items-center justify-center gap-2.5 sm:gap-3 rounded-[120px] px-4 sm:px-5 py-3 cursor-pointer transition-colors duration-300`;
 
-  // Subtitle styling responding to group hover states
   const subtitleStyles = `text-[9px] sm:text-[10px] font-semibold uppercase tracking-wider transition-colors duration-300 ${
     dark
       ? "text-zinc-400 group-hover:text-white/90"
       : "text-zinc-400 group-hover:text-white/90"
   }`;
 
-  // Alignment: centered on mobile, left-aligned on web if alignLeft is true
   const alignmentClass = alignLeft
     ? "justify-center md:justify-start"
     : "justify-center";
+
+  if (isHalf) {
+    return (
+      <div
+        className={`mt-0 flex flex-row items-center gap-3 sm:gap-4 w-full ${alignmentClass}`}
+      >
+        <motion.a
+          href={iosUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+          className="flex h-10 w-10 items-center justify-center rounded-full bg-[#121212] text-white transition-colors hover:bg-[#FF0000] "
+        >
+          <FaApple size={18} />
+        </motion.a>
+        <motion.a
+          href={androidUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+          className="flex h-10 w-10 items-center justify-center rounded-full bg-[#121212] text-white transition-colors hover:bg-[#FF0000] "
+        >
+          <BiLogoPlayStore size={18} />
+        </motion.a>
+      </div>
+    );
+  }
 
   return (
     <div
       className={`mt-0 flex flex-row items-center gap-3 sm:gap-4 w-full ${alignmentClass}`}
     >
-      {/* iOS App Store Button */}
       <motion.a
         href={iosUrl}
         target="_blank"
         rel="noopener noreferrer"
         initial={false}
-        whileHover={{ y: -2, scale: 1 }} // Ensures scale stays strictly at 1 (no resizing)
+        whileHover={{ y: -2, scale: 1 }}
         whileTap={{ scale: 0.97 }}
         transition={{ type: "spring", stiffness: 400, damping: 25 }}
         className={`${buttonStyles} ${
@@ -60,13 +89,12 @@ export default function DownloadButtons({
         </div>
       </motion.a>
 
-      {/* Android Play Store Button */}
       <motion.a
         href={androidUrl}
         target="_blank"
         rel="noopener noreferrer"
         initial={false}
-        whileHover={{ y: -2, scale: 1 }} // Ensures scale stays strictly at 1 (no resizing)
+        whileHover={{ y: -2, scale: 1 }}
         whileTap={{ scale: 0.97 }}
         transition={{ type: "spring", stiffness: 400, damping: 25 }}
         className={`${buttonStyles} ${
