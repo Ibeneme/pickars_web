@@ -8,12 +8,10 @@ import {
   FaFacebookF,
   FaLinkedinIn,
 } from "react-icons/fa6";
-import { FaApple } from "react-icons/fa";
-import { BiLogoPlayStore } from "react-icons/bi";
 import logo from "../../assets/images/logo.svg";
 import { motion } from "framer-motion";
-import { ANDROID_URL, IOS_URL } from "../../constants";
 import AppDownloadCTA from "./Contact"; // Or wherever your AppDownloadCTA component lives
+import DownloadButtons from "../../components/buttons/DownloadButtons";
 
 const Footer: React.FC = () => {
   const scrollToTop = () => {
@@ -60,7 +58,12 @@ const Footer: React.FC = () => {
               </h2>
             </div>
 
-            <p className="mb-8 max-w-md text-sm font-normal leading-relaxed text-gray-400">
+            {/* App Download Links */}
+            <div className="flex flex-wrap items-center gap-3">
+              <DownloadButtons dark={true} isHalf={false} alignLeft={true} />
+            </div>
+
+            <p className="mb-8 mt-8 max-w-md text-sm font-normal leading-relaxed text-gray-400">
               At Pickars, we make doorstep deliveries simple, fast, and
               reliable. With a network of trained riders across Nigeria, we make
               sending and receiving packages seamless, convenient, and
@@ -88,28 +91,6 @@ const Footer: React.FC = () => {
                   </p>
                 </div>
               </motion.a>
-
-              {/* App Download Links */}
-              <div className="flex flex-wrap items-center gap-3">
-                <a
-                  href={IOS_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group flex items-center gap-2.5 rounded-xl bg-white/5 px-4 py-2.5 text-xs font-bold text-white transition-colors hover:bg-white/10"
-                >
-                  <FaApple size={18} />
-                  App Store
-                </a>
-                <a
-                  href={ANDROID_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group flex items-center gap-2.5 rounded-xl bg-white/5 px-4 py-2.5 text-xs font-bold text-white transition-colors hover:bg-white/10"
-                >
-                  <BiLogoPlayStore size={18} />
-                  Google Play
-                </a>
-              </div>
 
               {/* Social Media Links */}
               <div className="mt-1 flex items-center gap-2.5">

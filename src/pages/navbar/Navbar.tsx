@@ -22,8 +22,8 @@ const Navbar = () => {
     { name: "Our App", path: "/app/app-features" },
     { name: "FAQs", path: "/app/faqs" },
     // { name: "Support", path: "/app/help-center" },
-    { name: "Track", path: "/app/tracking" },
-    { name: "Blog", path: "#", disabled: true, badge: "Soon" },
+    { name: "Track", path: "/app/tracking", disabled: false },
+    //{ name: "Blog", path: "#", disabled: true, badge: "Soon" },
   ];
 
   return (
@@ -54,47 +54,54 @@ const Navbar = () => {
 
           {/* Desktop Nav Links */}
           <ul className="hidden items-center gap-1 md:flex">
-            {navItems.map(({ name, path, disabled, badge }) => {
-              const isActive = currentPath === path;
-              return (
-                <li key={name}>
-                  <a
-                    href={disabled ? undefined : path}
-                    className={`relative px-4 py-2 text-sm font-bold transition-all duration-300 rounded-full flex items-center gap-1.5 ${
-                      disabled
-                        ? "text-gray-400 cursor-not-allowed pointer-events-none opacity-60"
-                        : isActive
-                        ? "bg-[#FF0000] text-white"
-                        : "text-gray-600 hover:bg-black/5"
-                    }`}
-                  >
-                    {name}
-                    {badge && (
-                      <span
-                        className={`text-[9px] font-extrabold px-1.5 py-0.5 rounded-full uppercase tracking-wider ${
-                          isActive
-                            ? "bg-white/20 text-white"
-                            : "bg-gray-200 text-gray-600"
-                        }`}
-                      >
-                        {badge}
-                      </span>
-                    )}
-                    {isActive && !disabled && (
-                      <motion.div
-                        layoutId="navPill"
-                        className="absolute inset-0 rounded-full bg-[#FF0000] -z-10"
-                        transition={{
-                          type: "spring",
-                          stiffness: 300,
-                          damping: 30,
-                        }}
-                      />
-                    )}
-                  </a>
-                </li>
-              );
-            })}
+            {navItems.map(
+              ({
+                name,
+                path,
+                disabled,
+                // badge
+              }) => {
+                const isActive = currentPath === path;
+                return (
+                  <li key={name}>
+                    <a
+                      href={disabled ? undefined : path}
+                      className={`relative px-4 py-2 text-sm font-bold transition-all duration-300 rounded-full flex items-center gap-1.5 ${
+                        disabled
+                          ? "text-gray-400 cursor-not-allowed pointer-events-none opacity-60"
+                          : isActive
+                          ? "bg-[#FF0000] text-white"
+                          : "text-gray-600 hover:bg-black/5"
+                      }`}
+                    >
+                      {name}
+                      {/* {badge && (
+                        <span
+                          className={`text-[9px] font-extrabold px-1.5 py-0.5 rounded-full uppercase tracking-wider ${
+                            isActive
+                              ? "bg-white/20 text-white"
+                              : "bg-gray-200 text-gray-600"
+                          }`}
+                        >
+                          {badge}
+                        </span>
+                      )} */}
+                      {isActive && !disabled && (
+                        <motion.div
+                          layoutId="navPill"
+                          className="absolute inset-0 rounded-full bg-[#FF0000] -z-10"
+                          transition={{
+                            type: "spring",
+                            stiffness: 300,
+                            damping: 30,
+                          }}
+                        />
+                      )}
+                    </a>
+                  </li>
+                );
+              }
+            )}
           </ul>
 
           {/* Download & Toggle */}
@@ -145,43 +152,53 @@ const Navbar = () => {
             className="absolute left-6 right-6 top-24 z-[-1] overflow-hidden rounded-[40px] border border-white/20 bg-white/95 p-10 backdrop-blur-3xl shadow-[0_20px_50px_rgba(0,0,0,0.15)] md:hidden"
           >
             <div className="flex flex-col gap-6">
-              {navItems.map(({ name, path, disabled, badge }, i) => {
-                const isActive = currentPath === path;
-                return (
-                  <motion.a
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: i * 0.05 }}
-                    key={name}
-                    href={disabled ? undefined : path}
-                    onClick={() => !disabled && setIsOpen(false)}
-                    className={`flex items-center justify-between text-3xl font-black tracking-tighter ${
-                      disabled
-                        ? "text-gray-300 pointer-events-none"
-                        : isActive
-                        ? "text-[#FF0000]"
-                        : "text-[#121212]"
-                    }`}
-                  >
-                    <div className="flex items-center gap-3">
-                      {name}
-                      {badge && (
-                        <span className="text-[10px] bg-gray-200 text-gray-600 font-extrabold px-2 py-0.5 rounded-full uppercase tracking-wider">
-                          {badge}
-                        </span>
+              {navItems.map(
+                (
+                  {
+                    name,
+                    path,
+                    disabled,
+                    // badge
+                  },
+                  i
+                ) => {
+                  const isActive = currentPath === path;
+                  return (
+                    <motion.a
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: i * 0.05 }}
+                      key={name}
+                      href={disabled ? undefined : path}
+                      onClick={() => !disabled && setIsOpen(false)}
+                      className={`flex items-center justify-between text-3xl font-black tracking-tighter ${
+                        disabled
+                          ? "text-gray-300 pointer-events-none"
+                          : isActive
+                          ? "text-[#FF0000]"
+                          : "text-[#121212]"
+                      }`}
+                    >
+                      <div className="flex items-center gap-3">
+                        {name}
+                        {/* {badge && (
+                          <span className="text-[10px] bg-gray-200 text-gray-600 font-extrabold px-2 py-0.5 rounded-full uppercase tracking-wider">
+                            {badge}
+                          </span>
+                        )} */}
+                      </div>
+                      {!disabled && (
+                        <ArrowRight
+                          className={
+                            isActive ? "text-[#FF0000]" : "text-gray-400"
+                          }
+                          size={24}
+                        />
                       )}
-                    </div>
-                    {!disabled && (
-                      <ArrowRight
-                        className={
-                          isActive ? "text-[#FF0000]" : "text-gray-400"
-                        }
-                        size={24}
-                      />
-                    )}
-                  </motion.a>
-                );
-              })}
+                    </motion.a>
+                  );
+                }
+              )}
 
               <div className="mt-6 flex flex-col gap-4 border-t border-gray-100 pt-8">
                 <p className="text-xs font-bold uppercase tracking-widest text-gray-400">
