@@ -121,7 +121,7 @@ const portHarcourtLocations = [
 ];
 
 // Generates a localized loop path for each rider to circle their specific city zone
-const getLocalRiderLoop = (xPct, yPct) => {
+const getLocalRiderLoop = (xPct: any, yPct: any) => {
   const cx = (parseFloat(xPct) / 100) * 1000;
   const cy = (parseFloat(yPct) / 100) * 700;
   // Creates a smooth clockwise elliptical route
