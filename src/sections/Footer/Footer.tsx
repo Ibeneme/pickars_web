@@ -10,8 +10,7 @@ import {
 } from "react-icons/fa6";
 import logo from "../../assets/images/logo.svg";
 import { motion } from "framer-motion";
-import AppDownloadCTA from "./Contact"; // Or wherever your AppDownloadCTA component lives
-import DownloadButtons from "../../components/buttons/DownloadButtons";
+import AppDownloadCTA from "./Contact";
 
 const Footer: React.FC = () => {
   const scrollToTop = () => {
@@ -43,27 +42,19 @@ const Footer: React.FC = () => {
 
   return (
     <footer className="relative w-full overflow-hidden bg-black font-['Lufga'] text-white">
-      {/* Full-width Red Download Banner CTA */}
       <AppDownloadCTA />
 
-      {/* Main Footer Container */}
-      <div className="mx-auto max-w-7xl md:px-0 px-6 pb-16 pt-20">
+      <div className="mx-auto max-w-7xl px-6 pb-16 pt-20 md:px-0">
         <div className="grid grid-cols-1 gap-16 lg:grid-cols-12">
-          {/* Brand Identity Section */}
           <div className="flex flex-col items-start lg:col-span-5">
-            <div className="mb-6 flex items-center gap-3">
+            <div className="mb-2 flex items-center gap-3">
               <img src={logo} alt="Pickars Logo" className="h-9 w-auto" />
               <h2 className="text-2xl font-black tracking-tight text-white">
                 Pickars
               </h2>
             </div>
 
-            {/* App Download Links */}
-            <div className="flex flex-wrap items-center gap-3">
-              <DownloadButtons dark={true} isHalf={false} alignLeft={true} />
-            </div>
-
-            <p className="mb-8 mt-8 max-w-md text-sm font-normal leading-relaxed text-gray-400">
+            <p className="mb-8 mt-2 max-w-md text-sm font-normal leading-relaxed text-gray-400">
               At Pickars, we make doorstep deliveries simple, fast, and
               reliable. With a network of trained riders across Nigeria, we make
               sending and receiving packages seamless, convenient, and
@@ -71,28 +62,6 @@ const Footer: React.FC = () => {
             </p>
 
             <div className="flex w-full flex-col gap-5">
-              {/* Email Support */}
-              <motion.a
-                href="mailto:support@pickars.com"
-                whileHover={{ x: 3 }}
-                transition={{ type: "spring", stiffness: 300, damping: 22 }}
-                className="group flex w-fit items-center gap-3.5 rounded-2xl bg-white/5 p-3.5 transition-colors hover:bg-white/10"
-              >
-                <div className="relative flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#FF0000] text-white">
-                  <FaEnvelope size={14} />
-                  <span className="absolute -right-0.5 -top-0.5 h-2 w-2 rounded-full bg-emerald-400 ring-2 ring-black" />
-                </div>
-                <div>
-                  <p className="text-[10px] font-bold uppercase tracking-widest text-gray-500">
-                    Email us
-                  </p>
-                  <p className="text-sm font-bold text-white">
-                    support@pickars.com
-                  </p>
-                </div>
-              </motion.a>
-
-              {/* Social Media Links */}
               <div className="mt-1 flex items-center gap-2.5">
                 {socialLinks.map((social) => (
                   <a
@@ -110,10 +79,9 @@ const Footer: React.FC = () => {
             </div>
           </div>
 
-          {/* Links Grid */}
           <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 lg:col-span-7">
             <div>
-              <h3 className="mb-5 text-xs font-black uppercase tracking-widest text-[#fff]">
+              <h3 className="mb-5 text-xs font-black uppercase tracking-widest text-white">
                 Company
               </h3>
               <ul className="flex flex-col gap-3.5">
@@ -137,7 +105,7 @@ const Footer: React.FC = () => {
             </div>
 
             <div>
-              <h3 className="mb-5 text-xs font-black uppercase tracking-widest text-[#fff]">
+              <h3 className="mb-5 text-xs font-black uppercase tracking-widest text-white">
                 Support
               </h3>
               <ul className="flex flex-col gap-3.5">
@@ -161,7 +129,7 @@ const Footer: React.FC = () => {
             </div>
 
             <div>
-              <h3 className="mb-5 text-xs font-black uppercase tracking-widest text-[#fff]">
+              <h3 className="mb-5 text-xs font-black uppercase tracking-widest text-white">
                 Legal
               </h3>
               <ul className="flex flex-col gap-3.5">
@@ -181,19 +149,38 @@ const Footer: React.FC = () => {
                     Privacy Policy
                   </Link>
                 </li>
+                <li>
+                  <motion.a
+                    href="mailto:support@pickars.com"
+                    whileHover={{ x: 3 }}
+                    transition={{ type: "spring", stiffness: 300, damping: 22 }}
+                    className="group mt-4 flex w-fit items-center gap-3.5 rounded-2xl bg-white/5 p-3.5 transition-colors hover:bg-white/10"
+                  >
+                    <div className="relative flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#FF0000] text-white">
+                      <FaEnvelope size={14} />
+                      <span className="absolute -right-0.5 -top-0.5 h-2 w-2 rounded-full bg-emerald-400 ring-2 ring-black" />
+                    </div>
+                    <div>
+                      <p className="text-[10px] font-bold uppercase tracking-widest text-gray-500">
+                        Email us
+                      </p>
+                      <p className="text-sm font-bold text-white">
+                        support@pickars.com
+                      </p>
+                    </div>
+                  </motion.a>{" "}
+                </li>
               </ul>
             </div>
           </div>
         </div>
 
-        {/* Big Brand Typography */}
         <div className="mt-16 w-full select-none overflow-hidden">
-          <h1 className="w-full text-center sm:text-left text-[clamp(3.3rem,12vw,14rem)] font-black leading-[0.8] tracking-tighter text-white">
+          <h1 className="w-full text-center text-[clamp(3.3rem,12vw,14rem)] font-black leading-[0.8] tracking-tighter text-white sm:text-left">
             Pickars<span className="text-[#ff0000]">.</span>
           </h1>
         </div>
 
-        {/* Bottom Bar Pickars Courier Limited */}
         <div className="mt-12 flex flex-col items-center justify-between gap-6 border-t border-white/10 pt-8 sm:flex-row">
           <p className="text-xs font-medium text-gray-500">
             © {new Date().getFullYear()} Pickars. Built by{" "}
@@ -201,7 +188,7 @@ const Footer: React.FC = () => {
               href="https://www.boringthinkers.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="font-semibold text-gray-400 hover:text-white transition-colors"
+              className="font-semibold text-gray-400 transition-colors hover:text-white"
             >
               BORING THINKERS LIMITED
             </a>
