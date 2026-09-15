@@ -1,381 +1,518 @@
-import React, { useEffect, useState, useRef } from "react";
-import { motion, useInView, useScroll, useTransform } from "framer-motion";
-import {
-  FaTruckFast,
-  FaClock,
-  FaShieldHalved,
-  FaStar,
-  FaUserCheck,
-  FaBolt,
-  FaMotorcycle,
-} from "react-icons/fa6";
-import phoneImage from "../../assets/images/grup.png"; // Adjust path if needed
-import { CheckCircle } from "lucide-react";
+import React from "react";
 
-interface StatItem {
-  numericValue: number;
-  suffix: string;
-  decimals?: number;
-  label: string;
-  description: string;
-  icon: React.ReactNode;
-}
-
-const statsData: StatItem[] = [
+const portHarcourtLocations = [
   {
-    numericValue: 1000,
-    suffix: "k+",
-    label: "Deliveries",
-    description: "Successfully landed across Rivers State.",
-    icon: <FaTruckFast />,
+    id: "gra",
+    name: "GRA Phase 2",
+    top: "18%",
+    left: "12%",
+    badgeBg: "bg-purple-400",
+    textColor: "text-black font-extrabold",
+    dotColor: "bg-black",
+    pinColor: "#a855f7",
+    pinTop: "32%",
+    pinLeft: "18%",
+    showOnMobile: true,
   },
   {
-    numericValue: 12,
-    suffix: "m",
-    label: "Pickup",
-    description: "Our average time to reach your doorstep.",
-    icon: <FaClock />,
+    id: "rumuola",
+    name: "Rumuola",
+    top: "22%",
+    left: "38%",
+    badgeBg: "bg-emerald-400",
+    textColor: "text-black font-extrabold",
+    dotColor: "bg-black",
+    pinColor: "#10b981",
+    pinTop: "35%",
+    pinLeft: "45%",
+    showOnMobile: false,
   },
   {
-    numericValue: 100,
-    suffix: "%",
-    label: "Security",
-    description: "Military-grade handling for every item.",
-    icon: <FaShieldHalved />,
+    id: "peterodili",
+    name: "Peter Odili",
+    top: "15%",
+    left: "78%",
+    badgeBg: "bg-amber-400",
+    textColor: "text-black font-extrabold",
+    dotColor: "bg-black",
+    pinColor: "#f59e0b",
+    pinTop: "27%",
+    pinLeft: "84%",
+    showOnMobile: true,
   },
   {
-    numericValue: 4.9,
-    suffix: "",
-    decimals: 1,
-    label: "Rating",
-    description: "The highest rated dispatch in the city.",
-    icon: <FaStar />,
+    id: "woji",
+    name: "Woji",
+    top: "42%",
+    left: "75%",
+    badgeBg: "bg-emerald-700",
+    textColor: "text-white font-extrabold",
+    dotColor: "bg-gray-300",
+    pinColor: "#047857",
+    pinTop: "55%",
+    pinLeft: "80%",
+    showOnMobile: true,
   },
   {
-    numericValue: 200,
-    suffix: "+",
-    label: "Active Riders",
-    description: "Verified dispatchers on standby 24/7.",
-    icon: <FaUserCheck />,
+    id: "ph-town",
+    name: "Old GRA / Town",
+    top: "48%",
+    left: "44%",
+    badgeBg: "bg-sky-400",
+    textColor: "text-black font-extrabold",
+    dotColor: "bg-gray-700",
+    pinColor: "#38bdf8",
+    pinTop: "60%",
+    pinLeft: "49%",
+    showOnMobile: true,
+  },
+  {
+    id: "ada-george",
+    name: "Ada George",
+    top: "52%",
+    left: "10%",
+    badgeBg: "bg-gray-200",
+    textColor: "text-black font-bold",
+    dotColor: "bg-gray-600",
+    pinColor: "#e5e7eb",
+    pinTop: "64%",
+    pinLeft: "16%",
+    showOnMobile: false,
+  },
+  {
+    id: "ikwerre-rd",
+    name: "Ikwerre Road",
+    top: "76%",
+    left: "20%",
+    badgeBg: "bg-orange-500",
+    textColor: "text-black font-extrabold",
+    dotColor: "bg-sky-300",
+    pinColor: "#f97316",
+    pinTop: "88%",
+    pinLeft: "25%",
+    showOnMobile: true,
+  },
+  {
+    id: "unipor",
+    name: "Choba / UniPort",
+    top: "86%",
+    left: "55%",
+    badgeBg: "bg-teal-100",
+    textColor: "text-black font-extrabold",
+    dotColor: "bg-gray-800",
+    pinColor: "#99f6e4",
+    pinTop: "96%",
+    pinLeft: "58%",
+    showOnMobile: false,
+  },
+  {
+    id: "eleme",
+    name: "Eleme Junction",
+    top: "74%",
+    left: "74%",
+    badgeBg: "bg-gray-300",
+    textColor: "text-black font-extrabold",
+    dotColor: "bg-purple-900",
+    pinColor: "#6b7280",
+    pinTop: "86%",
+    pinLeft: "79%",
+    showOnMobile: false,
   },
 ];
 
-// Animated Number Component that counts up when visible
-const AnimatedCounter = ({
-  target,
-  suffix = "",
-  decimals = 0,
-  isInView,
-}: {
-  target: number;
-  suffix?: string;
-  decimals?: number;
-  isInView: boolean;
-}) => {
-  const [count, setCount] = useState(0);
-
-  useEffect(() => {
-    if (!isInView) return;
-
-    let startTime: number;
-    const duration = 2000;
-
-    const animate = (timestamp: number) => {
-      if (!startTime) startTime = timestamp;
-      const progress = Math.min((timestamp - startTime) / duration, 1);
-      const easedProgress = 1 - Math.pow(1 - progress, 3);
-
-      setCount(easedProgress * target);
-
-      if (progress < 1) {
-        requestAnimationFrame(animate);
-      }
-    };
-
-    requestAnimationFrame(animate);
-  }, [isInView, target]);
-
-  return (
-    <span>
-      {count.toFixed(decimals)}
-      {suffix}
-    </span>
-  );
+// Generates a localized loop path for each rider to circle their specific city zone
+const getLocalRiderLoop = (xPct: any, yPct: any) => {
+  const cx = (parseFloat(xPct) / 100) * 1000;
+  const cy = (parseFloat(yPct) / 100) * 700;
+  // Creates a smooth clockwise elliptical route
+  return `M ${cx} ${cy - 40} C ${cx + 80} ${cy - 40}, ${cx + 80} ${
+    cy + 40
+  }, ${cx} ${cy + 40} C ${cx - 80} ${cy + 40}, ${cx - 80} ${cy - 40}, ${cx} ${
+    cy - 40
+  }`;
 };
 
-const StatsSection: React.FC = () => {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+const RIDER_PATH = "M -100 350 C 200 50, 300 650, 600 350 S 900 50, 1150 350";
 
-  // Scroll logic for the background marquee text
-  const { scrollYProgress } = useScroll();
-  const backgroundTextX = useTransform(scrollYProgress, [0.5, 1], [0, -200]);
+// JSON-LD SEO Schema for Courier / LocalBusiness Service Areas
+const seoSchema = {
+  "@context": "https://schema.org",
+  "@type": "CourierService",
+  name: "Pickars Delivery",
+  description: "Fast and reliable delivery service across Port Harcourt.",
+  areaServed: portHarcourtLocations.map((loc) => ({
+    "@type": "Place",
+    name: loc.name,
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Port Harcourt",
+      addressRegion: "Rivers State",
+      addressCountry: "NG",
+    },
+  })),
+};
 
-  // Separate stats for the 3-top, 2-bottom web layout
-  const topStats = statsData.slice(0, 3);
-  const bottomStats = statsData.slice(3, 5);
-
+function DeliveryRider() {
   return (
-    <section
-      ref={ref}
-      className="relative overflow-hidden bg-[#FAFAFA] py-24 md:py-32 font-sans border-b border-gray-100"
-    >
-      <div className="relative z-10 px-6 max-w-7xl mx-auto">
-        {/* SECTION HEADER */}
-        <div className="text-center max-w-2xl mx-auto mb-20 flex flex-col items-center">
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            className="mb-6 px-4 py-1.5 bg-rose-50 border border-rose-100 text-rose-600 font-bold text-xs uppercase tracking-widest rounded-full"
-          >
-            Track Record
-          </motion.div>
+    <g>
+      <ellipse cx="70" cy="58" rx="46" ry="10" fill="#1f1f1f" opacity="0.18" />
+      <circle
+        cx="22"
+        cy="45"
+        r="9"
+        fill="#1f1f1f"
+        stroke="#1f1f1f"
+        strokeWidth="1.5"
+      />
+      <circle
+        cx="118"
+        cy="45"
+        r="9"
+        fill="#1f1f1f"
+        stroke="#1f1f1f"
+        strokeWidth="1.5"
+      />
+      <rect
+        x="18"
+        y="40"
+        width="104"
+        height="10"
+        rx="5"
+        fill="#2b2b2b"
+        stroke="#000"
+        strokeWidth="1.5"
+      />
+      <g>
+        <rect
+          x="24"
+          y="27"
+          width="30"
+          height="34"
+          rx="7"
+          fill="#e11d2e"
+          stroke="#e11d2e"
+          strokeWidth="2"
+        />
+        <path
+          d="M 41 34 L 33 47 L 39 47 L 37 55 L 46 41 L 40 41 Z"
+          fill="#ffffff"
+        />
+      </g>
+      <ellipse
+        cx="66"
+        cy="45"
+        rx="21"
+        ry="15"
+        fill="#111111"
+        stroke="#111111"
+        strokeWidth="1.5"
+      />
+      <path
+        d="M 72 38 Q 95 30 112 32"
+        stroke="#111111"
+        strokeWidth="6"
+        strokeLinecap="round"
+        fill="none"
+      />
+      <path
+        d="M 72 52 Q 95 60 112 58"
+        stroke="#111111"
+        strokeWidth="6"
+        strokeLinecap="round"
+        fill="none"
+      />
+      <circle
+        cx="112"
+        cy="32"
+        r="5"
+        fill="#111111"
+        stroke="#111111"
+        strokeWidth="1.5"
+      />
+      <circle
+        cx="112"
+        cy="58"
+        r="5"
+        fill="#111111"
+        stroke="#111111"
+        strokeWidth="1.5"
+      />
+      <circle
+        cx="80"
+        cy="45"
+        r="12"
+        fill="#e11d2e"
+        stroke="#e11d2e"
+        strokeWidth="2"
+      />
+      <circle cx="86" cy="45" r="6" fill="#e11d2e" opacity="0.85" />
+      <g opacity="0.55">
+        <line
+          x1="-4"
+          y1="38"
+          x2="10"
+          y2="38"
+          stroke="#ff0000"
+          strokeWidth="3"
+          strokeLinecap="round"
+        />
+        <line
+          x1="-10"
+          y1="45"
+          x2="6"
+          y2="45"
+          stroke="#ff0000"
+          strokeWidth="3"
+          strokeLinecap="round"
+        />
+        <line
+          x1="-4"
+          y1="52"
+          x2="10"
+          y2="52"
+          stroke="#ff0000"
+          strokeWidth="3"
+          strokeLinecap="round"
+        />
+      </g>
+    </g>
+  );
+}
 
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-4xl md:text-5xl lg:text-6xl font-black leading-tight tracking-tight text-gray-900"
-          >
-            Built for speed, trusted for{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-rose-500 to-red-600">
-              reliability
-            </span>
-          </motion.h2>
+export default function PortHarcourtMapComponent() {
+  return (
+    <div className="relative w-full aspect-[4/5] sm:aspect-[4/3] md:aspect-[16/9] min-h-[420px] max-h-[750px] bg-[#f3f4f6] overflow-hidden rounded-xl md:rounded-3xl border-2 sm:border-4 border-black font-sans select-none">
+      {/* Injecting LocalBusiness SEO Schema for the service areas */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(seoSchema) }}
+      />
 
-          <motion.p
-            initial={{ opacity: 0, y: 15 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="mt-6 text-base text-gray-500 font-medium leading-relaxed max-w-lg"
-          >
-            From Diobu market goods to Trans-Amadi gear, we keep packages moving
-            fast—giving your local business good wings and going strong across
-            PH!
-          </motion.p>
-        </div>
+      <style>{`
+        @keyframes popIn {
+          0% { opacity: 0; transform: scale(0) translateY(15px); }
+          100% { opacity: 1; transform: scale(1) translateY(0); }
+        }
+        .map-element {
+          opacity: 0;
+          animation: popIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        }
+        @keyframes pinBob {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-4px); }
+        }
+        .pin-bob { animation: pinBob 2.4s ease-in-out infinite; }
+      `}</style>
 
-        {/* STATS LAYOUT */}
-        <div className="flex flex-col gap-6 lg:gap-8 relative z-10">
-          {/* TOP ROW: 3 Items on Web */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:flex gap-6 lg:gap-8 w-full">
-            {topStats.map((stat, idx) => (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, y: 30 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{
-                  duration: 0.5,
-                  delay: 0.2 + idx * 0.1,
-                }}
-                className="group relative bg-white rounded-3xl p-8 shadow-sm hover:shadow-xl transition-all duration-400 ease-out hover:-translate-y-2 border border-gray-100 flex-1 flex flex-col justify-between overflow-hidden"
-              >
-                <div>
-                  <div className="flex items-center justify-between mb-8 relative z-10">
-                    <motion.div
-                      whileHover={{ scale: 1.1, rotate: 5 }}
-                      className="w-14 h-14 bg-gradient-to-br from-rose-100 to-rose-50 text-rose-600 flex items-center justify-center text-2xl rounded-2xl shadow-sm"
-                    >
-                      {stat.icon}
-                    </motion.div>
-                    <span className="text-4xl md:text-5xl font-black text-gray-900 tracking-tight group-hover:text-rose-600 transition-colors duration-300">
-                      <AnimatedCounter
-                        target={stat.numericValue}
-                        suffix={stat.suffix}
-                        decimals={stat.decimals}
-                        isInView={isInView}
-                      />
-                    </span>
-                  </div>
-                  <h3 className="text-lg font-bold text-gray-900 mb-3 relative z-10">
-                    {stat.label}
-                  </h3>
-                </div>
-                <p className="text-sm text-gray-500 font-medium leading-relaxed relative z-10">
-                  {stat.description}
-                </p>
-                <div className="absolute -bottom-10 -right-10 w-32 h-32 bg-rose-50/50 rounded-full blur-2xl group-hover:bg-rose-100/50 transition-colors duration-500 pointer-events-none" />
-              </motion.div>
-            ))}
-          </div>
+      {/* Background greenery spots */}
+      <div className="absolute -top-12 -right-12 w-40 h-40 sm:w-64 sm:h-64 bg-[#22c55e] rounded-full border-2 sm:border-4 border-black z-0 opacity-90" />
+      <div className="absolute -bottom-16 -right-16 w-48 h-48 sm:w-80 sm:h-80 bg-[#22c55e] rounded-tl-full border-2 sm:border-4 border-black z-0 opacity-90" />
+      <div className="absolute -bottom-12 -left-12 w-40 h-40 sm:w-64 sm:h-64 bg-[#22c55e] rounded-full border-2 sm:border-4 border-black z-0 opacity-90" />
 
-          {/* BOTTOM ROW: 2 Items Centered on Web */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:flex lg:max-w-4xl lg:mx-auto gap-6 lg:gap-8 w-full">
-            {bottomStats.map((stat, idx) => (
-              <motion.div
-                key={idx + 3}
-                initial={{ opacity: 0, y: 30 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{
-                  duration: 0.5,
-                  delay: 0.2 + (idx + 3) * 0.1,
-                }}
-                className="group relative bg-white rounded-3xl p-8 shadow-sm hover:shadow-xl transition-all duration-400 ease-out hover:-translate-y-2 border border-gray-100 flex-1 flex flex-col justify-between overflow-hidden"
-              >
-                <div>
-                  <div className="flex items-center justify-between mb-8 relative z-10">
-                    <motion.div
-                      whileHover={{ scale: 1.1, rotate: 5 }}
-                      className="w-14 h-14 bg-gradient-to-br from-rose-100 to-rose-50 text-rose-600 flex items-center justify-center text-2xl rounded-2xl shadow-sm"
-                    >
-                      {stat.icon}
-                    </motion.div>
-                    <span className="text-4xl md:text-5xl font-black text-gray-900 tracking-tight group-hover:text-rose-600 transition-colors duration-300">
-                      <AnimatedCounter
-                        target={stat.numericValue}
-                        suffix={stat.suffix}
-                        decimals={stat.decimals}
-                        isInView={isInView}
-                      />
-                    </span>
-                  </div>
-                  <h3 className="text-lg font-bold text-gray-900 mb-3 relative z-10">
-                    {stat.label}
-                  </h3>
-                </div>
-                <p className="text-sm text-gray-500 font-medium leading-relaxed relative z-10">
-                  {stat.description}
-                </p>
-                <div className="absolute -bottom-10 -right-10 w-32 h-32 bg-rose-50/50 rounded-full blur-2xl group-hover:bg-rose-100/50 transition-colors duration-500 pointer-events-none" />
-              </motion.div>
-            ))}
-          </div>
-        </div>
+      {/* Map Paths */}
+      <svg
+        className="absolute inset-0 w-full h-full z-10"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 1000 700"
+        preserveAspectRatio="xMidYMid slice"
+      >
+        {/* Secondary dark bypass roads */}
+        <path
+          d="M 120 0 L 120 700"
+          stroke="#1f2937"
+          strokeWidth="24"
+          strokeLinecap="round"
+        />
+        <path
+          d="M 380 0 L 360 700"
+          stroke="#1f2937"
+          strokeWidth="18"
+          strokeLinecap="round"
+        />
+        <path
+          d="M 700 0 L 720 700"
+          stroke="#1f2937"
+          strokeWidth="22"
+          strokeLinecap="round"
+        />
 
-        {/* PROMO / CTA SECTION (Get Your Packages Moving) */}
-        <div className="relative mt-64 overflow-hidden bg-[#0A0A0A] text-white rounded-[2.5rem] p-8 md:p-16 lg:p-20 shadow-2xl">
-          {/* Subtle Grid Background */}
-          <div
-            className="absolute inset-0 opacity-[0.03] pointer-events-none"
-            style={{
-              backgroundImage: `linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px)`,
-              backgroundSize: "40px 40px",
-            }}
+        {/* Straight Horizontal Main Road across screen */}
+        <path
+          d="M 0 350 L 1000 350"
+          stroke="#d1d5db"
+          strokeWidth="26"
+          strokeLinecap="round"
+        />
+
+        {/* Primary arterial roads */}
+        <path
+          d={RIDER_PATH}
+          stroke="#d1d5db"
+          strokeWidth="28"
+          strokeLinecap="round"
+          fill="none"
+        />
+        <path
+          d="M 0 620 Q 350 580 1000 820"
+          stroke="#d1d5db"
+          strokeWidth="26"
+          strokeLinecap="round"
+          fill="none"
+        />
+        <path
+          d="M 100 0 L 140 700"
+          stroke="#d1d5db"
+          strokeWidth="22"
+          strokeLinecap="round"
+        />
+        <path
+          d="M 560 0 L 530 700"
+          stroke="#d1d5db"
+          strokeWidth="22"
+          strokeLinecap="round"
+        />
+
+        {/* DISPATCH: Individual Localized Riders for Each City */}
+        {portHarcourtLocations.map((loc, i) => {
+          const loopPath = getLocalRiderLoop(loc.pinLeft, loc.pinTop);
+          return (
+            <g key={`local-rider-${loc.id}`}>
+              {/* Optional visually faint line to see the rider's local route track */}
+              <path
+                d={loopPath}
+                stroke="#6b7280"
+                strokeWidth="2"
+                strokeDasharray="6,6"
+                fill="none"
+                opacity="0.15"
+              />
+              <g>
+                <animateMotion
+                  dur={`${4.5 + (i % 3)}s`} // Gives them slightly different varied speeds
+                  repeatCount="indefinite"
+                  path={loopPath}
+                  calcMode="linear"
+                  rotate="auto"
+                />
+                {/* Scale the localized riders down a bit so the map doesn't get overcrowded */}
+                <g transform="scale(0.35) translate(-70,-45)">
+                  <DeliveryRider />
+                </g>
+              </g>
+            </g>
+          );
+        })}
+
+        {/* The Main Arterial Cross-City Rider */}
+        <g transform="translate(-70,-45)">
+          <DeliveryRider />
+          <animateMotion
+            dur="8s"
+            repeatCount="indefinite"
+            keyPoints="0;1"
+            keyTimes="0;1"
+            calcMode="linear"
+            rotate="auto"
+            path={RIDER_PATH}
           />
+        </g>
+      </svg>
 
-          {/* Glowing Accents */}
-          <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-rose-600/20 rounded-full blur-[120px] pointer-events-none" />
-          <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-blue-600/10 rounded-full blur-[100px] pointer-events-none" />
-
-          <div className="relative z-10 grid lg:grid-cols-2 gap-16 lg:gap-8 items-center">
-            {/* LEFT SIDE - Text Content */}
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="space-y-8"
+      {/* Location pins and tickets */}
+      <div className="absolute inset-0 z-20 pointer-events-none">
+        {portHarcourtLocations.map((loc, i) => (
+          <React.Fragment key={loc.id}>
+            {/* Map Pin */}
+            <div
+              className={`map-element pin-bob absolute -translate-x-1/2 pointer-events-auto transition-transform hover:scale-125 cursor-pointer ${
+                loc.showOnMobile ? "block" : "hidden md:block"
+              }`}
+              style={{
+                top: loc.pinTop,
+                left: loc.pinLeft,
+                animationDelay: `${i * 0.08}s`,
+              }}
             >
-              <h2 className="text-5xl sm:text-6xl lg:text-7xl font-black tracking-tight leading-[1]">
-                Get Your <br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-gray-400 to-gray-600">
-                  Packages
-                </span>{" "}
-                <br />
-                Moving.
-              </h2>
+              <svg
+                className="w-5 h-5 sm:w-7 sm:h-7"
+                viewBox="0 0 24 32"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M12 0C5.373 0 0 5.373 0 12c0 8.25 12 20 12 20s12-11.75 12-20c0-6.627-5.373-12-12-12z"
+                  fill={loc.pinColor}
+                  stroke="#000000"
+                  strokeWidth="2"
+                />
+                <circle
+                  cx="12"
+                  cy="12"
+                  r="4.5"
+                  fill="#ffffff"
+                  stroke="#000000"
+                  strokeWidth="2"
+                />
+              </svg>
+            </div>
 
-              <p className="text-lg text-gray-400 font-medium max-w-md">
-                Experience the fastest dispatch network built for reliability
-                across Port Harcourt.
-              </p>
+            {/* Ticket Label */}
+            <div
+              className={`map-element absolute -translate-x-1/2 -translate-y-1/2 pointer-events-auto items-center w-max px-2 py-1 sm:px-3 sm:py-1.5 cursor-pointer hover:scale-110 transition-all border-2 sm:border-[3px] border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] sm:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] rotate-[-12deg] ${
+                loc.badgeBg
+              } ${loc.showOnMobile ? "inline-flex" : "hidden md:inline-flex"}`}
+              style={{
+                top: loc.top,
+                left: loc.left,
+                animationDelay: `${i * 0.08}s`,
+              }}
+            >
+              <div
+                className="absolute -left-[5px] sm:-left-[7px] top-1/2 -translate-y-1/2 w-2.5 h-2.5 sm:w-3.5 sm:h-3.5 rounded-full border-2 sm:border-[3px] border-black"
+                style={{
+                  background:
+                    "radial-gradient(circle at center, transparent 40%, black 41%, black 100%)",
+                  backgroundColor: "#f9fafb",
+                }}
+              />
 
-              <div className="flex flex-col sm:flex-row gap-4 pt-2">
-                <div className="flex items-center gap-3 bg-white/5 backdrop-blur-md border border-white/10 px-5 py-3 rounded-2xl text-sm font-semibold text-gray-200 shadow-inner">
-                  <FaBolt className="text-yellow-400 text-lg" />
-                  Ultra-Fast Dispatch
-                </div>
-                <div className="flex items-center gap-3 bg-white/5 backdrop-blur-md border border-white/10 px-5 py-3 rounded-2xl text-sm font-semibold text-gray-200 shadow-inner">
-                  <CheckCircle className="text-green-400 text-lg" />
-                  Verified Riders
-                </div>
+              <div className="flex items-center space-x-1 sm:space-x-2">
+                <span
+                  className={`w-1.5 h-1.5 sm:w-2.5 sm:h-2.5 rounded-full border sm:border-2 border-black shrink-0 ${loc.dotColor}`}
+                />
+                <span
+                  className={`${loc.textColor} font-black uppercase text-[9px] sm:text-xs tracking-wide whitespace-nowrap`}
+                >
+                  {loc.name}
+                </span>
               </div>
 
-              <div className="pt-6 flex items-center gap-4">
-                <div className="h-[1px] w-12 bg-rose-500" />
-                <p className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-gray-400">
-                  Web booking coming soon
-                </p>
+              <div className="flex items-center space-x-1 sm:space-x-1.5 ml-1.5 pl-1.5 sm:ml-2.5 sm:pl-2.5 border-l-2 border-dashed border-black/40">
+                <span className="text-[8px] sm:text-[10px] font-black opacity-60 uppercase tracking-tighter">
+                  PH
+                </span>
               </div>
-            </motion.div>
 
-            {/* RIGHT SIDE - Enhanced Image Showcase */}
-            <motion.div
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="relative flex items-center justify-center lg:justify-end w-full"
-            >
-              <div className="relative w-full max-w-[320px] group perspective-[1000px]">
-                {/* CSS Mockup Frame for the Image */}
-                <motion.div
-                  whileHover={{ rotateY: -5, rotateX: 5, scale: 1.02 }}
-                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                  className="relative z-10 overflow-visible"
-                >
-            
-                  {/* The Actual Image */}
-                  <img
-                    src={phoneImage}
-                    alt="Dispatch App Preview"
-                    className="w-full h-auto object-cover rounded-[2rem] bg-black"
-                  />
-                </motion.div>
-
-                {/* Floating Glass Widget 1 */}
-                <motion.div
-                  initial={{ opacity: 0, x: -30, y: 20 }}
-                  whileInView={{ opacity: 1, x: -40, y: 0 }}
-                  transition={{ delay: 0.3, type: "spring" }}
-                  className="absolute bottom-12 -left-12 sm:-left-20 z-20 flex items-center gap-4 bg-white/10 backdrop-blur-xl border border-white/20 p-4 rounded-2xl shadow-[0_8px_32px_rgba(0,0,0,0.3)]"
-                >
-                  <div className="relative flex h-4 w-4">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-4 w-4 bg-green-500 border-2 border-white/20"></span>
-                  </div>
-                  <div>
-                    <p className="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-0.5">
-                      Live Status
-                    </p>
-                    <p className="text-sm font-bold text-white">
-                      Tracking Active
-                    </p>
-                  </div>
-                </motion.div>
-
-                {/* Floating Glass Widget 2 */}
-                <motion.div
-                  initial={{ opacity: 0, x: 30, y: -20 }}
-                  whileInView={{ opacity: 1, x: 40, y: 0 }}
-                  transition={{ delay: 0.5, type: "spring" }}
-                  className="absolute top-16 -right-12 sm:-right-16 z-20 flex items-center gap-4 bg-rose-600/90 backdrop-blur-xl border border-rose-400/30 p-4 rounded-2xl shadow-[0_8px_32px_rgba(225,29,72,0.4)]"
-                >
-                  <div className="bg-white/20 p-2 rounded-full">
-                    <FaMotorcycle className="text-white text-lg" />
-                  </div>
-                  <div>
-                    <p className="text-[10px] font-bold text-rose-200 uppercase tracking-wider mb-0.5">
-                      ETA
-                    </p>
-                    <p className="text-sm font-bold text-white">2 mins away</p>
-                  </div>
-                </motion.div>
-              </div>
-            </motion.div>
-          </div>
-
-          {/* Marquee Text Background - Contained to the card */}
-          <div className="absolute inset-x-0 bottom-0 overflow-hidden h-32 pointer-events-none rounded-b-[2.5rem]">
-            <motion.div
-              style={{ x: backgroundTextX }}
-              className="text-[8rem] sm:text-[10rem] font-black text-white/[0.02] whitespace-nowrap leading-none mt-12"
-            >
-              PORT HARCOURT DISPATCH
-            </motion.div>
-          </div>
-        </div>
+              <div
+                className="absolute -right-[5px] sm:-right-[7px] top-1/2 -translate-y-1/2 w-2.5 h-2.5 sm:w-3.5 sm:h-3.5 rounded-full border-2 sm:border-[3px] border-black"
+                style={{
+                  background:
+                    "radial-gradient(circle at center, transparent 40%, black 41%, black 100%)",
+                  backgroundColor: "#f9fafb",
+                }}
+              />
+            </div>
+          </React.Fragment>
+        ))}
       </div>
-    </section>
-  );
-};
 
-export default StatsSection;
+      {/* Legend / Branding */}
+      <div className="absolute bottom-2 left-2 sm:bottom-4 sm:left-4 bg-white/90 backdrop-blur-sm border sm:border-2 border-black px-2 py-1 sm:px-4 sm:py-2 rounded-lg sm:rounded-xl z-30 flex items-center space-x-1.5 sm:space-x-2">
+        <span className="w-2 h-2 sm:w-3 sm:h-3 bg-red-600 rounded-full border border-black animate-ping" />
+        <span className="text-[9px] sm:text-xs font-black tracking-wider text-black uppercase">
+          PICKARS
+        </span>
+      </div>
+    </div>
+  );
+}

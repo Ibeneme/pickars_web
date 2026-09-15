@@ -110,47 +110,17 @@ const portHarcourtLocations = [
     name: "Eleme Junction",
     top: "74%",
     left: "74%",
-    badgeBg: "bg-gray-300",
+    badgeBg: "bg-gray-300", // Changed to neutral cool gray shade
     textColor: "text-black font-extrabold",
     dotColor: "bg-purple-900",
-    pinColor: "#6b7280",
+    pinColor: "#6b7280", // Changed to medium gray pin hex code
     pinTop: "86%",
     pinLeft: "79%",
     showOnMobile: false,
   },
 ];
 
-// Generates a localized loop path for each rider to circle their specific city zone
-const getLocalRiderLoop = (xPct: any, yPct: any) => {
-  const cx = (parseFloat(xPct) / 100) * 1000;
-  const cy = (parseFloat(yPct) / 100) * 700;
-  // Creates a smooth clockwise elliptical route
-  return `M ${cx} ${cy - 40} C ${cx + 80} ${cy - 40}, ${cx + 80} ${
-    cy + 40
-  }, ${cx} ${cy + 40} C ${cx - 80} ${cy + 40}, ${cx - 80} ${cy - 40}, ${cx} ${
-    cy - 40
-  }`;
-};
-
 const RIDER_PATH = "M -100 350 C 200 50, 300 650, 600 350 S 900 50, 1150 350";
-
-// JSON-LD SEO Schema for Courier / LocalBusiness Service Areas
-const seoSchema = {
-  "@context": "https://schema.org",
-  "@type": "CourierService",
-  name: "Pickars Delivery",
-  description: "Fast and reliable delivery service across Port Harcourt.",
-  areaServed: portHarcourtLocations.map((loc) => ({
-    "@type": "Place",
-    name: loc.name,
-    address: {
-      "@type": "PostalAddress",
-      addressLocality: "Port Harcourt",
-      addressRegion: "Rivers State",
-      addressCountry: "NG",
-    },
-  })),
-};
 
 function DeliveryRider() {
   return (
@@ -282,12 +252,6 @@ function DeliveryRider() {
 export default function PortHarcourtMapComponent() {
   return (
     <div className="relative w-full aspect-[4/5] sm:aspect-[4/3] md:aspect-[16/9] min-h-[420px] max-h-[750px] bg-[#f3f4f6] overflow-hidden rounded-xl md:rounded-3xl border-2 sm:border-4 border-black font-sans select-none">
-      {/* Injecting LocalBusiness SEO Schema for the service areas */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(seoSchema) }}
-      />
-
       <style>{`
         @keyframes popIn {
           0% { opacity: 0; transform: scale(0) translateY(15px); }
@@ -316,7 +280,7 @@ export default function PortHarcourtMapComponent() {
         viewBox="0 0 1000 700"
         preserveAspectRatio="xMidYMid slice"
       >
-        {/* Secondary dark bypass roads */}
+        {/* Secondary dark bypass roads (Deep charcoal gray) */}
         <path
           d="M 120 0 L 120 700"
           stroke="#1f2937"
@@ -336,7 +300,7 @@ export default function PortHarcourtMapComponent() {
           strokeLinecap="round"
         />
 
-        {/* Straight Horizontal Main Road across screen */}
+        {/* Straight Horizontal Main Road across screen (Light gray) */}
         <path
           d="M 0 350 L 1000 350"
           stroke="#d1d5db"
@@ -372,38 +336,6 @@ export default function PortHarcourtMapComponent() {
           strokeLinecap="round"
         />
 
-        {/* DISPATCH: Individual Localized Riders for Each City */}
-        {portHarcourtLocations.map((loc, i) => {
-          const loopPath = getLocalRiderLoop(loc.pinLeft, loc.pinTop);
-          return (
-            <g key={`local-rider-${loc.id}`}>
-              {/* Optional visually faint line to see the rider's local route track */}
-              <path
-                d={loopPath}
-                stroke="#6b7280"
-                strokeWidth="2"
-                strokeDasharray="6,6"
-                fill="none"
-                opacity="0.15"
-              />
-              <g>
-                <animateMotion
-                  dur={`${4.5 + (i % 3)}s`} // Gives them slightly different varied speeds
-                  repeatCount="indefinite"
-                  path={loopPath}
-                  calcMode="linear"
-                  rotate="auto"
-                />
-                {/* Scale the localized riders down a bit so the map doesn't get overcrowded */}
-                <g transform="scale(0.35) translate(-70,-45)">
-                  <DeliveryRider />
-                </g>
-              </g>
-            </g>
-          );
-        })}
-
-        {/* The Main Arterial Cross-City Rider */}
         <g transform="translate(-70,-45)">
           <DeliveryRider />
           <animateMotion
@@ -510,7 +442,7 @@ export default function PortHarcourtMapComponent() {
       <div className="absolute bottom-2 left-2 sm:bottom-4 sm:left-4 bg-white/90 backdrop-blur-sm border sm:border-2 border-black px-2 py-1 sm:px-4 sm:py-2 rounded-lg sm:rounded-xl z-30 flex items-center space-x-1.5 sm:space-x-2">
         <span className="w-2 h-2 sm:w-3 sm:h-3 bg-red-600 rounded-full border border-black animate-ping" />
         <span className="text-[9px] sm:text-xs font-black tracking-wider text-black uppercase">
-          PICKARS
+         PICKARS
         </span>
       </div>
     </div>
