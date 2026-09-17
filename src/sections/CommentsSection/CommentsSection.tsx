@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 
 gsap.registerPlugin(ScrollTrigger);
 
+
 interface FaqItem {
   id: number;
   question: string;
@@ -51,7 +52,7 @@ const faqs: FaqItem[] = [
     id: 5,
     question: "How do I book a dispatch rider on the app?",
     answer:
-      "Booking a bike is effortless—just open the app, enter your pickup and drop-off locations, view upfront pricing, and tap to match with an available rider instantly.",
+      "Booking a bike is effortless just open the app, enter your pickup and drop-off locations, view upfront pricing, and tap to match with an available rider instantly.",
     category: "Booking",
     tag: "Easy Steps",
   },
@@ -258,7 +259,9 @@ export default function PickarsTestimonialsSection(): React.JSX.Element {
             </p>
           </div>
 
+
           {/* Controls */}
+
           <div className="flex items-center gap-2.5 sm:gap-3 self-end sm:self-auto shrink-0">
             <button
               ref={prevBtnRef}
