@@ -1,4 +1,5 @@
-import puppeteer from "puppeteer";
+import puppeteer from "puppeteer-core";
+import chromium from "@sparticuz/chromium";
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
@@ -28,17 +29,14 @@ const mimeTypes = {
 };
 
 async function prerender() {
-  // Simple static file server (no SPA rewrite for assets)
   const server = createServer((req, res) => {
     let filePath = path.join(DIST, req.url === "/" ? "index.html" : req.url);
 
-    // If it's a directory, try index.html
     if (existsSync(filePath) && fs.statSync(filePath).isDirectory()) {
       filePath = path.join(filePath, "index.html");
     }
 
-    // SPA fallback only for HTML requests
-    if (!existsSync(filePath) && !extname(req.url)) {
+    if (!existsSync(filePath) && !extname(req.url || "")) {
       filePath = path.join(DIST, "index.html");
     }
 
@@ -55,9 +53,12 @@ async function prerender() {
   await new Promise((resolve) => server.listen(4173, resolve));
   console.log("→ Server running at http://localhost:4173");
 
+  // Special config for Vercel
   const browser = await puppeteer.launch({
-    headless: "new",
-    args: ["--no-sandbox", "--disable-setuid-sandbox"],
+    args: chromium.args,
+    defaultViewport: chromium.defaultViewport,
+    executablePath: await chromium.executablePath(),
+    headless: chromium.headless,
   });
 
   const page = await browser.newPage();
@@ -71,7 +72,6 @@ async function prerender() {
       timeout: 60000,
     });
 
-    // Wait extra for Helmet
     await new Promise((r) => setTimeout(r, 1500));
 
     const html = await page.content();
@@ -91,10 +91,10 @@ async function prerender() {
 
   await browser.close();
   server.close();
-  console.log("\n✅ Done!");
+  console.log("\n✅ Prerender completed!");
 }
 
 prerender().catch((err) => {
-  console.error(err);
+  console.error("❌ Prerender failed:", err);
   process.exit(1);
 });
