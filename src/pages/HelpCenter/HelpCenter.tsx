@@ -343,7 +343,7 @@ export default function HelpCenterPage() {
           property="og:description"
           content="Get instant answers on booking, payments, tracking, and customer support for dispatch rider services in Port Harcourt."
         />
-        <meta property="og:image" content="https://www.pickars.com/box.png" />
+        <meta property="og:image" content="https://www.pickars.com/about-us.png" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
 
@@ -360,7 +360,7 @@ export default function HelpCenterPage() {
           name="twitter:description"
           content="Find instant answers on booking, payments, tracking, and rider onboarding."
         />
-        <meta name="twitter:image" content="https://www.pickars.com/box.png" />
+        <meta name="twitter:image" content="https://www.pickars.com/about-us.png" />
 
         {/* Dynamic JSON-LD Structured Data Schema */}
         <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>

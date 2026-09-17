@@ -14,7 +14,7 @@ const FAQsPage = () => {
   });
 
   const canonicalUrl = `https://www.pickars.com${location.pathname}`;
-  const ogImageUrl = "https://www.pickars.com/faq.png";
+  const ogImageUrl = "https://www.pickars.com/about-us.png";
 
   const faqSchema = {
     "@context": "https://schema.org",

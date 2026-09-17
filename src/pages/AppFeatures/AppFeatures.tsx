@@ -19,7 +19,6 @@ const AppFeatures: React.FC = () => {
 
   // Dynamic canonical URL targeting
   const canonicalUrl = `https://www.pickars.com${location.pathname}`;
-  const ogImageUrl = "https://www.pickars.com/app-features.png";
 
   // SoftwareApplication Structured Data
   const appSchema = {
@@ -28,7 +27,6 @@ const AppFeatures: React.FC = () => {
     name: "Pickars Mobile Delivery App",
     operatingSystem: "Android, iOS",
     applicationCategory: "LogisticsApplication",
-    image: ogImageUrl,
     offers: {
       "@type": "Offer",
       price: "0",
@@ -110,15 +108,9 @@ const AppFeatures: React.FC = () => {
           property="og:description"
           content="Track dispatch riders in real-time, schedule express package pickups, and enjoy instant order alerts with the Pickars app."
         />
-        <meta property="og:image" content={ogImageUrl} />
-        <meta property="og:image:secure_url" content={ogImageUrl} />
-        <meta property="og:image:type" content="image/png" />
+        <meta property="og:image" content="https://www.pickars.com/about-us.png" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
-        <meta
-          property="og:image:alt"
-          content="Pickars App Features & Tracking"
-        />
 
         {/* Twitter Card */}
         <meta name="twitter:card" content="summary_large_image" />
@@ -133,11 +125,7 @@ const AppFeatures: React.FC = () => {
           name="twitter:description"
           content="Experience fast dispatch booking, real-time rider tracking, and seamless parcel deliveries with the Pickars app."
         />
-        <meta name="twitter:image" content={ogImageUrl} />
-        <meta
-          name="twitter:image:alt"
-          content="Pickars App Features & Tracking"
-        />
+        <meta name="twitter:image" content="https://www.pickars.com/about-us.png" />
 
         {/* JSON-LD Structured Data Schema */}
         <script type="application/ld+json">{JSON.stringify(appSchema)}</script>

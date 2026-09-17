@@ -152,7 +152,7 @@ const Home = () => {
     provider: {
       "@type": "LocalBusiness",
       name: "Pickars Logistics",
-      image: "https://www.pickars.com/box.png",
+      image: "https://www.pickars.com/about-us.png",
       telephone: "+2349164860591",
       priceRange: "₦₦",
       address: {
@@ -250,7 +250,7 @@ const Home = () => {
         <meta property="og:locale" content="en_NG" />
         <meta property="og:title" content={title} />
         <meta property="og:description" content={description} />
-        <meta property="og:image" content="https://www.pickars.com/box.png" />
+        <meta property="og:image" content="https://www.pickars.com/about-us.png" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
 
@@ -261,7 +261,7 @@ const Home = () => {
         <meta name="twitter:url" content={canonicalUrl} />
         <meta name="twitter:title" content={title} />
         <meta name="twitter:description" content={description} />
-        <meta name="twitter:image" content="https://www.pickars.com/box.png" />
+        <meta name="twitter:image" content="https://www.pickars.com/about-us.png" />
 
         {/* Structured Data */}
         <script type="application/ld+json">
