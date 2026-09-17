@@ -1,9 +1,7 @@
-/* src/assets/fonts/fonts.css */
-
 /* Light */
 @font-face {
     font-family: "Lufga";
-    src: url("./LufgaLight.ttf") format("truetype");
+    src: url("/fonts/LufgaLight.ttf") format("truetype");
     font-weight: 300;
     font-style: normal;
 }
@@ -11,7 +9,7 @@
 /* Regular */
 @font-face {
     font-family: "Lufga";
-    src: url("./LufgaRegular.ttf") format("truetype");
+    src: url("/fonts/LufgaRegular.ttf") format("truetype");
     font-weight: 400;
     font-style: normal;
 }
@@ -19,15 +17,15 @@
 /* Medium */
 @font-face {
     font-family: "Lufga";
-    src: url("./LufgaMedium.ttf") format("truetype");
+    src: url("/fonts/LufgaMedium.ttf") format("truetype");
     font-weight: 500;
     font-style: normal;
 }
 
-/* Semibold */
+/* Semibold - Capital 'B' matching LufgaSemiBold.ttf */
 @font-face {
     font-family: "Lufga";
-    src: url("./LufgaSemibold.ttf") format("truetype");
+    src: url("/fonts/LufgaSemiBold.ttf") format("truetype");
     font-weight: 600;
     font-style: normal;
 }
@@ -35,15 +33,15 @@
 /* Bold */
 @font-face {
     font-family: "Lufga";
-    src: url("./LufgaBold.ttf") format("truetype");
+    src: url("/fonts/LufgaBold.ttf") format("truetype");
     font-weight: 700;
     font-style: normal;
 }
 
-/* Extrabold */
+/* Extrabold - Capital 'B' matching LufgaExtraBold.ttf */
 @font-face {
     font-family: "Lufga";
-    src: url("./LufgaExtrabold.ttf") format("truetype");
+    src: url("/fonts/LufgaExtraBold.ttf") format("truetype");
     font-weight: 800;
     font-style: normal;
 }
