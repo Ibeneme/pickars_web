@@ -41,7 +41,7 @@ const Footer: React.FC = () => {
   ];
 
   return (
-    <footer className="relative w-full overflow-hidden bg-black font-['Lufga'] text-white">
+    <footer className="relative w-full overflow-hidden mb-0 bg-black font-['Lufga'] text-white">
       <AppDownloadCTA />
 
       <div className="mx-auto max-w-7xl px-6 pb-16 pt-20 md:px-0">

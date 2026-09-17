@@ -3,6 +3,8 @@
 
 :root {
   --font-sans: "Lufga", system-ui, sans-serif;
+  padding: 0px;
+  margin: 0px
 }
 
 body {

@@ -20,6 +20,7 @@ const Company = () => {
 
   // Dynamic canonical URL matching active path
   const canonicalUrl = `https://www.pickars.com${location.pathname}`;
+  const ogImageUrl = "https://www.pickars.com/about-us.png";
 
   // Advanced AboutPage & Organization Schema Graph
   const companySchema = {
@@ -29,9 +30,13 @@ const Company = () => {
         "@type": "AboutPage",
         "@id": `${canonicalUrl}#webpage`,
         url: canonicalUrl,
-        name: "About Pickars Logistics | Our Company & Journey",
+        name: "About Pickars | Our Company & Journey",
         description:
           "Learn about Pickars Courier Limited, our mission to revolutionize last-mile parcel delivery and dispatch rider networks across Port Harcourt and Nigeria.",
+        primaryImageOfPage: {
+          "@type": "ImageObject",
+          url: ogImageUrl,
+        },
         isPartOf: {
           "@type": "WebSite",
           "@id": "https://www.pickars.com/#website",
@@ -76,14 +81,14 @@ const Company = () => {
       {/* Dynamic SEO Meta Data for the Company Page */}
       <Helmet>
         {/* Core SEO */}
-        <title>Our Company & Mission | Pickars Logistics Port Harcourt</title>
+        <title>Our Company & Mission | Pickars</title>
         <meta
           name="description"
           content="Discover the Pickars journey. Building Port Harcourt's most reliable, tech-driven dispatch rider network and express parcel delivery ecosystem."
         />
         <meta
           name="keywords"
-          content="about Pickars, Pickars logistics company, dispatch service company Port Harcourt, courier company Rivers State, urban last mile delivery Nigeria"
+          content="about Pickars, dispatch service company Port Harcourt, courier company Rivers State, urban last mile delivery Nigeria"
         />
         <meta name="robots" content="index, follow, max-image-preview:large" />
         <link rel="canonical" href={canonicalUrl} />
@@ -97,34 +102,38 @@ const Company = () => {
         {/* Open Graph / Facebook / WhatsApp */}
         <meta property="og:type" content="website" />
         <meta property="og:url" content={canonicalUrl} />
-        <meta property="og:site_name" content="Pickars Logistics" />
+        <meta property="og:site_name" content="Pickars " />
         <meta property="og:locale" content="en_NG" />
-        <meta
-          property="og:title"
-          content="Our Company & Mission | Pickars Logistics"
-        />
+        <meta property="og:title" content="Our Company & Mission | Pickars" />
         <meta
           property="og:description"
           content="Discover the Pickars story. We are building the most trusted dispatch rider and urban parcel delivery network across Port Harcourt and Nigeria."
         />
-        <meta property="og:image" content="https://www.pickars.com/box.png" />
+        <meta property="og:image" content={ogImageUrl} />
+        <meta property="og:image:secure_url" content={ogImageUrl} />
+        <meta property="og:image:type" content="image/png" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
+        <meta
+          property="og:image:alt"
+          content="Pickars About Us - Company & Mission"
+        />
 
         {/* Twitter (X) */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:site" content="@pickars_app" />
         <meta name="twitter:creator" content="@pickars_app" />
         <meta name="twitter:url" content={canonicalUrl} />
-        <meta
-          name="twitter:title"
-          content="Our Company & Story | Pickars Logistics"
-        />
+        <meta name="twitter:title" content="Our Company & Story | Pickars" />
         <meta
           name="twitter:description"
           content="Discover the Pickars journey and our core mission of speed, reliability, and tech-driven dispatch solutions."
         />
-        <meta name="twitter:image" content="https://www.pickars.com/box.png" />
+        <meta name="twitter:image" content={ogImageUrl} />
+        <meta
+          name="twitter:image:alt"
+          content="Pickars About Us - Company & Mission"
+        />
 
         {/* Structured Data Graph */}
         <script type="application/ld+json">

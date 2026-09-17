@@ -44,24 +44,13 @@ const App: React.FC = () => {
   );
 
   return (
-    <div
-      className="app-main-wrapper"
-      style={{
-        background: "linear-gradient(to bottom, #FFF5F5 0%, #000000 100%)",
-        backgroundAttachment: "fixed",
-        minHeight: "100dvh",
-        display: "flex",
-        flexDirection: "column",
-        overflowX: "hidden",
-      }}
-    >
+    <div>
       <ScrollToTop />
 
       {!isAdminRoute && <Navbar />}
 
-      <main className="content-area" style={{ flex: 1 }}>
+      <main style={{ marginBottom: 0 }}>
         <Routes location={location} key={location.pathname}>
-          {/* Public Core Routes */}
           <Route path="/" element={<Home />} />
           <Route path="/app/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/app/terms-of-use" element={<TermsConditions />} />
@@ -75,8 +64,6 @@ const App: React.FC = () => {
           <Route path="/app/tracking" element={<TrackingPageMain />} />
           <Route path="/track" element={<PaymentSuccess />} />
           <Route path="/rider-terms" element={<DispatchRiderTermsPage />} />
-
-          {/* Explicit Sitemap SEO Routes - Static render Home while preserving URL */}
           <Route
             path="/quick-delivery/dispatch-rider-and-delivery/port-harcourt"
             element={<Home />}
@@ -91,11 +78,7 @@ const App: React.FC = () => {
           <Route path="/dispatch-rider-trans-amadi" element={<Home />} />
           <Route path="/dispatch-rider-woji" element={<Home />} />
 
-
-          {/* Admin Auth */}
           <Route path="/app/admin" element={<AdminLogin />} />
-
-          {/* PROTECTED ADMIN ROUTES */}
           <Route element={<ProtectedRoute />}>
             <Route path="/app/admin/dashboard" element={<Dashboard />} />
             <Route path="/app/admin/users" element={<UsersManagement />} />
@@ -106,8 +89,6 @@ const App: React.FC = () => {
               element={<PaymentsManagement />}
             />
             <Route path="/app/admin/marketing" element={<MarketingCenter />} />
-
-            {/* MANUAL RIDES */}
             <Route
               path="/app/admin/manual-booking"
               element={<ManualRideDispatch />}
@@ -121,8 +102,6 @@ const App: React.FC = () => {
               element={<ViewManualRide />}
             />
           </Route>
-
-          {/* Catch-all fallback for any other unhandled paths */}
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </main>
