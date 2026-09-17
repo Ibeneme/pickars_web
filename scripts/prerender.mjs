@@ -2,13 +2,13 @@ import puppeteer from "puppeteer";
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
-import http from "http";
-import handler from "serve-handler";
+import { createServer } from "http";
+import { createReadStream, existsSync } from "fs";
+import { extname } from "path";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const DIST = path.join(__dirname, "../dist");
 
-// Your real public routes that need correct SEO
 const routes = [
   "/",
   "/app/faqs",
@@ -17,17 +17,43 @@ const routes = [
   "/app/our-company",
 ];
 
+const mimeTypes = {
+  ".js": "application/javascript",
+  ".css": "text/css",
+  ".html": "text/html",
+  ".png": "image/png",
+  ".svg": "image/svg+xml",
+  ".json": "application/json",
+  ".webmanifest": "application/manifest+json",
+};
+
 async function prerender() {
-  // Start a static server on the built dist folder
-  const server = http.createServer((req, res) => {
-    return handler(req, res, {
-      public: DIST,
-      rewrites: [{ source: "**", destination: "/index.html" }], // important for SPA
-    });
+  // Simple static file server (no SPA rewrite for assets)
+  const server = createServer((req, res) => {
+    let filePath = path.join(DIST, req.url === "/" ? "index.html" : req.url);
+
+    // If it's a directory, try index.html
+    if (existsSync(filePath) && fs.statSync(filePath).isDirectory()) {
+      filePath = path.join(filePath, "index.html");
+    }
+
+    // SPA fallback only for HTML requests
+    if (!existsSync(filePath) && !extname(req.url)) {
+      filePath = path.join(DIST, "index.html");
+    }
+
+    if (existsSync(filePath)) {
+      const ext = extname(filePath);
+      res.setHeader("Content-Type", mimeTypes[ext] || "text/plain");
+      createReadStream(filePath).pipe(res);
+    } else {
+      res.statusCode = 404;
+      res.end("Not found");
+    }
   });
 
   await new Promise((resolve) => server.listen(4173, resolve));
-  console.log("→ Static server running at http://localhost:4173");
+  console.log("→ Server running at http://localhost:4173");
 
   const browser = await puppeteer.launch({
     headless: "new",
@@ -35,30 +61,25 @@ async function prerender() {
   });
 
   const page = await browser.newPage();
-
-  // Optional: set a realistic viewport
   await page.setViewport({ width: 1280, height: 800 });
 
   for (const route of routes) {
-    const url = `http://localhost:4173${route}`;
     console.log(`Prerendering → ${route}`);
 
-    await page.goto(url, {
+    await page.goto(`http://localhost:4173${route}`, {
       waitUntil: "networkidle0",
-      timeout: 30000,
+      timeout: 60000,
     });
 
-    // Give Helmet + React time to fully inject meta tags
-    await new Promise((r) => setTimeout(r, 1000));
+    // Wait extra for Helmet
+    await new Promise((r) => setTimeout(r, 1500));
 
     const html = await page.content();
 
-    // Decide where to save the file
     let filePath;
     if (route === "/") {
       filePath = path.join(DIST, "index.html");
     } else {
-      // e.g. /app/faqs → dist/app/faqs/index.html
       const folder = path.join(DIST, route.slice(1));
       fs.mkdirSync(folder, { recursive: true });
       filePath = path.join(folder, "index.html");
@@ -70,10 +91,10 @@ async function prerender() {
 
   await browser.close();
   server.close();
-  console.log("\n✅ Prerender completed successfully!");
+  console.log("\n✅ Done!");
 }
 
 prerender().catch((err) => {
-  console.error("❌ Prerender failed:", err);
+  console.error(err);
   process.exit(1);
 });
