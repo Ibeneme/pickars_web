@@ -12,6 +12,7 @@ const TrackingPageMain: React.FC = () => {
 
   // Dynamic canonical URL matching active path
   const canonicalUrl = `https://www.pickars.com${location.pathname}`;
+  const ogImageUrl = "https://www.pickars.com/track.png";
 
   // Top scroll progress spring animation
   const { scrollYProgress } = useScroll();
@@ -38,6 +39,10 @@ const TrackingPageMain: React.FC = () => {
         name: "Live Dispatch Rider & Parcel Tracking | Pickars Port Harcourt",
         description:
           "Track your dispatch rider and parcel status live across Port Harcourt with Pickars. Enter your tracking ID for real-time GPS updates.",
+        primaryImageOfPage: {
+          "@type": "ImageObject",
+          url: ogImageUrl,
+        },
         isPartOf: {
           "@type": "WebSite",
           "@id": "https://www.pickars.com/#website",
@@ -137,9 +142,15 @@ const TrackingPageMain: React.FC = () => {
           property="og:description"
           content="Track your package and dispatch rider live in Port Harcourt. Get instant updates on pickup, transit status, and delivery completion."
         />
-        <meta property="og:image" content="https://www.pickars.com/box.png" />
+        <meta property="og:image" content={ogImageUrl} />
+        <meta property="og:image:secure_url" content={ogImageUrl} />
+        <meta property="og:image:type" content="image/png" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
+        <meta
+          property="og:image:alt"
+          content="Pickars Live Dispatch & Parcel Tracking"
+        />
 
         {/* Twitter Card */}
         <meta name="twitter:card" content="summary_large_image" />
@@ -154,7 +165,11 @@ const TrackingPageMain: React.FC = () => {
           name="twitter:description"
           content="Monitor your rider's live location and parcel status across Port Harcourt in real-time."
         />
-        <meta name="twitter:image" content="https://www.pickars.com/box.png" />
+        <meta name="twitter:image" content={ogImageUrl} />
+        <meta
+          name="twitter:image:alt"
+          content="Pickars Live Dispatch & Parcel Tracking"
+        />
 
         {/* Structured Data Graph */}
         <script type="application/ld+json">

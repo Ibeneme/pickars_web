@@ -14,6 +14,8 @@ const FAQsPage = () => {
   });
 
   const canonicalUrl = `https://www.pickars.com${location.pathname}`;
+  const ogImageUrl = "https://www.pickars.com/faq.png";
+
   const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -56,6 +58,7 @@ const FAQsPage = () => {
   return (
     <div className="relative bg-[#fff] selection:bg-red-600 selection:text-white">
       <Helmet>
+        {/* Core SEO */}
         <title>
           Frequently Asked Questions | Pickars Dispatch & Delivery Port Harcourt
         </title>
@@ -69,10 +72,14 @@ const FAQsPage = () => {
         />
         <meta name="robots" content="index, follow, max-image-preview:large" />
         <link rel="canonical" href={canonicalUrl} />
+
+        {/* Local Geo Signals */}
         <meta name="geo.region" content="NG-RI" />
         <meta name="geo.placename" content="Port Harcourt" />
         <meta name="geo.position" content="4.824167;7.080833" />
         <meta name="ICBM" content="4.824167, 7.080833" />
+
+        {/* Open Graph / Facebook / WhatsApp */}
         <meta property="og:type" content="website" />
         <meta property="og:url" content={canonicalUrl} />
         <meta property="og:site_name" content="Pickars Logistics" />
@@ -85,9 +92,17 @@ const FAQsPage = () => {
           property="og:description"
           content="Find answers to common questions about booking dispatch riders, tracking shipments, pricing, and driver support in Port Harcourt."
         />
-        <meta property="og:image" content="https://www.pickars.com/box.png" />
+        <meta property="og:image" content={ogImageUrl} />
+        <meta property="og:image:secure_url" content={ogImageUrl} />
+        <meta property="og:image:type" content="image/png" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
+        <meta
+          property="og:image:alt"
+          content="Pickars Frequently Asked Questions"
+        />
+
+        {/* Twitter (X) */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:site" content="@pickars_app" />
         <meta name="twitter:creator" content="@pickars_app" />
@@ -100,13 +115,22 @@ const FAQsPage = () => {
           name="twitter:description"
           content="Find answers to common questions about booking dispatch riders, tracking shipments, and pricing in Port Harcourt."
         />
-        <meta name="twitter:image" content="https://www.pickars.com/box.png" />
+        <meta name="twitter:image" content={ogImageUrl} />
+        <meta
+          name="twitter:image:alt"
+          content="Pickars Frequently Asked Questions"
+        />
+
+        {/* Structured Data Graph */}
         <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
       </Helmet>
+
+      {/* Scroll Progress Bar */}
       <motion.div
         style={{ scaleX }}
         className="fixed inset-x-0 top-0 z-50 h-1.5 origin-left bg-[#ff0000]"
       />
+
       <main>
         <FAQPage />
       </main>
