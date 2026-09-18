@@ -1,8 +1,8 @@
 import axios from "axios";
 import Cookies from "js-cookie";
 
-const API_BASE_URL = `http://localhost:5200/api/v1/admin/`;
-const API_BASE_URL_TRACK = `http://localhost:5200/api/`;
+const API_BASE_URL = `https://pickurps-server.onrender.com/api/v1/admin/`;
+const API_BASE_URL_TRACK = `https://pickurps-server.onrender.com/api/`;
 
 const axiosInstance = axios.create({
     baseURL: API_BASE_URL,
