@@ -112,6 +112,7 @@ export const CompanyMission: React.FC = () => {
           />
 
 
+
           {/* Gradient Overlay */}
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
 
