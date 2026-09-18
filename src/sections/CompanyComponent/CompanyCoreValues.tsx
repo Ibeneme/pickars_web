@@ -62,8 +62,12 @@ export const CompanyCoreValues: React.FC = () => {
           variants={headerVariant}
           className="flex flex-col items-center text-center max-w-2xl mx-auto mb-12 sm:mb-16"
         >
-          <div
-            className="mb-4 px-5 py-2 bg-[#FF0000] text-white font-black text-[11px] sm:text-xs uppercase tracking-widest cursor-default select-none"
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8, rotate: -5 }}
+            animate={{ opacity: 1, scale: 1, rotate: -2 }}
+            whileHover={{ scale: 1.08, rotate: 0 }}
+            transition={{ type: "spring", stiffness: 200, damping: 15 }}
+            className="mb-4 sm:mb-6 px-5 sm:px-6 py-2 max-w-[210px] sm:py-2.5 bg-[#FF0000] text-white font-black text-[11px] sm:text-xs md:text-sm uppercase tracking-widest cursor-default select-none"
             style={{
               maskImage:
                 "radial-gradient(circle 5px at calc(100% - 2.5px) 50%, #0000 99%, #000 100%)",
@@ -72,7 +76,7 @@ export const CompanyCoreValues: React.FC = () => {
             }}
           >
             OUR CORE VALUES
-          </div>
+          </motion.div>
 
           <h2 className="mb-5 text-4xl font-black leading-[1.05] tracking-tight text-gray-900 sm:text-6xl md:text-6xl lg:text-6xl">
             Igniting and driving the ultimate{" "}

@@ -100,7 +100,7 @@ const TrackingPageMain: React.FC = () => {
   };
 
   return (
-    <section className="relative flex flex-col min-h-screen w-full bg-white text-gray-900 overflow-hidden">
+    <section className="relative flex flex-col min-h-screen w-full bg-white text-gray-900 overflow-hidden font-['Lufga']">
       {/* Advanced SEO Metadata */}
       <Helmet>
         {/* Core Metadata */}

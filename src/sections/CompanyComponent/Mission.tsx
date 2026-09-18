@@ -37,8 +37,12 @@ export const Mission: React.FC = () => {
             variants={fadeUpVariant}
             className="relative bg-black rounded-[32px] sm:rounded-[40px] p-4 sm:p-6 md:p-8 flex flex-col justify-between overflow-hidden min-h-[500px] sm:min-h-[580px]"
           >
-            <div
-              className="mb-2 mt-4 sm:mb-3 px-5 sm:px-6 py-2 sm:py-2.5 bg-[#FF0000] text-white font-black text-[11px] sm:text-xs md:text-sm uppercase tracking-widest cursor-default select-none w-fit inline-block"
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8, rotate: -5 }}
+              animate={{ opacity: 1, scale: 1, rotate: -2 }}
+              whileHover={{ scale: 1.08, rotate: 0 }}
+              transition={{ type: "spring", stiffness: 200, damping: 15 }}
+              className="mb-4 sm:mb-6 px-5 sm:px-6 py-2 max-w-[210px] sm:py-2.5 bg-[#FF0000] text-white font-black text-[11px] sm:text-xs md:text-sm uppercase tracking-widest cursor-default select-none"
               style={{
                 maskImage:
                   "radial-gradient(circle 5px at calc(100% - 2.5px) 50%, #0000 99%, #000 100%)",
@@ -47,7 +51,7 @@ export const Mission: React.FC = () => {
               }}
             >
               Our Core Mission
-            </div>
+            </motion.div>
 
             <div className="my-6">
               <h2 className="text-4xl sm:text-5xl md:text-6xl font-black text-white tracking-tight leading-[1.08]">

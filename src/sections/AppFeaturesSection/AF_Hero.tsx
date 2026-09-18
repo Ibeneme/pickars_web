@@ -61,7 +61,7 @@ const AFHero: React.FC = () => {
       ref={containerRef}
       className="relative isolate overflow-hidden bg-[#fff] py-20 font-['Lufga'] text-gray-900 md:py-32"
     >
-      <div className="mx-auto max-w-7xl px-4 pt-16 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-6xl px-4 pt-16 ">
         {/* ——— HEADER INFO ——— */}
         <motion.div
           variants={containerVariants}

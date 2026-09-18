@@ -50,10 +50,12 @@ const HeroSection: React.FC = () => {
           animate="visible"
           className="flex w-full flex-col items-center text-center max-w-4xl"
         >
-          {/* Ticket-style badge */}
           <motion.div
-            variants={itemVariants}
-            className="mb-5 px-5 py-2 bg-[#FF0000] text-white font-black text-[11px] sm:text-xs uppercase tracking-widest cursor-default select-none"
+            initial={{ opacity: 0, scale: 0.8, rotate: -5 }}
+            animate={{ opacity: 1, scale: 1, rotate: -2 }}
+            whileHover={{ scale: 1.08, rotate: 0 }}
+            transition={{ type: "spring", stiffness: 200, damping: 15 }}
+            className="mb-4 sm:mb-6 px-5 sm:px-6 py-2 sm:py-2.5 bg-[#FF0000] text-white font-black text-[11px] sm:text-xs md:text-sm uppercase tracking-widest cursor-default select-none"
             style={{
               maskImage:
                 "radial-gradient(circle 5px at calc(100% - 2.5px) 50%, #0000 99%, #000 100%)",
