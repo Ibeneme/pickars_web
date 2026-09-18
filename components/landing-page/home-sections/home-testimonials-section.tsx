@@ -206,7 +206,7 @@ export default function HomeTestimonialsSection(): React.JSX.Element {
   return (
     <section
       ref={sectionRef}
-      className="relative w-full bg-[#fff5f5] py-16 sm:py-20 md:py-28 px-4 sm:px-6 lg:px-8 font-sans flex flex-col justify-center items-center overflow-hidden"
+      className="relative w-full bg-[#fff5f5] py-16 sm:py-20 md:py-28 px-4 sm:px-6 lg:px-8 flex flex-col justify-center items-center overflow-hidden"
     >
       <motion.div
         initial={{ opacity: 0, scale: 0.8, rotate: -5 }}

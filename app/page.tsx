@@ -57,8 +57,8 @@ export const metadata: Metadata = {
       "Book fast, reliable dispatch riders for same-day package and parcel delivery anywhere in Port Harcourt.",
     images: [
       {
-        url: "/opengraphs/about-us.png",
-        secureUrl: `${baseUrl}/opengraphs/about-us.png`,
+        url: "/opengraphs/box.png",
+        secureUrl: `${baseUrl}/opengraphs/box.png`,
         width: 1200,
         height: 630,
         type: "image/png",
@@ -74,7 +74,7 @@ export const metadata: Metadata = {
       "Dispatch Riders in Port Harcourt | Same-Day Bike Couriers | PICKARS",
     description:
       "Book reliable dispatch riders near you in Port Harcourt. Fast same-day parcel delivery & bike courier service across Rivers State.",
-    images: ["/opengraphs/about-us.png"],
+    images: ["/opengraphs/box.png"],
   },
   appLinks: {
     ios: {
@@ -146,7 +146,7 @@ const jsonLdData = {
       },
       primaryImageOfPage: {
         "@type": "ImageObject",
-        url: `${baseUrl}/opengraphs/about-us.png`,
+        url: `${baseUrl}/opengraphs/box.png`,
       },
     },
     {
@@ -157,7 +157,7 @@ const jsonLdData = {
       url: baseUrl,
       logo: {
         "@type": "ImageObject",
-        url: `${baseUrl}/opengraphs/about-us.png`,
+        url: `${baseUrl}/opengraphs/box.png`,
         width: 1200,
         height: 630,
       },
@@ -196,8 +196,8 @@ const jsonLdData = {
         ratingValue: "4.9",
         reviewCount: "158",
       },
-      screenshot: `${baseUrl}/opengraphs/about-us.png`,
-      image: `${baseUrl}/opengraphs/about-us.png`,
+      screenshot: `${baseUrl}/opengraphs/box.png`,
+      image: `${baseUrl}/opengraphs/box.png`,
       installUrl: [
         "https://apps.apple.com/ng/app/pickars/id6746796884",
         "https://play.google.com/store/apps/details?id=com.pickars.app&hl=en",
@@ -214,8 +214,8 @@ const jsonLdData = {
       parentOrganization: {
         "@id": `${baseUrl}/#organization`,
       },
-      image: `${baseUrl}/opengraphs/about-us.png`,
-      logo: `${baseUrl}/opengraphs/about-us.png`,
+      image: `${baseUrl}/opengraphs/box.png`,
+      logo: `${baseUrl}/opengraphs/box.png`,
       description:
         "Professional dispatch riders and bike courier service in Port Harcourt. Same-day parcel delivery, express package pickup and last-mile logistics across Rivers State. Available in GRA, Trans Amadi, Woji, Rumuokoro, Mile 1, Rumuola and more.",
       url: baseUrl,
