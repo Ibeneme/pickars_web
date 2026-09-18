@@ -90,23 +90,25 @@ export const CompanyMission: React.FC = () => {
               fill
               className="object-cover"
               sizes="(max-width: 768px) 100vw, 50vw"
+              priority
             />
           </motion.div>
         </div>
 
+        {/* Bottom Banner Image */}
         <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
           variants={fadeUpVariant}
-          className="relative overflow-hidden rounded-[32px] sm:rounded-[40px] w-full"
+          className="relative overflow-hidden rounded-[32px] sm:rounded-[40px] w-full h-[350px] sm:h-[450px] md:h-[500px]"
         >
           <Image
             src={photo}
             alt="Pickars service showcase"
-            width={1200}
-            height={600}
-            className="w-full h-auto object-cover block"
+            fill
+            className="w-full h-full object-contain"
+            sizes="100vw"
           />
 
           {/* Gradient Overlay */}

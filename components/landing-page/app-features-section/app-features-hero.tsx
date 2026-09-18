@@ -87,7 +87,6 @@ export default function AppFeaturesHero() {
           >
             APP EXPERIENCE
           </motion.div>
-
           <motion.h2
             variants={itemVariants}
             className="text-4xl font-black leading-tight tracking-tight text-gray-900 sm:text-6xl"
@@ -95,7 +94,6 @@ export default function AppFeaturesHero() {
             Engineered for <span className="text-[#FF0000]">speed</span> and
             total reliability.
           </motion.h2>
-
           <motion.p
             variants={itemVariants}
             className="mt-4 max-w-xl text-base font-medium text-gray-600 sm:text-lg"
@@ -121,7 +119,6 @@ export default function AppFeaturesHero() {
                 >
                   The Pickars App
                 </motion.h3>
-
                 <div className="flex flex-col gap-4 sm:gap-6">
                   {features.map((feature) => (
                     <motion.div
@@ -141,7 +138,6 @@ export default function AppFeaturesHero() {
                       >
                         {feature.number}
                       </motion.div>
-
                       <div className="flex flex-col gap-1">
                         <h4 className="text-lg font-bold tracking-tight text-white sm:text-xl">
                           {feature.title}
@@ -170,17 +166,18 @@ export default function AppFeaturesHero() {
               <div className="relative flex h-full w-full items-center justify-end overflow-hidden">
                 <motion.div
                   style={{ y: mockupY }}
-                  className="h-full w-full scale-105"
+                  className="relative h-[500px] w-full scale-105 sm:h-[600px] lg:h-full"
                 >
                   <Image
                     src={appMockup}
                     alt="Pickars App Interface Mockup"
-                    className="block h-full w-full object-cover object-right"
+                    fill
+                    className="block object-cover object-right "
                     priority
+             
                   />
                 </motion.div>
-
-                <div className="absolute bottom-6 right-6 rounded-2xl border border-white/10 bg-gray-900/90 px-5 py-3 text-white backdrop-blur-md">
+                <div className="absolute bottom-6 right-6 z-10 rounded-2xl border border-white/10 bg-gray-900/90 px-5 py-3 text-white backdrop-blur-md">
                   <p className="text-xs font-medium text-gray-400">
                     Available on
                   </p>

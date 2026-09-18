@@ -92,11 +92,16 @@ export default function AppFeaturesDeliveryOptions() {
             viewport={{ once: true, margin: "-100px" }}
             className="relative mx-auto w-full overflow-hidden rounded-[32px] sm:rounded-[40px]"
           >
-            <motion.div style={{ y: mockupY }} className="w-full">
+            <motion.div
+              style={{ y: mockupY }}
+              className="relative h-[350px] w-full sm:h-[500px] lg:h-[650px]"
+            >
               <Image
                 src={redRiderImg}
                 alt="Pickars App Pickup and Delivery Options Preview"
-                className="block h-auto w-full object-cover"
+                fill
+                className="object-cover"
+                priority
               />
             </motion.div>
           </motion.div>
