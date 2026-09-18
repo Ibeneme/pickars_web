@@ -11,7 +11,6 @@ import {
   FiDatabase,
   FiTrash2,
   FiFileText,
-  FiAlertCircle,
 } from "react-icons/fi";
 
 const PrivacyPolicyPage: React.FC = () => {
@@ -154,8 +153,8 @@ const PrivacyPolicyPage: React.FC = () => {
                       <span className="text-red-600 font-bold">•</span>
                       <span>
                         <strong>Account information</strong> — full name, phone
-                        number, email address, profile photo, and
-                        payment details.
+                        number, email address, profile photo, and payment
+                        details.
                       </span>
                     </li>
                     <li className="flex gap-3">

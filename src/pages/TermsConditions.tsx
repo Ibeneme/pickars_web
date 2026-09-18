@@ -11,9 +11,7 @@ import {
   FiBriefcase,
   FiShield,
   FiPackage,
-  FiMapPin,
   FiLock,
-  FiInfo,
 } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
 import DownloadButtons from "../components/buttons/DownloadButtons";

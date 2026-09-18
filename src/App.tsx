@@ -34,6 +34,7 @@ import PaymentSuccess from "./pages/TrackingPage/PaymentSuccess";
 import DispatchRiderTermsPage from "./pages/DispatchRiderTermsPage";
 import CompanyPage from "./pages/OurCompany";
 import TrackingPageMain from "./pages/TrackingPage/TrackingPageMain";
+import NotFound from "./pages/NotFound";
 
 const App: React.FC = () => {
   const location = useLocation();
@@ -102,7 +103,7 @@ const App: React.FC = () => {
               element={<ViewManualRide />}
             />
           </Route>
-          <Route path="*" element={<Navigate to="/" replace />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
 
