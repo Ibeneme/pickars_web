@@ -3,7 +3,7 @@
 import React, { useRef } from "react";
 import Image from "next/image";
 import { motion, useScroll, useTransform, type Variants } from "framer-motion";
-import appMockup from "@/assets/landing-page-images/app-mockups/phone_f.svg";
+import appMockup from "@/assets/landing-page-images/app-mockups/phone_g.svg";
 import DownloadButtons from "@/components/atoms/buttons/DownloadButtons";
 
 export default function AppFeaturesHero() {

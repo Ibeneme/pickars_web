@@ -107,7 +107,7 @@ export const CompanyMission: React.FC = () => {
             src={photo}
             alt="Pickars service showcase"
             fill
-            className="w-full h-full object-contain"
+            className="object-cover"
             sizes="100vw"
           />
 
