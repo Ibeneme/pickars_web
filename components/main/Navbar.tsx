@@ -1,0 +1,201 @@
+"use client";
+
+import { useState, useEffect } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { Menu, X, ArrowRight } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import navImage from "@/public/logo.svg";
+import DownloadButtons from "../atoms/buttons/DownloadButtons";
+
+const Navbar = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 40);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const navItems = [
+    { name: "Home", path: "/" },
+    { name: "About", path: "/app/our-company" },
+    { name: "Our App", path: "/app/app-features" },
+    { name: "FAQs", path: "/app/faqs" },
+    { name: "Track", path: "/app/tracking", disabled: false },
+  ];
+
+  return (
+    <nav
+      className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-500 font-['Lufga'] ${
+        scrolled ? "pt-4" : "pt-8"
+      }`}
+    >
+      <div className="mx-auto max-w-5xl px-6 flex justify-center">
+        <div
+          className={`flex items-center justify-between gap-8 rounded-full bg-white/70 px-4 py-2.5 backdrop-blur-2xl transition-all duration-500 ${
+            scrolled ? "md:w-auto md:gap-20 gap-24 shadow-2xl" : "w-full"
+          }`}
+        >
+          {/* Logo Section */}
+          <Link href="/" className="flex items-center gap-2 pl-2 group">
+            <div className="relative">
+              <img
+                src={navImage.src || navImage}
+                alt="Pickars Logo"
+                className="h-8 w-auto transition-transform duration-500 group-hover:rotate-[360deg] rounded-full"
+              />
+            </div>
+            <h3 className="text-xl font-black tracking-tighter text-[#121212]">
+              Pickars
+            </h3>
+          </Link>
+
+          {/* Desktop Nav Links */}
+          <ul className="hidden items-center gap-1 md:flex">
+            {navItems.map(({ name, path, disabled }) => {
+              const isActive = pathname === path;
+
+              if (disabled) {
+                return (
+                  <li key={name}>
+                    <span className="px-4 py-2 text-sm font-bold text-gray-400 cursor-not-allowed pointer-events-none opacity-60 flex items-center gap-1.5">
+                      {name}
+                    </span>
+                  </li>
+                );
+              }
+
+              return (
+                <li key={name}>
+                  <Link
+                    href={path}
+                    className={`relative px-4 py-2 text-sm font-bold transition-all duration-300 rounded-full flex items-center gap-1.5 ${
+                      isActive ? "text-white" : "text-gray-600 hover:bg-black/5"
+                    }`}
+                  >
+                    {name}
+                    {isActive && (
+                      <motion.div
+                        layoutId="navPill"
+                        className="absolute inset-0 rounded-full bg-[#FF0000] -z-10"
+                        transition={{
+                          type: "spring",
+                          stiffness: 300,
+                          damping: 30,
+                        }}
+                      />
+                    )}
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+
+          {/* Download & Toggle */}
+          <div className="flex items-center gap-2">
+            <div className="hidden items-center gap-2 lg:flex">
+              <DownloadButtons isHalf={true} />
+            </div>
+
+            <button
+              className={`flex h-10 w-10 items-center justify-center rounded-full transition-all ${
+                isOpen ? "bg-[#FF0000] text-white" : "bg-gray-100 text-black"
+              } md:hidden`}
+              onClick={() => setIsOpen(!isOpen)}
+            >
+              <AnimatePresence mode="wait">
+                {isOpen ? (
+                  <motion.div
+                    key="close"
+                    initial={{ rotate: -90 }}
+                    animate={{ rotate: 0 }}
+                    exit={{ rotate: 90 }}
+                  >
+                    <X size={20} />
+                  </motion.div>
+                ) : (
+                  <motion.div
+                    key="menu"
+                    initial={{ rotate: 90 }}
+                    animate={{ rotate: 0 }}
+                    exit={{ rotate: -90 }}
+                  >
+                    <Menu size={20} />
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Mobile Drawer */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95, y: -20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.95, y: -20 }}
+            className="absolute left-6 right-6 top-24 z-[-1] overflow-hidden rounded-[40px] border border-white/20 bg-white/95 p-10 backdrop-blur-3xl shadow-[0_20px_50px_rgba(0,0,0,0.15)] md:hidden"
+          >
+            <div className="flex flex-col gap-6">
+              {navItems.map(({ name, path, disabled }, i) => {
+                const isActive = pathname === path;
+
+                if (disabled) {
+                  return (
+                    <span
+                      key={name}
+                      className="flex items-center justify-between text-3xl font-black tracking-tighter text-gray-300 pointer-events-none"
+                    >
+                      {name}
+                    </span>
+                  );
+                }
+
+                return (
+                  <motion.div
+                    key={name}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: i * 0.05 }}
+                  >
+                    <Link
+                      href={path}
+                      onClick={() => setIsOpen(false)}
+                      className={`flex items-center justify-between text-3xl font-black tracking-tighter ${
+                        isActive ? "text-[#FF0000]" : "text-[#121212]"
+                      }`}
+                    >
+                      <div className="flex items-center gap-3">{name}</div>
+                      <ArrowRight
+                        className={
+                          isActive ? "text-[#FF0000]" : "text-gray-400"
+                        }
+                        size={24}
+                      />
+                    </Link>
+                  </motion.div>
+                );
+              })}
+
+              <div className="mt-2 mb-[-20px] flex flex-col gap-2 border-t border-gray-100 pt-4">
+                <p className="text-xs font-bold uppercase tracking-widest text-gray-400">
+                  Get Pickars on your device
+                </p>
+                <div>
+                  <DownloadButtons alignLeft={true} />
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </nav>
+  );
+};
+
+export default Navbar;
