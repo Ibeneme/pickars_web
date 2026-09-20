@@ -228,11 +228,11 @@ const jsonLdData = {
         price: "0",
         priceCurrency: "NGN",
       },
-      aggregateRating: {
-        "@type": "AggregateRating",
-        ratingValue: "4.9",
-        reviewCount: "158",
-      },
+      // aggregateRating: {
+      //   "@type": "AggregateRating",
+      //   ratingValue: "4.9",
+      //   reviewCount: "158",
+      // },
       screenshot: `${baseUrl}/mockup.png`,
       image: `${baseUrl}/mockup.png`,
       installUrl: [

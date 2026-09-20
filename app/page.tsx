@@ -191,11 +191,7 @@ const jsonLdData = {
         price: "0",
         priceCurrency: "NGN",
       },
-      aggregateRating: {
-        "@type": "AggregateRating",
-        ratingValue: "4.9",
-        reviewCount: "158",
-      },
+
       screenshot: `${baseUrl}/opengraphs/box.png`,
       image: `${baseUrl}/opengraphs/box.png`,
       installUrl: [
@@ -237,13 +233,7 @@ const jsonLdData = {
         longitude: 7.080833,
       },
       hasMap: "https://share.google/rtYgzAMRGhKFzIHje",
-      aggregateRating: {
-        "@type": "AggregateRating",
-        ratingValue: "4.9",
-        bestRating: "5",
-        worstRating: "1",
-        reviewCount: "158",
-      },
+
       openingHoursSpecification: {
         "@type": "OpeningHoursSpecification",
         dayOfWeek: [
