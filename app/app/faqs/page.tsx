@@ -60,7 +60,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     url: `${baseUrl}/app/faqs`,
-    siteName: "Pickars Logistics",
+    siteName: "Frequently Asked Questions",
     locale: "en_NG",
     title: "Frequently Asked Questions | Pickars Delivery",
     description:
