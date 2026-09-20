@@ -5,7 +5,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
-  title: "Help Center & FAQs | Pickars Delivery Support Port Harcourt",
+  title: "Help Center & Customer Support | Pickars Delivery Support Port Harcourt",
   description:
     "Find fast answers to questions about booking dispatch riders, tracking parcels live, payments, refunds, and rider onboarding at the Pickars Help Center.",
   keywords: [
