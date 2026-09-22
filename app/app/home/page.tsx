@@ -6,13 +6,9 @@ import NeverLateSection from "@/components/landing-page/home-sections/never-late
 import PackageDeliverySection from "@/components/landing-page/home-sections/package-delivery-section";
 import QualitiesSliderSection from "@/components/landing-page/home-sections/qualities-slider-section";
 import type { Metadata } from "next";
+import { baseUrl } from "@/utils/constants";
 
-const port = process.env.PORT || 3000;
-const baseUrl =
-  process.env.NEXT_PUBLIC_SITE_URL ||
-  (process.env.NODE_ENV === "development"
-    ? `http://localhost:${port}`
-    : "https://www.pickars.com");
+
 
 // Home Page Metadata (Open Graph, Twitter, Meta Tags)
 export const metadata: Metadata = {
@@ -51,7 +47,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     url: "/",
-    siteName: "PICKARS Logistics",
+    siteName: "Pickars Logistics",
     locale: "en_NG",
     title: "Pickars: Your doorstep deliveries, redefined.",
     description:
