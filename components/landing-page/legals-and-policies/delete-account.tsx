@@ -31,37 +31,92 @@ const modalVariant: Variants = {
 };
 
 export const DeleteAccountPage: React.FC = () => {
+  const [countryCode, setCountryCode] = useState("+234");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
   const [deleteSuccess, setDeleteSuccess] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
 
-  // Triggered when user submits the form -> Open Modal first
+  // Clean raw input: strip non-digit characters
+  const getCleanedNumber = (input: string) => {
+    return input.replace(/\D/g, "");
+  };
+
+  // Helper to format phone numbers for both formats (without zero vs with zero)
+  const preparePhoneVariants = (rawNumber: string, prefix: string) => {
+    let clean = getCleanedNumber(rawNumber);
+
+    // If user typed national prefix with 234, remove it first to normalize
+    if (clean.startsWith("234")) {
+      clean = clean.slice(3);
+    }
+
+    // Strip leading zero if present
+    const withoutZero = clean.replace(/^0+/, "");
+    // Force leading zero
+    const withZero = clean.startsWith("0") ? clean : `0${clean}`;
+
+    const cleanPrefix = prefix.replace("+", "");
+
+    return {
+      // Primary normalized format (without leading zero) e.g., "8012345678" or "+2348012345678"
+      primary: `${cleanPrefix}${withoutZero}`,
+      // Secondary fallback format (with leading zero) e.g., "08012345678" or "+23408012345678"
+      secondary: `${cleanPrefix}${withZero}`,
+      rawWithoutZero: withoutZero,
+      rawWithZero: withZero,
+    };
+  };
+
   const handleOpenModal = (e: React.FormEvent) => {
     e.preventDefault();
     setErrorMsg("");
 
-    if (!phoneNumber.trim()) {
-      setErrorMsg("Please enter your registered phone number.");
+    const cleaned = getCleanedNumber(phoneNumber);
+    if (!cleaned) {
+      setErrorMsg("Please enter a valid phone number.");
       return;
     }
 
     setIsModalOpen(true);
   };
 
-  // Triggered when user confirms inside the modal
   const handleConfirmDelete = async () => {
     setIsModalOpen(false);
     setIsDeleting(true);
     setErrorMsg("");
 
-    console.log("--> Confirming delete for phone number:", phoneNumber.trim());
+    const phoneFormats = preparePhoneVariants(phoneNumber, countryCode);
+
+    console.log("--> Attempting account deletion with variants:", phoneFormats);
 
     try {
-      const response = await trackInstance.delete("/auth/delete-account", {
-        data: { phoneNumber: phoneNumber.trim() },
-      });
+      // Send primary request without leading zero (e.g. 2348012345678)
+      // and secondary fallback with leading zero (e.g. 23408012345678) or raw formats
+      const sendDeleteReq = (num: string) =>
+        trackInstance.delete("/auth/delete-account", {
+          data: { phoneNumber: num },
+        });
+
+      // Try primary formatted request first
+      let response;
+      try {
+        response = await sendDeleteReq(phoneFormats.primary);
+      } catch (firstErr) {
+        // Fallback 1: Try without prefix (e.g., 8012345678)
+        try {
+          response = await sendDeleteReq(phoneFormats.rawWithoutZero);
+        } catch (secondErr) {
+          // Fallback 2: Try with local zero (e.g., 08012345678)
+          try {
+            response = await sendDeleteReq(phoneFormats.rawWithZero);
+          } catch (thirdErr) {
+            // Fallback 3: Try formatted with zero (e.g., 23408012345678)
+            response = await sendDeleteReq(phoneFormats.secondary);
+          }
+        }
+      }
 
       console.log("--> Delete response success:", response.data);
       setDeleteSuccess(true);
@@ -71,7 +126,7 @@ export const DeleteAccountPage: React.FC = () => {
         setErrorMsg(err.response.data.message);
       } else {
         setErrorMsg(
-          "Failed to delete account. Please verify your phone number or try again later."
+          "Failed to delete account. Please verify your phone number and try again."
         );
       }
     } finally {
@@ -84,6 +139,15 @@ export const DeleteAccountPage: React.FC = () => {
     setDeleteSuccess(false);
     setErrorMsg("");
   };
+
+  const displayFormattedPhone = `${countryCode} ${phoneFormatsDisplay(
+    phoneNumber
+  )}`;
+
+  function phoneFormatsDisplay(num: string) {
+    const clean = getCleanedNumber(num).replace(/^234/, "").replace(/^0+/, "");
+    return clean;
+  }
 
   return (
     <section className="py-16 sm:py-20 md:py-24 bg-[#fff] min-h-[100vh] flex items-center justify-center">
@@ -113,7 +177,7 @@ export const DeleteAccountPage: React.FC = () => {
           <p className="mt-4 text-zinc-300 text-sm sm:text-base leading-relaxed">
             In compliance with Google Play requirements, you can request the
             permanent deletion of your Pickars account and all associated data.
-            Enter your registered phone number below to proceed.
+            Select your country code and enter your registered phone number.
           </p>
 
           {/* SUCCESS BANNER */}
@@ -143,9 +207,9 @@ export const DeleteAccountPage: React.FC = () => {
               </div>
               <p className="mt-2 text-sm leading-relaxed text-emerald-300/90">
                 Your account for{" "}
-                <span className="font-semibold">{phoneNumber}</span> and all
-                associated ride records, messages, and earnings data have been
-                permanently removed.
+                <span className="font-semibold">{displayFormattedPhone}</span>{" "}
+                and all associated ride records, messages, and earnings data
+                have been permanently removed.
               </p>
               <button
                 onClick={handleReset}
@@ -164,15 +228,32 @@ export const DeleteAccountPage: React.FC = () => {
                 >
                   Registered Phone Number
                 </label>
-                <input
-                  type="tel"
-                  id="phoneNumber"
-                  value={phoneNumber}
-                  onChange={(e) => setPhoneNumber(e.target.value)}
-                  placeholder="+234 800 000 0000"
-                  disabled={isDeleting}
-                  className="w-full px-5 py-4 rounded-2xl bg-zinc-900 border border-zinc-800 text-white placeholder-zinc-500 focus:outline-none focus:border-[#FF0000] transition-colors text-base disabled:opacity-50"
-                />
+
+                {/* COUNTRY CODE + PHONE INPUT GROUP */}
+                <div className="flex items-center gap-3">
+                  <select
+                    value={countryCode}
+                    onChange={(e) => setCountryCode(e.target.value)}
+                    disabled={isDeleting}
+                    className="px-4 py-4 rounded-2xl bg-zinc-900 border border-zinc-800 text-white font-medium focus:outline-none focus:border-[#FF0000] transition-colors text-base cursor-pointer disabled:opacity-50"
+                  >
+                    <option value="+234">🇳🇬 +234 (Nigeria)</option>
+                  </select>
+
+                  <input
+                    type="tel"
+                    id="phoneNumber"
+                    value={phoneNumber}
+                    onChange={(e) => setPhoneNumber(e.target.value)}
+                    placeholder="801 234 5678"
+                    disabled={isDeleting}
+                    className="w-full px-5 py-4 rounded-2xl bg-zinc-900 border border-zinc-800 text-white placeholder-zinc-500 focus:outline-none focus:border-[#FF0000] transition-colors text-base disabled:opacity-50"
+                  />
+                </div>
+                <p className="mt-2 text-xs text-zinc-500">
+                  Enter number with or without leading zero (e.g. 8012345678 or
+                  08012345678).
+                </p>
               </div>
 
               {/* ERROR BANNER */}
@@ -274,8 +355,10 @@ export const DeleteAccountPage: React.FC = () => {
               </h3>
               <p className="mt-2 text-sm text-zinc-400 leading-relaxed">
                 You are about to permanently delete the account linked to{" "}
-                <span className="font-semibold text-white">{phoneNumber}</span>.
-                This action cannot be undone.
+                <span className="font-semibold text-white">
+                  {displayFormattedPhone}
+                </span>
+                . This action cannot be undone.
               </p>
 
               <div className="mt-6 flex flex-col sm:flex-row gap-3">
