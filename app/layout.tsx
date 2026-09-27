@@ -1,7 +1,6 @@
 import { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import ScrollProgress from "@/components/atoms/scrolls/ScrollProgress";
 import ReduxProvider from "@/components/providers/redux-provider";
 import { baseUrl } from "@/utils/constants";
 import MainLayout from "@/components/layouts/MainLayout";
