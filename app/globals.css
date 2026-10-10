@@ -3,3 +3,12 @@
 @theme {
   --font-lufga: var(--font-lufga), sans-serif;
 }
+
+input, select, textarea {
+  font-size: 16px; /* Prevents auto-zoom on mobile */
+}
+@layer base {
+  input, select, textarea {
+    font-size: 16px;
+  }
+}
