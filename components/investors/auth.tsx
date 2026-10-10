@@ -14,7 +14,14 @@ import {
   type KeyboardEvent,
 } from "react";
 import { useRouter } from "next/navigation";
-import { ArrowLeft, ArrowRight, CheckCircle2, ShieldCheck } from "lucide-react";
+import {
+  ArrowLeft,
+  ArrowRight,
+  CheckCircle2,
+  ShieldCheck,
+  Mail,
+  Phone,
+} from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
 import { type AppDispatch, type RootState } from "@/api/store";
 import {
@@ -49,6 +56,8 @@ export default function InvestorSignInPage() {
   } = useSelector((state: RootState) => state.investor);
 
   const [isRegistering, setIsRegistering] = useState(false);
+  const [loginMethod, setLoginMethod] = useState<"phone" | "email">("phone");
+
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
@@ -64,6 +73,9 @@ export default function InvestorSignInPage() {
 
   const error = localError || reduxError;
   const busy = loading || done;
+
+  // Active identifier for verification and submission
+  const identifier = loginMethod === "email" ? email : phone;
 
   useEffect(() => {
     if (cooldown <= 0) return;
@@ -118,18 +130,29 @@ export default function InvestorSignInPage() {
     }
   }
 
-  // Handle Sign In Request (Sends OTP via phone lookup)
+  // Handle Sign In Request (Sends OTP via phone or email lookup)
   async function handleLogin(e?: FormEvent) {
     if (e) e.preventDefault();
     dispatch(clearInvestorError());
     setLocalError("");
 
-    if (!phone.trim()) {
-      setLocalError("Enter your registered phone number.");
+    if (!identifier.trim()) {
+      setLocalError(
+        loginMethod === "email"
+          ? "Enter your registered email address."
+          : "Enter your registered phone number."
+      );
       return;
     }
 
-    const result = await dispatch(loginInvestor({ phone: phone.trim() }));
+    if (loginMethod === "email" && !emailOk(email)) {
+      setLocalError("Enter a valid email address.");
+      return;
+    }
+
+    const result = await dispatch(
+      loginInvestor({ identifier: identifier.trim() })
+    );
 
     if (loginInvestor.fulfilled.match(result)) {
       setCodeSent(true);
@@ -143,7 +166,7 @@ export default function InvestorSignInPage() {
     setLocalError("");
 
     const result = await dispatch(
-      verifyOtp({ phone: phone.trim(), otp: code })
+      verifyOtp({ identifier: identifier.trim(), otp: code })
     );
 
     if (verifyOtp.fulfilled.match(result)) {
@@ -226,7 +249,7 @@ export default function InvestorSignInPage() {
               className="h-9 rounded-[8px] w-auto sm:h-10"
             />
           </a>
-          {/* <button
+          <button
             type="button"
             onClick={() => {
               setIsRegistering(!isRegistering);
@@ -237,7 +260,7 @@ export default function InvestorSignInPage() {
             {isRegistering
               ? "Already an investor? Sign in"
               : "Create an account"}
-          </button> */}
+          </button>
         </header>
 
         <div className="flex flex-1 items-center py-12">
@@ -272,7 +295,7 @@ export default function InvestorSignInPage() {
                   )}
                   <h1 className="text-3xl font-semibold tracking-tight">
                     {codeSent
-                      ? "Check your email"
+                      ? "Check your inbox"
                       : isRegistering
                       ? "Create Investor Account"
                       : "Investor Portal Sign in"}
@@ -280,16 +303,16 @@ export default function InvestorSignInPage() {
                   <p className="text-[15px] leading-relaxed text-neutral-600">
                     {codeSent ? (
                       <>
-                        We sent a 6-digit code to your registered email for{" "}
+                        We sent a 6-digit code to{" "}
                         <span className="font-medium text-black break-all">
-                          {email || phone}
+                          {identifier}
                         </span>
                         .
                       </>
                     ) : isRegistering ? (
                       "Fill in your stakeholder details to generate your account and receive your verification code."
                     ) : (
-                      "Enter your registered phone number. We'll send a verification code to your email."
+                      "Sign in using your registered phone number or email address."
                     )}
                   </p>
                 </div>
@@ -307,6 +330,41 @@ export default function InvestorSignInPage() {
 
                 {!codeSent ? (
                   <div className="space-y-4">
+                    {!isRegistering && (
+                      <div className="flex rounded-lg bg-neutral-100 p-1">
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setLoginMethod("phone");
+                            setLocalError("");
+                          }}
+                          className={`flex-1 flex items-center justify-center gap-2 rounded-md py-2 text-xs font-medium transition-all ${
+                            loginMethod === "phone"
+                              ? "bg-white text-black shadow-sm"
+                              : "text-neutral-500 hover:text-black"
+                          }`}
+                        >
+                          <Phone size={14} />
+                          Phone Number
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setLoginMethod("email");
+                            setLocalError("");
+                          }}
+                          className={`flex-1 flex items-center justify-center gap-2 rounded-md py-2 text-xs font-medium transition-all ${
+                            loginMethod === "email"
+                              ? "bg-white text-black shadow-sm"
+                              : "text-neutral-500 hover:text-black"
+                          }`}
+                        >
+                          <Mail size={14} />
+                          Email Address
+                        </button>
+                      </div>
+                    )}
+
                     {isRegistering && (
                       <>
                         <div className="space-y-1.5">
@@ -383,22 +441,64 @@ export default function InvestorSignInPage() {
                       </>
                     )}
 
-                    <div className="space-y-1.5">
-                      <label htmlFor="phone" className="text-sm font-medium">
-                        Phone Number
-                      </label>
-                      <input
-                        id="phone"
-                        type="tel"
-                        required
-                        placeholder="08012345678 or +234..."
-                        value={phone}
-                        onChange={(e) => setPhone(e.target.value)}
-                        disabled={busy}
-                        autoFocus={!isRegistering}
-                        className={`${FIELD} px-4 py-3 text-sm`}
-                      />
-                    </div>
+                    {!isRegistering && loginMethod === "phone" && (
+                      <div className="space-y-1.5">
+                        <label htmlFor="phone" className="text-sm font-medium">
+                          Phone Number
+                        </label>
+                        <input
+                          id="phone"
+                          type="tel"
+                          required
+                          placeholder="08012345678 or +234..."
+                          value={phone}
+                          onChange={(e) => setPhone(e.target.value)}
+                          disabled={busy}
+                          autoFocus
+                          className={`${FIELD} px-4 py-3 text-sm`}
+                        />
+                      </div>
+                    )}
+
+                    {!isRegistering && loginMethod === "email" && (
+                      <div className="space-y-1.5">
+                        <label
+                          htmlFor="login-email"
+                          className="text-sm font-medium"
+                        >
+                          Email Address
+                        </label>
+                        <input
+                          id="login-email"
+                          type="email"
+                          required
+                          placeholder="john@example.com"
+                          value={email}
+                          onChange={(e) => setEmail(e.target.value)}
+                          disabled={busy}
+                          autoFocus
+                          className={`${FIELD} px-4 py-3 text-sm`}
+                        />
+                      </div>
+                    )}
+
+                    {isRegistering && (
+                      <div className="space-y-1.5">
+                        <label htmlFor="phone" className="text-sm font-medium">
+                          Phone Number
+                        </label>
+                        <input
+                          id="phone"
+                          type="tel"
+                          required
+                          placeholder="08012345678 or +234..."
+                          value={phone}
+                          onChange={(e) => setPhone(e.target.value)}
+                          disabled={busy}
+                          className={`${FIELD} px-4 py-3 text-sm`}
+                        />
+                      </div>
+                    )}
                   </div>
                 ) : (
                   <div className="space-y-2">

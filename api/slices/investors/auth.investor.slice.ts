@@ -1,3 +1,7 @@
+/**
+ * Pickars Courier Limited – Investor Redux Slice (Supports Email & Phone Authentication)
+ */
+
 import { createSlice, createAsyncThunk, type PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
 import Cookies from "js-cookie";
@@ -64,7 +68,7 @@ export const createAccount = createAsyncThunk(
 
 export const loginInvestor = createAsyncThunk(
     "investor/login",
-    async (payload: { phone: string }, { rejectWithValue }) => {
+    async (payload: { identifier: string }, { rejectWithValue }) => {
         console.log("🚀 [loginInvestor] Dispatching request with payload:", payload);
         try {
             const response = await trackInstance.post("/v1/auth/investors/login", payload);
@@ -80,7 +84,7 @@ export const loginInvestor = createAsyncThunk(
 
 export const verifyOtp = createAsyncThunk(
     "investor/verifyOtp",
-    async (payload: { phone: string; otp: string }, { rejectWithValue }) => {
+    async (payload: { identifier: string; otp: string }, { rejectWithValue }) => {
         console.log("🚀 [verifyOtp] Dispatching request with payload:", payload);
         try {
             const response = await trackInstance.post("/v1/auth/investors/verify-otp", payload);
@@ -104,7 +108,7 @@ export const verifyOtp = createAsyncThunk(
 
 export const resendOtp = createAsyncThunk(
     "investor/resendOtp",
-    async (payload: { phone: string }, { rejectWithValue }) => {
+    async (payload: { identifier: string }, { rejectWithValue }) => {
         console.log("🚀 [resendOtp] Dispatching request with payload:", payload);
         try {
             const response = await trackInstance.post("/v1/auth/investors/resend-otp", payload);
@@ -120,10 +124,10 @@ export const resendOtp = createAsyncThunk(
 
 export const fetchInvestorProfile = createAsyncThunk(
     "investor/fetchProfile",
-    async (phone: string, { rejectWithValue }) => {
-        console.log("🚀 [fetchInvestorProfile] Fetching profile for phone:", phone);
+    async (identifier: string, { rejectWithValue }) => {
+        console.log("🚀 [fetchInvestorProfile] Fetching profile for identifier:", identifier);
         try {
-            const response = await trackInstance.get(`/v1/auth/investors/profile/${phone}`);
+            const response = await trackInstance.get(`/v1/auth/investors/profile/${identifier}`);
             console.log("✅ [fetchInvestorProfile] Success response:", response.data);
             if (response.data.investor) {
                 Cookies.set("investorProfile", JSON.stringify(response.data.investor), { expires: 7 });
