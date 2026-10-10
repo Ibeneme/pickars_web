@@ -397,7 +397,7 @@ export default function RootLayout({
       >
         <ReduxProvider>
           {/* ScrollProgress only renders for non-admin routes */}
-          <ScrollProgressWrapper />
+  
           <MainLayout>{children}</MainLayout>
         </ReduxProvider>
       </body>

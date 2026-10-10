@@ -40,34 +40,34 @@ export default function PaymentsManagement() {
 
   return (
     <>
-      <div className="flex flex-col gap-8">
-        <header className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div className="flex flex-col gap-8 font-['Lufga',sans-serif] px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full pb-16">
+        <header className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 pt-4">
           <div>
-            <h1 className="text-4xl font-black text-[#0A0A0A] tracking-tighter">
+            <h1 className="text-3xl sm:text-4xl font-black text-[#0A0A0A] tracking-tighter">
               Revenue Audit
             </h1>
-            <p className="text-gray-400 font-bold">
+            <p className="text-gray-400 font-bold text-sm mt-1">
               Verify settlements and Paystack transaction logs.
             </p>
           </div>
 
-          <div className="relative group w-full md:w-80">
-            <FiSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-[#FF0000] transition-colors" />
+          <div className="relative group w-full lg:w-80">
+            <FiSearch className="absolute left-5 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-[#FF0000] transition-colors" />
             <input
               type="text"
               placeholder="Ref or Tracking ID..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full bg-white border-2 border-transparent focus:border-red-500/10 py-4 pl-12 pr-6 rounded-2xl outline-none font-bold text-sm shadow-sm"
+              className="w-full bg-white border-2 border-gray-100 focus:border-red-500/20 py-4 pl-12 pr-6 rounded-2xl outline-none font-bold text-sm transition-all"
             />
           </div>
         </header>
 
         {/* Payment Summary Tiles */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="bg-[#0A0A0A] p-8 rounded-[32px] text-white relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-24 h-24 bg-[#FF0000] rounded-full blur-3xl opacity-20" />
-            <p className="text-[10px] font-black uppercase text-gray-500 tracking-widest mb-2">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="bg-[#0A0A0A] p-8 rounded-[32px] text-white relative overflow-hidden border border-gray-900">
+            <div className="absolute top-0 right-0 w-24 h-24 bg-[#FF0000] rounded-full blur-3xl opacity-20 pointer-events-none" />
+            <p className="text-[10px] font-black uppercase text-gray-400 tracking-widest mb-2">
               Processed (Total)
             </p>
             <h3 className="text-3xl font-black text-white">
@@ -80,43 +80,47 @@ export default function PaymentsManagement() {
                 .toLocaleString()}
             </h3>
           </div>
-          <div className="bg-white p-8 rounded-[32px] border border-gray-100 shadow-sm">
+          <div className="bg-white p-8 rounded-[32px] border border-gray-100">
             <p className="text-[10px] font-black uppercase text-gray-400 tracking-widest mb-2">
               Volume
             </p>
             <h3 className="text-3xl font-black text-[#0A0A0A]">
               {payments.length}{" "}
-              <span className="text-sm text-gray-300">Transactions</span>
+              <span className="text-sm font-bold text-gray-300">
+                Transactions
+              </span>
             </h3>
           </div>
-          <div className="bg-white p-8 rounded-[32px] border border-gray-100 shadow-sm">
+          <div className="bg-white p-8 rounded-[32px] border border-gray-100 sm:col-span-2 lg:col-span-1">
             <p className="text-[10px] font-black uppercase text-gray-400 tracking-widest mb-2">
               Platform Fee
             </p>
             <h3 className="text-3xl font-black text-[#FF0000]">
-              10% <span className="text-sm text-gray-300">Average</span>
+              10%{" "}
+              <span className="text-sm font-bold text-gray-300">Average</span>
             </h3>
           </div>
         </div>
 
-        <div className="bg-white rounded-[40px] shadow-sm border border-gray-100 overflow-hidden">
-          <div className="overflow-x-auto">
-            <table className="w-full text-left border-collapse">
+        {/* Transactions Table Section */}
+        <div className="bg-white rounded-[32px] sm:rounded-[40px] border border-gray-100 overflow-hidden">
+          <div className="overflow-x-auto w-full">
+            <table className="w-full text-left border-collapse min-w-[700px]">
               <thead>
                 <tr className="bg-gray-50/50 border-b border-gray-100">
-                  <th className="px-8 py-6 text-[10px] font-black uppercase tracking-widest text-gray-400">
+                  <th className="px-6 sm:px-8 py-5 sm:py-6 text-[10px] font-black uppercase tracking-widest text-gray-400">
                     Date & Ref
                   </th>
-                  <th className="px-8 py-6 text-[10px] font-black uppercase tracking-widest text-gray-400">
+                  <th className="px-6 sm:px-8 py-5 sm:py-6 text-[10px] font-black uppercase tracking-widest text-gray-400">
                     Customer
                   </th>
-                  <th className="px-8 py-6 text-[10px] font-black uppercase tracking-widest text-gray-400">
+                  <th className="px-6 sm:px-8 py-5 sm:py-6 text-[10px] font-black uppercase tracking-widest text-gray-400">
                     Amount
                   </th>
-                  <th className="px-8 py-6 text-[10px] font-black uppercase tracking-widest text-gray-400">
+                  <th className="px-6 sm:px-8 py-5 sm:py-6 text-[10px] font-black uppercase tracking-widest text-gray-400">
                     Status
                   </th>
-                  <th className="px-8 py-6 text-[10px] font-black uppercase tracking-widest text-gray-400 text-right">
+                  <th className="px-6 sm:px-8 py-5 sm:py-6 text-[10px] font-black uppercase tracking-widest text-gray-400 text-right">
                     Receipt
                   </th>
                 </tr>
@@ -127,26 +131,26 @@ export default function PaymentsManagement() {
                     key={p._id}
                     className="hover:bg-gray-50/30 transition-colors group"
                   >
-                    <td className="px-8 py-5">
+                    <td className="px-6 sm:px-8 py-5 sm:py-6">
                       <p className="font-black text-xs text-[#0A0A0A]">
                         {new Date(p.createdAt).toLocaleDateString()}
                       </p>
-                      <p className="text-[10px] font-bold text-gray-400 truncate w-32 tracking-tighter">
+                      <p className="text-[10px] font-bold text-gray-400 truncate w-32 tracking-tighter mt-0.5">
                         {p.paid?.details?.reference || "N/A"}
                       </p>
                     </td>
-                    <td className="px-8 py-5">
+                    <td className="px-6 sm:px-8 py-5 sm:py-6">
                       <p className="font-bold text-sm text-[#0A0A0A] capitalize">
                         {p.customer.firstName} {p.customer.lastName}
                       </p>
-                      <p className="text-[10px] font-black text-[#FF0000] uppercase tracking-tighter">
+                      <p className="text-[10px] font-black text-[#FF0000] uppercase tracking-tighter mt-0.5">
                         ID: #{p.trackingId.slice(0, 8)}
                       </p>
                     </td>
-                    <td className="px-8 py-5 font-black text-[#0A0A0A]">
+                    <td className="px-6 sm:px-8 py-5 sm:py-6 font-black text-sm text-[#0A0A0A]">
                       ₦{p.totalPrice.toLocaleString()}
                     </td>
-                    <td className="px-8 py-5">
+                    <td className="px-6 sm:px-8 py-5 sm:py-6">
                       <div
                         className={`flex items-center gap-2 text-[10px] font-black uppercase tracking-widest ${
                           p.paid?.isPaid
@@ -158,10 +162,11 @@ export default function PaymentsManagement() {
                         {p.paid?.isPaid ? "Success" : "Pending"}
                       </div>
                     </td>
-                    <td className="px-8 py-5 text-right">
+                    <td className="px-6 sm:px-8 py-5 sm:py-6 text-right">
                       <button
                         onClick={() => setSelectedPayment(p)}
-                        className="p-3 bg-gray-50 hover:bg-[#FF0000] text-gray-400 hover:text-white rounded-xl transition-all"
+                        className="p-3.5 bg-gray-50 hover:bg-[#FF0000] text-gray-400 hover:text-white rounded-2xl transition-all ml-auto shrink-0"
+                        title="View Receipt"
                       >
                         <FiFileText size={18} />
                       </button>
@@ -174,10 +179,10 @@ export default function PaymentsManagement() {
         </div>
       </div>
 
-      {/* PAYMENT DETAILS MODAL */}
+      {/* COMPACT PAYMENT DETAILS MODAL */}
       <AnimatePresence>
         {selectedPayment && (
-          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+          <div className="fixed inset-0 z-[200] flex items-center justify-center p-4 sm:p-6">
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -188,94 +193,97 @@ export default function PaymentsManagement() {
             <motion.div
               initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
-              className="bg-white w-full max-w-2xl rounded-[48px] shadow-2xl relative overflow-hidden"
+              exit={{ scale: 0.95, opacity: 0 }}
+              className="bg-white w-full max-w-md rounded-[32px] relative overflow-hidden border border-gray-100 max-h-[90vh] overflow-y-auto"
             >
-              <div className="p-12">
-                <header className="flex justify-between items-start mb-12">
-                  <div>
-                    <div className="w-16 h-16 bg-red-50 rounded-3xl flex items-center justify-center mb-6">
-                      <FiCreditCard className="text-[#FF0000]" size={32} />
+              <div className="p-6 sm:p-8">
+                <header className="flex justify-between items-start mb-6">
+                  <div className="flex items-center gap-3">
+                    <div className="w-12 h-12 bg-red-50 rounded-2xl flex items-center justify-center shrink-0">
+                      <FiCreditCard className="text-[#FF0000]" size={22} />
                     </div>
-                    <h2 className="text-3xl font-black text-[#0A0A0A] tracking-tighter">
-                      Payment Receipt
-                    </h2>
-                    <p className="text-gray-400 font-bold text-sm">
-                      Ref: {selectedPayment.paid?.details?.reference}
-                    </p>
+                    <div>
+                      <h2 className="text-xl font-black text-[#0A0A0A] tracking-tighter">
+                        Payment Receipt
+                      </h2>
+                      <p className="text-gray-400 font-bold text-xs">
+                        Ref: {selectedPayment.paid?.details?.reference}
+                      </p>
+                    </div>
                   </div>
                   <button
                     onClick={() => setSelectedPayment(null)}
-                    className="p-2 text-gray-400 hover:text-black transition-colors"
+                    className="p-1.5 text-gray-400 hover:text-black transition-colors shrink-0"
                   >
-                    <FiXCircle size={32} />
+                    <FiXCircle size={24} />
                   </button>
                 </header>
 
-                <div className="space-y-8">
+                <div className="space-y-5">
                   {/* Amount Block */}
-                  <div className="bg-gray-50 p-8 rounded-[32px] text-center border border-gray-100">
-                    <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">
+                  <div className="bg-gray-50 p-5 rounded-2xl text-center border border-gray-100">
+                    <p className="text-[9px] font-black text-gray-400 uppercase tracking-widest mb-1">
                       Transaction Amount
                     </p>
-                    <h4 className="text-5xl font-black text-[#0A0A0A]">
+                    <h4 className="text-3xl font-black text-[#0A0A0A]">
                       ₦{selectedPayment.totalPrice.toLocaleString()}
                     </h4>
                   </div>
 
-                  <div className="grid grid-cols-2 gap-8 px-4">
-                    <div className="space-y-1">
-                      <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest">
+                  <div className="grid grid-cols-2 gap-4 px-1">
+                    <div className="space-y-0.5">
+                      <p className="text-[9px] font-black text-gray-400 uppercase tracking-widest">
                         Payment Method
                       </p>
-                      <p className="font-black text-[#0A0A0A] uppercase">
-                        {selectedPayment.paid.paymentMethod} •{" "}
-                        {selectedPayment.paid.paymentService}
+                      <p className="font-black text-xs text-[#0A0A0A] uppercase">
+                        {selectedPayment.paid?.paymentMethod || "Card"} •{" "}
+                        {selectedPayment.paid?.paymentService || "Paystack"}
                       </p>
                     </div>
-                    <div className="space-y-1 text-right">
-                      <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest">
+                    <div className="space-y-0.5 text-right">
+                      <p className="text-[9px] font-black text-gray-400 uppercase tracking-widest">
                         Gateway Status
                       </p>
-                      <p className="font-black text-emerald-500 uppercase">
-                        {selectedPayment.paid.details?.status || "Successful"}
+                      <p className="font-black text-xs text-emerald-500 uppercase">
+                        {selectedPayment.paid?.details?.status || "Successful"}
                       </p>
                     </div>
                   </div>
 
                   <hr className="border-gray-100" />
 
-                  <div className="space-y-6 px-4">
-                    <h5 className="text-[10px] font-black text-[#FF0000] uppercase tracking-[0.3em]">
+                  <div className="space-y-3 px-1">
+                    <h5 className="text-[9px] font-black text-[#FF0000] uppercase tracking-[0.2em]">
                       Channel Information
                     </h5>
-                    <div className="grid grid-cols-2 gap-6">
+                    <div className="grid grid-cols-2 gap-4">
                       <div>
-                        <p className="text-[10px] font-black text-gray-400 uppercase">
+                        <p className="text-[9px] font-black text-gray-400 uppercase">
                           Card Type
                         </p>
-                        <p className="font-bold text-[#0A0A0A]">
-                          {selectedPayment.paid.details?.authorization
+                        <p className="font-bold text-xs text-[#0A0A0A]">
+                          {selectedPayment.paid?.details?.authorization
                             ?.card_type || "Visa/Mastercard"}
                         </p>
                       </div>
                       <div>
-                        <p className="text-[10px] font-black text-gray-400 uppercase">
+                        <p className="text-[9px] font-black text-gray-400 uppercase">
                           Bank
                         </p>
-                        <p className="font-bold text-[#0A0A0A]">
-                          {selectedPayment.paid.details?.authorization?.bank ||
+                        <p className="font-bold text-xs text-[#0A0A0A]">
+                          {selectedPayment.paid?.details?.authorization?.bank ||
                             "Settled via Paystack"}
                         </p>
                       </div>
                     </div>
                   </div>
 
-                  <div className="pt-8">
+                  <div className="pt-2">
                     <button
-                      className="w-full bg-[#0A0A0A] text-white py-6 rounded-3xl font-black text-sm flex items-center justify-center gap-3 hover:bg-black transition-all"
+                      className="w-full bg-[#0A0A0A] text-white py-4 rounded-2xl font-black text-xs flex items-center justify-center gap-2 hover:bg-[#FF0000] transition-all"
                       onClick={() => window.print()}
                     >
-                      <FiFileText /> Export as PDF
+                      <FiFileText size={15} /> Export as PDF
                     </button>
                   </div>
                 </div>

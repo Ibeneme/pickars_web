@@ -1,9 +1,10 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
+import Cookies from "js-cookie";
 import {
   FiPieChart,
   FiUsers,
@@ -27,7 +28,19 @@ export default function AdminLayout({
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
+  const router = useRouter();
   const dispatch = useDispatch<AppDispatch>();
+
+  const isAuthRoute = pathname?.startsWith("/admin/auth");
+
+  useEffect(() => {
+    const token = Cookies.get("adminToken");
+
+    // If it's not an auth route and there's no token, redirect to /admin/auth
+    if (!isAuthRoute && !token) {
+      router.replace("/admin/auth");
+    }
+  }, [pathname, router, isAuthRoute]);
 
   const menuItems = [
     { name: "Overview", path: "/admin/dashboard", icon: <FiPieChart /> },
@@ -46,6 +59,11 @@ export default function AdminLayout({
       icon: <SlEnvolopeLetter />,
     },
   ];
+
+  // If we are on the auth page, render children directly without the dashboard layout/sidebar
+  if (isAuthRoute) {
+    return <div className="min-h-screen bg-[#F8F9FA]">{children}</div>;
+  }
 
   return (
     <div className="h-screen flex bg-[#F8F9FA] font-['Lufga',sans-serif] overflow-hidden">

@@ -11,6 +11,8 @@ import {
   FiArrowUpRight,
 } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
+import { usePathname, useRouter } from "next/navigation";
+import Cookies from "js-cookie";
 import {
   AreaChart,
   Area,
@@ -28,16 +30,30 @@ import { type AppDispatch, type RootState } from "@/api/store";
 import { fetchDashboardStats } from "@/api/slices/dashboardSlice";
 import LoadingScreen from "@/components/atoms/loaders/loading-screen";
 
-
 export default function Dashboard() {
+  const router = useRouter();
+  const pathname = usePathname();
   const dispatch = useDispatch<AppDispatch>();
   const { stats, chartData, loading } = useSelector(
     (state: RootState) => state.dashboard
   );
 
   useEffect(() => {
-    dispatch(fetchDashboardStats());
-  }, [dispatch]);
+    // Check if the current route is an admin auth route
+    const isAuthRoute = pathname?.startsWith("/admin/auth");
+    const token = Cookies.get("adminToken");
+
+    // If it's not an auth route and there's no token, redirect to /admin/auth
+    if (!isAuthRoute && !token) {
+      router.replace("/admin/auth");
+      return;
+    }
+
+    // Only fetch stats if authenticated or on allowed routes
+    if (token) {
+      dispatch(fetchDashboardStats());
+    }
+  }, [dispatch, pathname, router]);
 
   const formattedChartData = useMemo(() => {
     if (!chartData) return [];

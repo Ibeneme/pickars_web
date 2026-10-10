@@ -4,6 +4,7 @@ import dashboardSlice from "./slices/dashboardSlice";
 import staffSlice from "./slices/staffSlice";
 import manualRideSlice from "./slices/manualRideSlice";
 import paymentSlice from "./slices/paymentSlice";
+import investorReducer from "./slices/investors/auth.investor.slice";
 
 export const store = configureStore({
     reducer: {
@@ -11,7 +12,8 @@ export const store = configureStore({
         dashboard: dashboardSlice,
         staff: staffSlice,
         manualRide: manualRideSlice,
-        payment: paymentSlice
+        payment: paymentSlice,
+        investor: investorReducer,
     },
 });
 
