@@ -39,6 +39,7 @@ import {
   FaApple,
   FaGooglePlay,
 } from "react-icons/fa6";
+import DownloadButtons from "../../../../components/atoms/buttons/DownloadButtons";
 
 /* ------------------------------------------------------------------ */
 /* Data                                                                */
@@ -80,7 +81,7 @@ const CAP_TABLE: Holder[] = [
     color: "#ff0000",
   },
   {
-    name: "Mr. Shine",
+    name: "Mr. Kelly Shine",
     category: "Strategic Investor",
     pct: 21,
     context:
@@ -261,19 +262,19 @@ export default function CompanyOverviewPage() {
   const others = CAP_TABLE.filter((h) => !h.isLead);
 
   return (
-    <div className="rounded-[2rem] bg-white p-6 sm:p-8 text-neutral-900 border border-neutral-200/80 ">
+    <div className="rounded-[2rem] bg-white p-4 sm:p-6 lg:p-8 text-neutral-900 border border-neutral-200/80">
       {/* ============ Header ============ */}
       <header className="flex flex-col gap-8 lg:flex-row lg:items-start lg:justify-between">
         <div className="max-w-3xl">
           <span className="inline-block rounded border border-neutral-300 bg-neutral-50 px-1.5 py-0.5 text-[10px] uppercase tracking-wide text-neutral-600">
             Corporate registry &amp; banking
           </span>
-          <h1 className="mt-5 text-4xl font-medium leading-[1.05] tracking-tight text-neutral-400 sm:text-5xl lg:text-6xl">
+          <h1 className="mt-5 text-3xl font-medium leading-[1.05] tracking-tight text-neutral-400 sm:text-4xl lg:text-6xl">
             Pickars Courier
             <br />
             <span className="text-black">Limited</span>
           </h1>
-          <p className="mt-5 max-w-2xl text-base leading-relaxed text-neutral-500 sm:text-lg">
+          <p className="mt-5 max-w-2xl text-sm leading-relaxed text-neutral-500 sm:text-base lg:text-lg">
             Redefining doorstep deliveries and logistics infrastructure across
             Port Harcourt and beyond. Built for speed, security, and transparent
             equity partnership.
@@ -293,6 +294,9 @@ export default function CompanyOverviewPage() {
             </span>
           </Link>
 
+          <div className="my-4 w-full flex flex-col sm:flex-row items-center gap-3">
+            <DownloadButtons />
+          </div>
           <div className="flex items-center gap-2">
             {socialLinks.map((s) => (
               <a
@@ -312,10 +316,12 @@ export default function CompanyOverviewPage() {
 
       {/* ============ Registry pill bar ============ */}
       <div className="mt-10 flex flex-wrap items-center gap-3">
-        <div className="flex items-center gap-3 rounded-full bg-black py-2 pl-6 pr-2 text-white">
-          <span className="text-base font-medium">Company number</span>
-          <span className="flex items-center gap-2 rounded-full bg-white/10 py-1.5 pl-1.5 pr-4 text-sm tracking-wider">
-            <span className="grid h-9 w-9 place-items-center rounded-full bg-white/10">
+        <div className="flex flex-wrap items-center gap-3 rounded-2xl sm:rounded-full bg-black py-2 pl-4 sm:pl-6 pr-2 text-white">
+          <span className="text-sm sm:text-base font-medium">
+            Company number
+          </span>
+          <span className="flex items-center gap-2 rounded-full bg-white/10 py-1.5 pl-1.5 pr-4 text-xs sm:text-sm tracking-wider">
+            <span className="grid h-7 w-7 sm:h-9 sm:w-9 place-items-center rounded-full bg-white/10">
               <Hash size={16} aria-hidden />
             </span>
             {COMPANY_NUMBER}
@@ -340,7 +346,7 @@ export default function CompanyOverviewPage() {
           {copiedKey === "cac" ? "Copied" : "Copy number"}
         </button>
 
-        <span className="flex items-center gap-2 rounded-full border border-emerald-200 bg-white px-4 py-3 text-sm font-medium text-emerald-700 ">
+        <span className="flex items-center gap-2 rounded-full border border-emerald-200 bg-white px-4 py-3 text-sm font-medium text-emerald-700">
           <span className="relative flex h-2.5 w-2.5">
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75 motion-reduce:animate-none" />
             <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-500" />
@@ -359,7 +365,7 @@ export default function CompanyOverviewPage() {
 
         <div className="mt-6 grid gap-5 md:grid-cols-2">
           {/* OPay Card */}
-          <div className="rounded-[2rem] border border-neutral-200/80 bg-[#fafafa] p-6 flex flex-col justify-between">
+          <div className="rounded-[2rem] border border-neutral-200/80 bg-[#fafafa] p-5 sm:p-6 flex flex-col justify-between">
             <div>
               <div className="flex items-center justify-between">
                 <span className="grid h-12 w-12 place-items-center rounded-2xl bg-[#ff0000] text-white">
@@ -372,7 +378,7 @@ export default function CompanyOverviewPage() {
               <h3 className="mt-5 text-xl font-medium">
                 OPay (Pickars Courier Limited)
               </h3>
-              <p className="mt-1 font-mono text-2xl font-semibold tracking-wider text-black">
+              <p className="mt-1 font-mono text-xl sm:text-2xl font-semibold tracking-wider text-black break-all">
                 {OPAY_ACCOUNT}
               </p>
               <p className="mt-2 text-xs text-neutral-500">
@@ -380,14 +386,14 @@ export default function CompanyOverviewPage() {
                 immediate merchant liquidity.
               </p>
             </div>
-            <div className="mt-6 pt-4 border-t border-neutral-200/80 flex items-center justify-between">
-              <span className="text-xs font-medium text-neutral-600">
+            <div className="mt-6 pt-4 border-t border-neutral-200/80 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+              <span className="text-xs font-medium text-neutral-600 break-all">
                 Account Name: PICKARS COURIER LIMITED
               </span>
               <button
                 type="button"
                 onClick={() => copyText(OPAY_ACCOUNT, "opay")}
-                className={`inline-flex items-center gap-1.5 rounded-full bg-white border border-neutral-200 px-4 py-2 text-xs font-semibold text-neutral-800 transition-colors hover:bg-black hover:text-white ${FOCUS}`}
+                className={`inline-flex items-center justify-center gap-1.5 rounded-full bg-white border border-neutral-200 px-4 py-2 text-xs font-semibold text-neutral-800 transition-colors hover:bg-black hover:text-white shrink-0 ${FOCUS}`}
               >
                 {copiedKey === "opay" ? (
                   <Check size={14} />
@@ -400,7 +406,7 @@ export default function CompanyOverviewPage() {
           </div>
 
           {/* Sterling Bank Card */}
-          <div className="rounded-[2rem] border border-neutral-200/80 bg-[#fafafa] p-6 flex flex-col justify-between">
+          <div className="rounded-[2rem] border border-neutral-200/80 bg-[#fafafa] p-5 sm:p-6 flex flex-col justify-between">
             <div>
               <div className="flex items-center justify-between">
                 <span className="grid h-12 w-12 place-items-center rounded-2xl bg-black text-white">
@@ -411,7 +417,7 @@ export default function CompanyOverviewPage() {
                 </span>
               </div>
               <h3 className="mt-5 text-xl font-medium">Sterling Bank</h3>
-              <p className="mt-1 font-mono text-2xl font-semibold tracking-wider text-black">
+              <p className="mt-1 font-mono text-xl sm:text-2xl font-semibold tracking-wider text-black break-all">
                 {STERLING_ACCOUNT}
               </p>
               <p className="mt-2 text-xs text-neutral-500">
@@ -419,14 +425,14 @@ export default function CompanyOverviewPage() {
                 Pickars Courier Limited.
               </p>
             </div>
-            <div className="mt-6 pt-4 border-t border-neutral-200/80 flex items-center justify-between">
-              <span className="text-xs font-medium text-neutral-600">
+            <div className="mt-6 pt-4 border-t border-neutral-200/80 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+              <span className="text-xs font-medium text-neutral-600 break-all">
                 Account Name: PICKARS COURIER LIMITED
               </span>
               <button
                 type="button"
                 onClick={() => copyText(STERLING_ACCOUNT, "sterling")}
-                className={`inline-flex items-center gap-1.5 rounded-full bg-white border border-neutral-200 px-4 py-2 text-xs font-semibold text-neutral-800 transition-colors hover:bg-black hover:text-white ${FOCUS}`}
+                className={`inline-flex items-center justify-center gap-1.5 rounded-full bg-white border border-neutral-200 px-4 py-2 text-xs font-semibold text-neutral-800 transition-colors hover:bg-black hover:text-white shrink-0 ${FOCUS}`}
               >
                 {copiedKey === "sterling" ? (
                   <Check size={14} />
@@ -440,13 +446,13 @@ export default function CompanyOverviewPage() {
         </div>
 
         {/* Paystack Notice Banner */}
-        <div className="mt-5 rounded-[2rem] bg-black p-6 sm:p-8 text-white flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <div className="mt-5 rounded-[2rem] bg-black p-5 sm:p-8 text-white flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div className="flex items-center gap-4">
             <span className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-white/10 text-[#b9f03a]">
               <CreditCard size={22} />
             </span>
             <div>
-              <h4 className="font-medium text-lg">
+              <h4 className="font-medium text-base sm:text-lg">
                 Card Payments &amp; Automated Collections
               </h4>
               <p className="text-xs text-white/70 mt-0.5">
@@ -462,51 +468,7 @@ export default function CompanyOverviewPage() {
         </div>
       </section>
 
-      {/* ============ Key metrics ============ */}
-      <section
-        aria-label="Key figures"
-        className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3"
-      >
-        <MetricCard
-          icon={TrendingUp}
-          label="Current valuation"
-          value="₦50,000,000"
-          note="Post-seed baseline valuation estimate"
-        />
-        <MetricCard
-          icon={Award}
-          label="Lead investment injection"
-          value="₦5,000,000"
-          note="Provided by Boring Thinkers Ltd (35%)"
-        />
-        <div className="rounded-[2rem] border border-neutral-200/80 bg-white p-6 sm:col-span-2 lg:col-span-1">
-          <IconTile icon={Smartphone} />
-          <p className="mt-5 text-sm text-neutral-400">Mobile distribution</p>
-          <div className="mt-3 flex flex-wrap items-center gap-2">
-            <a
-              href="https://play.google.com/store/apps/details?id=com.pickars.app"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`inline-flex items-center gap-2 rounded-full bg-[#18181b] px-5 py-2.5 text-sm font-medium text-white transition-transform hover:-translate-y-0.5 ${FOCUS}`}
-            >
-              <FaGooglePlay size={15} />
-              Play Store
-            </a>
-            <a
-              href="https://apps.apple.com/ng/app/pickars/id6746796884"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`inline-flex items-center gap-2 rounded-full bg-[#18181b] px-5 py-2.5 text-sm font-medium text-white transition-transform hover:-translate-y-0.5 ${FOCUS}`}
-            >
-              <FaApple size={16} />
-              App Store
-            </a>
-          </div>
-          <p className="mt-4 text-xs text-neutral-500">
-            Live applications on both major stores
-          </p>
-        </div>
-      </section>
+      {/* ============ Key metrics (Responsive Download Buttons) ============ */}
 
       {/* ============ Company at a glance ============ */}
       <section className="mt-14">
@@ -524,7 +486,7 @@ export default function CompanyOverviewPage() {
               </span>
               <div className="min-w-0 flex-1">
                 <dt className="text-sm text-white/60">Company number</dt>
-                <dd className="mt-0.5 text-3xl font-medium tracking-[0.08em]">
+                <dd className="mt-0.5 text-2xl sm:text-3xl font-medium tracking-[0.08em] break-all">
                   {COMPANY_NUMBER}
                 </dd>
               </div>
@@ -569,7 +531,7 @@ export default function CompanyOverviewPage() {
             title="Stakeholder percentage & cap table"
             subtitle="Equity distribution, governance roles, and strategic context."
           />
-          <span className="rounded-full border border-neutral-200/80 bg-white px-4 py-2 text-xs font-medium text-neutral-600 ">
+          <span className="rounded-full border border-neutral-200/80 bg-white px-4 py-2 text-xs font-medium text-neutral-600">
             Total {fmtPct(sum(CAP_TABLE))} equity allocation
           </span>
         </div>
@@ -668,7 +630,7 @@ export default function CompanyOverviewPage() {
             return (
               <article
                 key={doc.title}
-                className="flex items-start gap-4 rounded-[2rem] border border-neutral-200/80 bg-white p-5 "
+                className="flex items-start gap-4 rounded-[2rem] border border-neutral-200/80 bg-white p-5"
               >
                 <span className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-gradient-to-b from-neutral-700 to-black text-white ring-4 ring-white">
                   <Icon size={22} aria-hidden />
@@ -709,7 +671,7 @@ export default function CompanyOverviewPage() {
       </section>
 
       {/* ============ Footer ============ */}
-      <footer className="mt-14 flex flex-col items-center justify-between gap-4 border-t border-black/5 pt-6 text-xs text-neutral-400 sm:flex-row">
+      <footer className="mt-14 flex flex-col items-center justify-between gap-4 border-t border-black/5 pt-6 text-xs text-neutral-400 sm:flex-row text-center sm:text-left">
         <p>
           © 2026 Pickars Courier Limited · Company No. {COMPANY_NUMBER}. Built
           &amp; powered by Boring Thinkers Limited.
@@ -728,7 +690,7 @@ export default function CompanyOverviewPage() {
           <motion.p
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
-            className="rounded-full bg-[#18181b] px-5 py-3 text-sm font-medium text-white"
+            className="rounded-full bg-[#18181b] px-5 py-3 text-sm font-medium text-white shadow-lg"
           >
             {toast}
           </motion.p>
@@ -750,27 +712,6 @@ function IconTile({ icon: Icon }: { icon: LucideIcon }) {
   );
 }
 
-function MetricCard({
-  icon,
-  label,
-  value,
-  note,
-}: {
-  icon: LucideIcon;
-  label: string;
-  value: string;
-  note: string;
-}) {
-  return (
-    <div className="rounded-[2rem] border border-neutral-200/80 bg-white p-6 ">
-      <IconTile icon={icon} />
-      <p className="mt-5 text-sm text-neutral-400">{label}</p>
-      <p className="mt-1 text-3xl font-medium tracking-tight">{value}</p>
-      <p className="mt-3 text-xs text-neutral-500">{note}</p>
-    </div>
-  );
-}
-
 function SectionHeading({
   icon: Icon,
   title,
@@ -782,8 +723,8 @@ function SectionHeading({
 }) {
   return (
     <div>
-      <h2 className="flex items-center gap-3 text-2xl font-medium tracking-tight">
-        <span className="grid h-9 w-9 place-items-center rounded-xl border border-neutral-200/60 bg-white ">
+      <h2 className="flex items-center gap-3 text-xl sm:text-2xl font-medium tracking-tight">
+        <span className="grid h-9 w-9 place-items-center rounded-xl border border-neutral-200/60 bg-white">
           <Icon size={18} className="text-[#ff0000]" aria-hidden />
         </span>
         {title}
@@ -805,7 +746,7 @@ function StatPill({
   const styles = {
     black: "bg-black text-white",
     lime: "bg-[#b9f03a] text-black",
-    white: "bg-white text-black border border-neutral-200/80 ",
+    white: "bg-white text-black border border-neutral-200/80",
   }[tone];
   const muted = tone === "black" ? "text-white/60" : "text-black/60";
   return (
@@ -813,7 +754,9 @@ function StatPill({
       className={`flex items-baseline justify-between rounded-full px-6 py-4 ${styles}`}
     >
       <span className={`text-sm ${muted}`}>{label}</span>
-      <span className="text-3xl font-light tracking-tight">{value}</span>
+      <span className="text-2xl sm:text-3xl font-light tracking-tight">
+        {value}
+      </span>
     </div>
   );
 }
@@ -830,8 +773,8 @@ function HolderCard({
   const dark = featured;
   return (
     <article
-      className={`flex flex-col rounded-[2rem] p-6 ${
-        dark ? "bg-black text-white" : "border border-neutral-200/80 bg-white "
+      className={`flex flex-col rounded-[2rem] p-5 sm:p-6 ${
+        dark ? "bg-black text-white" : "border border-neutral-200/80 bg-white"
       } ${className}`}
     >
       <div className="flex items-start gap-4">
@@ -851,8 +794,8 @@ function HolderCard({
         </span>
 
         <div className="min-w-0 flex-1">
-          <h3 className="flex items-center gap-2 text-lg font-medium leading-snug">
-            {h.name}
+          <h3 className="flex items-center gap-2 text-base sm:text-lg font-medium leading-snug">
+            <span className="truncate">{h.name}</span>
             {h.entityUrl && (
               <a
                 href={h.entityUrl}
@@ -863,14 +806,14 @@ function HolderCard({
                   dark
                     ? "text-white/50 hover:text-white"
                     : "text-neutral-400 hover:text-black"
-                } transition-colors`}
+                } transition-colors shrink-0`}
               >
                 <ExternalLink size={14} />
               </a>
             )}
           </h3>
           <p
-            className={`mt-0.5 text-sm ${
+            className={`mt-0.5 text-xs sm:text-sm ${
               dark ? "text-white/60" : "text-neutral-500"
             }`}
           >
@@ -878,7 +821,7 @@ function HolderCard({
           </p>
         </div>
 
-        <p className="text-5xl font-light leading-none tracking-tight">
+        <p className="text-3xl sm:text-5xl font-light leading-none tracking-tight shrink-0">
           {fmtPct(h.pct)}
         </p>
       </div>
@@ -892,7 +835,6 @@ function HolderCard({
       </p>
 
       <div className="mt-5 flex flex-wrap items-center gap-2">
-    
         <span
           className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-medium ${
             dark

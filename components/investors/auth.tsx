@@ -226,7 +226,7 @@ export default function InvestorSignInPage() {
               className="h-9 rounded-[8px] w-auto sm:h-10"
             />
           </a>
-          <button
+          {/* <button
             type="button"
             onClick={() => {
               setIsRegistering(!isRegistering);
@@ -237,7 +237,7 @@ export default function InvestorSignInPage() {
             {isRegistering
               ? "Already an investor? Sign in"
               : "Create an account"}
-          </button>
+          </button> */}
         </header>
 
         <div className="flex flex-1 items-center py-12">

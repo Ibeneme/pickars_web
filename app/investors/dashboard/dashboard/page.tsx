@@ -89,7 +89,7 @@ export default function InvestorOverviewPage() {
   const dateLabel = now
     ? now.toLocaleDateString("en-GB", { day: "numeric", month: "long" })
     : "Today";
-  const firstName = (investor?.name || "Investor").split(" ")[0];
+  const firstName = (investor?.name || "Investor");
 
   const panelStats = get(panelPeriod);
   const barValues = PERIODS.map((p) => ({
@@ -104,7 +104,11 @@ export default function InvestorOverviewPage() {
       <header className="flex flex-wrap items-start justify-between gap-4">
         <div>
           <h1 className="text-3xl font-medium tracking-tight text-neutral-400 sm:text-4xl">
-            {greeting}, <span className="text-black">{firstName}</span>
+            {greeting},{" "}
+            <span className="text-black">
+              {firstName}{" "}
+      
+            </span>
           </h1>
           <p className="mt-1.5 text-base text-neutral-500">
             What would you like to do today?
