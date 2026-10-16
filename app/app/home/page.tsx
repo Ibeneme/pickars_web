@@ -269,7 +269,7 @@ const jsonLdData = {
   ],
 };
 
-export default function HomePage() {
+export default function HomeIndex() {
   return (
     <main className="min-h-screen bg-slate-50 text-slate-900 font-sans">
       <script
@@ -283,7 +283,7 @@ export default function HomePage() {
       <HomeWithMapSection />
       <PackageDeliverySection />
       <HowItWorks />
-      <NeverLateSection />
+      {/* <NeverLateSection /> */}
       <HomeTestimonialsSection />
     </main>
   );

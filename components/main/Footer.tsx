@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { memo } from "react";
 import Link from "next/link";
 import {
   FaEnvelope,
@@ -13,6 +13,77 @@ import {
 import logo from "@/public/logo.svg";
 import { motion } from "framer-motion";
 import AppDownloadCTA from "./AppDownloadCTA";
+
+/* ------------------------------------------------------------------ */
+/*  Footer skyline: one flat row of separate buildings (built once)    */
+/* ------------------------------------------------------------------ */
+const VB_W = 1440;
+const VB_H = 220;
+const GROUND = 220;
+
+function mulberry32(seed: number) {
+  return function () {
+    seed |= 0;
+    seed = (seed + 0x6d2b79f5) | 0;
+    let t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+
+interface Tower {
+  x: number;
+  w: number;
+  h: number;
+  slant: boolean;
+}
+
+function buildSkyline(): Tower[] {
+  const rnd = mulberry32(77);
+  const towers: Tower[] = [];
+  let x = 0;
+  let prevH = 0;
+  while (x < VB_W) {
+    const w = 44 + rnd() * 50;
+    let h = 60 + rnd() * 130;
+    // keep neighbours visibly different in height
+    if (Math.abs(h - prevH) < 25) h = Math.min(195, h + 40);
+    towers.push({ x, w, h, slant: rnd() > 0.8 });
+    x += w + 4 + rnd() * 8;
+    prevH = h;
+  }
+  return towers;
+}
+
+const TOWERS = buildSkyline();
+
+const FooterSkyline = memo(function FooterSkyline() {
+  return (
+    <svg
+      className="pointer-events-none absolute inset-x-0 bottom-0 z-0 h-40 w-full sm:h-52 md:h-64"
+      viewBox={`0 0 ${VB_W} ${VB_H}`}
+      preserveAspectRatio="xMidYMax slice"
+      fill="none"
+      aria-hidden
+    >
+      <g fill="#ffffff" opacity="0.06">
+        {TOWERS.map((t, i) => {
+          const top = GROUND - t.h;
+          return t.slant ? (
+            <polygon
+              key={i}
+              points={`${t.x},${GROUND} ${t.x},${top + 18} ${
+                t.x + t.w
+              },${top} ${t.x + t.w},${GROUND}`}
+            />
+          ) : (
+            <rect key={i} x={t.x} y={top} width={t.w} height={t.h} />
+          );
+        })}
+      </g>
+    </svg>
+  );
+});
 
 const Footer: React.FC = () => {
   const scrollToTop = () => {
@@ -46,7 +117,10 @@ const Footer: React.FC = () => {
     <footer className="relative w-full overflow-hidden mb-0 bg-black font-['Lufga'] text-white">
       <AppDownloadCTA />
 
-      <div className="mx-auto max-w-7xl px-6 pb-16 pt-20 md:px-0">
+      {/* Buildings sit behind the footer content, along the bottom */}
+      <FooterSkyline />
+
+      <div className="relative z-10 mx-auto max-w-7xl px-6 pb-16 pt-20 md:px-0">
         <div className="grid grid-cols-1 gap-16 lg:grid-cols-12">
           <div className="flex flex-col items-start lg:col-span-5">
             <div className="mb-2 flex items-center gap-3">

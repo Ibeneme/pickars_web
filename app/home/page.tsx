@@ -6,6 +6,7 @@ import NeverLateSection from "@/components/landing-page/home-sections/never-late
 import PackageDeliverySection from "@/components/landing-page/home-sections/package-delivery-section";
 import QualitiesSliderSection from "@/components/landing-page/home-sections/qualities-slider-section";
 import type { Metadata } from "next";
+import HomeIndex from "../app/home/page";
 
 const port = process.env.PORT || 3000;
 const baseUrl =
@@ -14,7 +15,6 @@ const baseUrl =
     ? `http://localhost:${port}`
     : "https://www.pickars.com");
 
-// Home Page Metadata (Open Graph, Twitter, Meta Tags)
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
   title: "Pickars: Your doorstep deliveries, redefined.",
@@ -276,19 +276,7 @@ const jsonLdData = {
 export default function HomePage() {
   return (
     <main className="min-h-screen bg-slate-50 text-slate-900 font-sans">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(jsonLdData).replace(/</g, "\\u003c"),
-        }}
-      />
-      <HeroSection />
-      <QualitiesSliderSection />
-      <HomeWithMapSection />
-      <PackageDeliverySection />
-      <HowItWorks />
-      <NeverLateSection />
-      <HomeTestimonialsSection />
+      <HomeIndex />
     </main>
   );
 }
