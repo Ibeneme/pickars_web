@@ -281,7 +281,7 @@ export default function HomeIndex() {
       <HeroSection />
       <QualitiesSliderSection />
       <HomeWithMapSection />
-      <PackageDeliverySection />
+      <NeverLateSection />
       <HowItWorks />
       {/* <NeverLateSection /> */}
       <HomeTestimonialsSection />
