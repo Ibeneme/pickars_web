@@ -8,7 +8,7 @@ import { createPageMetadata } from "@/utils/seo/metadata";
 import { pageSchema } from "@/utils/seo/schema";
 
 const PATH = "/app/our-company";
-const TITLE = "About Us: Port Harcourt Logistics Company";
+const TITLE = "About Us: Logistics made Easy";
 const DESCRIPTION =
   "Pickars Courier Limited is a Port Harcourt platform connecting individuals and businesses with independent dispatch riders for fast, reliable delivery.";
 
