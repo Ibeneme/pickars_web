@@ -653,7 +653,7 @@ function SignOutDialog({
   function handleClose() {
     if (loading) return;
     // GSAP Exit Animation
-    const ctx = gsap.context(() => {
+    gsap.context(() => {
       gsap.to(overlayRef.current, {
         opacity: 0,
         duration: 0.2,

@@ -107,7 +107,7 @@ const HeroSection: React.FC = () => {
           <motion.div style={{ y: imageY }} className="w-full h-full scale-110">
             <Image
               src={photo}
-              alt="Pickars service showcase"
+              alt="Pickars dispatch rider delivery service in Port Harcourt"
               priority
               className="w-full h-auto object-cover block"
             />
@@ -128,9 +128,9 @@ const HeroSection: React.FC = () => {
             }}
             className="absolute bottom-6 left-6 sm:bottom-10 sm:left-10 z-10 flex items-end gap-4"
           >
-            <h3 className="text-white text-4xl sm:text-6xl font-black tracking-tighter font-['Lufga'] leading-none">
+            <p className="text-white text-4xl sm:text-6xl font-black tracking-tighter font-['Lufga'] leading-none">
               Pickars<span style={{ color: "#ff0000" }}>.</span>
-            </h3>
+            </p>
           </motion.div>
         </motion.div>
       </div>

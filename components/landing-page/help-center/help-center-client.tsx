@@ -235,7 +235,8 @@ export default function HelpCenterClient() {
   const toggleFaq = (id: string) => {
     setOpenIds((prev) => {
       const next = new Set(prev);
-      next.has(id) ? next.delete(id) : next.add(id);
+      if (next.has(id)) next.delete(id);
+      else next.add(id);
       return next;
     });
   };
@@ -390,18 +391,18 @@ export default function HelpCenterClient() {
       </div>
 
       {/*  MAIN CONTENT  */}
-      <main className="mx-auto max-w-5xl px-4 py-12 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-5xl px-4 py-12 sm:px-6 lg:px-8">
         {query && (
           <p className="mb-8 text-sm font-semibold text-gray-500">
-            Found {totalResults} result{totalResults === 1 ? "" : "s"} for "
-            {query}"
+            Found {totalResults} result{totalResults === 1 ? "" : "s"} for &quot;
+            {query}&quot;
           </p>
         )}
 
         {visibleCategories.length === 0 ? (
           <div className="rounded-[32px] border-2 border-dashed border-gray-200 px-6 py-16 text-center">
             <p className="text-base font-semibold text-gray-600">
-              No answers matched "{query}". Try a different search, or reach out
+              No answers matched &quot;{query}&quot;. Try a different search, or reach out
               to us below.
             </p>
           </div>
@@ -486,7 +487,7 @@ export default function HelpCenterClient() {
             ))}
           </div>
         )}
-      </main>
+      </div>
 
       {/*  CALL TO ACTION FOOTER CARD  */}
       <footer className="pb-16 pt-8 px-4 sm:px-6">

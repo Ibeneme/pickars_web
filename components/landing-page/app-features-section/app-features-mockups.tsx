@@ -110,9 +110,9 @@ export default function AppFeaturesMockup() {
                 Step {steps[currentStep].number} of 05 —{" "}
                 {steps[currentStep].cardContent}
               </div>
-              <h1 className="text-3xl md:text-5xl font-extrabold tracking-tight leading-tight mb-4 text-white">
+              <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight leading-tight mb-4 text-white">
                 {steps[currentStep].title}
-              </h1>
+              </h2>
               <p className="text-zinc-400 text-sm md:text-base leading-relaxed max-w-xl mb-8">
                 {steps[currentStep].description}
               </p>
@@ -175,9 +175,8 @@ export default function AppFeaturesMockup() {
             <div className="w-full max-w-lg h-[600px] sm:h-[650px] flex items-center justify-center overflow-hidden relative">
               <Image
                 src={steps[currentStep].image}
-                alt={`Step ${steps[currentStep].number} visual`}
+                alt={`Pickars app screen: ${steps[currentStep].title}`}
                 className="w-full h-full object-contain"
-                priority
               />
             </div>
           </div>

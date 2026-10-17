@@ -2,17 +2,12 @@
 
 import React, { useState } from "react";
 import { motion, useScroll, useSpring, type Variants } from "framer-motion";
-import { usePathname } from "next/navigation";
 import { FiSearch, FiTruck, FiClock } from "react-icons/fi";
 import PortHarcourtAnimatedMap from "@/components/atoms/animated/maps/port-harcourt-animated-map";
 
 const TrackComponent: React.FC = () => {
   const [trackingId, setTrackingId] = useState("");
   const [showComingSoon, setShowComingSoon] = useState(false);
-  const pathname = usePathname();
-
-  // Dynamic canonical URL matching active path
-  const canonicalUrl = `https://www.pickars.com${pathname}`;
 
   // Top scroll progress spring animation
   const { scrollYProgress } = useScroll();
@@ -26,55 +21,6 @@ const TrackComponent: React.FC = () => {
     e.preventDefault();
     if (!trackingId.trim()) return;
     setShowComingSoon(true);
-  };
-
-  // Structured Data Schema for Tracking Action & Delivery Service
-  const trackingPageSchema = {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "WebPage",
-        "@id": `${canonicalUrl}#webpage`,
-        url: canonicalUrl,
-        name: "Live Dispatch Rider & Parcel Tracking | Pickars Port Harcourt",
-        description:
-          "Track your dispatch rider and parcel status live across Port Harcourt with Pickars. Enter your tracking ID for real-time GPS updates.",
-        isPartOf: {
-          "@type": "WebSite",
-          "@id": "https://www.pickars.com/#website",
-          url: "https://www.pickars.com/",
-          name: "Pickars",
-        },
-        potentialAction: {
-          "@type": "SearchAction",
-          target: `${canonicalUrl}?id={tracking_id}`,
-          "query-input": "required name=tracking_id",
-        },
-        inLanguage: "en-NG",
-      },
-      {
-        "@type": "DeliveryService",
-        "@id": "https://www.pickars.com/#trackingservice",
-        name: "Pickars Live GPS Parcel Tracking",
-        provider: {
-          "@type": "LocalBusiness",
-          name: "Pickars Logistics",
-          telephone: "+2349164860591",
-          address: {
-            "@type": "PostalAddress",
-            addressLocality: "Port Harcourt",
-            addressRegion: "Rivers State",
-            addressCountry: "NG",
-          },
-        },
-        areaServed: {
-          "@type": "City",
-          name: "Port Harcourt",
-        },
-        description:
-          "Real-time dispatch rider location, parcel status monitoring, and express last-mile package tracking in Port Harcourt.",
-      },
-    ],
   };
 
   const containerVariants: Variants = {
@@ -102,12 +48,6 @@ const TrackComponent: React.FC = () => {
 
   return (
     <section className="relative flex flex-col min-h-screen w-full bg-white text-gray-900 overflow-hidden font-['Lufga']">
-      {/* Schema.org Structured Data */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(trackingPageSchema) }}
-      />
-
       {/* Top Scroll Progress Bar */}
       <motion.div
         style={{ scaleX }}
@@ -115,7 +55,7 @@ const TrackComponent: React.FC = () => {
       />
 
       {/* Main Flex Column Container */}
-      <main className="flex flex-col w-full items-center pt-48 pb-12 px-4 sm:px-6 lg:px-8">
+      <div className="flex flex-col w-full items-center pt-48 pb-12 px-4 sm:px-6 lg:px-8">
         <div className="mx-auto flex w-full max-w-2xl flex-col items-center">
           <motion.div
             variants={containerVariants}
@@ -213,7 +153,7 @@ const TrackComponent: React.FC = () => {
             </div>
           </motion.div>
         </div>
-      </main>
+      </div>
 
       {/* Map Container */}
       <div className="mx-auto w-full max-w-7xl mt-auto px-4 pb-20 sm:px-6 lg:px-8">

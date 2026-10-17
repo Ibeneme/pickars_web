@@ -101,7 +101,6 @@ export default function AppFeaturesDeliveryOptions() {
                 alt="Pickars App Pickup and Delivery Options Preview"
                 fill
                 className="object-cover"
-                priority
               />
             </motion.div>
           </motion.div>

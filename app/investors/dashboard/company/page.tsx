@@ -10,7 +10,6 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import {
   ArrowUpRight,
-  Award,
   Building2,
   Check,
   CheckCircle2,
@@ -23,9 +22,7 @@ import {
   Landmark,
   MapPin,
   PieChart,
-  Smartphone,
   Truck,
-  TrendingUp,
   Users,
   CreditCard,
   Wallet,
@@ -36,8 +33,6 @@ import {
   FaXTwitter,
   FaFacebookF,
   FaLinkedinIn,
-  FaApple,
-  FaGooglePlay,
 } from "react-icons/fa6";
 import DownloadButtons from "../../../../components/atoms/buttons/DownloadButtons";
 
@@ -703,14 +698,6 @@ export default function CompanyOverviewPage() {
 /* ------------------------------------------------------------------ */
 /* Pieces                                                              */
 /* ------------------------------------------------------------------ */
-
-function IconTile({ icon: Icon }: { icon: LucideIcon }) {
-  return (
-    <span className="grid h-14 w-14 place-items-center rounded-2xl bg-gradient-to-b from-neutral-700 to-black text-white ring-4 ring-white">
-      <Icon size={22} aria-hidden />
-    </span>
-  );
-}
 
 function SectionHeading({
   icon: Icon,

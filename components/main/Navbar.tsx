@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X, ArrowRight } from "lucide-react";
@@ -15,7 +16,7 @@ const Navbar = () => {
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 40);
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -29,6 +30,7 @@ const Navbar = () => {
 
   return (
     <nav
+      aria-label="Primary"
       className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-500 font-['Lufga'] ${
         scrolled ? "pt-4" : "pt-8"
       }`}
@@ -40,17 +42,22 @@ const Navbar = () => {
           }`}
         >
           {/* Logo Section */}
-          <Link href="/" className="flex items-center gap-2 pl-2 group">
+          <Link
+            href="/"
+            aria-label="Pickars home"
+            className="flex items-center gap-2 pl-2 group"
+          >
             <div className="relative">
-              <img
-                src={navImage.src || navImage}
-                alt="Pickars Logo"
+              <Image
+                src={navImage}
+                alt=""
+                priority
                 className="h-8 w-auto transition-transform duration-500 group-hover:rotate-[360deg] rounded-full"
               />
             </div>
-            <h3 className="text-xl font-black tracking-tighter text-[#121212]">
+            <span className="text-xl font-black tracking-tighter text-[#121212]">
               Pickars
-            </h3>
+            </span>
           </Link>
 
           {/* Desktop Nav Links */}
@@ -72,6 +79,7 @@ const Navbar = () => {
                 <li key={name}>
                   <Link
                     href={path}
+                    aria-current={isActive ? "page" : undefined}
                     className={`relative px-4 py-2 text-sm font-bold transition-all duration-300 rounded-full flex items-center gap-1.5 ${
                       isActive ? "text-white" : "text-gray-600 hover:bg-black/5"
                     }`}
@@ -101,6 +109,10 @@ const Navbar = () => {
             </div>
 
             <button
+              type="button"
+              aria-label={isOpen ? "Close menu" : "Open menu"}
+              aria-expanded={isOpen}
+              aria-controls="mobile-menu"
               className={`flex h-10 w-10 items-center justify-center rounded-full transition-all ${
                 isOpen ? "bg-[#FF0000] text-white" : "bg-gray-100 text-black"
               } md:hidden`}
@@ -136,6 +148,7 @@ const Navbar = () => {
       <AnimatePresence>
         {isOpen && (
           <motion.div
+            id="mobile-menu"
             initial={{ opacity: 0, scale: 0.95, y: -20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: -20 }}
@@ -165,6 +178,7 @@ const Navbar = () => {
                   >
                     <Link
                       href={path}
+                      aria-current={isActive ? "page" : undefined}
                       onClick={() => setIsOpen(false)}
                       className={`flex items-center justify-between text-3xl font-black tracking-tighter ${
                         isActive ? "text-[#FF0000]" : "text-[#121212]"

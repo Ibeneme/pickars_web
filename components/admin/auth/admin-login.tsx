@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
 import {
   FiMail,
-  FiShield,
   FiArrowRight,
   FiRefreshCw,
   FiLock,

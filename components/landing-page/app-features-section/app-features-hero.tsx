@@ -87,13 +87,13 @@ export default function AppFeaturesHero() {
           >
             APP EXPERIENCE
           </motion.div>
-          <motion.h2
+          <motion.h1
             variants={itemVariants}
             className="text-4xl font-black leading-tight tracking-tight text-gray-900 sm:text-6xl"
           >
             Engineered for <span className="text-[#FF0000]">speed</span> and
             total reliability.
-          </motion.h2>
+          </motion.h1>
           <motion.p
             variants={itemVariants}
             className="mt-4 max-w-xl text-base font-medium text-gray-600 sm:text-lg"
@@ -170,7 +170,7 @@ export default function AppFeaturesHero() {
                 >
                   <Image
                     src={appMockup}
-                    alt="Pickars App Interface Mockup"
+                    alt="Pickars delivery app interface on a smartphone"
                     fill
                     className="block object-cover object-right "
                     priority

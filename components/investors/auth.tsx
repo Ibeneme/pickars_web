@@ -13,6 +13,7 @@ import {
   type FormEvent,
   type KeyboardEvent,
 } from "react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import {
   ArrowLeft,
@@ -55,7 +56,7 @@ export default function InvestorSignInPage() {
     isAuthenticated,
   } = useSelector((state: RootState) => state.investor);
 
-  const [isRegistering, setIsRegistering] = useState(false);
+  const [isRegistering] = useState(false);
   const [loginMethod, setLoginMethod] = useState<"phone" | "email">("phone");
 
   const [phone, setPhone] = useState("");
@@ -237,7 +238,7 @@ export default function InvestorSignInPage() {
       {/* ============ LEFT: FORM ============ */}
       <section className="flex min-h-screen flex-col px-6 py-8 sm:px-12 lg:px-16 xl:px-24 justify-between">
         <header className="flex items-center justify-between">
-          <a
+          <Link
             href="/"
             aria-label="Pickars home"
             className={`inline-flex items-center rounded-md ${FOCUS}`}
@@ -248,7 +249,7 @@ export default function InvestorSignInPage() {
               alt="Pickars"
               className="h-9 rounded-[8px] w-auto sm:h-10"
             />
-          </a>
+          </Link>
           {/* <button
             type="button"
             onClick={() => {
@@ -273,7 +274,7 @@ export default function InvestorSignInPage() {
                   className="mx-auto text-[#ff0000]"
                 />
                 <h1 className="text-2xl font-semibold tracking-tight">
-                  You're signed in
+                  You&apos;re signed in
                 </h1>
                 <p className="text-sm text-neutral-600">
                   Taking you to your dashboard…
@@ -552,7 +553,7 @@ export default function InvestorSignInPage() {
 
                 {codeSent && (
                   <p className="text-center text-sm text-neutral-600">
-                    Didn't get it?{" "}
+                    Didn&apos;t get it?{" "}
                     <button
                       type="button"
                       disabled={cooldown > 0 || busy}

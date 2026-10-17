@@ -1,57 +1,32 @@
 import type { Metadata } from "next";
+import JsonLd from "@/components/seo/json-ld";
 import DeleteAccountPage from "@/components/landing-page/legals-and-policies/delete-account";
+import { createPageMetadata } from "@/utils/seo/metadata";
+import { pageSchema } from "@/utils/seo/schema";
 
-export const metadata: Metadata = {
-  title: "Request Account Deletion | Pickars",
-  description:
-    "Request the permanent deletion of your Pickars user account and associated personal data in accordance with Google Play User Data policies.",
-  keywords: [
-    "Pickars",
-    "Account Deletion",
-    "Delete Account",
-    "Data Safety",
-    "Privacy Policy",
-    "Port Harcourt Delivery",
-  ],
-  alternates: {
-    canonical: "https://pickars.com/app/delete-account", // Replace with your actual domain
-  },
-  openGraph: {
-    title: "Account Deletion Request - Pickars",
-    description:
-      "Submit a request to permanently delete your Pickars account and associated service data.",
-    url: "https://pickars.com/app/delete-account", // Replace with your actual domain
-    siteName: "Pickars",
-    locale: "en_US",
-    type: "website",
-    images: [
-      {
-        url: "https://pickars.com/card.png", // Replace with your OG image URL
-        width: 1200,
-        height: 630,
-        alt: "Pickars Account Deletion Request",
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Request Account Deletion | Pickars",
-    description:
-      "Submit a request to permanently delete your Pickars account and associated service data.",
-    images: ["https://pickars.com/card.png"],
-  },
-  robots: {
-    index: true,
-    follow: true,
-  },
-};
+const PATH = "/app/delete-account";
+const DESCRIPTION =
+  "Request permanent deletion of your Pickars account and associated personal data, in line with Google Play and App Store user-data requirements.";
 
-const DeletePage = () => {
+export const metadata: Metadata = createPageMetadata({
+  title: "Request Account Deletion",
+  description: DESCRIPTION,
+  path: PATH,
+  imageAlt: "Pickars account deletion request",
+});
+
+const schema = pageSchema({
+  path: PATH,
+  name: "Pickars Account Deletion Request",
+  description: DESCRIPTION,
+  breadcrumbs: [{ name: "Delete Account", path: PATH }],
+});
+
+export default function DeleteAccountRoute() {
   return (
-    <main>
+    <>
+      <JsonLd data={schema} />
       <DeleteAccountPage />
-    </main>
+    </>
   );
-};
-
-export default DeletePage;
+}

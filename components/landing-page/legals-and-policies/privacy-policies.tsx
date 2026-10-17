@@ -102,7 +102,7 @@ const PrivacyPolicy: React.FC = () => {
           </aside>
 
           {/* Main Content */}
-          <main className="lg:col-span-9 space-y-20 md:space-y-28">
+          <div className="lg:col-span-9 space-y-20 md:space-y-28">
             {/* 1. Overview */}
             <section id="intro" className="scroll-mt-36">
               <div className="p-8 md:p-12 bg-white border border-gray-100 rounded-[40px]">
@@ -654,7 +654,7 @@ const PrivacyPolicy: React.FC = () => {
                 reserved. Operating exclusively in Port Harcourt, Nigeria.
               </p>
             </footer>
-          </main>
+          </div>
         </div>
       </div>
     </div>

@@ -8,7 +8,6 @@
  */
 import { useState } from "react";
 import Link from "next/link";
-import { motion } from "framer-motion";
 import {
   ArrowUpRight,
   Calculator,
@@ -20,9 +19,7 @@ import {
   Layers,
   MapPin,
   ShieldCheck,
-  Target,
   TrendingUp,
-  Truck,
   Wallet,
   Zap,
   type LucideIcon,

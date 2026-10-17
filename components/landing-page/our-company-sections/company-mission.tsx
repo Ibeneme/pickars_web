@@ -62,7 +62,7 @@ export const CompanyMission: React.FC = () => {
               </h2>
               <p className="mt-5 text-base sm:text-lg font-normal leading-relaxed text-zinc-300">
                 We started Pickars out of a simple frustration: sending items
-                across Port Harcourt shouldn't require countless phone calls,
+                across Port Harcourt shouldn&apos;t require countless phone calls,
                 unreliable dispatchers, or endless tracking anxiety.
               </p>
               <p className="mt-4 text-base sm:text-lg font-normal leading-relaxed text-zinc-300">
@@ -90,7 +90,6 @@ export const CompanyMission: React.FC = () => {
               fill
               className="object-cover"
               sizes="(max-width: 768px) 100vw, 50vw"
-              priority
             />
           </motion.div>
         </div>
@@ -105,7 +104,7 @@ export const CompanyMission: React.FC = () => {
         >
           <Image
             src={photo}
-            alt="Pickars service showcase"
+            alt="Pickars riders delivering across the city"
             fill
             className="object-cover"
             sizes="100vw"
@@ -122,9 +121,9 @@ export const CompanyMission: React.FC = () => {
             viewport={{ once: true }}
             className="absolute bottom-6 left-6 sm:bottom-10 sm:left-10 z-10"
           >
-            <h3 className="text-white text-4xl sm:text-6xl font-black tracking-tighter font-['Lufga']">
+            <p className="text-white text-4xl sm:text-6xl font-black tracking-tighter font-['Lufga']">
               Pickars<span style={{ color: "#ff0000" }}>.</span>
-            </h3>
+            </p>
           </motion.div>
         </motion.div>
       </div>

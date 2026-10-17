@@ -99,7 +99,7 @@ const TermsAndConditions: React.FC = () => {
           </aside>
 
           {/* Main Content */}
-          <main className="lg:col-span-9 space-y-20 md:space-y-28">
+          <div className="lg:col-span-9 space-y-20 md:space-y-28">
             {/* 1. Contractual Relationship */}
             <section id="intro" className="scroll-mt-36">
               <div className="p-8 md:p-12 bg-white border border-gray-100 rounded-[40px]">
@@ -527,7 +527,7 @@ const TermsAndConditions: React.FC = () => {
                 </p>
               </div>
             </section>
-          </main>
+          </div>
         </div>
       </div>
     </div>

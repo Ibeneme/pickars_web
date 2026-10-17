@@ -82,13 +82,14 @@ const PackageDeliverySection: React.FC = () => {
         >
           <Image
             src={photo}
-            alt="Pickars service showcase"
-            priority
+            alt="Pickars package delivery to your doorstep"
             className="w-full h-auto object-cover block"
           />
 
+          {/* Gradient Overlay */}
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
 
+          {/* Pickars Text Overlay */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -100,9 +101,9 @@ const PackageDeliverySection: React.FC = () => {
             }}
             className="absolute bottom-6 left-6 sm:bottom-10 sm:left-10 z-10"
           >
-            <h3 className="text-white text-4xl sm:text-6xl font-black tracking-tighter font-['Lufga']">
+            <p className="text-white text-4xl sm:text-6xl font-black tracking-tighter font-['Lufga']">
               Pickars<span style={{ color: "#ff0000" }}>.</span>
-            </h3>
+            </p>
           </motion.div>
         </motion.div>
       </div>

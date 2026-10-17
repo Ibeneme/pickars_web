@@ -13,18 +13,7 @@ import {
   fetchFinancialSummary,
   fetchInvestorProfile,
 } from "@/api/slices/investors/auth.investor.slice";
-import {
-  Banknote,
-  TrendingUp,
-  Calendar,
-  ArrowUpRight,
-  Check,
-  Package,
-  ChevronDown,
-} from "lucide-react";
-import Link from "next/link";
-
-const BASE = "/investors/dashboard";
+import { Calendar, Check, ChevronDown } from "lucide-react";
 
 const MONTHS = [
   { value: 1, label: "January" },
@@ -42,9 +31,6 @@ const MONTHS = [
 ];
 
 const naira = (n: number) => `₦${Math.round(n || 0).toLocaleString()}`;
-
-const FOCUS =
-  "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600";
 
 const SOFT = " border border-neutral-200/60";
 

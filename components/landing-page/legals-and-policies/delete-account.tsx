@@ -103,15 +103,15 @@ export const DeleteAccountPage: React.FC = () => {
       let response;
       try {
         response = await sendDeleteReq(phoneFormats.primary);
-      } catch (firstErr) {
+      } catch {
         // Fallback 1: Try without prefix (e.g., 8012345678)
         try {
           response = await sendDeleteReq(phoneFormats.rawWithoutZero);
-        } catch (secondErr) {
+        } catch {
           // Fallback 2: Try with local zero (e.g., 08012345678)
           try {
             response = await sendDeleteReq(phoneFormats.rawWithZero);
-          } catch (thirdErr) {
+          } catch {
             // Fallback 3: Try formatted with zero (e.g., 23408012345678)
             response = await sendDeleteReq(phoneFormats.secondary);
           }

@@ -101,7 +101,6 @@ export default function AppFeaturesNotifications() {
                 alt="Pickars App Smart Notifications Preview"
                 fill
                 className="object-cover"
-                priority
               />
             </motion.div>
           </motion.div>

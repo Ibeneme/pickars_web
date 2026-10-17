@@ -39,6 +39,7 @@ export default function DownloadButtons({
           href={iosUrl}
           target="_blank"
           rel="noopener noreferrer"
+          aria-label="Download Pickars on the App Store"
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
           className="flex h-10 w-10 items-center justify-center rounded-full bg-[#121212] text-white transition-colors hover:bg-[#FF0000] "
@@ -49,6 +50,7 @@ export default function DownloadButtons({
           href={androidUrl}
           target="_blank"
           rel="noopener noreferrer"
+          aria-label="Get Pickars on Google Play"
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
           className="flex h-10 w-10 items-center justify-center rounded-full bg-[#121212] text-white transition-colors hover:bg-[#FF0000] "

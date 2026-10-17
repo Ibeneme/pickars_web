@@ -129,7 +129,7 @@ export default function InvestorOverviewPage() {
       {/* ============ 2. Schedule-style pill bar ============ */}
       <div className="mt-8 flex flex-wrap items-center gap-3">
         <div className="flex items-center gap-3 rounded-full bg-black py-2 pl-6 pr-2 text-white">
-          <span className="text-base font-medium">Today's Date</span>
+          <span className="text-base font-medium">Today&apos;s Date</span>
           <span className="flex items-center gap-2.5 rounded-full bg-white/10 py-1.5 pl-1.5 pr-4 text-sm">
             <span className="grid h-9 w-9 place-items-center rounded-full bg-white/10">
               <CalendarDays size={16} aria-hidden />

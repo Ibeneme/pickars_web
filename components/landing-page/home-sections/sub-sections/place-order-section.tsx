@@ -78,8 +78,7 @@ const PlaceOrderSection: React.FC = () => {
             <div className="relative z-10 mt-12 w-full md:mb-[-84px] mb-[-36px]">
               <Image
                 src={riders_head}
-                alt="Pickars Rider"
-                priority
+                alt="Pickars dispatch riders ready to pick up your order"
                 className="w-full h-auto object-contain block"
               />
             </div>
