@@ -87,10 +87,8 @@ const PackageDeliverySection: React.FC = () => {
             className="w-full h-auto object-cover block"
           />
 
-          {/* Gradient Overlay */}
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
 
-          {/* Pickars Text Overlay */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
