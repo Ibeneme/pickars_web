@@ -809,7 +809,7 @@ const PartnerWithUs: React.FC = () => {
                   <div className="relative z-10 flex flex-col p-6 sm:p-10 lg:w-[58%]">
                     {/* Text color changes to white for malls and office supplies */}
                     <h3
-                      className={`text-4xl font-bold leading-none tracking-tight sm:text-6xl ${
+                      className={`text-4xl pt-6 font-bold leading-none tracking-tight sm:text-6xl ${
                         p.id === "malls" || p.id === "office"
                           ? "text-white"
                           : "text-black"
