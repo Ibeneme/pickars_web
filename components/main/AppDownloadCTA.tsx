@@ -1,27 +1,50 @@
-import React from "react";
-import { motion, type Variants } from "framer-motion";
+import React, { memo, useRef } from "react";
+import { motion, useInView, type Variants } from "framer-motion";
 import DownloadButtons from "../atoms/buttons/DownloadButtons";
 
-function DeliveryRider() {
+/* Looping animations are plain CSS and pause when the section is off-screen */
+const CSS = `
+@keyframes cta-ride {
+  from { transform: translate3d(-170px, 0, 0); }
+  to   { transform: translate3d(100cqw, 0, 0); }
+}
+@keyframes cta-road {
+  from { transform: translate3d(0, 0, 0); }
+  to   { transform: translate3d(-112px, 0, 0); }
+}
+@keyframes cta-float {
+  0%, 100% { transform: translate3d(0, 0, 0); opacity: .3; }
+  50%      { transform: translate3d(0, -22px, 0); opacity: .7; }
+}
+.cta-bg { container-type: inline-size; }
+.cta-ride-1 { animation: cta-ride 12s linear infinite; will-change: transform; }
+.cta-ride-2 { animation: cta-ride 8s linear infinite; animation-delay: -4s; will-change: transform; }
+.cta-road   { animation: cta-road 1.6s linear infinite; will-change: transform; }
+.cta-float  { animation: cta-float 5.5s ease-in-out infinite; will-change: transform, opacity; }
+.cta-float-2 { animation-duration: 6.5s; animation-delay: -1.2s; }
+.cta-float-3 { animation-duration: 4.2s; animation-delay: -2s; }
+@media (max-width: 767px) {
+  .cta-ride-1 { animation-duration: 6.5s; }
+  .cta-ride-2 { animation-duration: 4.5s; animation-delay: -2.2s; }
+  .cta-road   { animation-duration: 1s; }
+}
+[data-active="false"] .cta-ride-1,
+[data-active="false"] .cta-ride-2,
+[data-active="false"] .cta-road,
+[data-active="false"] .cta-float { animation-play-state: paused; }
+@media (prefers-reduced-motion: reduce) {
+  .cta-ride-1, .cta-ride-2, .cta-road, .cta-float { animation: none !important; }
+}
+`;
+
+/* ------------------------------------------------------------------ */
+/*  Delivery rider                                                     */
+/* ------------------------------------------------------------------ */
+const DeliveryRider = memo(function DeliveryRider() {
   return (
-    <g>
-      <ellipse cx="70" cy="58" rx="46" ry="10" fill="#1f1f1f" opacity="0.18" />
-      <circle
-        cx="22"
-        cy="45"
-        r="9"
-        fill="#1f1f1f"
-        stroke="#1f1f1f"
-        strokeWidth="1.5"
-      />
-      <circle
-        cx="118"
-        cy="45"
-        r="9"
-        fill="#1f1f1f"
-        stroke="#1f1f1f"
-        strokeWidth="1.5"
-      />
+    <svg width="140" height="70" viewBox="-12 20 140 50" overflow="visible">
+      <circle cx="22" cy="45" r="9" fill="#1f1f1f" />
+      <circle cx="118" cy="45" r="9" fill="#1f1f1f" />
       <rect
         x="18"
         y="40"
@@ -32,284 +55,240 @@ function DeliveryRider() {
         stroke="#000"
         strokeWidth="1.5"
       />
-      <g>
-        <rect
-          x="24"
-          y="27"
-          width="30"
-          height="34"
-          rx="7"
-          fill="#e11d2e"
-          stroke="#e11d2e"
-          strokeWidth="2"
-        />
-        <path
-          d="M 41 34 L 33 47 L 39 47 L 37 55 L 46 41 L 40 41 Z"
-          fill="#ffffff"
-        />
-      </g>
-      <ellipse
-        cx="66"
-        cy="45"
-        rx="21"
-        ry="15"
-        fill="#111111"
-        stroke="#111111"
-        strokeWidth="1.5"
+      <rect
+        x="24"
+        y="27"
+        width="30"
+        height="34"
+        rx="7"
+        fill="#e11d2e"
+        stroke="#fff"
+        strokeWidth="2"
       />
+      <path d="M 41 34 L 33 47 L 39 47 L 37 55 L 46 41 L 40 41 Z" fill="#fff" />
+      <ellipse cx="66" cy="45" rx="21" ry="15" fill="#111" />
       <path
         d="M 72 38 Q 95 30 112 32"
-        stroke="#111111"
+        stroke="#111"
         strokeWidth="6"
         strokeLinecap="round"
         fill="none"
       />
       <path
         d="M 72 52 Q 95 60 112 58"
-        stroke="#111111"
+        stroke="#111"
         strokeWidth="6"
         strokeLinecap="round"
         fill="none"
       />
-      <circle
-        cx="112"
-        cy="32"
-        r="5"
-        fill="#111111"
-        stroke="#111111"
-        strokeWidth="1.5"
-      />
-      <circle
-        cx="112"
-        cy="58"
-        r="5"
-        fill="#111111"
-        stroke="#111111"
-        strokeWidth="1.5"
-      />
+      <circle cx="112" cy="32" r="5" fill="#111" />
+      <circle cx="112" cy="58" r="5" fill="#111" />
       <circle
         cx="80"
         cy="45"
         r="12"
         fill="#e11d2e"
-        stroke="#e11d2e"
+        stroke="#fff"
         strokeWidth="2"
       />
       <circle cx="86" cy="45" r="6" fill="#e11d2e" opacity="0.85" />
-      <g opacity="0.55">
-        <line
-          x1="-4"
-          y1="38"
-          x2="10"
-          y2="38"
-          stroke="#ff0000"
-          strokeWidth="3"
-          strokeLinecap="round"
-        />
-        <line
-          x1="-10"
-          y1="45"
-          x2="6"
-          y2="45"
-          stroke="#ff0000"
-          strokeWidth="3"
-          strokeLinecap="round"
-        />
-        <line
-          x1="-4"
-          y1="52"
-          x2="10"
-          y2="52"
-          stroke="#ff0000"
-          strokeWidth="3"
-          strokeLinecap="round"
-        />
+      <g opacity="0.6" stroke="#fff" strokeWidth="3" strokeLinecap="round">
+        <line x1="-4" y1="38" x2="10" y2="38" />
+        <line x1="-10" y1="45" x2="6" y2="45" />
+        <line x1="-4" y1="52" x2="10" y2="52" />
       </g>
-    </g>
+    </svg>
   );
+});
+
+/* ------------------------------------------------------------------ */
+/*  Skyline – one flat row of separate buildings                       */
+/* ------------------------------------------------------------------ */
+const VB_W = 1440;
+const VB_H = 240;
+const GROUND = 240;
+
+function mulberry32(seed: number) {
+  return function () {
+    seed |= 0;
+    seed = (seed + 0x6d2b79f5) | 0;
+    let t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
 }
 
+interface Tower {
+  x: number;
+  w: number;
+  h: number;
+  slant: boolean;
+}
+
+// One single row of buildings, side by side: nothing overlaps or stacks
+function buildSkyline(): Tower[] {
+  const rnd = mulberry32(31);
+  const towers: Tower[] = [];
+  let x = 0;
+  let prevH = 0;
+  while (x < VB_W) {
+    const w = 44 + rnd() * 50;
+    let h = 70 + rnd() * 140;
+    // keep neighbours visibly different in height
+    if (Math.abs(h - prevH) < 25) h = Math.min(210, h + 40);
+    towers.push({ x, w, h, slant: rnd() > 0.8 });
+    x += w + 4 + rnd() * 8;
+    prevH = h;
+  }
+  return towers;
+}
+
+const TOWERS = buildSkyline();
+
+const CitySkyline = memo(function CitySkyline() {
+  return (
+    <svg
+      className="pointer-events-none absolute bottom-16 left-0 z-[1] h-44 w-full sm:bottom-20 sm:h-56 md:bottom-24 md:h-72"
+      viewBox={`0 0 ${VB_W} ${VB_H}`}
+      preserveAspectRatio="xMidYMax slice"
+      fill="none"
+      aria-hidden
+    >
+      <g fill="#000" opacity="0.3">
+        {TOWERS.map((t, i) => {
+          const top = GROUND - t.h;
+          return t.slant ? (
+            <polygon
+              key={i}
+              points={`${t.x},${GROUND} ${t.x},${top + 18} ${
+                t.x + t.w
+              },${top} ${t.x + t.w},${GROUND}`}
+            />
+          ) : (
+            <rect key={i} x={t.x} y={top} width={t.w} height={t.h} />
+          );
+        })}
+      </g>
+    </svg>
+  );
+});
+
+/* ------------------------------------------------------------------ */
+/*  Background                                                         */
+/* ------------------------------------------------------------------ */
+const Background = memo(function Background() {
+  return (
+    <div className="cta-bg pointer-events-none absolute inset-0 overflow-hidden">
+      <CitySkyline />
+
+      {/* road */}
+      <div className="absolute bottom-0 left-0 z-[2] h-16 w-full overflow-hidden bg-black/60 sm:h-20 md:h-24">
+        <div className="absolute inset-x-0 top-0 h-px bg-white/25" />
+        <div
+          className="cta-road absolute left-0 top-1/2 h-1.5 -translate-y-1/2 sm:h-2"
+          style={{
+            width: "calc(100% + 112px)",
+            backgroundImage:
+              "repeating-linear-gradient(90deg, rgba(255,255,255,0.65) 0 56px, transparent 56px 112px)",
+          }}
+        />
+      </div>
+
+      {/* riders */}
+      <div className="cta-ride-1 absolute bottom-1.5 z-10 opacity-95 sm:bottom-2.5">
+        <div className="origin-bottom-left scale-[0.7] sm:scale-90 md:scale-100">
+          <DeliveryRider />
+        </div>
+      </div>
+      <div className="cta-ride-2 absolute bottom-7 z-10 opacity-85 sm:bottom-9 md:bottom-11">
+        <div className="origin-bottom-left scale-[0.55] sm:scale-75 md:scale-[0.8]">
+          <DeliveryRider />
+        </div>
+      </div>
+
+      {/* floating accents */}
+      <div className="cta-float absolute left-[12%] top-[18%] h-9 w-9 rounded-xl border border-white/15 bg-black/20" />
+      <div className="cta-float cta-float-2 absolute right-[18%] top-[22%] h-7 w-7 rounded-full border-2 border-white/25 bg-white/10" />
+      <div className="cta-float cta-float-3 absolute left-[32%] top-[28%] h-2 w-2 rounded-full bg-white/70" />
+    </div>
+  );
+});
+
+/* ------------------------------------------------------------------ */
+/*  CTA                                                                */
+/* ------------------------------------------------------------------ */
+const containerVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { staggerChildren: 0.12 } },
+};
+
+const itemVariants: Variants = {
+  hidden: { y: 20, opacity: 0 },
+  visible: {
+    y: 0,
+    opacity: 1,
+    transition: { type: "spring", stiffness: 100, damping: 18 },
+  },
+};
+
 const AppDownloadCTA: React.FC = () => {
-  const containerVariants: Variants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.12,
-      },
-    },
-  };
-
-  const itemVariants: Variants = {
-    hidden: { y: 20, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        type: "spring",
-        stiffness: 100,
-        damping: 18,
-      },
-    },
-  };
-
-  const isDesktop = typeof window !== "undefined" && window.innerWidth >= 768;
+  const ref = useRef<HTMLElement>(null);
+  const active = useInView(ref, { margin: "100px" });
 
   return (
-    <div className="w-full px-8 sm:px-6 lg:px-8">
-      <section className="relative mx-auto mt-8 mb-16 w-full max-w-7xl overflow-hidden rounded-3xl bg-[#ff0000] font-['Lufga'] text-white sm:mt-12  lg:mt-16 shadow-2xl">
-        {/* ========== VISIBLE DELIVERY BACKGROUND ANIMATIONS ========== */}
-        <div className="pointer-events-none absolute inset-0 overflow-hidden">
-          {/* 1. Subtle Background Glowing Gradients */}
-          <motion.div
-            animate={{
-              scale: [1, 1.15, 1],
-              opacity: [0.15, 0.25, 0.15],
-            }}
-            transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute top-1/4 left-1/4 -translate-x-1/2 -translate-y-1/2 h-96 w-96 rounded-full bg-black/10 blur-5xl"
-          />
+    <div className="w-full px-4 sm:px-6 lg:px-8">
+      <style>{CSS}</style>
 
-          {/* 2. Enhanced Animated Road (Borders Removed) */}
-          <div className="absolute bottom-0 left-0 z-0 w-full h-20 sm:h-24 bg-black/40 overflow-hidden">
-            {/* Moving Center Lane Markings */}
-            <motion.div
-              animate={{ x: ["-50%", "0%"] }}
-              transition={{
-                duration: isDesktop ? 3 : 1.5,
-                repeat: Infinity,
-                ease: "linear",
-              }}
-              className="absolute top-1/2 left-0 -translate-y-1/2 flex space-x-12 sm:space-x-16 w-[200%]"
-            >
-              {Array.from({ length: 30 }).map((_, i) => (
-                <div
-                  key={i}
-                  className="w-12 sm:w-16 h-1.5 sm:h-2 bg-white/70 rounded-full shrink-0"
-                />
-              ))}
-            </motion.div>
-          </div>
+      <section
+        ref={ref}
+        data-active={active}
+        className="relative mx-auto mb-16 mt-8 w-full max-w-7xl overflow-hidden rounded-[2rem] bg-[#ff0000] font-['Lufga'] text-white sm:mt-12 lg:mt-16"
+      >
+        <Background />
 
-          {/* 3. Animated Delivery Riders Crossing the Road */}
-          <motion.div
-            animate={{ x: ["-100px", "100vw"] }}
-            transition={{
-              duration: isDesktop ? 11 : 6,
-              repeat: Infinity,
-              ease: "linear",
-            }}
-            className="absolute bottom-2 sm:bottom-3 z-10 scale-75 sm:scale-100 opacity-95"
-          >
-            <DeliveryRider />
-          </motion.div>
-
-          <motion.div
-            animate={{ x: ["-100px", "100vw"] }}
-            transition={{
-              duration: isDesktop ? 7.5 : 4.2,
-              repeat: Infinity,
-              ease: "linear",
-              delay: isDesktop ? 3.5 : 2.2,
-            }}
-            className="absolute bottom-8 sm:bottom-11 z-10 scale-60 sm:scale-75 opacity-90"
-          >
-            <DeliveryRider />
-          </motion.div>
-
-          {/* 4. Floating Abstract Logistics Elements */}
-          <motion.div
-            animate={{ y: [0, -35, 0], opacity: [0.3, 0.7, 0.3] }}
-            transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute left-[15%] top-[20%] w-10 h-10 rounded-xl bg-black/20 border border-white/20 shadow-lg"
-          />
-
-          <motion.div
-            animate={{ y: [0, 30, 0], opacity: [0.2, 0.6, 0.2] }}
-            transition={{
-              duration: 6,
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: 1,
-            }}
-            className="absolute right-[20%] top-[25%] w-8 h-8 rounded-full border-2 border-white/30 bg-white/10"
-          />
-
-          <motion.div
-            animate={{
-              y: [0, -25, 0],
-              x: [0, 15, 0],
-              opacity: [0.4, 0.8, 0.4],
-            }}
-            transition={{
-              duration: 4.5,
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: 0.5,
-            }}
-            className="absolute left-[65%] top-[40%] w-6 h-6 rounded-lg bg-black/20 border border-white/15"
-          />
-
-          {/* Spark dots */}
-          <motion.div
-            animate={{ y: [0, -50, 0], opacity: [0.3, 0.9, 0.3] }}
-            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute left-[35%] top-[30%] h-2.5 w-2.5 rounded-full bg-white/70"
-          />
-          <motion.div
-            animate={{ y: [0, 40, 0], opacity: [0.2, 0.8, 0.2] }}
-            transition={{
-              duration: 5.5,
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: 1.5,
-            }}
-            className="absolute right-[35%] top-[18%] h-2 w-2 rounded-full bg-white/60"
-          />
-        </div>
-        {/* ========== END BACKGROUND ANIMATIONS ========== */}
-
-        <div className="relative z-20 mx-auto flex max-w-7xl flex-col items-center justify-center px-4 pt-16 pb-28 sm:px-6 sm:py-24 lg:px-8 lg:py-28">
+        <div className="relative z-20 mx-auto flex max-w-7xl flex-col items-center justify-center px-5 pb-40 pt-16 sm:px-8 sm:pb-44 sm:pt-24 lg:px-10 lg:pb-48 lg:pt-28">
           <motion.div
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true }}
+            viewport={{ once: true, margin: "-80px" }}
             className="flex w-full max-w-4xl flex-col items-center text-center"
           >
-            {/* Ticket-style Badge */}
+            {/* ticket badge */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.8, rotate: -5 }}
-              animate={{ opacity: 1, scale: 1, rotate: -2 }}
-              whileHover={{ scale: 1.08, rotate: 0 }}
-              transition={{ type: "spring", stiffness: 200, damping: 15 }}
-              className="mb-6 sm:mb-12 px-5 sm:px-6 py-2 max-w-[270px] sm:py-2.5 bg-[#000] text-white font-black text-[11px] sm:text-xs md:text-sm uppercase tracking-widest cursor-default select-none"
-              style={{
-                maskImage:
-                  "radial-gradient(circle 5px at calc(100% - 2.5px) 50%, #0000 99%, #000 100%)",
-                WebkitMaskImage:
-                  "conic-gradient(from -45deg at 50% 50%, #000 0 90deg, #0000 0) 0 0/10px 10px repeat",
-              }}
+              variants={itemVariants}
+              style={{ rotate: -1.5 }}
+              className="relative mb-7 cursor-default select-none sm:mb-10"
             >
-              GET STARTED TODAY
+              <div className="relative rounded-md bg-black px-6 py-2.5 text-[11px] font-black uppercase tracking-[0.22em] text-white sm:text-xs md:text-sm">
+                <span className="absolute -left-1.5 top-1/2 h-3 w-3 -translate-y-1/2 rounded-full bg-[#ff0000]" />
+                <span className="absolute -right-1.5 top-1/2 h-3 w-3 -translate-y-1/2 rounded-full bg-[#ff0000]" />
+                <span className="mr-2 inline-block h-1.5 w-1.5 rounded-full bg-[#ff3b3b] align-middle" />
+                Get started today
+              </div>
             </motion.div>
 
-            <motion.h2
+            <motion.h1
               variants={itemVariants}
-              className="text-4xl font-black leading-[1.05] tracking-tight text-white sm:text-6xl md:text-6xl drop-shadow-sm"
+              className="text-4xl font-black leading-[1.08] tracking-tight text-white sm:text-5xl md:text-6xl"
             >
-              Download the app <br className="hidden sm:inline" /> to get
-              started.
-            </motion.h2>
+              Download the app <br className="hidden sm:inline" />
+              to get{" "}
+              <span className="relative inline-block">
+                started.
+                <span className="absolute -bottom-1 left-0 h-1.5 w-full rounded-full bg-white/80 sm:h-2" />
+              </span>
+            </motion.h1>
 
             <motion.p
               variants={itemVariants}
-              className="mt-6 max-w-2xl text-base font-medium leading-relaxed text-white/90 sm:text-xl"
+              className="mt-6 max-w-2xl text-base font-medium leading-relaxed text-white/90 sm:mt-7 sm:text-lg md:text-xl"
             >
               Book deliveries in seconds, track your dispatch rider in real
               time, and enjoy seamless package pickups right from your phone.
             </motion.p>
-            <motion.div variants={itemVariants} className="mt-10">
+
+            <motion.div variants={itemVariants} className="mt-9 sm:mt-11">
               <DownloadButtons dark={true} />
             </motion.div>
           </motion.div>

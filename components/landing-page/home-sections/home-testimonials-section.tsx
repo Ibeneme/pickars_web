@@ -3,90 +3,104 @@
 import React, { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { motion, AnimatePresence } from "framer-motion";
+import {
+  motion,
+  AnimatePresence,
+  useAnimationFrame,
+  useInView,
+  useReducedMotion,
+} from "framer-motion";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
 
-interface FaqItem {
+interface TestimonialItem {
   id: number;
-  question: string;
-  answer: string;
-  category: string;
+  quote: string;
+  author: string;
+  role: string;
   tag: string;
 }
 
-const faqs: FaqItem[] = [
+const testimonials: TestimonialItem[] = [
   {
     id: 1,
-    question: "How fast is delivery with Pickars in Port Harcourt?",
-    answer:
-      "Pickars delivers packages across Port Harcourt in under an hour depending on the route, connecting you instantly with riders near you for lightning-fast dispatch.",
-    category: "Delivery Speed",
-    tag: "Speed",
+    quote:
+      "Pickars has completely transformed how I handle customer deliveries for my online boutique in GRA. Packages get to my buyers across Port Harcourt in record time without any stress!",
+    author: "Chiamaka Okoro",
+    role: "Boutique Owner, GRA",
+    tag: "Merchant",
   },
   {
     id: 2,
-    question: "Can I track my package in real-time while it's being delivered?",
-    answer:
-      "Yes! Real-time tracking is built directly into Pickars so you can monitor your rider's exact location from pickup to final drop-off at your destination.",
-    category: "Tracking",
+    quote:
+      "The live map tracking is a game-changer! I can sit in my office in Trans-Amadi and watch my dispatch rider deliver documents right to my client's doorstep in real-time.",
+    author: "Tariq Briggs",
+    role: "Operations Manager, Trans-Amadi",
     tag: "Live Map",
   },
   {
     id: 3,
-    question: "What areas in Port Harcourt does Pickars cover?",
-    answer:
-      "Pickars covers all major areas across Port Harcourt including Borikiri, Garrison, Eleme, Oil Mill, GRA, Ada George, Trans-Amadi, Diobu, and beyond.",
-    category: "Coverage",
-    tag: "PH Coverage",
-  },
-  {
-    id: 4,
-    question:
-      "Is Pickars reliable for sending business stock and daily orders?",
-    answer:
-      "Absolutely. Many online boutique owners and small businesses rely on Pickars daily to dispatch products securely and efficiently across PH without stress.",
-    category: "Business",
-    tag: "Merchants",
-  },
-  {
-    id: 5,
-    question: "How do I book a dispatch rider on the app?",
-    answer:
-      "Booking a bike is effortless just open the app, enter your pickup and drop-off locations, view upfront pricing, and tap to match with an available rider instantly.",
-    category: "Booking",
-    tag: "Easy Steps",
-  },
-  {
-    id: 6,
-    question: "Are fragile items safe with Pickars dispatch riders?",
-    answer:
-      "Yes, our trained riders handle every package with care, ensuring fragile items, documents, and valuables arrive safely without any damage.",
-    category: "Safety",
+    quote:
+      "I run a small bakery, and handling fragile cakes used to be a nightmare until I started using Pickars. Their riders are careful, punctual, and extremely polite.",
+    author: "Blessing Nnamdi",
+    role: "Baker & Vendor, Ada George",
     tag: "Secure",
   },
   {
+    id: 4,
+    quote:
+      "Lightning-fast delivery across Borikiri and Garrison. Whenever I need a package picked up urgently, Pickars never disappoints. Best dispatch service in PH!",
+    author: "Godwin Etim",
+    role: "E-commerce Seller",
+    tag: "Speed",
+  },
+  {
+    id: 5,
+    quote:
+      "Booking a bike takes less than a minute on the app. Upfront pricing means no hidden charges or arguing with riders over delivery fees. Highly recommended!",
+    author: "Dr. Evelyn Peters",
+    role: "Pharmacist, Rumuola",
+    tag: "Easy App",
+  },
+  {
+    id: 6,
+    quote:
+      "As someone who sends multiple parcels daily across town, their budget-friendly merchant rates have saved me so much money while keeping my customers happy.",
+    author: "Kenneth Woke",
+    role: "Gadget Store Owner, Mile 3",
+    tag: "Affordable",
+  },
+  {
     id: 7,
-    question: "Do Pickars riders stick to delivery schedules?",
-    answer:
-      "Pickars takes time management seriously, respecting delivery windows and schedules better than standard local dispatch services in Port Harcourt.",
-    category: "Schedule",
-    tag: "Punctual",
+    quote:
+      "Reliable, professional, and super fast. Pickars handles our corporate document runs across Port Harcourt seamlessly. Exceptional service all round.",
+    author: "Precious Dike",
+    role: "Legal Consultant, Old GRA",
+    tag: "Corporate",
   },
   {
     id: 8,
-    question: "Are the delivery rates affordable for small business owners?",
-    answer:
-      "We offer competitive, budget-friendly rates designed specifically to help small business owners scale their daily deliveries without breaking the bank.",
-    category: "Pricing",
-    tag: "Affordable",
+    quote:
+      "I love how smooth the whole experience is. From ordering to drop-off, everything feels modern, secure, and built specifically for people living in PH.",
+    author: "Samuel Jumbo",
+    role: "Regular Customer, Eleme",
+    tag: "Punctual",
   },
 ];
 
 const AUTO_ADVANCE_SECONDS = 10;
 const CIRCLE_CIRCUMFERENCE = 131.9;
+
+const RED = "#FF0000";
+const INK = "#111111";
+const EASE = [0.22, 1, 0.36, 1] as const;
+
+/* ───────────── Dispatch rider (one wheel) ───────────── */
+const WHEEL_R = 13;
+
+
 
 export default function HomeTestimonialsSection(): React.JSX.Element {
   const sectionRef = useRef<HTMLElement>(null);
@@ -97,7 +111,7 @@ export default function HomeTestimonialsSection(): React.JSX.Element {
   const nextBtnRef = useRef<HTMLButtonElement>(null);
   const progressTweenRef = useRef<gsap.core.Tween | null>(null);
 
-  const [currentIndex, setCurrentIndex] = useState(2);
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -171,7 +185,7 @@ export default function HomeTestimonialsSection(): React.JSX.Element {
         }
       },
       onComplete: () => {
-        setCurrentIndex((prev) => (prev + 1) % faqs.length);
+        setCurrentIndex((prev) => (prev + 1) % testimonials.length);
       },
     });
 
@@ -184,11 +198,13 @@ export default function HomeTestimonialsSection(): React.JSX.Element {
   const resumeAutoAdvance = () => progressTweenRef.current?.resume();
 
   const handleNext = () => {
-    setCurrentIndex((prev) => (prev + 1) % faqs.length);
+    setCurrentIndex((prev) => (prev + 1) % testimonials.length);
   };
 
   const handlePrev = () => {
-    setCurrentIndex((prev) => (prev - 1 + faqs.length) % faqs.length);
+    setCurrentIndex(
+      (prev) => (prev - 1 + testimonials.length) % testimonials.length
+    );
   };
 
   const handleBtnEnter = (btn: HTMLButtonElement | null) => {
@@ -201,7 +217,7 @@ export default function HomeTestimonialsSection(): React.JSX.Element {
     gsap.to(btn, { y: 0, scale: 1, duration: 0.3, ease: "power3.out" });
   };
 
-  const current = faqs[currentIndex];
+  const current = testimonials[currentIndex];
 
   return (
     <section
@@ -221,17 +237,18 @@ export default function HomeTestimonialsSection(): React.JSX.Element {
             "conic-gradient(from -45deg at 50% 50%, #000 0 90deg, #0000 0) 0 0/10px 10px repeat",
         }}
       >
-        FREQUENTLY ASKED QUESTIONS
+        TESTIMONIALS
       </motion.div>
 
       {/* Header - Centered */}
       <div className="w-full max-w-3xl mb-10 sm:mb-12 md:mb-16 flex flex-col items-center text-center">
         <h3 className="mb-5 text-4xl font-black leading-[1.05] tracking-tight text-gray-900 sm:text-6xl md:text-6xl lg:text-6xl">
-          Got questions about <span className="text-[#ff0000]">Pickars?</span>
+          Loved by businesses across{" "}
+          <span className="text-[#ff0000]">Port Harcourt</span>
         </h3>
         <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-600 mt-3 sm:mt-4 max-w-2xl">
-          Everything you need to know about our dispatch rider service in Port
-          Harcourt.
+          Hear what everyday senders and merchants have to say about their
+          experience with Pickars.
         </p>
       </div>
 
@@ -242,23 +259,24 @@ export default function HomeTestimonialsSection(): React.JSX.Element {
         onMouseLeave={resumeAutoAdvance}
         className="w-full max-w-7xl bg-white rounded-2xl sm:rounded-3xl md:rounded-[2.5rem] border border-red-100 p-5 sm:p-8 md:p-12 lg:p-16 flex flex-col justify-between min-h-[480px] sm:min-h-[520px] relative overflow-hidden"
       >
-        {/* Decorative ? */}
+        {/* Decorative Quote Mark */}
         <span
           ref={quoteMarkRef}
           aria-hidden="true"
           className="pointer-events-none absolute -top-4 right-4 sm:right-8 md:right-12 text-[8rem] sm:text-[12rem] md:text-[16rem] font-black leading-none text-red-600/[0.035] select-none"
         >
-          ?
+          &ldquo;
         </span>
 
         {/* Top bar */}
         <div className="relative flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 sm:gap-6 border-b border-red-50 pb-6 sm:pb-8">
           <div className="flex flex-col gap-1 min-w-0">
             <span className="text-[11px] sm:text-xs font-bold tracking-widest text-red-400 uppercase truncate">
-              0{currentIndex + 1} / 0{faqs.length} — {current.tag}
+              0{currentIndex + 1} / 0{testimonials.length}
             </span>
-            <p className="text-sm sm:text-base text-gray-500 font-medium truncate max-w-md">
-              {current.question}
+            <p className="text-sm sm:text-base text-gray-700 font-bold truncate max-w-md">
+              {current.author} —{" "}
+              <span className="text-gray-500 font-medium">{current.role}</span>
             </p>
           </div>
 
@@ -270,7 +288,7 @@ export default function HomeTestimonialsSection(): React.JSX.Element {
               onMouseEnter={() => handleBtnEnter(prevBtnRef.current)}
               onMouseLeave={() => handleBtnLeave(prevBtnRef.current)}
               className="w-11 h-11 sm:w-12 sm:h-12 rounded-full border border-red-100 flex items-center justify-center text-gray-700 hover:bg-red-50 hover:border-red-200 transition-colors cursor-pointer will-change-transform"
-              aria-label="Previous Question"
+              aria-label="Previous Testimonial"
             >
               <svg
                 className="w-4.5 h-4.5 sm:w-5 sm:h-5 stroke-current stroke-2 fill-none"
@@ -286,7 +304,7 @@ export default function HomeTestimonialsSection(): React.JSX.Element {
               onMouseEnter={() => handleBtnEnter(nextBtnRef.current)}
               onMouseLeave={() => handleBtnLeave(nextBtnRef.current)}
               className="w-11 h-11 sm:w-12 sm:h-12 rounded-full border border-red-100 flex items-center justify-center text-gray-700 hover:bg-red-50 hover:border-red-200 transition-colors relative cursor-pointer will-change-transform"
-              aria-label="Next Question"
+              aria-label="Next Testimonial"
             >
               <svg
                 className="absolute inset-0 w-full h-full -rotate-90"
@@ -321,7 +339,7 @@ export default function HomeTestimonialsSection(): React.JSX.Element {
           </div>
         </div>
 
-        {/* Answer */}
+        {/* Quote / Testimonial text */}
         <div className="relative py-8 sm:py-10 md:py-14 flex flex-col justify-center min-h-[180px] sm:min-h-[220px]">
           <AnimatePresence mode="wait">
             <motion.div
@@ -333,7 +351,7 @@ export default function HomeTestimonialsSection(): React.JSX.Element {
               className="max-w-4xl"
             >
               <p className="text-xl sm:text-2xl md:text-3xl lg:text-[2.4rem] xl:text-[2.6rem] font-extrabold tracking-tight text-gray-900 leading-[1.3] sm:leading-[1.25]">
-                {current.answer}
+                &ldquo;{current.quote}&rdquo;
               </p>
             </motion.div>
           </AnimatePresence>
@@ -343,7 +361,7 @@ export default function HomeTestimonialsSection(): React.JSX.Element {
         <div className="relative flex flex-col sm:flex-row items-center sm:items-end justify-between gap-6 sm:gap-8 pt-6 border-t border-red-50">
           {/* Dots */}
           <div className="flex items-center gap-1.5 sm:gap-2 order-2 sm:order-1">
-            {faqs.map((_, idx) => (
+            {testimonials.map((_, idx) => (
               <button
                 key={idx}
                 onClick={() => setCurrentIndex(idx)}
@@ -352,12 +370,14 @@ export default function HomeTestimonialsSection(): React.JSX.Element {
                     ? "w-6 sm:w-8 bg-[#FF0000]"
                     : "w-1.5 sm:w-2 bg-red-100 hover:bg-red-200"
                 }`}
-                aria-label={`Go to question ${idx + 1}`}
+                aria-label={`Go to testimonial ${idx + 1}`}
               />
             ))}
           </div>
         </div>
       </div>
+
+
     </section>
   );
 }

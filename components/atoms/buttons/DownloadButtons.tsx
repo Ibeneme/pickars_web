@@ -11,17 +11,21 @@ export default function DownloadButtons({
   dark = false,
   alignLeft = false,
   isHalf = false,
+  bgColor,
+  textColor,
 }: {
   iosUrl?: string;
   androidUrl?: string;
   dark?: boolean;
   alignLeft?: boolean;
   isHalf?: boolean;
+  bgColor?: string;
+  textColor?: string;
 }) {
   const buttonStyles = `group flex flex-1 sm:flex-none min-w-[140px] sm:min-w-[180px] items-center justify-center gap-2.5 sm:gap-3 rounded-[120px] px-4 sm:px-5 py-3 cursor-pointer transition-colors duration-300`;
 
   const subtitleStyles = `text-[9px] sm:text-[10px] font-semibold uppercase tracking-wider transition-colors duration-300 ${
-    dark
+    dark || (textColor && textColor.includes("white"))
       ? "text-zinc-400 group-hover:text-white/90"
       : "text-zinc-400 group-hover:text-white/90"
   }`;
@@ -29,6 +33,23 @@ export default function DownloadButtons({
   const alignmentClass = alignLeft
     ? "justify-center md:justify-start"
     : "justify-center";
+
+  // Handle custom inline styles if bgColor or textColor are passed
+  const customStyle = {
+    ...(bgColor ? { backgroundColor: bgColor } : {}),
+    ...(textColor ? { color: textColor } : {}),
+  };
+
+  const getButtonClass = () => {
+    if (bgColor || textColor) {
+      return `${buttonStyles} hover:bg-[#ff0000] hover:text-white`;
+    }
+    return `${buttonStyles} ${
+      dark
+        ? "bg-white text-black hover:bg-[#ff0000] hover:text-white"
+        : "bg-black text-white hover:bg-[#ff0000]"
+    }`;
+  };
 
   if (isHalf) {
     return (
@@ -42,7 +63,10 @@ export default function DownloadButtons({
           aria-label="Download Pickars on the App Store"
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
-          className="flex h-10 w-10 items-center justify-center rounded-full bg-[#121212] text-white transition-colors hover:bg-[#FF0000] "
+          style={customStyle}
+          className={`flex h-10 w-10 items-center justify-center rounded-full transition-colors hover:bg-[#FF0000] hover:text-white ${
+            !bgColor ? "bg-[#121212] text-white" : ""
+          }`}
         >
           <FaApple size={18} />
         </motion.a>
@@ -53,7 +77,10 @@ export default function DownloadButtons({
           aria-label="Get Pickars on Google Play"
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
-          className="flex h-10 w-10 items-center justify-center rounded-full bg-[#121212] text-white transition-colors hover:bg-[#FF0000] "
+          style={customStyle}
+          className={`flex h-10 w-10 items-center justify-center rounded-full transition-colors hover:bg-[#FF0000] hover:text-white ${
+            !bgColor ? "bg-[#121212] text-white" : ""
+          }`}
         >
           <BiLogoPlayStore size={18} />
         </motion.a>
@@ -73,11 +100,8 @@ export default function DownloadButtons({
         whileHover={{ y: -2, scale: 1 }}
         whileTap={{ scale: 0.97 }}
         transition={{ type: "spring", stiffness: 400, damping: 25 }}
-        className={`${buttonStyles} ${
-          dark
-            ? "bg-white text-black hover:bg-[#ff0000] hover:text-white"
-            : "bg-black text-white hover:bg-[#ff0000]"
-        }`}
+        style={customStyle}
+        className={getButtonClass()}
       >
         <svg
           className="h-5 w-5 sm:h-6 sm:w-6 shrink-0 fill-current"
@@ -101,11 +125,8 @@ export default function DownloadButtons({
         whileHover={{ y: -2, scale: 1 }}
         whileTap={{ scale: 0.97 }}
         transition={{ type: "spring", stiffness: 400, damping: 25 }}
-        className={`${buttonStyles} ${
-          dark
-            ? "bg-white text-black hover:bg-[#ff0000] hover:text-white"
-            : "bg-black text-white hover:bg-[#ff0000]"
-        }`}
+        style={customStyle}
+        className={getButtonClass()}
       >
         <svg
           className="h-5 w-5 sm:h-6 sm:w-6 shrink-0 fill-current"

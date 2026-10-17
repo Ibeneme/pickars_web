@@ -3,7 +3,7 @@ import JsonLd from "@/components/seo/json-ld";
 import HeroSection from "@/components/landing-page/home-sections/hero";
 import HomeTestimonialsSection from "@/components/landing-page/home-sections/home-testimonials-section";
 import HomeWithMapSection from "@/components/landing-page/home-sections/home-with-map-section";
-import HowItWorks from "@/components/landing-page/home-sections/how-it-works";
+import PartnerWithUs from "@/components/landing-page/home-sections/partner-with-us";
 import NeverLateSection from "@/components/landing-page/home-sections/never-late-section";
 import PackageDeliverySection from "@/components/landing-page/home-sections/package-delivery-section";
 import QualitiesSliderSection from "@/components/landing-page/home-sections/qualities-slider-section";
@@ -16,7 +16,7 @@ import {
 } from "@/utils/seo/schema";
 import { SITE, absoluteUrl, OG_IMAGES } from "@/utils/seo/config";
 
-const TITLE = "Pickars: Dispatch Riders & Same-Day Delivery in Port Harcourt";
+const TITLE = "Pickars: Your doorstep deliveries, redefined";
 const DESCRIPTION =
   "Book trusted dispatch riders for same-day parcel and package delivery across Port Harcourt. Live GPS tracking, upfront pricing and instant rider matching.";
 
@@ -25,7 +25,7 @@ export const metadata: Metadata = createPageMetadata({
   absoluteTitle: true,
   description: DESCRIPTION,
   path: "/",
-  imageAlt: "Pickars – fast dispatch riders and bike couriers in Port Harcourt",
+  imageAlt: "Pickars – Your doorstep deliveries, redefined.",
 });
 
 const homeSchema = graph(
@@ -49,13 +49,15 @@ const homeSchema = graph(
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-900 font-sans">
+    <div className="min-h-screen bg-white text-slate-900 font-sans">
       <JsonLd data={homeSchema} />
       <HeroSection />
+
       <QualitiesSliderSection />
       <HomeWithMapSection />
-      <PackageDeliverySection />
-      <HowItWorks />
+      <PartnerWithUs />
+      {/* <PackageDeliverySection /> */}
+
       <NeverLateSection />
       <HomeTestimonialsSection />
     </div>

@@ -1,7 +1,6 @@
 "use client";
 
-import React from "react";
-import Image from "next/image";
+import React, { memo } from "react";
 import Link from "next/link";
 import {
   FaEnvelope,
@@ -14,38 +13,125 @@ import {
 import logo from "@/public/logo.svg";
 import { motion } from "framer-motion";
 import AppDownloadCTA from "./AppDownloadCTA";
-import { SITE, SOCIAL_LINKS } from "@/utils/seo/config";
 
-type SocialName = (typeof SOCIAL_LINKS)[number]["name"];
+/* ------------------------------------------------------------------ */
+/*  Footer skyline: one flat row of separate buildings (built once)    */
+/* ------------------------------------------------------------------ */
+const VB_W = 1440;
+const VB_H = 220;
+const GROUND = 220;
 
-const SOCIAL_ICONS: Record<SocialName, React.ReactNode> = {
-  Instagram: <FaInstagram size={16} />,
-  "X (Twitter)": <FaXTwitter size={16} />,
-  Facebook: <FaFacebookF size={16} />,
-  LinkedIn: <FaLinkedinIn size={16} />,
-};
+function mulberry32(seed: number) {
+  return function () {
+    seed |= 0;
+    seed = (seed + 0x6d2b79f5) | 0;
+    let t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+
+interface Tower {
+  x: number;
+  w: number;
+  h: number;
+  slant: boolean;
+}
+
+function buildSkyline(): Tower[] {
+  const rnd = mulberry32(77);
+  const towers: Tower[] = [];
+  let x = 0;
+  let prevH = 0;
+  while (x < VB_W) {
+    const w = 44 + rnd() * 50;
+    let h = 60 + rnd() * 130;
+    // keep neighbours visibly different in height
+    if (Math.abs(h - prevH) < 25) h = Math.min(195, h + 40);
+    towers.push({ x, w, h, slant: rnd() > 0.8 });
+    x += w + 4 + rnd() * 8;
+    prevH = h;
+  }
+  return towers;
+}
+
+const TOWERS = buildSkyline();
+
+const FooterSkyline = memo(function FooterSkyline() {
+  return (
+    <svg
+      className="pointer-events-none absolute inset-x-0 bottom-0 z-0 h-40 w-full sm:h-52 md:h-64"
+      viewBox={`0 0 ${VB_W} ${VB_H}`}
+      preserveAspectRatio="xMidYMax slice"
+      fill="none"
+      aria-hidden
+    >
+      <g fill="#ffffff" opacity="0.06">
+        {TOWERS.map((t, i) => {
+          const top = GROUND - t.h;
+          return t.slant ? (
+            <polygon
+              key={i}
+              points={`${t.x},${GROUND} ${t.x},${top + 18} ${
+                t.x + t.w
+              },${top} ${t.x + t.w},${GROUND}`}
+            />
+          ) : (
+            <rect key={i} x={t.x} y={top} width={t.w} height={t.h} />
+          );
+        })}
+      </g>
+    </svg>
+  );
+});
 
 const Footer: React.FC = () => {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
+  const socialLinks = [
+    {
+      name: "Instagram",
+      url: "https://www.instagram.com/pickars_official?igsh=MWY4aTJieHVtMGltYg%3D%3D&utm_source=qr",
+      icon: <FaInstagram size={16} />,
+    },
+    {
+      name: "X (Twitter)",
+      url: "https://x.com/pickars_app?s=21",
+      icon: <FaXTwitter size={16} />,
+    },
+    {
+      name: "Facebook",
+      url: "https://www.facebook.com/share/1cW4kyitrJ/?mibextid=wwXIfr&wa_status_inline=true",
+      icon: <FaFacebookF size={16} />,
+    },
+    {
+      name: "LinkedIn",
+      url: "https://www.linkedin.com/company/pickars/",
+      icon: <FaLinkedinIn size={16} />,
+    },
+  ];
+
   return (
     <footer className="relative w-full overflow-hidden mb-0 bg-black font-['Lufga'] text-white">
       <AppDownloadCTA />
 
-      <div className="mx-auto max-w-7xl px-6 pb-16 pt-20 md:px-0">
+      {/* Buildings sit behind the footer content, along the bottom */}
+      <FooterSkyline />
+
+      <div className="relative z-10 mx-auto max-w-7xl px-6 pb-16 pt-20 md:px-0">
         <div className="grid grid-cols-1 gap-16 lg:grid-cols-12">
           <div className="flex flex-col items-start lg:col-span-5">
             <div className="mb-2 flex items-center gap-3">
-              <Image
-                src={logo}
-                alt=""
+              <img
+                src={logo.src || logo}
+                alt="Pickars Logo"
                 className="h-9 w-auto"
               />
-              <p className="text-2xl font-black tracking-tight text-white">
+              <h2 className="text-2xl font-black tracking-tight text-white">
                 Pickars
-              </p>
+              </h2>
             </div>
 
             <p className="mb-8 mt-2 max-w-md text-sm font-normal leading-relaxed text-gray-400">
@@ -57,7 +143,7 @@ const Footer: React.FC = () => {
 
             <div className="flex w-full flex-col gap-5">
               <div className="mt-1 flex items-center gap-2.5">
-                {SOCIAL_LINKS.map((social) => (
+                {socialLinks.map((social) => (
                   <a
                     key={social.name}
                     href={social.url}
@@ -66,17 +152,14 @@ const Footer: React.FC = () => {
                     className="flex h-9 w-9 items-center justify-center rounded-xl bg-white/5 text-gray-400 transition-colors hover:bg-[#FF0000] hover:text-white"
                     aria-label={social.name}
                   >
-                    {SOCIAL_ICONS[social.name]}
+                    {social.icon}
                   </a>
                 ))}
               </div>
             </div>
           </div>
 
-          <nav
-            aria-label="Footer"
-            className="grid grid-cols-2 gap-8 sm:grid-cols-3 lg:col-span-7"
-          >
+          <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 lg:col-span-7">
             <div>
               <h3 className="mb-5 text-xs font-black uppercase tracking-widest text-white">
                 Company
@@ -148,7 +231,7 @@ const Footer: React.FC = () => {
                 </li>
                 <li>
                   <motion.a
-                    href={`mailto:${SITE.email}`}
+                    href="mailto:support@pickars.com"
                     whileHover={{ x: 3 }}
                     transition={{ type: "spring", stiffness: 300, damping: 22 }}
                     className="group mt-4 flex w-fit items-center gap-3.5 rounded-2xl bg-white/5 p-3.5 transition-colors hover:bg-white/10"
@@ -162,39 +245,38 @@ const Footer: React.FC = () => {
                         Email us
                       </p>
                       <p className="text-sm font-bold text-white">
-                        {SITE.email}
+                        support@pickars.com
                       </p>
                     </div>
                   </motion.a>
                 </li>
               </ul>
             </div>
-          </nav>
+          </div>
         </div>
 
-        <div className="mt-16 w-full select-none overflow-hidden" aria-hidden="true">
-          <p className="w-full text-center text-[clamp(3.3rem,12vw,14rem)] font-black leading-[0.8] tracking-tighter text-white sm:text-left">
+        <div className="mt-16 w-full select-none overflow-hidden">
+          <h1 className="w-full text-center text-[clamp(3.3rem,12vw,14rem)] font-black leading-[0.8] tracking-tighter text-white sm:text-left">
             Pickars<span className="text-[#ff0000]">.</span>
-          </p>
+          </h1>
         </div>
 
         <div className="mt-12 flex flex-col items-center justify-between gap-6 border-t border-white/10 pt-8 sm:flex-row">
           <p className="text-xs font-medium text-gray-500">
-            © {new Date().getFullYear()} {SITE.name}. Built by{" "}
+            © {new Date().getFullYear()} Pickars. Built by{" "}
             <a
-              href={SITE.foundingCompany.url}
+              href="https://www.boringthinkers.com"
               target="_blank"
               rel="noopener noreferrer"
               className="font-semibold text-gray-400 transition-colors hover:text-white"
             >
-              {SITE.foundingCompany.name.toUpperCase()}
+              BORING THINKERS LIMITED
             </a>
             . All rights reserved.
           </p>
           <motion.button
             whileHover={{ y: -3 }}
             whileTap={{ scale: 0.95 }}
-            type="button"
             onClick={scrollToTop}
             className="group flex items-center gap-3 text-xs font-black uppercase tracking-widest text-white transition-colors hover:text-[#FF0000]"
           >
