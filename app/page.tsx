@@ -54,10 +54,13 @@ export default function HomePage() {
   return (
     <div className="min-h-screen bg-white text-slate-900 font-sans">
       <JsonLd data={homeSchema} />
-      <HeroSection />
+      <RiderPage />
 
+      {/* <QualitiesSliderSection /> */}
+      <div style={{ paddingTop: 64 }}>
+        <HomeWithMapSection />
+      </div>
       <QualitiesSliderSection />
-      <HomeWithMapSection />
       <PartnerWithUs />
       {/* <PackageDeliverySection /> */}
 

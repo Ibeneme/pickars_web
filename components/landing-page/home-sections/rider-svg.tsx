@@ -260,7 +260,7 @@ export default function RiderPage() {
 
   return (
     <main
-      className="relative flex min-h-screen w-full flex-col items-center overflow-x-clip px-4 pt-20 sm:px-6 md:px-8 lg:pt-[120px] font-['Lufga']"
+      className="relative flex min-h-screen w-full flex-col items-center overflow-x-clip px-4 pt-20 sm:px-6 md:px-8 lg:pt-[10px] font-['Lufga']"
       style={{ backgroundColor: BG }}
     >
       <style>{CSS}</style>

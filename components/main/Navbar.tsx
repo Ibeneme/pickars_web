@@ -14,8 +14,11 @@ const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
 
+  const isHome = pathname === "/";
+
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 40);
+    // Triggers after scrolling past 1400px
+    const handleScroll = () => setScrolled(window.scrollY > 1000);
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -28,6 +31,8 @@ const Navbar = () => {
     { name: "Track", path: "/app/tracking", disabled: false },
   ];
 
+  const isUnified = scrolled;
+
   return (
     <nav
       aria-label="Primary"
@@ -35,76 +40,102 @@ const Navbar = () => {
         scrolled ? "pt-4" : "pt-8"
       }`}
     >
-      <div className="mx-auto max-w-5xl px-6 flex justify-center">
+      <div className="mx-auto max-w-7xl px-6 flex justify-center">
         <div
-          className={`flex items-center justify-between gap-8 rounded-full bg-white/70 px-4 py-2.5 backdrop-blur-2xl transition-all duration-500 ${
-            scrolled ? "md:w-auto md:gap-20 gap-24 shadow-2xl" : "w-full"
+          className={`w-full transition-all duration-500 flex items-center ${
+            isUnified
+              ? `justify-between rounded-full px-6 py-3 max-w-5xl bg-white/75 backdrop-blur-2xl shadow-2xl`
+              : "justify-between max-w-7xl"
           }`}
         >
-          {/* Logo Section */}
-          <Link
-            href="/"
-            aria-label="Pickars home"
-            className="flex items-center gap-2 pl-2 group"
+          {/* Left Section: Logo Container */}
+          <div
+            className={`flex items-center rounded-full transition-all duration-500 ${
+              isUnified
+                ? "bg-transparent px-0 py-0 shadow-none"
+                : "bg-white px-5 py-3 shadow-none"
+            }`}
           >
-            <div className="relative">
-              <Image
-                src={navImage}
-                alt=""
-                priority
-                className="h-7 w-auto transition-transform duration-500 group-hover:rotate-[360deg] rounded-full"
-              />
-            </div>
-            <span className="text-[18px] font-bold tracking-tighter text-[#121212]">
-              Pickars
-            </span>
-          </Link>
+            <Link
+              href="/"
+              aria-label="Pickars home"
+              className="flex items-center gap-2 group"
+            >
+              <div className="relative">
+                <Image
+                  src={navImage}
+                  alt=""
+                  priority
+                  className="h-7 w-auto transition-transform duration-500 group-hover:rotate-[360deg] rounded-full"
+                />
+              </div>
+              <span className="text-[18px] font-bold tracking-tighter text-[#121212]">
+                Pickars
+              </span>
+            </Link>
+          </div>
 
-          {/* Desktop Nav Links */}
-          <ul className="hidden items-center gap-1 md:flex">
-            {navItems.map(({ name, path, disabled }) => {
-              const isActive = pathname === path;
+          {/* Middle Section: Desktop Nav Links Container */}
+          <div
+            className={`hidden md:flex items-center rounded-full transition-all duration-500 ${
+              isUnified
+                ? "bg-transparent px-0 py-0 shadow-none"
+                : "bg-white px-3 py-1.5 shadow-none"
+            }`}
+          >
+            <ul className="flex items-center gap-1">
+              {navItems.map(({ name, path, disabled }) => {
+                const isActive = pathname === path;
 
-              if (disabled) {
+                if (disabled) {
+                  return (
+                    <li key={name}>
+                      <span className="px-4 py-2 text-sm font-bold text-gray-400 cursor-not-allowed pointer-events-none opacity-60 flex items-center gap-1.5">
+                        {name}
+                      </span>
+                    </li>
+                  );
+                }
+
                 return (
                   <li key={name}>
-                    <span className="px-4 py-2 text-sm font-bold text-gray-400 cursor-not-allowed pointer-events-none opacity-60 flex items-center gap-1.5">
-                      {name}
-                    </span>
+                    <Link
+                      href={path}
+                      aria-current={isActive ? "page" : undefined}
+                      className={`relative px-4 py-3 text-sm font-bold transition-all duration-300 rounded-full flex items-center gap-1.5 ${
+                        isActive
+                          ? "text-white"
+                          : "text-gray-600 hover:bg-black/5"
+                      }`}
+                    >
+                      <span className="relative z-10">{name}</span>
+                      {isActive && (
+                        <motion.div
+                          layoutId="navPill"
+                          className="absolute inset-0 rounded-full bg-[#FF0000] -z-0"
+                          transition={{
+                            type: "spring",
+                            stiffness: 300,
+                            damping: 30,
+                          }}
+                        />
+                      )}
+                    </Link>
                   </li>
                 );
-              }
+              })}
+            </ul>
+          </div>
 
-              return (
-                <li key={name}>
-                  <Link
-                    href={path}
-                    aria-current={isActive ? "page" : undefined}
-                    className={`relative px-4 py-2 text-sm font-bold transition-all duration-300 rounded-full flex items-center gap-1.5 ${
-                      isActive ? "text-white" : "text-gray-600 hover:bg-black/5"
-                    }`}
-                  >
-                    {name}
-                    {isActive && (
-                      <motion.div
-                        layoutId="navPill"
-                        className="absolute inset-0 rounded-full bg-[#FF0000] -z-10"
-                        transition={{
-                          type: "spring",
-                          stiffness: 300,
-                          damping: 30,
-                        }}
-                      />
-                    )}
-                  </Link>
-                </li>
-              );
-            })}
-          </ul>
-
-          {/* Download & Toggle */}
+          {/* Right Section: Download & Mobile Toggle Container */}
           <div className="flex items-center gap-2">
-            <div className="hidden items-center gap-2 lg:flex">
+            <div
+              className={`hidden items-center rounded-full transition-all duration-500 lg:flex ${
+                isUnified
+                  ? "bg-transparent px-0 py-0 shadow-none"
+                  : "bg-white px-3 py-1.5 shadow-none"
+              }`}
+            >
               <DownloadButtons isHalf={true} />
             </div>
 
@@ -113,8 +144,8 @@ const Navbar = () => {
               aria-label={isOpen ? "Close menu" : "Open menu"}
               aria-expanded={isOpen}
               aria-controls="mobile-menu"
-              className={`flex h-10 w-10 items-center justify-center rounded-full transition-all ${
-                isOpen ? "bg-[#FF0000] text-white" : "bg-gray-100 text-black"
+              className={`flex h-11 w-11 items-center justify-center rounded-full transition-all shadow-none ${
+                isOpen ? "bg-[#FF0000] text-white" : "bg-white text-black"
               } md:hidden`}
               onClick={() => setIsOpen(!isOpen)}
             >
