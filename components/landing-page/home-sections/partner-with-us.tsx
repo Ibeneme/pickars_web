@@ -10,7 +10,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 const WHATSAPP_NUMBER = "2349164860591"; // 0916 486 0591
 
-const BG = "#000";
+const BG = "#FFEEEE";
 
 const bumps = [
   { x: 40, r: 52 },
@@ -269,16 +269,16 @@ const HomeArt = () => (
     <ellipse cx="150" cy="330" rx="130" ry="7" fill="#000" opacity="0.12" />
 
     {/* rail */}
-    <rect x="8" y="53" width="284" height="6" rx="3" fill="#1e3a8a" />
-    <circle cx="10" cy="56" r="7" fill="#1e3a8a" />
-    <circle cx="290" cy="56" r="7" fill="#1e3a8a" />
+    <rect x="8" y="53" width="284" height="6" rx="3" fill="#60a5fa" />
+    <circle cx="10" cy="56" r="7" fill="#60a5fa" />
+    <circle cx="290" cy="56" r="7" fill="#60a5fa" />
 
-    {/* shirt */}
+    {/* shirt - updated from dark brown to lighter warm amber/caramel */}
     <HangG amp={3} dur={3.2}>
       <Hanger cx={70} half={34} />
       <path
         d="M36 92 14 122l14 12 16-14v80h52v-80l16 14 14-12-22-30-20 6q-14 10-28 0Z"
-        fill="#4F2805"
+        fill="#f59e0b"
       />
       <path
         d="M56 98l14 16 14-16"
@@ -314,50 +314,50 @@ const HomeArt = () => (
       <path d="M230 103v43" stroke="#6d28d9" strokeWidth="3" />
     </HangG>
 
-    {/* chocolate box */}
+    {/* chocolate box - updated from dark browns to lighter warm gold/caramel tones */}
     <FloatG y={3} dur={2.8}>
-      <rect x="40" y="272" width="190" height="52" rx="10" fill="#7c2d12" />
-      <rect x="48" y="264" width="174" height="40" rx="8" fill="#451a03" />
+      <rect x="40" y="272" width="190" height="52" rx="10" fill="#d97706" />
+      <rect x="48" y="264" width="174" height="40" rx="8" fill="#f59e0b" />
       {[72, 106, 140, 174, 208].map((x, i) => (
         <g key={x}>
           <circle
             cx={x}
             cy="284"
             r="14"
-            fill={["#92400e", "#78350f", "#b45309"][i % 3]}
+            fill={["#fbbf24", "#fcd34d", "#fde68a"][i % 3]}
           />
           <path
             d={`M${x - 7} 284q7-9 14 0`}
-            stroke={i % 2 ? "#fde68a" : "#fff"}
+            stroke={i % 2 ? "#b45309" : "#fff"}
             strokeWidth="3"
             fill="none"
             strokeLinecap="round"
           />
         </g>
       ))}
-      <rect x="40" y="296" width="190" height="10" fill="#9a3412" />
-      <circle cx="135" cy="301" r="6" fill="#fbbf24" />
+      <rect x="40" y="296" width="190" height="10" fill="#b45309" />
+      <circle cx="135" cy="301" r="6" fill="#fef08a" />
     </FloatG>
 
-    {/* chocolate bar */}
+    {/* chocolate bar - updated from dark brown to lighter golden/amber */}
     <FloatG y={6} rot={4} dur={3} delay={0.4}>
       <g transform="translate(262 286) rotate(-12)">
-        <rect x="-22" y="-32" width="44" height="64" rx="5" fill="#78350f" />
+        <rect x="-22" y="-32" width="44" height="64" rx="5" fill="#f59e0b" />
         <path
           d="M-22 -10H22M-22 10H22M0 -32V32"
-          stroke="#92400e"
+          stroke="#d97706"
           strokeWidth="3"
         />
-        <rect x="-22" y="14" width="44" height="18" rx="4" fill="#fbbf24" />
+        <rect x="-22" y="14" width="44" height="18" rx="4" fill="#fef08a" />
       </g>
     </FloatG>
 
-    {/* truffle */}
+    {/* truffle - updated from dark brown to lighter golden brown */}
     <FloatG y={9} rot={8} dur={2.4} delay={0.7}>
-      <circle cx="20" cy="298" r="15" fill="#78350f" />
+      <circle cx="20" cy="298" r="15" fill="#f59e0b" />
       <path
         d="M10 292l5 3M22 288l2 5M26 300l5-1M14 304l4 3"
-        stroke="#fde68a"
+        stroke="#fef08a"
         strokeWidth="2.5"
         strokeLinecap="round"
       />
@@ -598,7 +598,7 @@ const partners: Partner[] = [
     title: "Home vendors",
     text: "Sell from your home? Bakers, cooks and small brands: we pick up from your door and deliver to your customers.",
     cta: "Send us a message for partnership",
-    bg: "#fbbf24",
+    bg: "#000000",
     tags: [
       { name: "Home bakers", bg: "#f9a8d4" },
       { name: "Home kitchens", bg: "#ffeeee" },
@@ -613,7 +613,7 @@ const partners: Partner[] = [
     title: "Office supplies",
     text: "Sell stationery, printers or office equipment? Keep Port Harcourt offices stocked with fast, reliable delivery.",
     cta: "Send us a message for partnership",
-    bg: "#830CFA",
+    bg: "#ff0000",
     tags: [
       { name: "Stationery", bg: "#fde68a" },
       { name: "Printers & ink", bg: "#93c5fd" },
@@ -629,7 +629,7 @@ const partners: Partner[] = [
     title: "Market traders",
     text: "Sell at Mile 3, Creek Road or any local market? Reach customers who want fresh produce without the trip.",
     cta: "Send us a message for partnership",
-    bg: "#b7f0c1",
+    bg: "#000000",
     tags: [
       { name: "Fresh produce", bg: "#fbbf24" },
       { name: "Fish & meat", bg: "#fb923c" },
@@ -715,7 +715,7 @@ const PartnerWithUs: React.FC = () => {
   return (
     <section
       ref={ref}
-      className="relative mt-[210px] mb-[70px] py-[100px] sm:mb-[110px] font-['Lufga'] text-white"
+      className="relative mt-[210px] mb-[70px] py-[100px] sm:mb-[110px] font-['Lufga'] text-black"
       style={{ backgroundColor: BG }}
     >
       {/* Cloud edge at the top */}
@@ -757,23 +757,23 @@ const PartnerWithUs: React.FC = () => {
           initial={{ opacity: 0, y: 30, scale: 0.9 }}
           animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
           transition={{ type: "spring", stiffness: 120, damping: 14 }}
-          className="mb-5 text-4xl font-black leading-[1.05]   tracking-tight sm:text-6xl"
+          className="mb-5 text-4xl font-black leading-[1.05] tracking-tight text-black sm:text-6xl"
         >
           Let's Handle your {""}
-          <span className="text-[#fff]"> Logistics & Supplies</span>
+          <span className="text-[#ff0000]"> Logistics & Supplies</span>
         </motion.h2>
         <motion.p
           initial={{ opacity: 0, y: 15 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.15 }}
           style={{ lineHeight: 1.6 }}
-          className="max-w-2xl text-[16px] font-medium text-[#B5B5B5] sm:text-[18px]"
+          className="max-w-2xl text-[16px] font-medium text-black/70 sm:text-[18px]"
         >
           Whatever you sell, we deliver it. Pick what fits your business and
           partner with the fastest delivery team in Port Harcourt.
         </motion.p>
         <span className="my-8">
-          <DownloadButtons dark={true} />
+          <DownloadButtons />
         </span>
       </div>
 
@@ -802,15 +802,18 @@ const PartnerWithUs: React.FC = () => {
             >
               <article
                 style={{ backgroundColor: p.bg }}
-                className="relative h-[600px] w-full overflow-hidden rounded-[32px] border-[3px] border-black shadow-2xl sm:h-[560px] lg:h-[520px]"
+                className="relative h-[600px] w-full overflow-hidden rounded-[32px] border-[3px] border-black sm:h-[560px] lg:h-[520px]"
               >
                 <div className="flex h-full flex-col lg:flex-row">
                   {/* text */}
                   <div className="relative z-10 flex flex-col p-6 sm:p-10 lg:w-[58%]">
-                    {/* Text color changes to white for malls and office supplies */}
+                    {/* Text color changes to white for dark cards (malls, office, home, markets) */}
                     <h3
                       className={`text-4xl pt-6 font-bold leading-none tracking-tight sm:text-6xl ${
-                        p.id === "malls" || p.id === "office"
+                        p.id === "malls" ||
+                        p.id === "office" ||
+                        p.id === "home" ||
+                        p.id === "markets"
                           ? "text-white"
                           : "text-black"
                       }`}
@@ -819,7 +822,10 @@ const PartnerWithUs: React.FC = () => {
                     </h3>
                     <p
                       className={`mt-5 max-w-lg text-[17px] font-medium sm:text-[20px] ${
-                        p.id === "malls" || p.id === "office"
+                        p.id === "malls" ||
+                        p.id === "office" ||
+                        p.id === "home" ||
+                        p.id === "markets"
                           ? "text-white/90"
                           : "text-black/80"
                       }`}
