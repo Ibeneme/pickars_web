@@ -276,8 +276,7 @@ const AppDownloadCTA: React.FC = () => {
               to get{" "}
               <span className="relative inline-block">
                 started.
-                <span className="absolute -bottom-1 left-0 h-1.5 w-full rounded-full bg-white/80 sm:h-2" />
-              </span>
+          </span>
             </motion.h1>
 
             <motion.p

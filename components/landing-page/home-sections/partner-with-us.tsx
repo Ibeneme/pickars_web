@@ -10,7 +10,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 const WHATSAPP_NUMBER = "2349164860591"; // 0916 486 0591
 
-const BG = "#000000";
+const BG = "#121212";
 
 const bumps = [
   { x: 40, r: 52 },
@@ -581,7 +581,7 @@ const partners: Partner[] = [
     title: "Malls & Marts",
     text: "Have a shop in a mall or plaza? Let shoppers across Port Harcourt order from you and get it delivered the same day.",
     cta: "Send us a message for partnership",
-    bg: "#E82C35",
+    bg: "#ff0000",
     tags: [
       { name: "Fashion stores", bg: "#f9a8d4" },
       { name: "Supermarkets", bg: "#86efac" },
@@ -598,10 +598,10 @@ const partners: Partner[] = [
     title: "Home vendors",
     text: "Sell from your home? Bakers, cooks and small brands: we pick up from your door and deliver to your customers.",
     cta: "Send us a message for partnership",
-    bg: "#FFF2EE",
+    bg: "#fbbf24",
     tags: [
       { name: "Home bakers", bg: "#f9a8d4" },
-      { name: "Home kitchens", bg: "#fb923c" },
+      { name: "Home kitchens", bg: "#ffeeee" },
       { name: "Snacks", bg: "#86efac" },
       { name: "Skincare", bg: "#c7b8ff" },
     ],
@@ -760,14 +760,14 @@ const PartnerWithUs: React.FC = () => {
           className="mb-5 text-4xl font-black leading-[1.05]   tracking-tight sm:text-6xl"
         >
           Let's Handle your {""}
-          <span className="text-gray-400"> Logistics & Supplies</span>
+          <span className="text-[#B5B5B5]"> Logistics & Supplies</span>
         </motion.h2>
         <motion.p
           initial={{ opacity: 0, y: 15 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.15 }}
           style={{ lineHeight: 1.6 }}
-          className="max-w-2xl text-[16px] font-medium text-gray-400 sm:text-[18px]"
+          className="max-w-2xl text-[16px] font-medium text-[#B5B5B5] sm:text-[18px]"
         >
           Whatever you sell, we deliver it. Pick what fits your business and
           partner with the fastest delivery team in Port Harcourt.

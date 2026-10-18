@@ -15,6 +15,8 @@ import {
   mobileAppSchema,
 } from "@/utils/seo/schema";
 import { SITE, absoluteUrl, OG_IMAGES } from "@/utils/seo/config";
+import RiderPage from "@/components/landing-page/home-sections/rider-svg";
+import FAQsClientPage from "@/components/landing-page/faqs/faq-section";
 
 const TITLE = "Pickars: Your doorstep deliveries, redefined";
 const DESCRIPTION =
@@ -61,6 +63,10 @@ export default function HomePage() {
 
       <NeverLateSection />
       <HomeTestimonialsSection />
+      <div style={{ marginTop: -120, marginBottom: -48 }}>
+        {/* <RiderPage /> */}
+        <FAQsClientPage />
+      </div>
     </div>
   );
 }

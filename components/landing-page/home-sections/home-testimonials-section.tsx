@@ -3,13 +3,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import {
-  motion,
-  AnimatePresence,
-  useAnimationFrame,
-  useInView,
-  useReducedMotion,
-} from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -97,10 +91,34 @@ const RED = "#FF0000";
 const INK = "#111111";
 const EASE = [0.22, 1, 0.36, 1] as const;
 
+/* Section colour: also used to fill the cloud edges */
+const BG = "#FFEEEE";
+
+/* Colour of the border that outlines the top cloud */
+const CLOUD_BORDER = "#ff0000";
+
+/* Irregular cloud bumps for the top edge (x, radius) across a 1600 wide strip */
+const bumps = [
+  { x: 40, r: 52 },
+  { x: 130, r: 70 },
+  { x: 235, r: 48 },
+  { x: 330, r: 78 },
+  { x: 440, r: 56 },
+  { x: 540, r: 84 },
+  { x: 655, r: 50 },
+  { x: 745, r: 68 },
+  { x: 850, r: 90 },
+  { x: 965, r: 54 },
+  { x: 1060, r: 74 },
+  { x: 1165, r: 50 },
+  { x: 1262, r: 82 },
+  { x: 1375, r: 58 },
+  { x: 1470, r: 72 },
+  { x: 1565, r: 54 },
+];
+
 /* ───────────── Dispatch rider (one wheel) ───────────── */
 const WHEEL_R = 13;
-
-
 
 export default function HomeTestimonialsSection(): React.JSX.Element {
   const sectionRef = useRef<HTMLElement>(null);
@@ -222,8 +240,31 @@ export default function HomeTestimonialsSection(): React.JSX.Element {
   return (
     <section
       ref={sectionRef}
-      className="relative w-full bg-[#fff5f5] py-16 sm:py-20 md:py-28 px-4 sm:px-6 lg:px-8 flex flex-col font-['Lufga'] justify-center items-center overflow-hidden"
+      className="relative mt-[70px] mb-[70px] sm:mt-[110px] sm:mb-[110px] w-full py-16 sm:py-20 md:py-28 px-4 sm:px-6 lg:px-8 flex flex-col font-['Lufga'] justify-center items-center"
+      style={{ backgroundColor: BG }}
     >
+      {/* Cloud edge at the top */}
+      <svg
+        viewBox="0 0 1600 140"
+        preserveAspectRatio="xMidYMax slice"
+        className="absolute left-0 right-0 bottom-full block w-full h-[70px] sm:h-[110px]"
+        aria-hidden="true"
+      >
+        {/* 1) border layer: same shapes with a thick stroke, drawn first */}
+        {/* <g fill={CLOUD_BORDER} stroke={CLOUD_BORDER} strokeWidth={14}>
+          {bumps.map((b) => (
+            <circle key={`border-${b.x}`} cx={b.x} cy={140} r={b.r} />
+          ))}
+        </g> */}
+        {/* 2) fill layer on top hides the inner half, leaving only the outline */}
+        <g fill={BG}>
+          {bumps.map((b) => (
+            <circle key={b.x} cx={b.x} cy={140} r={b.r} />
+          ))}
+          <rect x={0} y={100} width={1600} height={41} />
+        </g>
+      </svg>
+
       <motion.div
         initial={{ opacity: 0, scale: 0.8, rotate: -5 }}
         animate={{ opacity: 1, scale: 1, rotate: -2 }}
@@ -376,8 +417,6 @@ export default function HomeTestimonialsSection(): React.JSX.Element {
           </div>
         </div>
       </div>
-
-
     </section>
   );
 }

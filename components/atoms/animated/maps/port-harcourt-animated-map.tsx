@@ -267,7 +267,7 @@ function DeliveryRider() {
 
 export default function PortHarcourtAnimatedMap() {
   return (
-    <div className="relative w-full aspect-[4/5] sm:aspect-[4/3] md:aspect-[16/9] min-h-[420px] max-h-[750px] bg-[#f3f4f6] overflow-hidden rounded-xl md:rounded-3xl border-2 sm:border-4 border-black font-sans select-none">
+    <div className="relative w-full aspect-[4/5]  sm:aspect-[4/3] md:aspect-[16/9] min-h-[420px] max-h-[750px] bg-[#f3f4f6] overflow-hidden rounded-xl md:rounded-3xl border-2 sm:border-4 border-black select-none">
       <style>{`
         @keyframes popIn {
           0% { opacity: 0; transform: scale(0) translateY(15px); }

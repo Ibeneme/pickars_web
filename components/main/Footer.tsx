@@ -14,6 +14,32 @@ import logo from "@/public/logo.svg";
 import { motion } from "framer-motion";
 import AppDownloadCTA from "./AppDownloadCTA";
 
+/* Footer colour: also used to fill the cloud edge at the top */
+const FOOTER_BG = "#000000";
+
+/* Colour of the border that outlines the top cloud (set to FOOTER_BG to hide it) */
+const CLOUD_BORDER = "#ff0000";
+
+/* Irregular cloud bumps for the top edge (x, radius) across a 1600 wide strip */
+const bumps = [
+  { x: 40, r: 52 },
+  { x: 130, r: 70 },
+  { x: 235, r: 48 },
+  { x: 330, r: 78 },
+  { x: 440, r: 56 },
+  { x: 540, r: 84 },
+  { x: 655, r: 50 },
+  { x: 745, r: 68 },
+  { x: 850, r: 90 },
+  { x: 965, r: 54 },
+  { x: 1060, r: 74 },
+  { x: 1165, r: 50 },
+  { x: 1262, r: 82 },
+  { x: 1375, r: 58 },
+  { x: 1470, r: 72 },
+  { x: 1565, r: 54 },
+];
+
 /* ------------------------------------------------------------------ */
 /*  Footer skyline: one flat row of separate buildings (built once)    */
 /* ------------------------------------------------------------------ */
@@ -85,6 +111,32 @@ const FooterSkyline = memo(function FooterSkyline() {
   );
 });
 
+/* Cloud edge that sits on top of the footer */
+const TopCloud = memo(function TopCloud() {
+  return (
+    <svg
+      viewBox="0 0 1600 140"
+      preserveAspectRatio="xMidYMax slice"
+      className="pointer-events-none absolute bottom-full left-0 right-0 block h-[70px] w-full sm:h-[110px]"
+      aria-hidden="true"
+    >
+      {/* 1) border layer: same shapes with a thick stroke, drawn first */}
+      {/* <g fill={CLOUD_BORDER} stroke={CLOUD_BORDER} strokeWidth={14}>
+        {bumps.map((b) => (
+          <circle key={`border-${b.x}`} cx={b.x} cy={140} r={b.r} />
+        ))}
+      </g> */}
+      {/* 2) fill layer on top hides the inner half, leaving only the outline */}
+      <g fill={FOOTER_BG}>
+        {bumps.map((b) => (
+          <circle key={b.x} cx={b.x} cy={140} r={b.r} />
+        ))}
+        <rect x={0} y={100} width={1600} height={41} />
+      </g>
+    </svg>
+  );
+});
+
 const Footer: React.FC = () => {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -114,10 +166,15 @@ const Footer: React.FC = () => {
   ];
 
   return (
-    <footer className="relative w-full overflow-hidden mb-0 bg-black font-['Lufga'] text-white">
+    /* overflow-hidden removed (it clipped the cloud); margin leaves room for the cloud */
+    <footer
+      className="relative mb-0 mt-[70px] w-full z-[24] pt-[64px] mt-[150px] font-['Lufga'] text-white sm:mt-[110px]"
+      style={{ backgroundColor: FOOTER_BG }}
+    >
+      <TopCloud />
+
       <AppDownloadCTA />
 
-      {/* Buildings sit behind the footer content, along the bottom */}
       <FooterSkyline />
 
       <div className="relative z-10 mx-auto max-w-7xl px-6 pb-16 pt-20 md:px-0">

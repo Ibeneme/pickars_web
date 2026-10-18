@@ -52,10 +52,10 @@ const Navbar = () => {
                 src={navImage}
                 alt=""
                 priority
-                className="h-8 w-auto transition-transform duration-500 group-hover:rotate-[360deg] rounded-full"
+                className="h-7 w-auto transition-transform duration-500 group-hover:rotate-[360deg] rounded-full"
               />
             </div>
-            <span className="text-xl font-black tracking-tighter text-[#121212]">
+            <span className="text-[18px] font-bold tracking-tighter text-[#121212]">
               Pickars
             </span>
           </Link>

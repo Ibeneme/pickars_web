@@ -143,7 +143,7 @@ const NeverLateSection: React.FC = () => {
   return (
     <section className="relative w-full overflow-hidden bg-[#fff] py-12 px-6 md:px-12 font-['Lufga'] text-[#111111]">
       {/* Main Container: Single Vertical Flex Column */}
-      <div className="max-w-3xl mx-auto flex flex-col items-center text-center gap-16 relative z-10">
+      <div className="max-w-3xl my-[64px] mx-auto flex flex-col items-center text-center gap-16 relative z-10">
         {/* Top Section: Copy and Custom Download Buttons */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}

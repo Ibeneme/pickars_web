@@ -6,6 +6,7 @@ import { CompanyMission } from "@/components/landing-page/our-company-sections/c
 import { OG_IMAGES } from "@/utils/seo/config";
 import { createPageMetadata } from "@/utils/seo/metadata";
 import { pageSchema } from "@/utils/seo/schema";
+import RiderPage from "@/components/landing-page/home-sections/rider-svg";
 
 const PATH = "/app/our-company";
 const TITLE = "About Us: Logistics made Easy";
@@ -33,6 +34,7 @@ export default function OurCompanyPage() {
   return (
     <div>
       <JsonLd data={schema} />
+      <RiderPage />
       <CompanyHero />
       <CompanyMission />
       <CompanyCoreValues />
