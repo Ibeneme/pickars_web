@@ -10,7 +10,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 const WHATSAPP_NUMBER = "2349164860591"; // 0916 486 0591
 
-const BG = "#121212";
+const BG = "#000";
 
 const bumps = [
   { x: 40, r: 52 },
@@ -760,7 +760,7 @@ const PartnerWithUs: React.FC = () => {
           className="mb-5 text-4xl font-black leading-[1.05]   tracking-tight sm:text-6xl"
         >
           Let's Handle your {""}
-          <span className="text-[#B5B5B5]"> Logistics & Supplies</span>
+          <span className="text-[#fff]"> Logistics & Supplies</span>
         </motion.h2>
         <motion.p
           initial={{ opacity: 0, y: 15 }}
