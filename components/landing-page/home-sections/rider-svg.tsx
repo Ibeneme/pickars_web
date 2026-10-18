@@ -396,7 +396,7 @@ export default function RiderPage() {
         {/* Bottom row: download buttons + tiny progress dots (no arrows) */}
         <div className="mt-8 flex flex-wrap items-center justify-between gap-4 sm:mt-12">
           <DownloadButtons alignLeft />
-
+{/* 
           <div
             className="flex items-center gap-1.5"
             role="group"
@@ -416,7 +416,7 @@ export default function RiderPage() {
                 }`}
               />
             ))}
-          </div>
+          </div> */}
         </div>
       </section>
 
