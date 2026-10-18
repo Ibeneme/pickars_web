@@ -52,7 +52,7 @@ const homeSchema = graph(
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen bg-white text-slate-900 font-sans">
+    <div className="min-h-screen bg-white text-slate-900 ">
       <JsonLd data={homeSchema} />
       <RiderPage />
 

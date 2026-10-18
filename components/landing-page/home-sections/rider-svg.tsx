@@ -338,11 +338,20 @@ export default function RiderPage() {
       <style>{CSS}</style>
 
       {/* very big headline, sits behind the top of the rider */}
-      <h1 className="relative z-0  md:pb-[64px] md:pt-[32px]  pt-[12px] pb-[12px] w-full max-w-[1262px] select-none text-center text-[clamp(3.6rem,12vw,12rem)] font-black leading-[0.85] tracking-tighter text-black">
+      <h1 className="relative z-0   md:pt-[32px]  pt-[12px] w-full max-w-[1262px] select-none text-center text-[clamp(3.2rem,8vw,10rem)] font-black leading-[0.85] tracking-tighter text-black">
         <span className="">Just Send it</span>
         <span className="text-[#ff0000] md:ml-2 ml-1">.</span>
+
         {/* <span className="hd-line hd-line-2 text-[#ff0000]">Packages</span> */}
       </h1>
+      <span className="md:pb-[48px]  mt-4 pb-[8px]">
+        {" "}
+        <DownloadButtons
+          isHalf={true}
+          iconSize={24} // Desktop icon size
+          padding="h-13 w-13" // Desktop padding container
+        />
+      </span>
 
       {/* rider illustration (overlaps the bottom of the headline) */}
       <div className="relative z-10 -mt-[3vw] w-full max-w-[1262px] sm:-mt-[2vw]">
@@ -372,7 +381,7 @@ export default function RiderPage() {
       <section
         onMouseEnter={() => setPaused(true)}
         onMouseLeave={() => setPaused(false)}
-        className="relative z-10 mb-10 w-full max-w-6xl rounded-[30px] sm:rounded-[40px] border-[2.4px] border-black bg-white px-5 py-8 text-left sm:px-10 sm:py-12 md:px-14 md:py-14"
+        className="relative z-10 mb-10 w-full max-w-6xl rounded-[30px] sm:rounded-[40px] border-[0.8px] border-[#ff000045] bg-white px-5 py-8 text-left sm:px-10 sm:py-12 md:px-14 md:py-14"
       >
         {/* Slide content: only the active slide is rendered, so the card height fits its text */}
         <div key={idx} className="sl-in" aria-live="polite">

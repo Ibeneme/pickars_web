@@ -715,7 +715,7 @@ const PartnerWithUs: React.FC = () => {
   return (
     <section
       ref={ref}
-      className="relative mt-[210px] mb-[70px] py-[100px] sm:mb-[110px] font-['Lufga'] text-black"
+      className="relative mt-[210px] mb-[70px] py-[100px] sm:mb-[110px] font-['Lufga'] text-black overflow-x-hidden"
       style={{ backgroundColor: BG }}
     >
       {/* Cloud edge at the top */}
@@ -752,7 +752,7 @@ const PartnerWithUs: React.FC = () => {
       </svg>
 
       {/* HEADER */}
-      <div className="relative z-10 mx-auto mb-10 flex max-w-3xl flex-col items-center px-4 text-center sm:mb-14">
+      <div className="relative z-10 mx-auto mb-10 flex max-w-3xl flex-col items-center px-4 text-center sm:mb-14 overflow-x-hidden">
         <motion.h2
           initial={{ opacity: 0, y: 30, scale: 0.9 }}
           animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
@@ -778,13 +778,13 @@ const PartnerWithUs: React.FC = () => {
       </div>
 
       {/* PINNED STACK */}
-      <div className="relative z-10 mx-auto max-w-[1240px] px-4">
+      <div className="relative z-10 mx-auto max-w-[1240px] px-4 overflow-x-hidden">
         <div
           ref={stackRef}
           className={
             reduce
-              ? "flex flex-col gap-5"
-              : "relative h-[640px] w-full sm:h-[600px] lg:h-[560px]"
+              ? "flex flex-col gap-5 overflow-x-hidden"
+              : "relative h-[640px] w-full sm:h-[600px] lg:h-[560px] overflow-x-hidden"
           }
         >
           {partners.map((p, i) => (
@@ -795,8 +795,8 @@ const PartnerWithUs: React.FC = () => {
               }}
               className={
                 reduce
-                  ? "relative"
-                  : "absolute inset-0 flex items-center justify-center will-change-transform"
+                  ? "relative overflow-x-hidden"
+                  : "absolute inset-0 flex items-center justify-center will-change-transform overflow-x-hidden"
               }
               style={{ zIndex: i + 1 }}
             >
@@ -804,7 +804,7 @@ const PartnerWithUs: React.FC = () => {
                 style={{ backgroundColor: p.bg }}
                 className="relative h-[600px] w-full overflow-hidden rounded-[32px] border-[3px] border-black sm:h-[560px] lg:h-[520px]"
               >
-                <div className="flex h-full flex-col lg:flex-row">
+                <div className="flex h-full flex-col lg:flex-row overflow-hidden">
                   {/* text */}
                   <div className="relative z-10 flex flex-col p-6 sm:p-10 lg:w-[58%]">
                     {/* Text color changes to white for dark cards (malls, office, home, markets) */}

@@ -13,6 +13,10 @@ export default function DownloadButtons({
   isHalf = false,
   bgColor,
   textColor,
+  iconSize = 18,
+  mobileIconSize,
+  padding = "h-10 w-10",
+  mobilePadding,
 }: {
   iosUrl?: string;
   androidUrl?: string;
@@ -21,6 +25,10 @@ export default function DownloadButtons({
   isHalf?: boolean;
   bgColor?: string;
   textColor?: string;
+  iconSize?: number;
+  mobileIconSize?: number;
+  padding?: string;
+  mobilePadding?: string;
 }) {
   const buttonStyles = `group flex flex-1 sm:flex-none min-w-[140px] sm:min-w-[180px] items-center justify-center gap-2.5 sm:gap-3 rounded-[120px] px-4 sm:px-5 py-3 cursor-pointer transition-colors duration-300`;
 
@@ -51,6 +59,11 @@ export default function DownloadButtons({
     }`;
   };
 
+  // Build responsive classes using Tailwind
+  const effectivePadding = mobilePadding
+    ? `${mobilePadding} sm:${padding}`
+    : padding;
+
   if (isHalf) {
     return (
       <div
@@ -64,12 +77,26 @@ export default function DownloadButtons({
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
           style={customStyle}
-          className={`flex h-10 w-10 items-center justify-center rounded-full transition-colors hover:bg-[#FF0000] hover:text-white ${
+          className={`flex ${effectivePadding} items-center justify-center rounded-full transition-colors hover:bg-[#FF0000] hover:text-white ${
             !bgColor ? "bg-[#121212] text-white" : ""
           }`}
         >
-          <FaApple size={18} />
+          {/* Render responsive size using hidden/block classes or a standard wrapper div if needed, 
+              or fallback to standard iconSize if mobileIconSize isn't specified */}
+          {mobileIconSize ? (
+            <>
+              <span className="block sm:hidden">
+                <FaApple size={mobileIconSize} />
+              </span>
+              <span className="hidden sm:block">
+                <FaApple size={iconSize} />
+              </span>
+            </>
+          ) : (
+            <FaApple size={iconSize} />
+          )}
         </motion.a>
+
         <motion.a
           href={androidUrl}
           target="_blank"
@@ -78,11 +105,22 @@ export default function DownloadButtons({
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
           style={customStyle}
-          className={`flex h-10 w-10 items-center justify-center rounded-full transition-colors hover:bg-[#FF0000] hover:text-white ${
+          className={`flex ${effectivePadding} items-center justify-center rounded-full transition-colors hover:bg-[#FF0000] hover:text-white ${
             !bgColor ? "bg-[#121212] text-white" : ""
           }`}
         >
-          <BiLogoPlayStore size={18} />
+          {mobileIconSize ? (
+            <>
+              <span className="block sm:hidden">
+                <BiLogoPlayStore size={mobileIconSize} />
+              </span>
+              <span className="hidden sm:block">
+                <BiLogoPlayStore size={iconSize} />
+              </span>
+            </>
+          ) : (
+            <BiLogoPlayStore size={iconSize} />
+          )}
         </motion.a>
       </div>
     );
