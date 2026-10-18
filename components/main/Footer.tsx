@@ -120,13 +120,6 @@ const TopCloud = memo(function TopCloud() {
       className="pointer-events-none absolute bottom-full left-0 right-0 block h-[70px] w-full sm:h-[110px]"
       aria-hidden="true"
     >
-      {/* 1) border layer: same shapes with a thick stroke, drawn first */}
-      {/* <g fill={CLOUD_BORDER} stroke={CLOUD_BORDER} strokeWidth={14}>
-        {bumps.map((b) => (
-          <circle key={`border-${b.x}`} cx={b.x} cy={140} r={b.r} />
-        ))}
-      </g> */}
-      {/* 2) fill layer on top hides the inner half, leaving only the outline */}
       <g fill={FOOTER_BG}>
         {bumps.map((b) => (
           <circle key={b.x} cx={b.x} cy={140} r={b.r} />
@@ -166,9 +159,8 @@ const Footer: React.FC = () => {
   ];
 
   return (
-    /* overflow-hidden removed (it clipped the cloud); margin leaves room for the cloud */
     <footer
-      className="relative mb-0 mt-[70px] w-full z-[24] pt-[64px] mt-[150px] font-['Lufga'] text-white sm:mt-[110px]"
+      className="relative mb-0 mt-[150px] w-full z-[24] pt-[64px] font-['Lufga'] text-white sm:mt-[110px] overflow-x-clip"
       style={{ backgroundColor: FOOTER_BG }}
     >
       <TopCloud />
@@ -312,8 +304,9 @@ const Footer: React.FC = () => {
           </div>
         </div>
 
+        {/* Added overflow-hidden and adjusted max size clamp to prevent breaking layout horizontally */}
         <div className="mt-16 w-full select-none overflow-hidden">
-          <h1 className="w-full text-center text-[clamp(3.3rem,12vw,14rem)] font-black leading-[0.8] tracking-tighter text-white sm:text-left">
+          <h1 className="w-full text-center text-[clamp(3.3rem,10vw,11rem)] font-black leading-[0.8] tracking-tighter text-white sm:text-left">
             Pickars<span className="text-[#ff0000]">.</span>
           </h1>
         </div>
