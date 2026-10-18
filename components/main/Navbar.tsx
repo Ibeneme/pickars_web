@@ -183,7 +183,7 @@ const Navbar = () => {
             initial={{ opacity: 0, scale: 0.95, y: -20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: -20 }}
-            className="absolute left-6 right-6 top-24 z-[-1] overflow-hidden rounded-[40px] border border-white/20 bg-white/95 p-10 backdrop-blur-3xl shadow-[0_20px_50px_rgba(0,0,0,0.15)] md:hidden"
+            className="absolute left-6 right-6 top-24 z-[-1] overflow-hidden rounded-[40px] border border-white/20 bg-white/95 p-6 py-10 backdrop-blur-3xl shadow-[0_20px_50px_rgba(0,0,0,0.15)] md:hidden"
           >
             <div className="flex flex-col gap-6">
               {navItems.map(({ name, path, disabled }, i) => {

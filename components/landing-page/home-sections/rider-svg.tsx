@@ -6,7 +6,7 @@ import DownloadButtons from "@/components/atoms/buttons/DownloadButtons";
 /* ------------------------------------------------------------------ */
 /*  Theme: red / black / white                                         */
 /* ------------------------------------------------------------------ */
-const RED = "#FEEFDC";
+const RED = "#f3f4f6";
 const BG = RED;
 
 const VB_W = 1262;
@@ -284,7 +284,7 @@ export default function RiderPage() {
 
           <Backdrop />
           <Jacket />
-          <Bag />
+          {/* <Bag /> */}
           <Helmet />
         </svg>
       </div>
@@ -348,7 +348,7 @@ export default function RiderPage() {
                 }`}
                 aria-hidden={i !== idx}
               >
-                <h2 className="text-4xl font-bold leading-tight tracking-tight text-black sm:text-4xl md:text-5xl lg:text-6xl">
+                <h2 className="text-3xl font-bold leading-tight tracking-tight text-black sm:text-4xl md:text-5xl lg:text-6xl">
                   {restOfTitle}{" "}
                   <span className="text-[#ff0000]">{lastWord}</span>
                 </h2>
