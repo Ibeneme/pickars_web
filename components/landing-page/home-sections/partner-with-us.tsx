@@ -719,7 +719,7 @@ const PartnerWithUs: React.FC = () => {
       style={{ backgroundColor: BG }}
     >
       {/* Cloud edge at the top */}
-      {/* <svg
+      <svg
         viewBox="0 0 1600 140"
         preserveAspectRatio="xMidYMax slice"
         className="absolute left-0 right-0 bottom-full block w-full h-[70px] sm:h-[110px]"
@@ -731,7 +731,7 @@ const PartnerWithUs: React.FC = () => {
           ))}
           <rect x={0} y={100} width={1600} height={41} />
         </g>
-      </svg> */}
+      </svg>
 
       {/* Cloud edge at the bottom (mirror of the top) */}
       <svg
