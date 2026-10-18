@@ -6,7 +6,7 @@ import DownloadButtons from "@/components/atoms/buttons/DownloadButtons";
 /* ------------------------------------------------------------------ */
 /*  Theme: red / black / white                                         */
 /* ------------------------------------------------------------------ */
-const RED = "#f3f4f6";
+const RED = "#FFEEEE";
 const BG = RED;
 
 const VB_W = 1262;
