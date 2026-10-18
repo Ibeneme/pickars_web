@@ -1,6 +1,6 @@
 "use client";
 
-import React, { memo, useState } from "react";
+import React, { memo, useEffect, useState } from "react";
 import DownloadButtons from "@/components/atoms/buttons/DownloadButtons";
 
 /* ------------------------------------------------------------------ */
@@ -32,18 +32,21 @@ const bumps = [
   { x: 1565, r: 54 },
 ];
 
+/* width of one cloud strip: the tiles repeat every 1600 units so the loop is seamless */
+const STRIP = 1600;
+
 /* slides shown in the card with expanded text */
 const SLIDES = [
   {
-    title: "Redefining DoorStep Deliveries.",
+    title: "Doorstep Deliveries.",
     text: "Experience the smartest, most seamless way to send and receive packages across every corner of Port Harcourt. Fast, ultra-secure, and purpose-built for your everyday logistics needs.",
   },
   {
-    title: "Fast, same-day pickups.",
+    title: "Quick pickups.",
     text: "Our dedicated professional dispatch riders collect your packages promptly and get them straight to the destination door with zero delays, ensuring nothing ever sits around waiting.",
   },
   {
-    title: "Secure, door to door.",
+    title: "Deliveries, door to door.",
     text: "Every single package is handled with the utmost care and professional precision from the exact moment of pickup until it is safely signed for and handed over.",
   },
   {
@@ -58,15 +61,73 @@ const CSS = `
 @keyframes rd-pulse { 0%,100%{opacity:.35} 50%{opacity:.6} }
 @keyframes rd-arm   { 0%,100%{transform:translateY(0) rotate(-1.5deg)} 50%{transform:translateY(-6px) rotate(2deg)} }
 @keyframes rd-swing { 0%,100%{transform:rotate(-4deg)} 50%{transform:rotate(5deg)} }
+@keyframes cloud-drift { from{transform:translateX(0)} to{transform:translateX(-${STRIP}px)} }
+@keyframes hd-rise { from{opacity:0;transform:translateY(60px)} to{opacity:1;transform:translateY(0)} }
+@keyframes sl-in { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
+@keyframes cloud-bob   { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
 .rd-helmet { animation: rd-bob 4.5s ease-in-out infinite; }
 .rd-glint  { animation: rd-glint 3.2s ease-in-out infinite; }
 .rd-glow   { animation: rd-pulse 5s ease-in-out infinite; }
 .rd-arm    { transform-box: view-box; transform-origin: 905px 800px; animation: rd-arm 4.5s ease-in-out infinite; }
 .rd-swing  { transform-box: view-box; transform-origin: 1010px 650px; animation: rd-swing 4.5s ease-in-out -0.45s infinite; }
+.cloud-front { animation: cloud-drift 70s linear infinite; will-change: transform; }
+.cloud-back  { animation: cloud-drift 120s linear infinite reverse; will-change: transform; }
+.cloud-bob   { animation: cloud-bob 7s ease-in-out infinite; }
+.hd-line { display: block; animation: hd-rise .9s cubic-bezier(.22,1,.36,1) backwards; }
+.hd-line-2 { animation-delay: .15s; }
+.sl-in { animation: sl-in .45s ease-out; }
 @media (prefers-reduced-motion: reduce) {
-  .rd-helmet,.rd-glint,.rd-glow,.rd-arm,.rd-swing { animation: none !important; }
+  .rd-helmet,.rd-glint,.rd-glow,.rd-arm,.rd-swing,
+  .cloud-front,.cloud-back,.cloud-bob,.hd-line,.sl-in { animation: none !important; }
 }
 `;
+
+/* ------------------------------------------------------------------ */
+/*  Moving cloud edge (bottom of the page)                             */
+/*  Two layers drift in opposite directions at different speeds, so    */
+/*  the bumps slowly roll past each other like real clouds.            */
+/* ------------------------------------------------------------------ */
+const CloudEdge = memo(function CloudEdge() {
+  // three copies of the strip, so there is never a gap while it slides
+  const tiles = [-STRIP, 0, STRIP];
+
+  return (
+    <svg
+      viewBox="0 0 1600 140"
+      preserveAspectRatio="xMidYMax slice"
+      className="pointer-events-none absolute left-0 right-0 top-full z-10 block h-[70px] w-full -scale-y-100 sm:h-[110px]"
+      aria-hidden="true"
+    >
+      {/* back layer: lighter, slower, drifts the other way and bobs */}
+      <g className="cloud-bob" fill={BG} opacity="0.55">
+        <g className="cloud-back">
+          {tiles.map((dx) => (
+            <g key={dx} transform={`translate(${dx + 90} -22)`}>
+              {bumps.map((b) => (
+                <circle key={b.x} cx={b.x} cy={140} r={b.r * 0.9} />
+              ))}
+            </g>
+          ))}
+        </g>
+      </g>
+
+      {/* front layer: the solid cloud edge */}
+      <g fill={BG}>
+        <g className="cloud-front">
+          {tiles.map((dx) => (
+            <g key={dx} transform={`translate(${dx} 0)`}>
+              {bumps.map((b) => (
+                <circle key={b.x} cx={b.x} cy={140} r={b.r} />
+              ))}
+            </g>
+          ))}
+        </g>
+        {/* solid base so the edge always joins the page */}
+        <rect x={0} y={100} width={1600} height={41} />
+      </g>
+    </svg>
+  );
+});
 
 /* ------------------------------------------------------------------ */
 /*  Backdrop                                                           */
@@ -255,18 +316,36 @@ const Bag = memo(function Bag() {
 /* ------------------------------------------------------------------ */
 export default function RiderPage() {
   const [idx, setIdx] = useState(0);
-  const prev = () => setIdx((i) => (i - 1 + SLIDES.length) % SLIDES.length);
-  const next = () => setIdx((i) => (i + 1) % SLIDES.length);
+  const [paused, setPaused] = useState(false);
+
+  // slides change on their own every 6s (pauses while the card is hovered)
+  useEffect(() => {
+    if (paused) return;
+    const t = setTimeout(() => setIdx((i) => (i + 1) % SLIDES.length), 6000);
+    return () => clearTimeout(t);
+  }, [idx, paused]);
+
+  const slide = SLIDES[idx];
+  const words = slide.title.split(" ");
+  const lastWord = words.pop();
+  const restOfTitle = words.join(" ");
 
   return (
     <main
-      className="relative flex min-h-screen w-full flex-col items-center overflow-x-clip px-4 pt-20 sm:px-6 md:px-8 lg:pt-[10px] font-['Lufga']"
+      className="relative flex min-h-screen w-full flex-col items-center overflow-x-clip px-4 pt-28 sm:px-6 md:px-8 md:pt-36 font-['Lufga']"
       style={{ backgroundColor: BG }}
     >
       <style>{CSS}</style>
 
-      {/* rider illustration */}
-      <div className="relative w-full max-w-[1262px]">
+      {/* very big headline, sits behind the top of the rider */}
+      <h1 className="relative z-0  md:pb-[64px] md:pt-[32px]  pt-[12px] pb-[12px] w-full max-w-[1262px] select-none text-center text-[clamp(3.6rem,12vw,12rem)] font-black leading-[0.85] tracking-tighter text-black">
+        <span className="">Just Send it</span>
+        <span className="text-[#ff0000] md:ml-2 ml-1">.</span>
+        {/* <span className="hd-line hd-line-2 text-[#ff0000]">Packages</span> */}
+      </h1>
+
+      {/* rider illustration (overlaps the bottom of the headline) */}
+      <div className="relative z-10 -mt-[3vw] w-full max-w-[1262px] sm:-mt-[2vw]">
         <svg
           className="block h-auto max-h-[70vh] sm:max-h-[80vh] w-full"
           viewBox={`0 0 ${VB_W} ${VB_H}`}
@@ -290,99 +369,50 @@ export default function RiderPage() {
       </div>
 
       {/* card */}
-      <section className="relative z-10 mb-10 w-full max-w-6xl rounded-[30px] sm:rounded-[40px] border-2 border-black bg-white px-5 py-8 text-left sm:px-10 sm:py-12 md:px-14 md:py-14 shadow-sm">
-        {/* Top-Right Arrows Controls */}
-        <div className="flex items-center justify-between sm:justify-end gap-3 mb-6 sm:absolute sm:right-10 sm:top-10 sm:mb-0">
-          <button
-            type="button"
-            onClick={prev}
-            aria-label="Previous"
-            className="flex h-11 w-11 sm:h-14 sm:w-14 items-center justify-center rounded-full border-2 border-black bg-white text-black transition hover:bg-[#ff0000] hover:text-white active:scale-95"
-          >
-            <svg
-              viewBox="0 0 24 24"
-              className="h-5 w-5 sm:h-6 sm:w-6"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              aria-hidden="true"
-            >
-              <path d="M19 12H5M11 6l-6 6 6 6" />
-            </svg>
-          </button>
-          <button
-            type="button"
-            onClick={next}
-            aria-label="Next"
-            className="flex h-11 w-11 sm:h-14 sm:w-14 items-center justify-center rounded-full border-2 border-black bg-black text-white transition hover:bg-[#ff0000] active:scale-95"
-          >
-            <svg
-              viewBox="0 0 24 24"
-              className="h-5 w-5 sm:h-6 sm:w-6"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              aria-hidden="true"
-            >
-              <path d="M5 12h14M13 6l6 6-6 6" />
-            </svg>
-          </button>
+      <section
+        onMouseEnter={() => setPaused(true)}
+        onMouseLeave={() => setPaused(false)}
+        className="relative z-10 mb-10 w-full max-w-6xl rounded-[30px] sm:rounded-[40px] border-[2.4px] border-black bg-white px-5 py-8 text-left sm:px-10 sm:py-12 md:px-14 md:py-14"
+      >
+        {/* Slide content: only the active slide is rendered, so the card height fits its text */}
+        <div key={idx} className="sl-in" aria-live="polite">
+          <h2 className="text-3xl font-bold leading-tight tracking-tight text-black sm:text-4xl md:text-5xl lg:text-6xl">
+            {restOfTitle} <span className="text-[#ff0000]">{lastWord}</span>
+          </h2>
+          <p className="mt-3 sm:mt-5 max-w-xl text-sm sm:text-lg lg:text-xl text-black/80">
+            {slide.text}
+          </p>
         </div>
 
-        {/* Slides content */}
-        <div className="grid sm:pr-24" aria-live="polite">
-          {SLIDES.map((sl, i) => {
-            const words = sl.title.split(" ");
-            const lastWord = words.pop();
-            const restOfTitle = words.join(" ");
-
-            return (
-              <div
-                key={sl.title}
-                className={`col-start-1 row-start-1 transition-opacity duration-300 ${
-                  i === idx ? "opacity-100" : "invisible opacity-0"
-                }`}
-                aria-hidden={i !== idx}
-              >
-                <h2 className="text-3xl font-bold leading-tight tracking-tight text-black sm:text-4xl md:text-5xl lg:text-6xl">
-                  {restOfTitle}{" "}
-                  <span className="text-[#ff0000]">{lastWord}</span>
-                </h2>
-                <p className="mt-3 sm:mt-5 max-w-xl text-sm sm:text-lg lg:text-xl text-black/80">
-                  {sl.text}
-                </p>
-              </div>
-            );
-          })}
-        </div>
-
-        {/* Download buttons bottom row */}
-        <div className="mt-8 flex flex-wrap justify-between gap-4 sm:mt-12">
+        {/* Bottom row: download buttons + tiny progress dots (no arrows) */}
+        <div className="mt-8 flex flex-wrap items-center justify-between gap-4 sm:mt-12">
           <DownloadButtons alignLeft />
+
+          <div
+            className="flex items-center gap-1.5"
+            role="group"
+            aria-label="Slides"
+          >
+            {SLIDES.map((sl, i) => (
+              <button
+                key={sl.title}
+                type="button"
+                onClick={() => setIdx(i)}
+                aria-label={`Go to slide ${i + 1}`}
+                aria-current={i === idx}
+                className={`h-1.5 rounded-full transition-all duration-300 ${
+                  i === idx
+                    ? "w-6 bg-black"
+                    : "w-1.5 bg-black/20 hover:bg-black/40"
+                }`}
+              />
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* Cloud edge at the bottom */}
-      <svg
-        viewBox="0 0 1600 140"
-        preserveAspectRatio="xMidYMax slice"
-        className="pointer-events-none absolute left-0 right-0 top-full z-10 block h-[70px] w-full -scale-y-100 sm:h-[110px]"
-        aria-hidden="true"
-      >
-        <g fill={BG}>
-          {bumps
-            .slice()
-            .reverse()
-            .map((b) => (
-              <circle key={b.x} cx={b.x} cy={140} r={b.r} />
-            ))}
-          <rect x={0} y={100} width={1600} height={41} />
-        </g>
-      </svg>
+      {/* Cloud edge at the bottom: now drifting */}
+      <CloudEdge />
     </main>
   );
 }
