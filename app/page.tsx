@@ -26,6 +26,7 @@ export const metadata: Metadata = createPageMetadata({
   description: DESCRIPTION,
   path: "/",
   imageAlt: "Pickars – Your doorstep deliveries, redefined.",
+  image: OG_IMAGES.about,
 });
 
 const homeSchema = graph(
@@ -40,7 +41,7 @@ const homeSchema = graph(
     about: { "@id": ids.localBusiness },
     primaryImageOfPage: {
       "@type": "ImageObject",
-      url: absoluteUrl(OG_IMAGES.default),
+      url: absoluteUrl(OG_IMAGES.about),
     },
   },
   localBusinessSchema(),
