@@ -6,7 +6,7 @@ import DownloadButtons from "@/components/atoms/buttons/DownloadButtons";
 /* ------------------------------------------------------------------ */
 /*  Theme: red / black / white                                         */
 /* ------------------------------------------------------------------ */
-const RED = "#FFEEEE";
+const RED = "#FEEFDC";
 const BG = RED;
 
 const VB_W = 1262;
@@ -189,9 +189,9 @@ const Bag = memo(function Bag() {
       <g transform="translate(1056 538) scale(1.375) translate(-1710 -530)">
         <g className="rd-swing">
           <g
-            transform="translate(900 632) scale(1.4 0.8)"
+            transform="translate(900 632) scale(1.4 1.1)"
             stroke="#000"
-            strokeWidth="6"
+            strokeWidth="5"
             strokeLinejoin="round"
           >
             <path
@@ -205,7 +205,7 @@ const Bag = memo(function Bag() {
             <g
               fill="none"
               stroke="#b98558"
-              strokeWidth="3"
+              strokeWidth="8"
               strokeLinecap="round"
               opacity="0.7"
             >
