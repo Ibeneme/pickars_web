@@ -53,7 +53,7 @@ export default function AppFeaturesPage() {
       <AppFeaturesHero />
       <AppFeaturesDeliveryOptions />
       <AppFeaturesNotifications />
-      <AppFeaturesMockup />
+      {/* <AppFeaturesMockup /> */}
     </div>
   );
 }

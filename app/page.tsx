@@ -66,7 +66,7 @@ export default function HomePage() {
 
       <NeverLateSection />
       <HomeTestimonialsSection />
-      <div style={{ marginTop: -120, marginBottom: -48 }}>
+      <div style={{ marginTop: 0, marginBottom: 0 }}>
         {/* <RiderPage /> */}
         <FAQsClientPage />
       </div>

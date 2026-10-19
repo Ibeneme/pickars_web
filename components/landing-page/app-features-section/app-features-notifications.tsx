@@ -40,7 +40,7 @@ export default function AppFeaturesNotifications() {
   return (
     <section
       ref={containerRef}
-      className="relative isolate overflow-hidden bg-[#fff] font-['Lufga'] text-gray-900"
+      className="relative isolate overflow-hidden bg-[#fff] my-[220px] font-['Lufga'] text-gray-900"
     >
       <div className="mx-auto max-w-7xl px-4 pb-16 sm:px-6 lg:px-8">
         <motion.div

@@ -148,7 +148,7 @@ const TOWERS = buildSkyline();
 const CitySkyline = memo(function CitySkyline() {
   return (
     <svg
-      className="pointer-events-none absolute bottom-16 left-0 z-[1] h-44 w-full sm:bottom-20 sm:h-56 md:bottom-24 md:h-72"
+      className="pointer-events-none absolute bottom-0 left-0 z-[1] h-44 w-full sm:bottom-0 sm:h-56 md:bottom-0 md:h-72"
       viewBox={`0 0 ${VB_W} ${VB_H}`}
       preserveAspectRatio="xMidYMax slice"
       fill="none"
@@ -179,9 +179,7 @@ const CitySkyline = memo(function CitySkyline() {
 const Background = memo(function Background() {
   return (
     <div className="cta-bg pointer-events-none absolute inset-0 overflow-hidden">
-      <CitySkyline />
-
-      {/* road */}
+      {/* road
       <div className="absolute bottom-0 left-0 z-[2] h-16 w-full overflow-hidden bg-black/60 sm:h-20 md:h-24">
         <div className="absolute inset-x-0 top-0 h-px bg-white/25" />
         <div
@@ -194,7 +192,7 @@ const Background = memo(function Background() {
         />
       </div>
 
-      {/* riders */}
+      {/* riders
       <div className="cta-ride-1 absolute bottom-1.5 z-10 opacity-95 sm:bottom-2.5">
         <div className="origin-bottom-left scale-[0.7] sm:scale-90 md:scale-100">
           <DeliveryRider />
@@ -206,10 +204,12 @@ const Background = memo(function Background() {
         </div>
       </div>
 
-      {/* floating accents */}
+
       <div className="cta-float absolute left-[12%] top-[18%] h-9 w-9 rounded-xl border border-white/15 bg-black/20" />
       <div className="cta-float cta-float-2 absolute right-[18%] top-[22%] h-7 w-7 rounded-full border-2 border-white/25 bg-white/10" />
       <div className="cta-float cta-float-3 absolute left-[32%] top-[28%] h-2 w-2 rounded-full bg-white/70" />
+    */}
+      <CitySkyline />
     </div>
   );
 });
@@ -273,10 +273,7 @@ const AppDownloadCTA: React.FC = () => {
               className="text-4xl font-black leading-[1.08] tracking-tight text-white sm:text-5xl md:text-6xl"
             >
               Download the app <br className="hidden sm:inline" />
-              to get{" "}
-              <span className="relative inline-block">
-                started.
-          </span>
+              to get <span className="relative inline-block">started.</span>
             </motion.h1>
 
             <motion.p
