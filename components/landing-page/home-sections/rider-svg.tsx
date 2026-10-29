@@ -5,7 +5,7 @@ import DownloadButtons from "@/components/atoms/buttons/DownloadButtons";
 import CityMarquee from "./sub-sections/city-marquee";
 
 /* ------------------------------------------------------------------ */
-/*  Theme: red / black / white                                         */
+/*  Theme                                                              */
 /* ------------------------------------------------------------------ */
 const RED = "#DFFCE1";
 const BG = RED;
@@ -43,7 +43,6 @@ const CSS = `
 @keyframes sl-in { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
 
 /* ---- clouds ------------------------------------------------------ */
-/* steady drift across the sky (outer wrapper) */
 @keyframes cloud-ltr {
   from { transform: translate3d(-100%, 0, 0); }
   to   { transform: translate3d(100vw, 0, 0); }
@@ -52,7 +51,6 @@ const CSS = `
   from { transform: translate3d(100vw, 0, 0); }
   to   { transform: translate3d(-100%, 0, 0); }
 }
-/* the roaming cloud wanders using two slow, out-of-sync waves */
 @keyframes cloud-roam-x {
   from { transform: translate3d(2vw, 0, 0); }
   to   { transform: translate3d(66vw, 0, 0); }
@@ -61,7 +59,6 @@ const CSS = `
   from { transform: translate3d(0, 0, 0); }
   to   { transform: translate3d(0, 24vh, 0); }
 }
-/* tiny up-and-down float + soft breathing (inner svg) */
 @keyframes cloud-bob {
   0%,100% { transform: translate3d(0, 0, 0) scale(1); }
   50%     { transform: translate3d(0, -10px, 0) scale(1.03); }
@@ -77,6 +74,11 @@ const CSS = `
 .cloud-roam-x { animation: cloud-roam-x 22s ease-in-out infinite alternate; }
 .cloud-roam-y { animation: cloud-roam-y 9s ease-in-out infinite alternate; will-change: transform; }
 .cloud-bob { animation: cloud-bob ease-in-out infinite; transform-origin: 50% 80%; }
+
+/* MOBILE: show far fewer clouds (only 3 of the 13 stay) */
+@media (max-width: 767px) {
+  .cloud-hide-mobile { display: none !important; }
+}
 
 .rd-helmet { animation: rd-bob 4.5s ease-in-out infinite; }
 .rd-glint  { animation: rd-glint 3.2s ease-in-out infinite; }
@@ -99,18 +101,18 @@ const CSS = `
 /* ------------------------------------------------------------------ */
 type CloudDef = {
   kind: "ltr" | "rtl" | "roam";
-  top: string; // distance from top of the page (percentage of page height)
-  width: string; // responsive CSS width
-  dur: number; // drift duration in seconds (slow = cloud-like)
-  delay: number; // negative = already mid-sky on load
-  bobDur: number; // float duration in seconds
+  top: string;
+  width: string;
+  dur: number;
+  delay: number;
+  bobDur: number;
   bobDelay: number;
   opacity: number;
-  flip?: boolean; // mirror the shape so clouds don't all look identical
+  flip?: boolean;
+  hideOnMobile: boolean; // hidden below 768px to keep phones calm
 };
 
-/* seeded PRNG: "random" but identical on server and client,
-   so there is no hydration mismatch in Next.js */
+/* seeded PRNG: identical on server and client, no hydration mismatch */
 function mulberry32(seed: number) {
   return () => {
     seed |= 0;
@@ -125,18 +127,15 @@ function makeClouds(count: number, seed = 7): CloudDef[] {
   const rnd = mulberry32(seed);
   const range = (min: number, max: number) => min + rnd() * (max - min);
 
-  // split the page height into bands and put one cloud in each band
-  // (random spot inside the band) so they spread out without clumping
   const bands = Array.from({ length: count }, (_, i) => i);
-  // shuffle so direction/size don't follow the vertical order
   for (let i = bands.length - 1; i > 0; i--) {
     const j = Math.floor(rnd() * (i + 1));
     [bands[i], bands[j]] = [bands[j], bands[i]];
   }
 
-  const list: CloudDef[] = bands.map((band) => {
-    const s = range(0.6, 1.3); // size factor
-    const dur = Math.round(range(30, 55)); // seconds to cross the screen (lower = faster)
+  const list: CloudDef[] = bands.map((band, i) => {
+    const s = range(0.6, 1.3);
+    const dur = Math.round(range(30, 55));
     return {
       kind: rnd() > 0.5 ? "ltr" : "rtl",
       top: `${((band + rnd() * 0.8) / count) * 94}%`,
@@ -144,15 +143,17 @@ function makeClouds(count: number, seed = 7): CloudDef[] {
         1
       )}vw, ${Math.round(230 * s)}px)`,
       dur,
-      delay: -Math.round(rnd() * dur), // random starting x position
+      delay: -Math.round(rnd() * dur),
       bobDur: Math.round(range(9, 14)),
       bobDelay: -Math.round(rnd() * 10),
       opacity: +range(0.7, 0.95).toFixed(2),
       flip: rnd() > 0.5,
+      // keep every 5th cloud on mobile (about 3 of 12), hide the rest
+      hideOnMobile: i % 5 !== 0,
     };
   });
 
-  // one cloud that wanders around on its own
+  // roaming cloud: desktop only
   list.push({
     kind: "roam",
     top: "4%",
@@ -162,6 +163,7 @@ function makeClouds(count: number, seed = 7): CloudDef[] {
     bobDur: 12,
     bobDelay: -4,
     opacity: 0.92,
+    hideOnMobile: true,
   });
 
   return list;
@@ -169,7 +171,6 @@ function makeClouds(count: number, seed = 7): CloudDef[] {
 
 const CLOUDS: CloudDef[] = makeClouds(12);
 
-/* the cloud silhouette, drawn twice: once fat + black (border), once white (fill) */
 const CloudShape = () => (
   <>
     <circle cx="60" cy="62" r="30" />
@@ -192,7 +193,6 @@ const CloudSvg = ({ c }: { c: CloudDef }) => (
     }}
   >
     <g transform={c.flip ? "translate(200 0) scale(-1 1)" : undefined}>
-      {/* border */}
       <g
         fill="#ffffff75"
         stroke="#ffffff75"
@@ -202,7 +202,6 @@ const CloudSvg = ({ c }: { c: CloudDef }) => (
       >
         <CloudShape />
       </g>
-      {/* fill */}
       <g fill="#fff">
         <CloudShape />
       </g>
@@ -212,18 +211,18 @@ const CloudSvg = ({ c }: { c: CloudDef }) => (
 
 const Clouds = memo(function Clouds() {
   return (
-    // z-[-1] inside an `isolate` parent: above the page background,
-    // below every other element on the page.
     <div
       aria-hidden="true"
       className="pointer-events-none absolute inset-0 -z-10 overflow-hidden"
     >
       {CLOUDS.map((c, i) => {
+        const hide = c.hideOnMobile ? "cloud-hide-mobile" : "";
+
         if (c.kind === "roam") {
           return (
             <div
               key={i}
-              className="cloud-wrap cloud-roam-x"
+              className={`cloud-wrap cloud-roam-x ${hide}`}
               style={{
                 top: c.top,
                 width: c.width,
@@ -239,7 +238,7 @@ const Clouds = memo(function Clouds() {
         return (
           <div
             key={i}
-            className={`cloud-wrap cloud-${c.kind}`}
+            className={`cloud-wrap cloud-${c.kind} ${hide}`}
             style={{
               top: c.top,
               width: c.width,
@@ -300,13 +299,7 @@ const Jacket = memo(function Jacket() {
         fill="#000"
       />
       {/* arm seam, red piping */}
-      <path
-        d="M262 818 C298 842 298 900 300 1006"
-        stroke="#ff0000"
-        strokeWidth="22"
-        fill="none"
-        strokeLinecap="round"
-      />
+  
 
       <path
         d="M418 680 L460 630 C520 640 620 700 700 722 C750 722 745 760 720 780 C690 795 640 797 610 800 C595 770 590 740 588 722 C520 735 450 710 418 680Z"
@@ -405,25 +398,27 @@ export default function RiderPage() {
 
   return (
     <main
-      className="relative isolate flex min-h-screen w-full flex-col items-center overflow-x-clip px-4 pt-28 sm:px-6 md:px-8 md:pt-36 font-['Lufga']"
+      className="relative isolate flex w-full flex-col items-center overflow-x-clip px-4 pt-24 pb-0 sm:px-6 md:px-8 md:pt-36 font-['Lufga']"
       style={{ backgroundColor: BG }}
     >
       <style>{CSS}</style>
       <Clouds />
 
       {/* very big headline, sits behind the top of the rider */}
-      <h1 className="relative z-0 md:pt-[24px] pt-[12px] w-full max-w-[1262px] select-none text-center text-[clamp(3.2rem,8vw,10rem)] font-black leading-[0.85] tracking-tighter text-black">
-        <span className="">Just Send it</span>
-        <span className="text-[#ff0000] md:ml-2 ml-1">.</span>
+      <h1 className="relative z-0 w-full max-w-[1262px] select-none pt-4 text-center text-[clamp(3.6rem,15vw,10rem)] font-black leading-[0.9] tracking-tighter text-black md:pt-[24px]">
+        <span>Just Send it</span>
+        <span className="ml-1 text-[#ff0000] md:ml-2">.</span>
       </h1>
-      <span className="md:pb-[48px] mt-4 pb-[8px]">
+
+      {/* download buttons: more breathing room on mobile */}
+      <span className="mt-8 pb-6 md:mt-4 md:pb-[48px]">
         <DownloadButtons isHalf={true} iconSize={24} padding="h-13 w-13" />
       </span>
 
-      {/* rider illustration */}
-      <div className="relative z-10 -mt-[3vw] w-full max-w-[1262px] sm:-mt-[2vw]">
+      {/* rider illustration: bigger on mobile, bleeds slightly past the edges */}
+      <div className="relative z-10 mt-2 w-[135%] max-w-none sm:mt-0 sm:w-full sm:max-w-[1262px] md:-mt-[2vw]">
         <svg
-          className="block h-auto max-h-[70vh] sm:max-h-[80vh] w-full"
+          className="block h-auto w-full sm:max-h-[80vh]"
           viewBox={`0 0 ${VB_W} ${VB_H}`}
           preserveAspectRatio="xMidYMax meet"
           style={{ overflow: "visible" }}
@@ -443,13 +438,16 @@ export default function RiderPage() {
         </svg>
       </div>
 
-      {/* Modern White Card Component (Borders and Shadows Removed) */}
-      {/* <section
+      {/* optional: bottom marquee, currently imported but unused */}
+      {/* <CityMarquee /> */}
+
+      {/* Slide card (disabled). Uncomment together with the slide state above.
+      <section
         onMouseEnter={() => setPaused(true)}
         onMouseLeave={() => setPaused(false)}
-        className="relative mb-12  mt-[-48px] z-10 mb-0 w-full max-w-5xl bg-white px-6 py-8 sm:px-10 sm:py-10 md:px-12 md:py-12 text-left transition-all duration-300 rounded-[12px] sm:rounded-[48px]"
+        className="relative z-10 mt-[-48px] w-full max-w-5xl rounded-[12px] bg-white px-6 py-8 text-left transition-all duration-300 sm:rounded-[48px] sm:px-10 sm:py-10 md:px-12 md:py-12"
       >
-    <div
+        <div
           key={idx}
           className="sl-in flex min-h-[17rem] flex-col gap-4 sm:min-h-[15rem] sm:gap-5 lg:min-h-[14rem]"
           aria-live="polite"
@@ -462,51 +460,21 @@ export default function RiderPage() {
           </p>
         </div>
 
-  <div className="mt-8 flex flex-wrap items-center justify-between gap-6 sm:mt-10">
+        <div className="mt-8 flex flex-wrap items-center justify-between gap-6 sm:mt-10">
           <DownloadButtons alignLeft />
-
           <div className="flex items-center gap-3">
-            <button
-              type="button"
-              onClick={prev}
-              aria-label="Previous slide"
-              className="flex h-12 w-12 items-center justify-center rounded-full border border-black/15 text-black transition-colors duration-200 hover:bg-black hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
-            >
-              <svg
-                className="h-5 w-5"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                aria-hidden="true"
-              >
-                <path d="M15 18l-6-6 6-6" />
-              </svg>
+            <button type="button" onClick={prev} aria-label="Previous slide"
+              className="flex h-12 w-12 items-center justify-center rounded-full border border-black/15 text-black transition-colors duration-200 hover:bg-black hover:text-white">
+              <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6" /></svg>
             </button>
-            <button
-              type="button"
-              onClick={next}
-              aria-label="Next slide"
-              className="flex h-12 w-12 items-center justify-center rounded-full border border-black/15 text-black transition-colors duration-200 hover:bg-black hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
-            >
-              <svg
-                className="h-5 w-5"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                aria-hidden="true"
-              >
-                <path d="M9 18l6-6-6-6" />
-              </svg>
+            <button type="button" onClick={next} aria-label="Next slide"
+              className="flex h-12 w-12 items-center justify-center rounded-full border border-black/15 text-black transition-colors duration-200 hover:bg-black hover:text-white">
+              <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6" /></svg>
             </button>
           </div>
         </div>
-      </section> */}
+      </section>
+      */}
     </main>
   );
 }
