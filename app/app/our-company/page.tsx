@@ -35,7 +35,7 @@ export default function OurCompanyPage() {
   return (
     <div>
       <JsonLd data={schema} />
-      <HeroSection />
+      {/* <HeroSection /> */}
       <CompanyHero />
       <CompanyMission />
       <CompanyCoreValues />

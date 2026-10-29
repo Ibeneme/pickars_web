@@ -1,41 +1,17 @@
 "use client";
 
-import React, { memo, useEffect, useRef } from "react";
+import React, { memo } from "react";
 import { motion, useInView, useReducedMotion } from "framer-motion";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import DownloadButtons from "@/components/atoms/buttons/DownloadButtons";
-
-gsap.registerPlugin(ScrollTrigger);
+import { useRef } from "react";
 
 const WHATSAPP_NUMBER = "2349164860591"; // 0916 486 0591
 
-const BG = "#d9d2f795";
+const BG = "#ffffff";
 
 /* ---------- Cloud edge (traced from the supplied image) ---------- */
 const CLOUD_PATH =
   "M0 0 L0 109 L19 114 L38 114 L43 112 L134 113 L135 114 L140 114 L141 115 L146 115 L178 121 L194 125 L201 128 L204 125 L206 125 L209 128 L216 140 L256 140 L276 129 L293 122 L312 117 L322 117 L336 110 L353 106 L368 105 L369 106 L379 106 L400 111 L428 112 L429 111 L437 111 L438 110 L448 109 L466 103 L473 103 L474 104 L490 103 L515 97 L529 97 L537 100 L541 100 L549 94 L574 81 L593 75 L601 75 L622 84 L628 88 L640 101 L645 98 L650 98 L675 114 L679 114 L698 121 L708 120 L717 115 L727 107 L735 103 L745 100 L755 100 L762 102 L768 105 L778 114 L799 117 L800 118 L809 118 L810 119 L845 119 L846 118 L853 118 L897 107 L916 105 L917 104 L926 104 L927 103 L948 102 L952 100 L967 105 L977 103 L984 103 L985 102 L995 102 L996 101 L1025 101 L1026 102 L1036 103 L1043 107 L1064 106 L1065 105 L1108 105 L1115 108 L1134 124 L1147 133 L1156 136 L1172 139 L1178 139 L1179 140 L1524 140 L1530 138 L1538 138 L1542 140 L1667 140 L1673 138 L1693 136 L1694 135 L1708 135 L1727 140 L1742 140 L1749 132 L1752 131 L1760 132 L1769 140 L1889 140 L1890 139 L1902 139 L1903 140 L2196 140 L2184 105 L2167 91 L2168 89 L2178 85 L2188 84 L2189 83 L2229 83 L2230 84 L2249 85 L2250 86 L2257 86 L2258 87 L2281 90 L2291 85 L2309 80 L2325 78 L2326 77 L2333 77 L2334 76 L2342 76 L2343 75 L2357 75 L2364 79 L2371 81 L2388 81 L2397 79 L2413 73 L2427 64 L2433 72 L2437 74 L2447 74 L2454 71 L2465 63 L2475 62 L2481 68 L2483 74 L2489 69 L2496 67 L2537 87 L2544 88 L2552 84 L2559 84 L2565 89 L2570 90 L2575 79 L2586 64 L2594 56 L2600 54 L2608 56 L2621 68 L2627 78 L2648 66 L2666 58 L2675 58 L2679 60 L2697 78 L2710 66 L2717 63 L2723 62 L2732 65 L2739 72 L2744 81 L2750 87 L2754 89 L2764 90 L2773 88 L2793 78 L2795 78 L2799 75 L2806 73 L2812 75 L2825 89 L2846 104 L2855 107 L2859 107 L2869 104 L2879 104 L2879 0Z";
-
-/* "bottom": hangs from the bottom of the section (wavy side down)
-   "top":    sits on the top of the section, flipped (wavy side up) */
-const CloudEdge = memo(function CloudEdge({
-  position,
-}: {
-  position: "top" | "bottom";
-}) {
-  return (
-    <svg
-      viewBox="0 0 2880 141"
-      preserveAspectRatio="xMidYMin slice"
-      className={`pointer-events-none absolute left-0 right-0 z-10 block h-[70px] w-full sm:h-[110px] ${
-        position === "bottom" ? "top-full" : "bottom-full -scale-y-100"
-      }`}
-      aria-hidden="true"
-    >
-      <path d={CLOUD_PATH} fill={BG} />
-    </svg>
-  );
-});
 
 /* ---------- Animation helpers ---------- */
 const FloatG: React.FC<{
@@ -51,24 +27,6 @@ const FloatG: React.FC<{
   return (
     <motion.g
       animate={{ y: [0, -y, 0], x: [0, x, 0], rotate: [-rot, rot, -rot] }}
-      transition={{ duration: dur, delay, repeat: Infinity, ease: "easeInOut" }}
-    >
-      {children}
-    </motion.g>
-  );
-};
-
-const PulseG: React.FC<{
-  children: React.ReactNode;
-  scale?: number;
-  dur?: number;
-  delay?: number;
-}> = ({ children, scale = 1.12, dur = 1.6, delay = 0 }) => {
-  const reduce = useReducedMotion();
-  if (reduce) return <g>{children}</g>;
-  return (
-    <motion.g
-      animate={{ scale: [1, scale, 1] }}
       transition={{ duration: dur, delay, repeat: Infinity, ease: "easeInOut" }}
     >
       {children}
@@ -93,28 +51,6 @@ const SwayG: React.FC<{
     >
       {children}
     </motion.g>
-  );
-};
-
-const Steam: React.FC<{ x: number; y: number; delay: number }> = ({
-  x,
-  y,
-  delay,
-}) => {
-  const reduce = useReducedMotion();
-  return (
-    <g transform={`translate(${x} ${y})`}>
-      <motion.path
-        d="M0 0 q-10 -14 0 -28 q10 -14 0 -28"
-        stroke="#fff"
-        strokeWidth="6"
-        strokeLinecap="round"
-        fill="none"
-        initial={{ opacity: reduce ? 0.6 : 0 }}
-        animate={reduce ? undefined : { y: [0, -34], opacity: [0, 0.9, 0] }}
-        transition={{ duration: 2.4, delay, repeat: Infinity, ease: "easeOut" }}
-      />
-    </g>
   );
 };
 
@@ -225,7 +161,7 @@ const MallArt = () => (
     <FloatG y={14} dur={2.3} delay={0.8}>
       <path
         d="M266 70l5 11 12 2-9 8 3 12-11-6-11 6 3-12-9-8 12-2z"
-        fill="#fff"
+        fill="#ff0000"
       />
     </FloatG>
     <FloatG y={9} rot={6} dur={3.2} delay={0.4}>
@@ -237,117 +173,40 @@ const MallArt = () => (
   </svg>
 );
 
-/* swings from the top of its own box (like a hanger on a rail) */
-const HangG: React.FC<{
-  children: React.ReactNode;
-  amp?: number;
-  dur?: number;
-  delay?: number;
-}> = ({ children, amp = 3, dur = 3, delay = 0 }) => {
-  const reduce = useReducedMotion();
-  if (reduce) return <g>{children}</g>;
-  return (
-    <motion.g
-      style={{ originX: 0.5, originY: 0 }}
-      animate={{ rotate: [-amp, amp, -amp] }}
-      transition={{ duration: dur, delay, repeat: Infinity, ease: "easeInOut" }}
-    >
-      {children}
-    </motion.g>
-  );
-};
-
-const Hanger: React.FC<{ cx: number; half: number }> = ({ cx, half }) => (
-  <g
-    stroke="#fff"
-    strokeWidth="3.5"
-    fill="none"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-  >
-    <path d={`M${cx} 74V64a6 6 0 1 1 6-6`} />
-    <path d={`M${cx} 74L${cx - half} 90H${cx + half}Z`} />
-  </g>
-);
-
 const HomeArt = () => (
   <svg {...artSvg}>
-    <ellipse cx="150" cy="330" rx="130" ry="7" fill="#000" opacity="0.12" />
+    <ellipse cx="150" cy="328" rx="140" ry="8" fill="#000" opacity="0.12" />
 
-    {/* rail */}
-    <rect x="8" y="53" width="284" height="6" rx="3" fill="#1e3a8a" />
-    <circle cx="10" cy="56" r="7" fill="#1e3a8a" />
-    <circle cx="290" cy="56" r="7" fill="#1e3a8a" />
-
-    {/* shirt */}
-    <HangG amp={3} dur={3.2}>
-      <Hanger cx={70} half={34} />
-      <path
-        d="M36 92 14 122l14 12 16-14v80h52v-80l16 14 14-12-22-30-20 6q-14 10-28 0Z"
-        fill="#4F2805"
-      />
-      <path
-        d="M56 98l14 16 14-16"
-        stroke="#fde047"
-        strokeWidth="3"
-        fill="none"
-        strokeLinejoin="round"
-      />
-      <circle cx="70" cy="140" r="2.5" fill="#fde047" />
-      <circle cx="70" cy="160" r="2.5" fill="#fde047" />
-      <circle cx="70" cy="180" r="2.5" fill="#fde047" />
-    </HangG>
-
-    {/* dress */}
-    <HangG amp={3.5} dur={3.6} delay={0.5}>
-      <Hanger cx={150} half={30} />
-      <path d="M120 92h60l-8 38 24 92H104l24-92Z" fill="#f472b6" />
-      <rect x="127" y="126" width="46" height="9" fill="#be185d" />
-      <path
-        d="M124 160q26 10 52 0M116 190q34 12 68 0"
-        stroke="#fbcfe8"
-        strokeWidth="3"
-        fill="none"
-        strokeLinecap="round"
-      />
-    </HangG>
-
-    {/* trousers */}
-    <HangG amp={3} dur={3.4} delay={0.9}>
-      <Hanger cx={230} half={26} />
-      <path d="M204 92h52l6 150h-22l-10-96-10 96h-22Z" fill="#a78bfa" />
-      <rect x="204" y="92" width="52" height="11" fill="#5b21b6" />
-      <path d="M230 103v43" stroke="#6d28d9" strokeWidth="3" />
-    </HangG>
-
-    {/* chocolate box */}
-    <FloatG y={3} dur={2.8}>
-      <rect x="40" y="272" width="190" height="52" rx="10" fill="#7c2d12" />
-      <rect x="48" y="264" width="174" height="40" rx="8" fill="#451a03" />
-      {[72, 106, 140, 174, 208].map((x, i) => (
-        <g key={x}>
-          <circle
-            cx={x}
-            cy="284"
-            r="14"
-            fill={["#92400e", "#78350f", "#b45309"][i % 3]}
-          />
-          <path
-            d={`M${x - 7} 284q7-9 14 0`}
-            stroke={i % 2 ? "#fde68a" : "#fff"}
-            strokeWidth="3"
-            fill="none"
-            strokeLinecap="round"
-          />
-        </g>
-      ))}
-      <rect x="40" y="296" width="190" height="10" fill="#9a3412" />
-      <circle cx="135" cy="301" r="6" fill="#fbbf24" />
+    {/* Centered & Bigger Chocolate Box */}
+    <FloatG y={4} dur={2.8}>
+      <g transform="translate(10, 16)">
+        <rect x="20" y="240" width="220" height="60" rx="12" fill="#7c2d12" />
+        <rect x="28" y="230" width="204" height="46" rx="9" fill="#451a03" />
+        {[55, 93, 131, 169, 207].map((x, i) => (
+          <g key={x}>
+            <circle
+              cx={x}
+              cy="253"
+              r="16"
+              fill={["#92400e", "#78350f", "#b45309"][i % 3]}
+            />
+            <path
+              d={`M${x - 8} 253q8-10 16 0`}
+              stroke={i % 2 ? "#fde68a" : "#fff"}
+              strokeWidth="3.5"
+              fill="none"
+              strokeLinecap="round"
+            />
+          </g>
+        ))}
+        <rect x="20" y="268" width="220" height="12" fill="#9a3412" />
+        <circle cx="130" cy="274" r="7" fill="#fbbf24" />
+      </g>
     </FloatG>
 
-    {/* chocolate bar */}
+    {/* Centered & Bigger Chocolate Bar (Left side accent) */}
     <FloatG y={6} rot={4} dur={3} delay={0.4}>
-      <g transform="translate(262 286) rotate(-12)">
+      <g transform="translate(55, 185) scale(1.2) rotate(-12)">
         <rect x="-22" y="-32" width="44" height="64" rx="5" fill="#78350f" />
         <path
           d="M-22 -10H22M-22 10H22M0 -32V32"
@@ -358,25 +217,26 @@ const HomeArt = () => (
       </g>
     </FloatG>
 
-    {/* truffle */}
+    {/* Centered & Bigger Truffle (Right side accent) */}
     <FloatG y={9} rot={8} dur={2.4} delay={0.7}>
-      <circle cx="20" cy="298" r="15" fill="#78350f" />
-      <path
-        d="M10 292l5 3M22 288l2 5M26 300l5-1M14 304l4 3"
-        stroke="#fde68a"
-        strokeWidth="2.5"
-        strokeLinecap="round"
-      />
+      <g transform="translate(235, 230) scale(1.2)">
+        <circle cx="0" cy="0" r="18" fill="#78350f" />
+        <path
+          d="M-10 -6l6 3M4 -10l2 6M8 2l6 -1M-6 8l5 4"
+          stroke="#fde68a"
+          strokeWidth="2.5"
+          strokeLinecap="round"
+        />
+      </g>
     </FloatG>
 
-    {/* sparkle */}
+    {/* Sparkle */}
     <FloatG y={8} dur={2.2} delay={0.3}>
-      <path d="M150 20l4 9 9 3-9 3-4 9-4-9-9-3 9-3z" fill="#fff" />
+      <path d="M150 140l5 11 11 5-11 5-5 11-5-11-11-5 11-5z" fill="#ff0000" />
     </FloatG>
   </svg>
 );
 
-/* NEW office art: a printer pushing out pages, a folder, sticky note, clip */
 const PrinterPaper = () => {
   const reduce = useReducedMotion();
   return (
@@ -462,7 +322,7 @@ const OfficeArt = () => (
     <FloatG y={10} rot={14} dur={2.4} delay={0.2}>
       <path
         d="M270 56v38a14 14 0 0 1-28 0V48a9 9 0 0 1 18 0v40"
-        stroke="#fff"
+        stroke="#1e3a8a"
         strokeWidth="5"
         fill="none"
         strokeLinecap="round"
@@ -574,74 +434,46 @@ type Partner = {
   title: string;
   text: string;
   cta: string;
-  wa: string; // WhatsApp message
-  bg: string; // card colour
-  tags: { name: string; bg: string }[];
+  wa: string;
+  bg: string;
   Art: React.FC;
 };
 
 const partners: Partner[] = [
   {
     id: "malls",
-    wa: "Hi Pickars! I run a store in a mall and I'd like to partner with you.",
-    title: "Shopping Malls",
-    text: "Have a shop in a mall or plaza? Let shoppers across Port Harcourt order from you and get it delivered the same day.",
-    cta: "Send us a message for partnership",
-    bg: "#000000",
-    tags: [
-      { name: "Fashion stores", bg: "#ffffff" },
-      { name: "Supermarkets", bg: "#86efac" },
-      { name: "Electronics", bg: "#ffeeee" },
-      { name: "Beauty", bg: "#ff0000" },
-      { name: "Shoes", bg: "#ffffff" },
-      { name: "Gifts", bg: "#86efac" },
-    ],
+    wa: "Hello Pickars! I own a shop in a mall and I'm interested in working with you.",
+    title: "Mall Stores",
+    text: "Do you have a store in a mall or plaza? Let customers all over Port Harcourt buy from you and receive their orders on the same day.",
+    cta: "Message us to become a partner",
+    bg: "#DFFCE1",
     Art: MallArt,
   },
   {
     id: "home",
-    wa: "Hi Pickars! I'm a home vendor and I'd like to partner with you.",
-    title: "Home Vendors",
-    text: "Sell from your home? Bakers, cooks and small brands: we pick up from your door and deliver to your customers.",
-    cta: "Send us a message for partnership",
-    bg: "#830CFA", // Updated purple background
-    tags: [
-      { name: "Home bakers", bg: "#ffffff" },
-      { name: "Home kitchens", bg: "#ffeeee" },
-      { name: "Snacks", bg: "#86efac" },
-      { name: "Skincare", bg: "#ffffff" },
-    ],
+    wa: "Hello Pickars! I sell from home and I'd love to become your partner.",
+    title: "Home-Based Sellers",
+    text: "Do you run your business from home? Whether you bake, cook or build a small brand, we collect from your doorstep and bring it straight to your buyers.",
+    cta: "Message us to become a partner",
+    bg: "#DFF9FC",
     Art: HomeArt,
   },
   {
     id: "office",
-    wa: "Hi Pickars! I sell office supplies and I'd like to partner with you.",
-    title: "Office supplies",
-    text: "Sell stationery, printers or office equipment? Keep Port Harcourt offices stocked with fast, reliable delivery.",
-    cta: "Send us a message for partnership",
-    bg: "#0e6b3c",
-    tags: [
-      { name: "Stationery", bg: "#ffffff" },
-      { name: "Printers & ink", bg: "#ffeeee" },
-      { name: "Paper", bg: "#ffffff" },
-      { name: "Furniture", bg: "#ff0000" },
-      { name: "Laptops", bg: "#ffeeee" },
-    ],
+    wa: "Hello Pickars! I sell office supplies and I want to partner with you.",
+    title: "Office Supplies",
+    text: "Do you deal in stationery, printers or office equipment? We help you keep offices around Port Harcourt well stocked with quick, dependable delivery.",
+    cta: "Message us to become a partner",
+    bg: "#EDDFFC",
     Art: OfficeArt,
   },
   {
     id: "markets",
-    wa: "Hi Pickars! I trade in a local market and I'd like to partner with you.",
+    wa: "Hello Pickars! I trade in a local market and I'd like to partner with you.",
     title: "Market Traders",
-    text: "Sell at Mile 3, Creek Road or any local market? Reach customers who want fresh produce without the trip.",
-    cta: "Send us a message for partnership",
-    bg: "#ff0000",
-    tags: [
-      { name: "Fresh produce", bg: "#86efac" },
-      { name: "Fish & meat", bg: "#ff0000" },
-      { name: "Provisions", bg: "#ffffff" },
-      { name: "Spices", bg: "#ffeeee" },
-    ],
+    text: "Do you trade at Mile 3, Creek Road or another local market? Connect with buyers who want fresh produce brought to them so they can skip the trip.",
+    cta: "Message us to become a partner",
+    bg: "#FCF4DF",
     Art: MarketArt,
   },
 ];
@@ -649,194 +481,71 @@ const partners: Partner[] = [
 /* ---------- Section ---------- */
 const PartnerWithUs: React.FC = () => {
   const ref = useRef<HTMLElement>(null);
-  const stackRef = useRef<HTMLDivElement>(null);
-  const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
-  const reduce = !!useReducedMotion();
-
-  /* Pinned stacking scroll (same behaviour as the CRM stack cards) */
-  useEffect(() => {
-    if (reduce) return;
-
-    const ctx = gsap.context(() => {
-      const cards = cardsRef.current.filter(Boolean) as HTMLDivElement[];
-      if (!cards.length || !stackRef.current) return;
-
-      cards.forEach((card) => {
-        gsap.set(card, { transformOrigin: "50% 100%" });
-      });
-
-      gsap.set(cards[0], {
-        yPercent: 0,
-        scale: 1,
-        rotate: 0,
-        filter: "brightness(1)",
-      });
-      cards.slice(1).forEach((card) => {
-        gsap.set(card, {
-          yPercent: 110,
-          scale: 1,
-          rotate: 0,
-          filter: "brightness(1)",
-        });
-      });
-
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: stackRef.current,
-          start: "top 90px",
-          end: `+=${(cards.length - 1) * 100}%`,
-          scrub: 1,
-          pin: true,
-          pinSpacing: true,
-        },
-      });
-
-      cards.forEach((card, i) => {
-        if (i === 0) return;
-        const segment = i - 1;
-
-        // outgoing card: scales down, lifts and tilts as the next one covers it
-        tl.to(
-          cards[i - 1],
-          {
-            scale: 0.92,
-            y: -28,
-            rotate: -6,
-            filter: "brightness(0.75)",
-            duration: 1,
-            ease: "none",
-          },
-          segment
-        );
-
-        // incoming card rises straight up on top
-        tl.to(card, { yPercent: 0, duration: 1, ease: "none" }, segment);
-      });
-    }, ref);
-
-    return () => ctx.revert();
-  }, [reduce]);
 
   return (
     <section
       ref={ref}
-      className="relative mt-[210px] mb-[70px] py-[100px] sm:mb-[110px] font-['Lufga'] text-black"
+      className="relative mt-[48px] mb-[70px] py-[64px] sm:mb-[110px] font-['Lufga'] text-black"
       style={{ backgroundColor: BG }}
     >
-      {/* cloud edges: top (flipped) and bottom */}
-      <CloudEdge position="top" />
-      <CloudEdge position="bottom" />
-
       {/* HEADER */}
       <div className="relative z-10 mx-auto mb-10 flex max-w-3xl flex-col items-center px-4 text-center sm:mb-14">
         <motion.h2
           initial={{ opacity: 0, y: 30, scale: 0.9 }}
           animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
           transition={{ type: "spring", stiffness: 120, damping: 14 }}
-          className="mb-5 text-4xl font-black leading-[1.05] tracking-tight text-black sm:text-6xl"
+          className="mb-5 text-4xl font-semibold leading-[1.05] tracking-tight text-black sm:text-6xl"
         >
-          Let's Handle your {""}
-          <span className="text-[#ff0000]"> Logistics & Supplies</span>
+          Leave the {""}
+          <span className="text-[#ff0000]">Deliveries & Supply Runs</span> to Us
         </motion.h2>
         <motion.p
           initial={{ opacity: 0, y: 15 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.15 }}
           style={{ lineHeight: 1.6 }}
-          className="max-w-2xl text-[16px] font-medium text-black/70 sm:text-[18px]"
+          className="max-w-2xl text-[16px] font-regular text-black/70 sm:text-[18px]"
         >
-          Whatever you sell, we deliver it. Pick what fits your business and
-          partner with the fastest delivery team in Port Harcourt.
+          No matter what you sell, we get it to your customers. Choose the
+          option that matches your business and team up with the quickest
+          delivery crew in Port Harcourt.
         </motion.p>
         <span className="my-8">
           <DownloadButtons />
         </span>
       </div>
 
-      {/* PINNED STACK */}
+      {/* GRID LAYOUT */}
       <div className="relative z-10 mx-auto max-w-[1240px] px-4">
-        <div
-          ref={stackRef}
-          className={
-            reduce
-              ? "flex flex-col gap-5"
-              : "relative h-[640px] w-full sm:h-[600px] lg:h-[560px]"
-          }
-        >
-          {partners.map((p, i) => (
-            <div
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
+          {partners.map((p, index) => (
+            <motion.article
               key={p.id}
-              ref={(el) => {
-                cardsRef.current[i] = el;
-              }}
-              className={
-                reduce
-                  ? "relative"
-                  : "absolute inset-0 flex items-center justify-center will-change-transform"
-              }
-              style={{ zIndex: i + 1 }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              style={{ backgroundColor: p.bg }}
+              className="relative flex h-auto min-h-[660px] w-full flex-col justify-between overflow-hidden rounded-[32px] border-[1px] border-black/5 p-6 sm:p-10 lg:h-[660px]"
             >
-              <article
-                style={{ backgroundColor: p.bg }}
-                className="relative h-[600px] w-full overflow-hidden rounded-[32px] border-[0px] border-black sm:h-[560px] lg:h-[520px]"
-              >
-                <div className="flex h-full flex-col lg:flex-row">
-                  {/* text */}
-                  <div className="relative z-10 flex flex-col p-6 sm:p-10 lg:w-[58%]">
-                    {/* Text color changes to white for dark cards (malls, office, home, markets) */}
-                    <h3
-                      className={`text-4xl pt-6 font-bold leading-none tracking-tight sm:text-6xl ${
-                        p.id === "malls" ||
-                        p.id === "office" ||
-                        p.id === "home" ||
-                        p.id === "markets"
-                          ? "text-white"
-                          : "text-black"
-                      }`}
-                    >
-                      {p.title}
-                    </h3>
-                    <p
-                      className={`mt-5 max-w-lg text-[17px] font-medium sm:text-[20px] ${
-                        p.id === "malls" ||
-                        p.id === "office" ||
-                        p.id === "home" ||
-                        p.id === "markets"
-                          ? "text-white/90"
-                          : "text-black/80"
-                      }`}
-                      style={{ lineHeight: 1.5 }}
-                    >
-                      {p.text}
-                    </p>
+              {/* Full-width text content */}
+              <div className="w-full">
+                <h3 className="text-4xl pt-2 font-medium leading-none tracking-tight sm:text-5xl text-black">
+                  {p.title}
+                </h3>
+                <p
+                  className="mt-4 w-full text-[17px] font-regular sm:text-[18px] text-black/80"
+                  style={{ lineHeight: 1.5 }}
+                >
+                  {p.text}
+                </p>
+              </div>
 
-                    <div className="mt-6 flex flex-wrap gap-2 sm:gap-3 lg:mt-auto">
-                      {p.tags.map((t, ti) => (
-                        <motion.span
-                          key={t.name}
-                          whileHover={{ scale: 1.1, rotate: ti % 2 ? 3 : -3 }}
-                          transition={{
-                            type: "spring",
-                            stiffness: 300,
-                            damping: 14,
-                          }}
-                          className="inline-flex items-center gap-2 rounded-xl border-[2.2px] border-black px-3 py-1.5 text-[14px] font-medium text-black sm:text-xl"
-                          style={{ backgroundColor: t.bg }}
-                        >
-                          {t.name}
-                        </motion.span>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* illustration */}
-                  <div className="pointer-events-none relative mx-auto h-56 w-full max-w-[320px] sm:h-64 lg:absolute lg:inset-y-0 lg:right-6 lg:mx-0 lg:h-auto lg:w-[40%] lg:max-w-none">
-                    <p.Art />
-                  </div>
-                </div>
-              </article>
-            </div>
+              {/* illustration - full width across the bottom of the card */}
+              <div className="pointer-events-none relative mx-auto mt-6 h-72 w-full max-w-[460px] sm:h-80 sm:max-w-[520px] lg:absolute lg:bottom-0 lg:left-0 lg:right-0 lg:h-[420px] lg:w-full lg:max-w-none">
+                <p.Art />
+              </div>
+            </motion.article>
           ))}
         </div>
       </div>

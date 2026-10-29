@@ -5,7 +5,7 @@ import React from "react";
 import Image from "next/image";
 import { motion, type Variants } from "framer-motion";
 import phoneInPocket from "@/assets/landing-page-images/phone-in-pocket.svg";
-import photo from "@/assets/landing-page-images/picking-a-package.svg";
+import photo from  "@/assets/landing-page-images/home-hero.svg";
 import DownloadButtons from "@/components/atoms/buttons/DownloadButtons";
 
 const fadeUpVariant: Variants = {

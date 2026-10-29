@@ -2,127 +2,174 @@
 
 import React, { memo } from "react";
 
+/* ---------- Edit these ---------- */
+// Add or remove areas freely. They are split evenly between the two rows.
 const TOWNS = [
+  "GRA Phase 1",
   "GRA Phase 2",
-  "Rumuola",
-  "Peter Odili",
-  "Woji",
+  "GRA Phase 3",
   "Old GRA",
-  "Ada George",
-  "Ikwerre Road",
-  "Choba",
-  "Uniport",
-  "Eleme Junction",
-  "Trans-Amadi",
+  "New GRA",
+  "Rumuola",
+  "Rumuomasi",
+  "Rumuokoro",
+  "Rumuokwuta",
   "Rumuigbo",
   "Rumuokwurusi",
-  "Mgbuoba",
-  "D/Line",
+  "Rumueme",
+  "Rumuibekwe",
+  "Rumuodara",
+  "Rumuodomaya",
+  "Rumuagholu",
+  "Peter Odili",
+  "Woji",
+  "Elelenwo",
+  "Eliozu",
+  "Trans-Amadi",
+  "Ada George",
+  "Ikwerre Road",
+  "Aba Road",
+  "Choba",
+  "Uniport",
+  "Alakahia",
+  "Eleme Junction",
   "Borokiri",
+  "Diobu",
+  "Mile 1",
+  "Mile 2",
+  "Mile 3",
+  "D/Line",
+  "Mgbuoba",
+  "Agip",
+  "Rumuolumeni",
+  "Ozuoba",
+  "Rukpokwu",
+  "Igwuruta",
+  "Elekahia",
+  "Stadium Road",
+  "Amadi Ama",
+  "Abuloma",
+  "Eagle Island",
+  "Presidential Road",
+  "Location Road",
+  "Port Harcourt Township",
 ];
 
 const COLORS = [
-  { bg: "#ff7a3d", accent: "#ffc21a" }, // orange
-  { bg: "#ff9ec7", accent: "#1db96f" }, // pink
-  { bg: "#ffc21a", accent: "#ff9ec7" }, // yellow
-  { bg: "#1db96f", accent: "#ff9ec7" }, // green
+  { bg: "#ff7a3d" }, // orange
+  { bg: "#ff9ec7" }, // pink
+  { bg: "#ffc21a" }, // yellow
+  { bg: "#1db96f" }, // green
 ];
 
-const ROWS = [
-  { offset: 0, duration: 55, reverse: false },
-  { offset: 5, duration: 70, reverse: true },
-  { offset: 10, duration: 60, reverse: false },
-];
+/* small tilt on each chip so the strip feels hand-placed */
+const TILTS = ["-rotate-2", "rotate-1", "rotate-2", "-rotate-1"];
+
+// seconds for one full loop (bigger = slower). Different speeds feel more natural.
+const ROW_DURATIONS = [70, 90];
+/* -------------------------------- */
 
 const CSS = `
-@keyframes town-slide { from{transform:translateX(0)} to{transform:translateX(-50%)} }
-.town-track { animation: town-slide var(--dur, 60s) linear infinite; will-change: transform; }
-.town-track.rev { animation-direction: reverse; }
-.town-band:hover .town-track { animation-play-state: paused; }
+/* the track holds two identical copies; sliding by half a track loops seamlessly.
+   -50% -> 0 makes everything flow from left to right. */
+@keyframes town-ltr {
+  from { transform: translate3d(-50%, 0, 0); }
+  to   { transform: translate3d(0, 0, 0); }
+}
+.town-track {
+  animation: town-ltr linear infinite;
+  will-change: transform;
+}
+.town-marquee:hover .town-track,
+.town-marquee:focus-within .town-track {
+  animation-play-state: paused;
+}
 @media (prefers-reduced-motion: reduce) {
-  .town-track { animation: none !important; }
+  .town-track { animation: none; }
 }
 `;
 
-const Ticket = memo(function Ticket({
+const AreaChip = memo(function AreaChip({
   name,
   color,
+  tilt,
 }: {
   name: string;
-  color: { bg: string; accent: string };
+  color: { bg: string };
+  tilt: string;
 }) {
   return (
     <li
-      className="relative flex shrink-0 items-center justify-between rounded-[12px] border-2 border-black px-4 py-2 sm:rounded-[16px] sm:border-[3px] sm:px-5 sm:py-3 "
+      className={`inline-flex shrink-0 items-center gap-2 rounded-full border-[2px] border-black px-3.5 py-2 transition-transform duration-200 hover:-translate-y-1 hover:rotate-0 motion-reduce:transition-none sm:px-5 sm:py-2.5 ${tilt}`}
       style={{ backgroundColor: color.bg }}
     >
-      <div className="flex flex-col pr-3 sm:pr-4">
-        <span className="whitespace-nowrap text-base font-black tracking-tight text-black sm:text-xl">
-          {name}
-        </span>
-      </div>
-
-      <div className="flex flex-col items-center justify-center self-stretch border-l-2 border-dashed border-black/40 pl-3 sm:pl-4">
-        <span className="mt-1 font-mono text-[9px] font-bold tracking-widest text-black/80 sm:text-[10px]">
-          PH
-        </span>
-      </div>
+      <span className="whitespace-nowrap text-base font-medium tracking-tight text-black sm:text-xl">
+        {name}
+      </span>
     </li>
   );
 });
 
-const Row = memo(function Row({
+/* one full copy of a row's chips */
+const Group = memo(function Group({
+  towns,
   offset,
-  duration,
-  reverse,
+  hidden,
 }: {
+  towns: string[];
   offset: number;
-  duration: number;
-  reverse: boolean;
+  hidden?: boolean;
 }) {
-  // rotate the list so each row starts somewhere different
-  const list = [
-    ...TOWNS.slice(offset % TOWNS.length),
-    ...TOWNS.slice(0, offset % TOWNS.length),
-  ];
-
   return (
-    <div className="overflow-hidden py-1">
-      <div
-        className={`town-track flex w-max ${reverse ? "rev" : ""}`}
-        style={{ ["--dur" as string]: `${duration}s` }}
-      >
-        {/* two identical halves, so translating by -50% loops seamlessly */}
-        {[0, 1].map((half) => (
-          <ul
-            key={half}
-            className="flex shrink-0 gap-3 pr-3 sm:gap-4 sm:pr-4"
-            aria-hidden={half === 1}
-          >
-            {list.map((town, i) => (
-              <Ticket
-                key={`${half}-${town}`}
-                name={town}
-                color={COLORS[(i + offset) % COLORS.length]}
-              />
-            ))}
-          </ul>
-        ))}
-      </div>
-    </div>
+    <ul
+      className="flex shrink-0 items-center gap-3 pr-3 sm:gap-4 sm:pr-4"
+      aria-hidden={hidden || undefined}
+    >
+      {towns.map((name, i) => (
+        <AreaChip
+          key={`${name}-${i}`}
+          name={name}
+          // fixed pattern (not Math.random) so server and client render the same HTML
+          color={COLORS[(i + offset) % COLORS.length]}
+          tilt={TILTS[(i * 3 + offset) % TILTS.length]}
+        />
+      ))}
+    </ul>
   );
 });
 
+const MARQUEE_MASK =
+  "linear-gradient(to right, transparent, #000 8%, #000 92%, transparent)";
+
 export default function TownMarquee() {
+  // split the list into two rows
+  const half = Math.ceil(TOWNS.length / 2);
+  const rows = [TOWNS.slice(0, half), TOWNS.slice(half)];
+
   return (
     <section
-      className="town-band relative z-0 flex w-screen flex-col gap-2.5 overflow-hidden py-6 sm:gap-4 sm:py-8"
-      aria-label="Towns in Port Harcourt Pickars delivers to"
+      className="town-marquee relative z-0 w-full py-6 font-['Lufga'] sm:py-10"
+      aria-label="Areas in Port Harcourt that Pickars delivers to"
     >
       <style>{CSS}</style>
-      {ROWS.map((r) => (
-        <Row key={r.offset} {...r} />
-      ))}
+
+      <div className="flex flex-col gap-3 sm:gap-4">
+        {rows.map((row, ri) => (
+          <div
+            key={ri}
+            className="overflow-hidden py-2 motion-reduce:overflow-x-auto"
+            style={{ maskImage: MARQUEE_MASK, WebkitMaskImage: MARQUEE_MASK }}
+          >
+            <div
+              className="town-track flex w-max"
+              style={{ animationDuration: `${ROW_DURATIONS[ri]}s` }}
+            >
+              <Group towns={row} offset={ri * 2} />
+              <Group towns={row} offset={ri * 2} hidden />
+            </div>
+          </div>
+        ))}
+      </div>
     </section>
   );
 }

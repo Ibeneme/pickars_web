@@ -143,7 +143,7 @@ const Footer: React.FC = () => {
     >
       <TopCloud />
 
-      <AppDownloadCTA />
+      {/* <AppDownloadCTA /> */}
 
       <FooterSkyline />
 

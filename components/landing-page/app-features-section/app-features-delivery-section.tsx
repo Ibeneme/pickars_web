@@ -3,10 +3,12 @@
 import React, { memo, useRef } from "react";
 import Image from "next/image";
 import { motion, useScroll, useTransform, type Variants } from "framer-motion";
+import { FiClock, FiZap, FiStar } from "react-icons/fi";
 import redRiderImg from "@/assets/landing-page-images/delivery-options-ui.svg";
 
 /* Section colour: also used to fill the cloud edges */
-const BG = "#d9d2f795";
+const BG = "#000000";
+const PRIMARY_COLOR = "#ff0000";
 
 /* ------------------------------------------------------------------ */
 /*  Cloud edge (traced from the supplied image)                        */
@@ -35,6 +37,34 @@ const CloudEdge = memo(function CloudEdge({
   );
 });
 
+/* ------------------------------------------------------------------ */
+/*  Delivery tiers                                                     */
+/* ------------------------------------------------------------------ */
+interface Tier {
+  icon: React.ReactNode;
+  title: string;
+  description: string;
+}
+
+const TIERS: Tier[] = [
+  {
+    icon: <FiClock className="h-5 w-5" />,
+    title: "Regular",
+    description: "Reliable, budget-friendly deliveries for everyday packages.",
+  },
+  {
+    icon: <FiZap className="h-5 w-5" />,
+    title: "Impromptu",
+    description: "Need it now? Get matched with a nearby rider in minutes.",
+  },
+  {
+    icon: <FiStar className="h-5 w-5" />,
+    title: "Premium",
+    description:
+      "Priority handling and the fastest route for your most important items.",
+  },
+];
+
 export default function AppFeaturesDeliveryOptions() {
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
@@ -48,9 +78,7 @@ export default function AppFeaturesDeliveryOptions() {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: {
-        staggerChildren: 0.12,
-      },
+      transition: { staggerChildren: 0.12 },
     },
   };
 
@@ -59,11 +87,7 @@ export default function AppFeaturesDeliveryOptions() {
     visible: {
       y: 0,
       opacity: 1,
-      transition: {
-        type: "spring",
-        stiffness: 110,
-        damping: 18,
-      },
+      transition: { type: "spring", stiffness: 110, damping: 18 },
     },
   };
 
@@ -72,28 +96,29 @@ export default function AppFeaturesDeliveryOptions() {
        just outside the section, are not cut off */
     <section
       ref={containerRef}
-      className="relative isolate mt-[70px] mb-[70px] overflow-x-clip font-['Lufga'] text-gray-900 sm:mt-[110px] mb-[110px]"
+      className="relative isolate mb-[70px] mt-[70px] overflow-x-clip font-['Lufga'] text-white sm:mb-[110px] sm:mt-[110px]"
       style={{ backgroundColor: BG }}
     >
       {/* cloud edges: top (flipped) and bottom */}
       <CloudEdge position="top" />
       <CloudEdge position="bottom" />
 
-      <div className="relative z-10 mx-auto max-w-7xl px-4 pb-16 pt-0 sm:px-6 sm:pt-0 lg:px-8">
+      <div className="relative z-10 mx-auto max-w-7xl px-4 pb-16 pt-8 sm:px-6 sm:pt-12 lg:px-8">
+        {/* ---------- Header: title left, description right ---------- */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
-          className="mx-auto overflow-hidden p-4 sm:p-8"
+          className="mb-10 grid items-end gap-6 sm:mb-14 md:grid-cols-[1.4fr_1fr] md:gap-16"
         >
-          <div className="mx-auto flex w-full max-w-4xl flex-col items-center text-center">
+          <div className="flex flex-col items-start">
             <motion.div
               initial={{ opacity: 0, scale: 0.8, rotate: -5 }}
               animate={{ opacity: 1, scale: 1, rotate: -2 }}
               whileHover={{ scale: 1.08, rotate: 0 }}
               transition={{ type: "spring", stiffness: 200, damping: 15 }}
-              className="mb-6 sm:mb-10 px-5 sm:px-6 py-2 max-w-[210px] sm:py-2.5 bg-[#ff0000] text-white font-black text-[11px] sm:text-xs md:text-sm uppercase tracking-widest cursor-default select-none"
+              className="mb-6 max-w-[210px] cursor-default select-none bg-[#ff0000] px-5 py-2 text-[11px] font-black uppercase tracking-widest text-white sm:mb-8 sm:px-6 sm:py-2.5 sm:text-xs md:text-sm"
               style={{
                 maskImage:
                   "radial-gradient(circle 5px at calc(100% - 2.5px) 50%, #0000 99%, #000 100%)",
@@ -106,42 +131,82 @@ export default function AppFeaturesDeliveryOptions() {
 
             <motion.h3
               variants={itemVariants}
-              className="mb-5 text-4xl font-black leading-[1.05] tracking-tight text-gray-900 sm:text-6xl md:text-6xl lg:text-6xl"
+              className="text-4xl font-black leading-[1.05] tracking-tight text-white sm:text-5xl lg:text-6xl"
             >
-              Set your route, Choose your delivery option{" "}
-              <span className="text-[#FF0000]">with ease.</span>
+              Set your route, choose your delivery option{" "}
+              <span style={{ color: '#fff' }}>with ease.</span>
             </motion.h3>
-
-            <motion.p
-              variants={itemVariants}
-              className="mb-9 max-w-xl text-[16px] font-medium leading-relaxed text-gray-600 sm:text-[19px]"
-            >
-              Seamlessly select your pickup and delivery points, then pick the
-              ideal delivery tier whether regular, impromptu, or premium
-              tailored to your speed and budget.
-            </motion.p>
           </div>
 
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            viewport={{ once: true, margin: "-100px" }}
-            className="relative mx-auto w-full overflow-hidden rounded-[32px] sm:rounded-[40px]"
+          <motion.p
+            variants={itemVariants}
+            className="max-w-md text-[16px] font-medium leading-relaxed text-white/65 sm:text-[18px] md:pb-1"
           >
-            <motion.div
-              style={{ y: mockupY }}
-              className="relative h-[350px] w-full sm:h-[500px] lg:h-[650px]"
-            >
-              <Image
-                src={redRiderImg}
-                alt="Pickars App Pickup and Delivery Options Preview"
-                fill
-                className="object-cover"
-              />
-            </motion.div>
+            Seamlessly select your pickup and delivery points, then pick the
+            ideal delivery tier tailored to your speed and budget.
+          </motion.p>
+        </motion.div>
+
+        {/* ---------- Full-width parallax image ---------- */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          viewport={{ once: true, margin: "-100px" }}
+          className="relative w-full overflow-hidden rounded-[32px] border border-white/10 sm:rounded-[40px]"
+        >
+          <motion.div
+            style={{ y: mockupY }}
+            className="relative h-[300px] w-full sm:h-[460px] lg:h-[600px]"
+          >
+            <Image
+              src={redRiderImg}
+              alt="Pickars App Pickup and Delivery Options Preview"
+              fill
+              className="object-cover"
+            />
           </motion.div>
         </motion.div>
+
+        {/* ---------- Delivery tiers: three columns under the image ---------- */}
+        <motion.ul
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: "easeOut", delay: 0.1 }}
+          viewport={{ once: true, margin: "-60px" }}
+          className="mt-10 grid gap-8 sm:mt-14 md:grid-cols-3 md:gap-10"
+        >
+          {TIERS.map((tier, idx) => (
+            <li
+              key={tier.title}
+              className="group border-t border-white/15 pt-5 sm:pt-6"
+            >
+              <div className="flex items-center justify-between">
+                <span
+                  className="flex h-11 w-11 items-center justify-center rounded-xl transition-colors duration-300 group-hover:bg-[#ff0000] group-hover:text-white sm:h-12 sm:w-12"
+                  style={{
+                    backgroundColor: "rgba(255, 0, 0, 0.15)",
+                    color: PRIMARY_COLOR,
+                  }}
+                >
+                  {tier.icon}
+                </span>
+                <span
+                  className="text-xs font-semibold tracking-widest text-white/30"
+                  aria-hidden="true"
+                >
+                  {String(idx + 1).padStart(2, "0")}
+                </span>
+              </div>
+              <h4 className="mt-5 text-lg font-bold tracking-tight text-white sm:text-xl">
+                {tier.title}
+              </h4>
+              <p className="mt-2 text-sm leading-relaxed text-white/60">
+                {tier.description}
+              </p>
+            </li>
+          ))}
+        </motion.ul>
       </div>
     </section>
   );

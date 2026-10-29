@@ -17,6 +17,9 @@ import {
 import { SITE, absoluteUrl, OG_IMAGES } from "@/utils/seo/config";
 import RiderPage from "@/components/landing-page/home-sections/rider-svg";
 import FAQsClientPage from "@/components/landing-page/faqs/faq-section";
+import PickarsIntro from "@/components/landing-page/home-sections/intro";
+import PickarsMosaic from "@/components/landing-page/home-sections/Pickarsmosaic";
+import TownMarquee from "@/components/landing-page/home-sections/sub-sections/city-marquee";
 
 const TITLE = "Pickars: Your doorstep deliveries, redefined";
 const DESCRIPTION =
@@ -55,21 +58,28 @@ export default function HomePage() {
     <div className="min-h-screen bg-white text-slate-900 ">
       <JsonLd data={homeSchema} />
       <RiderPage />
-
-      {/* <QualitiesSliderSection /> */}
-      <div style={{ paddingTop: 64 }}>
-        <HomeWithMapSection />
-      </div>
       <QualitiesSliderSection />
-      <PartnerWithUs />
+      <PickarsIntro />
+      {/* <TownMarquee /> */}
+      <HomeTestimonialsSection />
+      <HomeWithMapSection />
+      <FAQsClientPage />
+      {/* <PickarsMosaic /> */}
+      {/* <QualitiesSliderSection /> */}
+      {/* <div style={{ paddingTop: 64 }}>
+        <HomeWithMapSection />
+      </div> */}
+ 
+      {/* <PartnerWithUs /> */}
       {/* <PackageDeliverySection /> */}
 
-      <NeverLateSection />
-      <HomeTestimonialsSection />
-      <div style={{ marginTop: 0, marginBottom: 0 }}>
-        {/* <RiderPage /> */}
+      {/* <NeverLateSection /> */}
+
+
+      {/* <div style={{ marginTop: 0, marginBottom: 0 }}>
+   
         <FAQsClientPage />
-      </div>
+      </div> */}
     </div>
   );
 }

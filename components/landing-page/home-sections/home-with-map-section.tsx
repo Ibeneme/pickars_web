@@ -4,6 +4,9 @@ import React, { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import DownloadButtons from "@/components/atoms/buttons/DownloadButtons";
 import PortHarcourtAnimatedMap from "@/components/atoms/animated/maps/port-harcourt-animated-map";
+import { Sparkle } from "lucide-react";
+
+const PRIMARY_COLOR = "#ff0000";
 
 const HomeWithMapSection: React.FC = () => {
   const ref = useRef<HTMLDivElement>(null);
@@ -12,72 +15,50 @@ const HomeWithMapSection: React.FC = () => {
   return (
     <section
       ref={ref}
-      className="relative overflow-hidden bg-[#fff] py-12 sm:py-16 md:py-32 font-['Lufga'] text-gray-900"
+      className="relative overflow-hidden bg-white font-['Lufga'] text-gray-900 py-12 sm:py-16 lg:py-24"
     >
-      <div className="relative z-10 px-4 sm:px-6 max-w-7xl mx-auto">
-        <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16 md:mb-20 flex flex-col items-center">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8, rotate: -5 }}
-            animate={isInView ? { opacity: 1, scale: 1, rotate: -2 } : {}}
-            whileHover={{ scale: 1.08, rotate: 0 }}
-            transition={{ type: "spring", stiffness: 200, damping: 15 }}
-            className="mb-4 sm:mb-6 px-5 sm:px-6 py-2 sm:py-2.5 bg-[#FF0000] text-white font-black text-[11px] sm:text-xs md:text-sm uppercase tracking-widest cursor-default select-none"
-            style={{
-              maskImage:
-                "radial-gradient(circle 5px at calc(100% - 2.5px) 50%, #0000 99%, #000 100%)",
-              WebkitMaskImage:
-                "conic-gradient(from -45deg at 50% 50%, #000 0 90deg, #0000 0) 0 0/10px 10px repeat",
-            }}
-          >
-            EVERYWHERE
-          </motion.div>
-
-          {/* Main Hero Headline */}
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            style={{ lineHeight: 1.2 }}
-            className="mb-5 text-4xl font-black leading-[1.05] tracking-tight text-gray-900 sm:text-6xl md:text-6xl lg:text-6xl"
-          >
-            Bringing Your Items Right to Your{" "}
-            <span className="relative inline-block text-transparent bg-clip-text bg-gradient-to-r from-[#ff0000] via-[#ff0000] to-[#ff0000]">
-              {" "}
-              Doorstep
+      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-0 lg:px-0">
+        {/* Header Grid */}
+        <div className="grid items-end gap-6  md:grid-cols-[1.6fr_1fr] md:gap-12 lg:gap-16">
+          <h2 className="text-6xl font-black leading-none tracking-tight sm:text-8xl">
+            Book a rider
+            <span
+              style={{ backgroundColor: PRIMARY_COLOR }}
+              className="mx-1.5 sm:mx-2.5 inline-flex h-6 w-6 sm:h-8 sm:w-8 md:h-10 md:w-10 items-center justify-center rounded-full align-middle text-white"
+            >
+              <Sparkle className="h-3.5 w-3.5 sm:h-5 sm:w-5 md:h-6 md:w-6" />
             </span>
-          </motion.h2>
+            anywhere in{" "}
+            <span
+              style={{ backgroundColor: PRIMARY_COLOR }}
+              className="inline-block px-2 sm:px-3 text-white mt-1 sm:mt-0"
+            >
+              Port Harcourt.
+            </span>
+          </h2>
 
-          {/* Subtitle / Value Proposition */}
-          <motion.p
-            initial={{ opacity: 0, y: 15 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            style={{ lineHeight: 1.6 }}
-            className="text-[16px] sm:text-[20px] text-gray-600 font-medium leading-relaxed max-w-2xl px-2 sm:px-0"
-          >
-            Whether you run a busy online store or just need to drop a package
-            across town, Pickars connects you with a verified rider in minutes.
-          </motion.p>
-
-          {/* Primary Action Buttons (App Store & Play Store) */}
-          <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="mt-8 flex flex-row items-center justify-center gap-4 w-full flex-wrap"
-          >
-            <DownloadButtons />
-          </motion.div>
+          <div className="flex flex-col items-start gap-4 sm:gap-5 md:pb-2">
+            <p className="max-w-md text-sm sm:text-base leading-relaxed text-black/70">
+              Need something picked up or delivered? Request a nearby Pickars
+              rider in seconds, follow them live on the map, and have your
+              package handed over at the door, quickly and safely.
+            </p>
+            <div className="w-full sm:w-auto">
+              <DownloadButtons isHalf={true} alignLeft={true} />
+            </div>
+          </div>
         </div>
 
-        {/* ── INTERACTIVE PH MAP HERO VISUAL ────────────────────────── */}
+        {/* Responsive Map Container */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, delay: 0.35 }}
-          className="relative rounded-3xl overflow-hidden"
+          className="relative w-full mt-16 overflow-hidden rounded-2xl sm:rounded-3xl shadow-sm border border-gray-100"
         >
-          <PortHarcourtAnimatedMap />
+          <div className="w-full h-auto min-h-[350px] sm:min-h-[450px] lg:min-h-[550px]">
+            <PortHarcourtAnimatedMap />
+          </div>
         </motion.div>
       </div>
     </section>

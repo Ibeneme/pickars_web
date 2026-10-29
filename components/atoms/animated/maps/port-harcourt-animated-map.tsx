@@ -2,6 +2,19 @@
 
 import React from "react";
 
+/* ------------------------------------------------------------------ */
+/*  Palette: purple  (tweak these to shift the whole map's mood)   */
+/* ------------------------------------------------------------------ */
+const MAP_BG = "#f3e8ff"; // soft lavender background
+const ROAD_MAIN = "#c4b5fd"; // light violet arterial roads
+const ROAD_DARK = "#3b0764"; // deep indigo-purple bypass roads
+const BLOB_1 = "#a855f7"; // top-right blob
+const BLOB_2 = "#c084fc"; // bottom-right blob
+const BLOB_3 = "#8b5cf6"; // bottom-left blob
+const RIDER_RED = "#e11d2e"; // rider bag + wheel hub (Pickars red accent)
+const SPEED_LINES = "#ef4444";
+const NOTCH_BG = "#faf5ff"; // ticket notch cutouts
+
 interface PortHarcourtLocation {
   id: string;
   name: string;
@@ -22,10 +35,10 @@ const portHarcourtLocations: PortHarcourtLocation[] = [
     name: "GRA Phase 2",
     top: "18%",
     left: "12%",
-    badgeBg: "bg-purple-400",
+    badgeBg: "bg-purple-300",
     textColor: "text-black font-extrabold",
     dotColor: "bg-black",
-    pinColor: "#a855f7",
+    pinColor: "#d8b4fe",
     pinTop: "32%",
     pinLeft: "18%",
     showOnMobile: true,
@@ -35,10 +48,10 @@ const portHarcourtLocations: PortHarcourtLocation[] = [
     name: "Rumuola",
     top: "22%",
     left: "38%",
-    badgeBg: "bg-emerald-400",
+    badgeBg: "bg-violet-400",
     textColor: "text-black font-extrabold",
     dotColor: "bg-black",
-    pinColor: "#10b981",
+    pinColor: "#a78bfa",
     pinTop: "35%",
     pinLeft: "45%",
     showOnMobile: false,
@@ -48,10 +61,10 @@ const portHarcourtLocations: PortHarcourtLocation[] = [
     name: "Peter Odili",
     top: "15%",
     left: "78%",
-    badgeBg: "bg-amber-400",
+    badgeBg: "bg-fuchsia-300",
     textColor: "text-black font-extrabold",
     dotColor: "bg-black",
-    pinColor: "#f59e0b",
+    pinColor: "#f0abfc",
     pinTop: "27%",
     pinLeft: "84%",
     showOnMobile: true,
@@ -61,10 +74,10 @@ const portHarcourtLocations: PortHarcourtLocation[] = [
     name: "Woji",
     top: "42%",
     left: "75%",
-    badgeBg: "bg-emerald-700",
+    badgeBg: "bg-purple-700",
     textColor: "text-white font-extrabold",
-    dotColor: "bg-gray-300",
-    pinColor: "#047857",
+    dotColor: "bg-purple-100",
+    pinColor: "#7e22ce",
     pinTop: "55%",
     pinLeft: "80%",
     showOnMobile: true,
@@ -74,10 +87,10 @@ const portHarcourtLocations: PortHarcourtLocation[] = [
     name: "Old GRA / Town",
     top: "48%",
     left: "44%",
-    badgeBg: "bg-sky-400",
+    badgeBg: "bg-indigo-300",
     textColor: "text-black font-extrabold",
-    dotColor: "bg-gray-700",
-    pinColor: "#38bdf8",
+    dotColor: "bg-gray-800",
+    pinColor: "#a5b4fc",
     pinTop: "60%",
     pinLeft: "49%",
     showOnMobile: true,
@@ -87,10 +100,10 @@ const portHarcourtLocations: PortHarcourtLocation[] = [
     name: "Ada George",
     top: "52%",
     left: "10%",
-    badgeBg: "bg-gray-200",
+    badgeBg: "bg-violet-200",
     textColor: "text-black font-bold",
-    dotColor: "bg-gray-600",
-    pinColor: "#e5e7eb",
+    dotColor: "bg-purple-900",
+    pinColor: "#ddd6fe",
     pinTop: "64%",
     pinLeft: "16%",
     showOnMobile: false,
@@ -100,10 +113,10 @@ const portHarcourtLocations: PortHarcourtLocation[] = [
     name: "Ikwerre Road",
     top: "76%",
     left: "20%",
-    badgeBg: "bg-orange-500",
+    badgeBg: "bg-purple-400",
     textColor: "text-black font-extrabold",
-    dotColor: "bg-sky-300",
-    pinColor: "#f97316",
+    dotColor: "bg-purple-100",
+    pinColor: "#c084fc",
     pinTop: "88%",
     pinLeft: "25%",
     showOnMobile: true,
@@ -113,10 +126,10 @@ const portHarcourtLocations: PortHarcourtLocation[] = [
     name: "Choba / UniPort",
     top: "86%",
     left: "55%",
-    badgeBg: "bg-teal-100",
+    badgeBg: "bg-purple-100",
     textColor: "text-black font-extrabold",
     dotColor: "bg-gray-800",
-    pinColor: "#99f6e4",
+    pinColor: "#f3e8ff",
     pinTop: "96%",
     pinLeft: "58%",
     showOnMobile: false,
@@ -126,10 +139,10 @@ const portHarcourtLocations: PortHarcourtLocation[] = [
     name: "Eleme Junction",
     top: "74%",
     left: "74%",
-    badgeBg: "bg-gray-300",
-    textColor: "text-black font-extrabold",
-    dotColor: "bg-purple-900",
-    pinColor: "#6b7280",
+    badgeBg: "bg-violet-600",
+    textColor: "text-white font-extrabold",
+    dotColor: "bg-purple-100",
+    pinColor: "#7c3aed",
     pinTop: "86%",
     pinLeft: "79%",
     showOnMobile: false,
@@ -175,8 +188,8 @@ function DeliveryRider() {
           width="30"
           height="34"
           rx="7"
-          fill="#e11d2e"
-          stroke="#e11d2e"
+          fill={RIDER_RED}
+          stroke={RIDER_RED}
           strokeWidth="2"
         />
         <path
@@ -227,18 +240,18 @@ function DeliveryRider() {
         cx="80"
         cy="45"
         r="12"
-        fill="#e11d2e"
-        stroke="#e11d2e"
+        fill={RIDER_RED}
+        stroke={RIDER_RED}
         strokeWidth="2"
       />
-      <circle cx="86" cy="45" r="6" fill="#e11d2e" opacity="0.85" />
-      <g opacity="0.55">
+      <circle cx="86" cy="45" r="6" fill={RIDER_RED} opacity="0.85" />
+      <g opacity="0.7">
         <line
           x1="-4"
           y1="38"
           x2="10"
           y2="38"
-          stroke="#ff0000"
+          stroke={SPEED_LINES}
           strokeWidth="3"
           strokeLinecap="round"
         />
@@ -247,7 +260,7 @@ function DeliveryRider() {
           y1="45"
           x2="6"
           y2="45"
-          stroke="#ff0000"
+          stroke={SPEED_LINES}
           strokeWidth="3"
           strokeLinecap="round"
         />
@@ -256,7 +269,7 @@ function DeliveryRider() {
           y1="52"
           x2="10"
           y2="52"
-          stroke="#ff0000"
+          stroke={SPEED_LINES}
           strokeWidth="3"
           strokeLinecap="round"
         />
@@ -267,7 +280,10 @@ function DeliveryRider() {
 
 export default function PortHarcourtAnimatedMap() {
   return (
-    <div className="relative w-full aspect-[4/5]  sm:aspect-[4/3] md:aspect-[16/9] min-h-[420px] max-h-[750px] bg-[#f3f4f6] overflow-hidden rounded-xl md:rounded-3xl border-2 sm:border-4 border-black select-none">
+    <div
+      className="relative w-full aspect-[4/5]  sm:aspect-[4/3] md:aspect-[16/9] min-h-[420px] max-h-[750px] overflow-hidden rounded-xl md:rounded-3xl border-2 sm:border-0 border-black select-none"
+      style={{ backgroundColor: MAP_BG }}
+    >
       <style>{`
         @keyframes popIn {
           0% { opacity: 0; transform: scale(0) translateY(15px); }
@@ -284,10 +300,19 @@ export default function PortHarcourtAnimatedMap() {
         .pin-bob { animation: pinBob 2.4s ease-in-out infinite; }
       `}</style>
 
-      {/* Background greenery spots */}
-      <div className="absolute -top-12 -right-12 w-40 h-40 sm:w-64 sm:h-64 bg-[#22c55e] rounded-full border-2 sm:border-4 border-black z-0 opacity-90" />
-      <div className="absolute -bottom-16 -right-16 w-48 h-48 sm:w-80 sm:h-80 bg-[#22c55e] rounded-tl-full border-2 sm:border-4 border-black z-0 opacity-90" />
-      <div className="absolute -bottom-12 -left-12 w-40 h-40 sm:w-64 sm:h-64 bg-[#22c55e] rounded-full border-2 sm:border-4 border-black z-0 opacity-90" />
+      {/* Background blobs */}
+      <div
+        className="absolute -top-12 -right-12 w-40 h-40 sm:w-64 sm:h-64 rounded-full border-2 sm:border-4 border-black z-0 opacity-90"
+        style={{ backgroundColor: BLOB_1 }}
+      />
+      <div
+        className="absolute -bottom-16 -right-16 w-48 h-48 sm:w-80 sm:h-80 rounded-tl-full border-2 sm:border-4 border-black z-0 opacity-90"
+        style={{ backgroundColor: BLOB_2 }}
+      />
+      <div
+        className="absolute -bottom-12 -left-12 w-40 h-40 sm:w-64 sm:h-64 rounded-full border-2 sm:border-4 border-black z-0 opacity-90"
+        style={{ backgroundColor: BLOB_3 }}
+      />
 
       {/* Map Paths */}
       <svg
@@ -299,19 +324,19 @@ export default function PortHarcourtAnimatedMap() {
         {/* Secondary dark bypass roads */}
         <path
           d="M 120 0 L 120 700"
-          stroke="#1f2937"
+          stroke={ROAD_DARK}
           strokeWidth="24"
           strokeLinecap="round"
         />
         <path
           d="M 380 0 L 360 700"
-          stroke="#1f2937"
+          stroke={ROAD_DARK}
           strokeWidth="18"
           strokeLinecap="round"
         />
         <path
           d="M 700 0 L 720 700"
-          stroke="#1f2937"
+          stroke={ROAD_DARK}
           strokeWidth="22"
           strokeLinecap="round"
         />
@@ -319,7 +344,7 @@ export default function PortHarcourtAnimatedMap() {
         {/* Main Road across screen */}
         <path
           d="M 0 350 L 1000 350"
-          stroke="#d1d5db"
+          stroke={ROAD_MAIN}
           strokeWidth="26"
           strokeLinecap="round"
         />
@@ -327,27 +352,27 @@ export default function PortHarcourtAnimatedMap() {
         {/* Primary arterial roads */}
         <path
           d={RIDER_PATH}
-          stroke="#d1d5db"
+          stroke={ROAD_MAIN}
           strokeWidth="28"
           strokeLinecap="round"
           fill="none"
         />
         <path
           d="M 0 620 Q 350 580 1000 820"
-          stroke="#d1d5db"
+          stroke={ROAD_MAIN}
           strokeWidth="26"
           strokeLinecap="round"
           fill="none"
         />
         <path
           d="M 100 0 L 140 700"
-          stroke="#d1d5db"
+          stroke={ROAD_MAIN}
           strokeWidth="22"
           strokeLinecap="round"
         />
         <path
           d="M 560 0 L 530 700"
-          stroke="#d1d5db"
+          stroke={ROAD_MAIN}
           strokeWidth="22"
           strokeLinecap="round"
         />
@@ -420,7 +445,7 @@ export default function PortHarcourtAnimatedMap() {
                 style={{
                   background:
                     "radial-gradient(circle at center, transparent 40%, black 41%, black 100%)",
-                  backgroundColor: "#f9fafb",
+                  backgroundColor: NOTCH_BG,
                 }}
               />
 
@@ -446,7 +471,7 @@ export default function PortHarcourtAnimatedMap() {
                 style={{
                   background:
                     "radial-gradient(circle at center, transparent 40%, black 41%, black 100%)",
-                  backgroundColor: "#f9fafb",
+                  backgroundColor: NOTCH_BG,
                 }}
               />
             </div>
@@ -455,8 +480,8 @@ export default function PortHarcourtAnimatedMap() {
       </div>
 
       {/* Legend / Branding */}
-      <div className="absolute bottom-2 left-2 sm:bottom-4 sm:left-4 bg-white/90 backdrop-blur-sm border sm:border-2 border-black px-2 py-1 sm:px-4 sm:py-2 rounded-lg sm:rounded-xl z-30 flex items-center space-x-1.5 sm:space-x-2">
-        <span className="w-2 h-2 sm:w-3 sm:h-3 bg-red-600 rounded-full border border-black animate-ping" />
+      <div className="absolute bottom-2 left-2 sm:bottom-4 sm:left-4 bg-purple-50/90 backdrop-blur-sm border sm:border-2 border-black px-2 py-1 sm:px-4 sm:py-2 rounded-lg sm:rounded-xl z-30 flex items-center space-x-1.5 sm:space-x-2">
+        <span className="w-2 h-2 sm:w-3 sm:h-3 bg-violet-600 rounded-full border border-black animate-ping" />
         <span className="text-[9px] sm:text-xs font-black tracking-wider text-black uppercase">
           PICKARS
         </span>

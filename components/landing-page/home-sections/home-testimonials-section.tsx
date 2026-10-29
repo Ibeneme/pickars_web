@@ -1,6 +1,6 @@
 "use client";
 
-import React, { memo, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { motion, AnimatePresence } from "framer-motion";
@@ -88,41 +88,18 @@ const AUTO_ADVANCE_SECONDS = 10;
 const CIRCLE_CIRCUMFERENCE = 131.9;
 
 const RED = "#FF0000";
-const INK = "#111111";
-const EASE = [0.22, 1, 0.36, 1] as const;
 
-/* Section colour: also used to fill the cloud edges */
-const BG = "#FFEEEE";
+/* Section background */
+const BG = "#fff";
 
-/* ------------------------------------------------------------------ */
-/*  Cloud edge (traced from the supplied image)                        */
-/* ------------------------------------------------------------------ */
-const CLOUD_PATH =
-  "M0 0 L0 109 L19 114 L38 114 L43 112 L134 113 L135 114 L140 114 L141 115 L146 115 L178 121 L194 125 L201 128 L204 125 L206 125 L209 128 L216 140 L256 140 L276 129 L293 122 L312 117 L322 117 L336 110 L353 106 L368 105 L369 106 L379 106 L400 111 L428 112 L429 111 L437 111 L438 110 L448 109 L466 103 L473 103 L474 104 L490 103 L515 97 L529 97 L537 100 L541 100 L549 94 L574 81 L593 75 L601 75 L622 84 L628 88 L640 101 L645 98 L650 98 L675 114 L679 114 L698 121 L708 120 L717 115 L727 107 L735 103 L745 100 L755 100 L762 102 L768 105 L778 114 L799 117 L800 118 L809 118 L810 119 L845 119 L846 118 L853 118 L897 107 L916 105 L917 104 L926 104 L927 103 L948 102 L952 100 L967 105 L977 103 L984 103 L985 102 L995 102 L996 101 L1025 101 L1026 102 L1036 103 L1043 107 L1064 106 L1065 105 L1108 105 L1115 108 L1134 124 L1147 133 L1156 136 L1172 139 L1178 139 L1179 140 L1524 140 L1530 138 L1538 138 L1542 140 L1667 140 L1673 138 L1693 136 L1694 135 L1708 135 L1727 140 L1742 140 L1749 132 L1752 131 L1760 132 L1769 140 L1889 140 L1890 139 L1902 139 L1903 140 L2196 140 L2184 105 L2167 91 L2168 89 L2178 85 L2188 84 L2189 83 L2229 83 L2230 84 L2249 85 L2250 86 L2257 86 L2258 87 L2281 90 L2291 85 L2309 80 L2325 78 L2326 77 L2333 77 L2334 76 L2342 76 L2343 75 L2357 75 L2364 79 L2371 81 L2388 81 L2397 79 L2413 73 L2427 64 L2433 72 L2437 74 L2447 74 L2454 71 L2465 63 L2475 62 L2481 68 L2483 74 L2489 69 L2496 67 L2537 87 L2544 88 L2552 84 L2559 84 L2565 89 L2570 90 L2575 79 L2586 64 L2594 56 L2600 54 L2608 56 L2621 68 L2627 78 L2648 66 L2666 58 L2675 58 L2679 60 L2697 78 L2710 66 L2717 63 L2723 62 L2732 65 L2739 72 L2744 81 L2750 87 L2754 89 L2764 90 L2773 88 L2793 78 L2795 78 L2799 75 L2806 73 L2812 75 L2825 89 L2846 104 L2855 107 L2859 107 L2869 104 L2879 104 L2879 0Z";
-
-/* "bottom": hangs from the bottom of the section (wavy side down)
-   "top":    sits on the top of the section, flipped (wavy side up) */
-const CloudEdge = memo(function CloudEdge({
-  position,
-}: {
-  position: "top" | "bottom";
-}) {
-  return (
-    <svg
-      viewBox="0 0 2880 141"
-      preserveAspectRatio="xMidYMin slice"
-      className={`pointer-events-none absolute left-0 right-0 z-10 block h-[70px] w-full sm:h-[110px] ${
-        position === "bottom" ? "top-full" : "bottom-full -scale-y-100"
-      }`}
-      aria-hidden="true"
-    >
-      <path d={CLOUD_PATH} fill={BG} />
-    </svg>
-  );
-});
-
-/* ───────────── Dispatch rider (one wheel) ───────────── */
-const WHEEL_R = 13;
+/* "Chiamaka Okoro" -> "CO", "Dr. Evelyn Peters" -> "EP" */
+const getInitials = (name: string) => {
+  const words = name.split(" ").filter((w) => w && !/^dr\.?$/i.test(w));
+  if (words.length === 0) return "";
+  const first = words[0][0];
+  const last = words.length > 1 ? words[words.length - 1][0] : "";
+  return `${first}${last}`.toUpperCase();
+};
 
 export default function HomeTestimonialsSection(): React.JSX.Element {
   const sectionRef = useRef<HTMLElement>(null);
@@ -244,162 +221,185 @@ export default function HomeTestimonialsSection(): React.JSX.Element {
   return (
     <section
       ref={sectionRef}
-      className="relative mt-[70px] mb-[70px] sm:mt-[110px] sm:mb-[110px] w-full py-16 sm:py-20 md:py-28 px-4 sm:px-6 lg:px-8 flex flex-col font-['Lufga'] justify-center items-center"
+      className="relative mb-[70px] flex w-full flex-col items-center justify-center px-4 py-16 font-['Lufga'] sm:mb-[110px] sm:px-6 sm:py-20 md:py-28 lg:px-8"
       style={{ backgroundColor: BG }}
     >
-      {/* cloud edges: top (flipped) and bottom */}
-      <CloudEdge position="top" />
-      <CloudEdge position="bottom" />
-
-      <motion.div
-        initial={{ opacity: 0, scale: 0.8, rotate: -5 }}
-        animate={{ opacity: 1, scale: 1, rotate: -2 }}
-        whileHover={{ scale: 1.08, rotate: 0 }}
-        transition={{ type: "spring", stiffness: 200, damping: 15 }}
-        className="mb-4 sm:mb-6 px-5 sm:px-6 py-2 sm:py-2.5 bg-[#FF0000] text-white font-black text-[11px] sm:text-xs md:text-sm uppercase tracking-widest cursor-default select-none"
-        style={{
-          maskImage:
-            "radial-gradient(circle 5px at calc(100% - 2.5px) 50%, #0000 99%, #000 100%)",
-          WebkitMaskImage:
-            "conic-gradient(from -45deg at 50% 50%, #000 0 90deg, #0000 0) 0 0/10px 10px repeat",
-        }}
-      >
-        TESTIMONIALS
-      </motion.div>
-
-      {/* Header - Centered */}
-      <div className="w-full max-w-3xl mb-10 sm:mb-12 md:mb-16 flex flex-col items-center text-center">
-        <h3 className="mb-5 text-4xl font-black leading-[1.05] tracking-tight text-gray-900 sm:text-6xl md:text-6xl lg:text-6xl">
-          Loved by businesses across{" "}
-          <span className="text-[#ff0000]">Port Harcourt</span>
-        </h3>
-        <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-600 mt-3 sm:mt-4 max-w-2xl">
-          Hear what everyday senders and merchants have to say about their
-          experience with Pickars.
-        </p>
-      </div>
-
-      {/* Card */}
       <div
         ref={containerRef}
         onMouseEnter={pauseAutoAdvance}
         onMouseLeave={resumeAutoAdvance}
-        className="w-full max-w-7xl bg-white rounded-2xl sm:rounded-3xl md:rounded-[2.5rem] border border-red-100 p-5 sm:p-8 md:p-12 lg:p-16 flex flex-col justify-between min-h-[480px] sm:min-h-[520px] relative overflow-hidden"
+        className="grid w-full max-w-7xl items-center gap-12 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-16"
       >
-        {/* Decorative Quote Mark */}
-        <span
-          ref={quoteMarkRef}
-          aria-hidden="true"
-          className="pointer-events-none absolute -top-4 right-4 sm:right-8 md:right-12 text-[8rem] sm:text-[12rem] md:text-[16rem] font-black leading-none text-red-600/[0.035] select-none"
-        >
-          &ldquo;
-        </span>
+        {/* ───────────── LEFT: heading + controls ───────────── */}
+        <div className="flex flex-col items-start">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8, rotate: -5 }}
+            animate={{ opacity: 1, scale: 1, rotate: -2 }}
+            whileHover={{ scale: 1.08, rotate: 0 }}
+            transition={{ type: "spring", stiffness: 200, damping: 15 }}
+            className="mb-5 cursor-default select-none bg-[#000] px-5 py-2 text-[11px] font-black uppercase tracking-widest text-white sm:mb-6 sm:px-6 sm:py-2.5 sm:text-xs md:text-sm"
+            style={{
+              maskImage:
+                "radial-gradient(circle 5px at calc(100% - 2.5px) 50%, #0000 99%, #000 100%)",
+              WebkitMaskImage:
+                "conic-gradient(from -45deg at 50% 50%, #000 0 90deg, #0000 0) 0 0/10px 10px repeat",
+            }}
+          >
+            TESTIMONIALS
+          </motion.div>
 
-        {/* Top bar */}
-        <div className="relative flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 sm:gap-6 border-b border-red-50 pb-6 sm:pb-8">
-          <div className="flex flex-col gap-1 min-w-0">
-            <span className="text-[11px] sm:text-xs font-bold tracking-widest text-red-400 uppercase truncate">
-              0{currentIndex + 1} / 0{testimonials.length}
-            </span>
-            <p className="text-sm sm:text-base text-gray-700 font-bold truncate max-w-md">
-              {current.author} —{" "}
-              <span className="text-gray-500 font-medium">{current.role}</span>
-            </p>
-          </div>
+          <h3 className="text-6xl font-black leading-none tracking-tight sm:text-8xl">
+            Hear What People Say{" "}
+            {/* <span className="text-[#000]">Port Harcourt</span> */}
+          </h3>
+          <p className="max-w-md mt-4 text-base text-gray-600 sm:text-lg">
+            Hear what everyday senders and merchants have to say about their
+            experience with Pickars.
+          </p>
 
           {/* Controls */}
-          <div className="flex items-center gap-2.5 sm:gap-3 self-end sm:self-auto shrink-0">
-            <button
-              ref={prevBtnRef}
-              onClick={handlePrev}
-              onMouseEnter={() => handleBtnEnter(prevBtnRef.current)}
-              onMouseLeave={() => handleBtnLeave(prevBtnRef.current)}
-              className="w-11 h-11 sm:w-12 sm:h-12 rounded-full border border-red-100 flex items-center justify-center text-gray-700 hover:bg-red-50 hover:border-red-200 transition-colors cursor-pointer will-change-transform"
-              aria-label="Previous Testimonial"
-            >
-              <svg
-                className="w-4.5 h-4.5 sm:w-5 sm:h-5 stroke-current stroke-2 fill-none"
-                viewBox="0 0 24 24"
+          <div className="mt-10 flex items-center gap-5 sm:mt-12">
+            <div className="flex items-center gap-2.5 sm:gap-3">
+              <button
+                ref={prevBtnRef}
+                onClick={handlePrev}
+                onMouseEnter={() => handleBtnEnter(prevBtnRef.current)}
+                onMouseLeave={() => handleBtnLeave(prevBtnRef.current)}
+                className="flex h-12 w-12 cursor-pointer items-center justify-center rounded-full border border-red-200 bg-white text-gray-700 transition-colors will-change-transform hover:border-red-300 hover:bg-red-50 sm:h-14 sm:w-14"
+                aria-label="Previous Testimonial"
               >
-                <line x1="19" y1="12" x2="5" y2="12" />
-                <polyline points="12 19 5 12 12 5" />
-              </svg>
-            </button>
-            <button
-              ref={nextBtnRef}
-              onClick={handleNext}
-              onMouseEnter={() => handleBtnEnter(nextBtnRef.current)}
-              onMouseLeave={() => handleBtnLeave(nextBtnRef.current)}
-              className="w-11 h-11 sm:w-12 sm:h-12 rounded-full border border-red-100 flex items-center justify-center text-gray-700 hover:bg-red-50 hover:border-red-200 transition-colors relative cursor-pointer will-change-transform"
-              aria-label="Next Testimonial"
-            >
-              <svg
-                className="absolute inset-0 w-full h-full -rotate-90"
-                viewBox="0 0 48 48"
+                <svg
+                  className="h-5 w-5 fill-none stroke-current stroke-2"
+                  viewBox="0 0 24 24"
+                >
+                  <line x1="19" y1="12" x2="5" y2="12" />
+                  <polyline points="12 19 5 12 12 5" />
+                </svg>
+              </button>
+              <button
+                ref={nextBtnRef}
+                onClick={handleNext}
+                onMouseEnter={() => handleBtnEnter(nextBtnRef.current)}
+                onMouseLeave={() => handleBtnLeave(nextBtnRef.current)}
+                className="relative flex h-12 w-12 cursor-pointer items-center justify-center rounded-full border border-red-200 bg-white text-gray-700 transition-colors will-change-transform hover:border-red-300 hover:bg-red-50 sm:h-14 sm:w-14"
+                aria-label="Next Testimonial"
               >
-                <circle
-                  cx="24"
-                  cy="24"
-                  r="21"
-                  className="stroke-red-100 fill-none"
-                  strokeWidth="2"
-                />
-                <circle
-                  ref={progressCircleRef}
-                  cx="24"
-                  cy="24"
-                  r="21"
-                  className="stroke-[#FF0000] fill-none"
-                  strokeWidth="2.5"
-                  strokeDasharray={CIRCLE_CIRCUMFERENCE}
-                  strokeLinecap="round"
-                />
-              </svg>
-              <svg
-                className="w-4.5 h-4.5 sm:w-5 sm:h-5 stroke-current stroke-2 fill-none relative z-10"
-                viewBox="0 0 24 24"
-              >
-                <line x1="5" y1="12" x2="19" y2="12" />
-                <polyline points="12 5 19 12 12 19" />
-              </svg>
-            </button>
+                <svg
+                  className="absolute inset-0 h-full w-full -rotate-90"
+                  viewBox="0 0 48 48"
+                >
+                  <circle
+                    cx="24"
+                    cy="24"
+                    r="21"
+                    className="fill-none stroke-red-100"
+                    strokeWidth="2"
+                  />
+                  <circle
+                    ref={progressCircleRef}
+                    cx="24"
+                    cy="24"
+                    r="21"
+                    className="fill-none stroke-[#FF0000]"
+                    strokeWidth="2.5"
+                    strokeDasharray={CIRCLE_CIRCUMFERENCE}
+                    strokeLinecap="round"
+                  />
+                </svg>
+                <svg
+                  className="relative z-10 h-5 w-5 fill-none stroke-current stroke-2"
+                  viewBox="0 0 24 24"
+                >
+                  <line x1="5" y1="12" x2="19" y2="12" />
+                  <polyline points="12 5 19 12 12 19" />
+                </svg>
+              </button>
+            </div>
+
+            {/* <span className="text-sm font-bold tracking-widest text-red-400">
+              0{currentIndex + 1} / 0{testimonials.length}
+            </span> */}
           </div>
-        </div>
 
-        {/* Quote / Testimonial text */}
-        <div className="relative py-8 sm:py-10 md:py-14 flex flex-col justify-center min-h-[180px] sm:min-h-[220px]">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={currentIndex}
-              initial={{ opacity: 0, y: 16, filter: "blur(3px)" }}
-              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-              exit={{ opacity: 0, y: -16, filter: "blur(3px)" }}
-              transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-              className="max-w-4xl"
-            >
-              <p className="text-xl sm:text-2xl md:text-3xl lg:text-[2.4rem] xl:text-[2.6rem] font-extrabold tracking-tight text-gray-900 leading-[1.3] sm:leading-[1.25]">
-                &ldquo;{current.quote}&rdquo;
-              </p>
-            </motion.div>
-          </AnimatePresence>
-        </div>
-
-        {/* Bottom */}
-        <div className="relative flex flex-col sm:flex-row items-center sm:items-end justify-between gap-6 sm:gap-8 pt-6 border-t border-red-50">
           {/* Dots */}
-          <div className="flex items-center gap-1.5 sm:gap-2 order-2 sm:order-1">
+          <div className="mt-8 flex items-center gap-1.5 sm:gap-2">
             {testimonials.map((_, idx) => (
               <button
                 key={idx}
                 onClick={() => setCurrentIndex(idx)}
-                className={`h-1.5 sm:h-2 rounded-full transition-all duration-300 cursor-pointer ${
+                className={`h-1.5 cursor-pointer rounded-full transition-all duration-300 sm:h-2 ${
                   idx === currentIndex
-                    ? "w-6 sm:w-8 bg-[#FF0000]"
-                    : "w-1.5 sm:w-2 bg-red-100 hover:bg-red-200"
+                    ? "w-6 bg-[#FF0000] sm:w-8"
+                    : "w-1.5 bg-red-200 hover:bg-red-300 sm:w-2"
                 }`}
                 aria-label={`Go to testimonial ${idx + 1}`}
               />
             ))}
+          </div>
+        </div>
+
+        {/* ───────────── RIGHT: stacked quote card ───────────── */}
+        <div className="relative pb-4 pr-4 sm:pb-6 sm:pr-6">
+          {/* cards peeking out from behind */}
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0 translate-x-4 translate-y-4 rotate-[2.5deg] rounded-[2rem] border border-red-200 bg-red-100 sm:translate-x-6 sm:translate-y-6 sm:rounded-[2.5rem]"
+          />
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0 translate-x-2 translate-y-2 -rotate-[1.5deg] rounded-[2rem] border border-red-100 bg-white sm:translate-x-3 sm:translate-y-3 sm:rounded-[2.5rem]"
+          />
+
+          {/* front card */}
+          <div
+            className="relative flex min-h-[460px] flex-col overflow-hidden rounded-[2rem] p-6 text-white sm:min-h-[500px] sm:rounded-[2.5rem] sm:p-10 md:p-12"
+            style={{ backgroundColor: RED }}
+          >
+            {/* Decorative Quote Mark */}
+            <span
+              ref={quoteMarkRef}
+              aria-hidden="true"
+              className="pointer-events-none absolute -top-2 right-4 select-none text-[9rem] font-black leading-none text-black/[0.12] sm:right-8 sm:text-[13rem]"
+            >
+              &ldquo;
+            </span>
+
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={currentIndex}
+                initial={{ opacity: 0, y: 16, filter: "blur(3px)" }}
+                animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                exit={{ opacity: 0, y: -16, filter: "blur(3px)" }}
+                transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+                className="relative flex flex-1 flex-col justify-between gap-10"
+                aria-live="polite"
+              >
+                <div>
+                  <span className="inline-block rounded-full bg-white px-4 py-1.5 text-xs font-black uppercase tracking-widest text-[#FF0000]">
+                    {current.tag}
+                  </span>
+
+                  <p className="mt-8 text-xl font-extrabold leading-[1.3] tracking-tight sm:text-2xl md:text-3xl">
+                    &ldquo;{current.quote}&rdquo;
+                  </p>
+                </div>
+
+                <div className="flex items-center gap-4 border-t border-white/30 pt-6">
+                  <span
+                    aria-hidden="true"
+                    className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-black text-base font-black text-white sm:h-14 sm:w-14"
+                  >
+                    {getInitials(current.author)}
+                  </span>
+                  <p className="min-w-0 text-base font-bold sm:text-lg">
+                    {current.author}
+                    <span className="block truncate text-sm font-medium text-white/80 sm:text-base">
+                      {current.role}
+                    </span>
+                  </p>
+                </div>
+              </motion.div>
+            </AnimatePresence>
           </div>
         </div>
       </div>
