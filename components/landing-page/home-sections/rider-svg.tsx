@@ -7,7 +7,7 @@ import CityMarquee from "./sub-sections/city-marquee";
 /* ------------------------------------------------------------------ */
 /*  Theme                                                              */
 /* ------------------------------------------------------------------ */
-const RED = "#FAE8E4";
+const RED = "#FCF4DF";
 const BG = RED;
 
 const VB_W = 1262;
