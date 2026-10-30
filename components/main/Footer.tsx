@@ -100,7 +100,7 @@ const TopCloud = memo(function TopCloud() {
     <svg
       viewBox="0 0 2880 141"
       preserveAspectRatio="xMidYMin slice"
-      className="pointer-events-none absolute bottom-full left-0 right-0 block h-[70px] w-full -scale-y-100 sm:h-[110px]"
+      className="pointer-events-none absolute bottom-full left-0 right-0 block h-[70px] w-full -scale-y-100 sm:h-[110px ]"
       aria-hidden="true"
     >
       <path d={CLOUD_PATH} fill={FOOTER_BG} />
@@ -138,16 +138,14 @@ const Footer: React.FC = () => {
 
   return (
     <footer
-      className="relative mb-0 mt-[150px] w-full z-[24] pt-[-48px] font-['Lufga'] text-white sm:mt-[110px] overflow-x-clip"
+      className="relative mb-0 mt-[150px] w-full z-[24]  font-['Lufga'] text-white sm:mt-[110px] overflow-x-clip"
       style={{ backgroundColor: FOOTER_BG }}
     >
       <TopCloud />
 
-      {/* <AppDownloadCTA /> */}
 
-      {/* <FooterSkyline /> */}
 
-      <div className="relative z-10 mx-auto max-w-7xl px-6 pb-16 pt-20 md:px-0">
+      <div className="relative z-10 mx-auto max-w-7xl px-6 pb-16 pt-24 md:px-0">
         <div className="grid grid-cols-1 gap-16 lg:grid-cols-12">
           <div className="flex flex-col items-start lg:col-span-5">
             <div className="mb-2 flex items-center gap-3">
@@ -284,9 +282,13 @@ const Footer: React.FC = () => {
 
         {/* Added overflow-hidden and adjusted max size clamp to prevent breaking layout horizontally */}
         <div className="mt-16 w-full select-none overflow-hidden">
-          <h1 className="w-full text-center text-[clamp(3.3rem,10vw,11rem)] font-black leading-[0.8] tracking-tighter text-white sm:text-left">
-            Pickars<span className="text-[#ff0000]">.</span>
-          </h1>
+          <p
+            aria-hidden="true"
+            className="w-full text-[clamp(6.2rem,17vw,20rem)] font-black leading-[1] tracking-tighter text-white sm:text-left md:text-[clamp(14rem,26vw,32rem)]"
+          >
+            Pickars
+            <span style={{ color: "#ff0000" }}>.</span>
+          </p>
         </div>
 
         <div className="mt-12 flex flex-col items-center justify-between gap-6 border-t border-white/10 pt-8 sm:flex-row">
