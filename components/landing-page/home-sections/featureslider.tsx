@@ -89,20 +89,6 @@ export default function FeatureSlider({
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Band fades in on scroll (plays once, never stays hidden)
-      gsap.from(bandRef.current, {
-        opacity: 0,
-        y: 20,
-        duration: 0.9,
-        ease: "power3.out",
-        clearProps: "opacity,transform",
-        scrollTrigger: {
-          trigger: bandRef.current,
-          start: "top 95%",
-          once: true,
-        },
-      });
-
       const reduce = window.matchMedia(
         "(prefers-reduced-motion: reduce)"
       ).matches;
