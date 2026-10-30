@@ -402,8 +402,8 @@ export default function RiderPage() {
       <Clouds />
 
       {/* very big headline, sits behind the top of the rider */}
-      <h1 className="relative z-0 w-full max-w-[1262px] text-[clamp(3.6rem,24vw,28rem)] select-none pt-16 text-center md:text-[clamp(3.6rem,18vw,10rem)] font-black leading-[0.9] tracking-tighter text-black md:pt-[24px]">
-        <span> Send it</span>
+      <h1 className="relative z-0 w-full max-w-[1262px] text-[clamp(3.6rem,17vw,28rem)] select-none pt-16 text-center md:text-[clamp(3.6rem,18vw,10rem)] font-black leading-[0.9] tracking-tighter text-black md:pt-[24px]">
+        <span> Just Send it</span>
         <span className="ml-1 text-[#ff0000] md:ml-2">.</span>
       </h1>
 
