@@ -88,11 +88,8 @@ const AUTO_ADVANCE_SECONDS = 10;
 const CIRCLE_CIRCUMFERENCE = 131.9;
 
 const RED = "#FF0000";
-
-/* Section background */
 const BG = "#fff";
 
-/* "Chiamaka Okoro" -> "CO", "Dr. Evelyn Peters" -> "EP" */
 const getInitials = (name: string) => {
   const words = name.split(" ").filter((w) => w && !/^dr\.?$/i.test(w));
   if (words.length === 0) return "";
@@ -116,12 +113,11 @@ export default function HomeTestimonialsSection(): React.JSX.Element {
     const ctx = gsap.context(() => {
       gsap.fromTo(
         containerRef.current,
-        { y: 60, opacity: 0, scale: 0.97 },
+        { y: 40, opacity: 0 },
         {
           y: 0,
           opacity: 1,
-          scale: 1,
-          duration: 1.1,
+          duration: 1,
           ease: "power4.out",
           scrollTrigger: {
             trigger: sectionRef.current,
@@ -130,34 +126,6 @@ export default function HomeTestimonialsSection(): React.JSX.Element {
           },
         }
       );
-
-      gsap.fromTo(
-        quoteMarkRef.current,
-        { opacity: 0, scale: 0.9 },
-        {
-          opacity: 1,
-          scale: 1,
-          duration: 0.9,
-          delay: 0.25,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top 78%",
-            toggleActions: "play none none reverse",
-          },
-        }
-      );
-
-      gsap.to(quoteMarkRef.current, {
-        y: -24,
-        ease: "none",
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top bottom",
-          end: "bottom top",
-          scrub: 1.1,
-        },
-      });
     }, sectionRef);
 
     return () => ctx.revert();
@@ -196,15 +164,12 @@ export default function HomeTestimonialsSection(): React.JSX.Element {
   const pauseAutoAdvance = () => progressTweenRef.current?.pause();
   const resumeAutoAdvance = () => progressTweenRef.current?.resume();
 
-  const handleNext = () => {
+  const handleNext = () =>
     setCurrentIndex((prev) => (prev + 1) % testimonials.length);
-  };
-
-  const handlePrev = () => {
+  const handlePrev = () =>
     setCurrentIndex(
       (prev) => (prev - 1 + testimonials.length) % testimonials.length
     );
-  };
 
   const handleBtnEnter = (btn: HTMLButtonElement | null) => {
     if (!btn) return;
@@ -221,51 +186,44 @@ export default function HomeTestimonialsSection(): React.JSX.Element {
   return (
     <section
       ref={sectionRef}
-      className="relative mb-[70px] flex w-full flex-col items-center justify-center px-4 py-16 font-['Lufga'] sm:mb-[110px] sm:px-6 sm:py-20 md:py-28 lg:px-8"
+      className="relative w-full overflow-hidden px-4 py-16 font-['Lufga'] sm:px-6 sm:py-20 md:py-28 lg:px-8"
       style={{ backgroundColor: BG }}
     >
       <div
         ref={containerRef}
         onMouseEnter={pauseAutoAdvance}
         onMouseLeave={resumeAutoAdvance}
-        className="grid w-full max-w-7xl items-center gap-12 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-16"
+        className="mx-auto grid w-full max-w-7xl items-center gap-12 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-16"
       >
-        {/* ───────────── LEFT: heading + controls ───────────── */}
-        <div className="flex flex-col items-start">
+        {/* ───────────── LEFT: Heading + Controls ───────────── */}
+        <div className="flex flex-col items-start overflow-hidden">
           <motion.div
             initial={{ opacity: 0, scale: 0.8, rotate: -5 }}
             animate={{ opacity: 1, scale: 1, rotate: -2 }}
             whileHover={{ scale: 1.08, rotate: 0 }}
             transition={{ type: "spring", stiffness: 200, damping: 15 }}
-            className="mb-5 cursor-default select-none bg-[#000] px-5 py-2 text-[11px] font-black uppercase tracking-widest text-white sm:mb-6 sm:px-6 sm:py-2.5 sm:text-xs md:text-sm"
-            style={{
-              maskImage:
-                "radial-gradient(circle 5px at calc(100% - 2.5px) 50%, #0000 99%, #000 100%)",
-              WebkitMaskImage:
-                "conic-gradient(from -45deg at 50% 50%, #000 0 90deg, #0000 0) 0 0/10px 10px repeat",
-            }}
+            className="mb-5 select-none bg-[#000] px-5 py-2 text-[11px] font-black uppercase tracking-widest text-white sm:mb-6 sm:px-6 sm:py-2.5 sm:text-xs md:text-sm"
           >
             TESTIMONIALS
           </motion.div>
 
-          <h3 className="text-6xl font-black leading-none tracking-tight sm:text-8xl">
-            Hear What People Say{" "}
-            {/* <span className="text-[#000]">Port Harcourt</span> */}
+          <h3 className="w-full text-3xl font-black leading-tight tracking-tight sm:text-5xl lg:text-6xl">
+            Hear What People Say
           </h3>
-          <p className="max-w-md mt-4 text-base text-gray-600 sm:text-lg">
+          <p className="mt-4 max-w-md text-sm leading-relaxed text-gray-600 sm:text-base">
             Hear what everyday senders and merchants have to say about their
             experience with Pickars.
           </p>
 
           {/* Controls */}
-          <div className="mt-10 flex items-center gap-5 sm:mt-12">
+          <div className="mt-8 flex items-center gap-5 sm:mt-10">
             <div className="flex items-center gap-2.5 sm:gap-3">
               <button
                 ref={prevBtnRef}
                 onClick={handlePrev}
                 onMouseEnter={() => handleBtnEnter(prevBtnRef.current)}
                 onMouseLeave={() => handleBtnLeave(prevBtnRef.current)}
-                className="flex h-12 w-12 cursor-pointer items-center justify-center rounded-full border border-red-200 bg-white text-gray-700 transition-colors will-change-transform hover:border-red-300 hover:bg-red-50 sm:h-14 sm:w-14"
+                className="flex h-12 w-12 cursor-pointer items-center justify-center rounded-full border border-red-200 bg-white text-gray-700 transition-colors hover:border-red-300 hover:bg-red-50 sm:h-14 sm:w-14"
                 aria-label="Previous Testimonial"
               >
                 <svg
@@ -281,7 +239,7 @@ export default function HomeTestimonialsSection(): React.JSX.Element {
                 onClick={handleNext}
                 onMouseEnter={() => handleBtnEnter(nextBtnRef.current)}
                 onMouseLeave={() => handleBtnLeave(nextBtnRef.current)}
-                className="relative flex h-12 w-12 cursor-pointer items-center justify-center rounded-full border border-red-200 bg-white text-gray-700 transition-colors will-change-transform hover:border-red-300 hover:bg-red-50 sm:h-14 sm:w-14"
+                className="relative flex h-12 w-12 cursor-pointer items-center justify-center rounded-full border border-red-200 bg-white text-gray-700 transition-colors hover:border-red-300 hover:bg-red-50 sm:h-14 sm:w-14"
                 aria-label="Next Testimonial"
               >
                 <svg
@@ -315,14 +273,10 @@ export default function HomeTestimonialsSection(): React.JSX.Element {
                 </svg>
               </button>
             </div>
-
-            {/* <span className="text-sm font-bold tracking-widest text-red-400">
-              0{currentIndex + 1} / 0{testimonials.length}
-            </span> */}
           </div>
 
           {/* Dots */}
-          <div className="mt-8 flex items-center gap-1.5 sm:gap-2">
+          <div className="mt-6 flex flex-wrap items-center gap-1.5 sm:mt-8 sm:gap-2">
             {testimonials.map((_, idx) => (
               <button
                 key={idx}
@@ -338,28 +292,28 @@ export default function HomeTestimonialsSection(): React.JSX.Element {
           </div>
         </div>
 
-        {/* ───────────── RIGHT: stacked quote card ───────────── */}
-        <div className="relative pb-4 pr-4 sm:pb-6 sm:pr-6">
-          {/* cards peeking out from behind */}
+        {/* ───────────── RIGHT: Stacked Quote Card ───────────── */}
+        <div className="relative w-full pb-3 pr-3 sm:pb-5 sm:pr-5">
+          {/* Background Decorative Cards */}
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute inset-0 translate-x-4 translate-y-4 rotate-[2.5deg] rounded-[2rem] border border-red-200 bg-red-100 sm:translate-x-6 sm:translate-y-6 sm:rounded-[2.5rem]"
+            className="pointer-events-none absolute inset-0 translate-x-3 translate-y-3 rotate-[2deg] rounded-[2rem] border border-red-200 bg-red-100 sm:translate-x-5 sm:translate-y-5 sm:rounded-[2.5rem]"
           />
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute inset-0 translate-x-2 translate-y-2 -rotate-[1.5deg] rounded-[2rem] border border-red-100 bg-white sm:translate-x-3 sm:translate-y-3 sm:rounded-[2.5rem]"
+            className="pointer-events-none absolute inset-0 translate-x-1.5 translate-y-1.5 -rotate-[1deg] rounded-[2rem] border border-red-100 bg-white sm:translate-x-2.5 sm:translate-y-2.5 sm:rounded-[2.5rem]"
           />
 
-          {/* front card */}
+          {/* Front Card */}
           <div
-            className="relative flex min-h-[460px] flex-col overflow-hidden rounded-[2rem] p-6 text-white sm:min-h-[500px] sm:rounded-[2.5rem] sm:p-10 md:p-12"
+            className="relative flex w-full flex-col overflow-hidden rounded-[2rem] p-6 text-white sm:rounded-[2.5rem] sm:p-10 md:p-12"
             style={{ backgroundColor: RED }}
           >
             {/* Decorative Quote Mark */}
             <span
               ref={quoteMarkRef}
               aria-hidden="true"
-              className="pointer-events-none absolute -top-2 right-4 select-none text-[9rem] font-black leading-none text-black/[0.12] sm:right-8 sm:text-[13rem]"
+              className="pointer-events-none absolute -top-4 right-4 select-none text-[8rem] font-black leading-none text-black/[0.1] sm:right-6 sm:text-[11rem]"
             >
               &ldquo;
             </span>
@@ -367,36 +321,38 @@ export default function HomeTestimonialsSection(): React.JSX.Element {
             <AnimatePresence mode="wait">
               <motion.div
                 key={currentIndex}
-                initial={{ opacity: 0, y: 16, filter: "blur(3px)" }}
+                initial={{ opacity: 0, y: 12, filter: "blur(2px)" }}
                 animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                exit={{ opacity: 0, y: -16, filter: "blur(3px)" }}
-                transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-                className="relative flex flex-1 flex-col justify-between gap-10"
+                exit={{ opacity: 0, y: -12, filter: "blur(2px)" }}
+                transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+                className="relative flex flex-col justify-between gap-8 sm:gap-12"
                 aria-live="polite"
               >
                 <div>
-                  <span className="inline-block rounded-full bg-white px-4 py-1.5 text-xs font-black uppercase tracking-widest text-[#FF0000]">
+                  <span className="inline-block rounded-full bg-white px-3.5 py-1 text-[11px] font-black uppercase tracking-widest text-[#FF0000] sm:px-4 sm:py-1.5 sm:text-xs">
                     {current.tag}
                   </span>
 
-                  <p className="mt-8 text-xl font-extrabold leading-[1.3] tracking-tight sm:text-2xl md:text-3xl">
+                  <p className="mt-6 text-lg font-extrabold leading-relaxed tracking-tight sm:text-xl md:text-2xl">
                     &ldquo;{current.quote}&rdquo;
                   </p>
                 </div>
 
-                <div className="flex items-center gap-4 border-t border-white/30 pt-6">
+                <div className="flex items-center gap-4 border-t border-white/30 pt-5 sm:pt-6">
                   <span
                     aria-hidden="true"
-                    className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-black text-base font-black text-white sm:h-14 sm:w-14"
+                    className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-black text-sm font-black text-white sm:h-13 sm:w-13 sm:text-base"
                   >
                     {getInitials(current.author)}
                   </span>
-                  <p className="min-w-0 text-base font-bold sm:text-lg">
-                    {current.author}
-                    <span className="block truncate text-sm font-medium text-white/80 sm:text-base">
+                  <div className="min-w-0">
+                    <p className="truncate text-sm font-bold sm:text-base md:text-lg">
+                      {current.author}
+                    </p>
+                    <p className="truncate text-xs font-medium text-white/80 sm:text-sm">
                       {current.role}
-                    </span>
-                  </p>
+                    </p>
+                  </div>
                 </div>
               </motion.div>
             </AnimatePresence>

@@ -415,8 +415,12 @@ export default function RiderPage() {
         <DownloadButtons isHalf={true} iconSize={24} padding="h-13 w-13" />
       </span>
 
-      {/* rider illustration: bigger on mobile, bleeds slightly past the edges */}
-      <div className="relative z-10 mt-2 w-[135%] max-w-none sm:mt-0 sm:w-full sm:max-w-[1262px] md:-mt-[2vw]">
+      {/* rider illustration.
+          MOBILE: the jacket base only fills ~72% of the SVG's width, so the SVG is
+          made 142vw wide and shifted right by 10vw. That puts the jacket base
+          edge to edge across the whole screen (it runs a little past both sides,
+          and overflow-x-clip on <main> trims the rest). From sm up: unchanged. */}
+      <div className="relative left-[10vw] z-10 mt-2 w-[142vw] max-w-none sm:left-0 sm:mt-0 sm:w-full sm:max-w-[1262px] md:-mt-[2vw]">
         <svg
           className="block h-auto w-full sm:max-h-[80vh]"
           viewBox={`0 0 ${VB_W} ${VB_H}`}

@@ -55,31 +55,18 @@ const homeSchema = graph(
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen bg-white text-slate-900 ">
+    <div className="min-h-screen w-full overflow-x-hidden bg-white text-slate-900">
       <JsonLd data={homeSchema} />
-      <RiderPage />
-      <QualitiesSliderSection />
-      <PickarsIntro />
-      {/* <TownMarquee /> */}
-      <HomeTestimonialsSection />
-      <HomeWithMapSection />
-      <FAQsClientPage />
-      {/* <PickarsMosaic /> */}
-      {/* <QualitiesSliderSection /> */}
-      {/* <div style={{ paddingTop: 64 }}>
+      <div className="w-full max-w-full overflow-hidden">
+        <RiderPage />
+        <QualitiesSliderSection />
+        <PickarsIntro />
+        {/* <TownMarquee /> */}
+        <HomeTestimonialsSection />
         <HomeWithMapSection />
-      </div> */}
- 
-      {/* <PartnerWithUs /> */}
-      {/* <PackageDeliverySection /> */}
-
-      {/* <NeverLateSection /> */}
-
-
-      {/* <div style={{ marginTop: 0, marginBottom: 0 }}>
-   
         <FAQsClientPage />
-      </div> */}
+        {/* <PickarsMosaic /> */}
+      </div>
     </div>
   );
 }
