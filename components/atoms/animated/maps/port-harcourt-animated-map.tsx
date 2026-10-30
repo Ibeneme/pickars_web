@@ -281,7 +281,7 @@ function DeliveryRider() {
 export default function PortHarcourtAnimatedMap() {
   return (
     <div
-      className="relative w-full aspect-[4/5]  sm:aspect-[4/3] md:aspect-[16/9] min-h-[420px] max-h-[750px] overflow-hidden rounded-xl md:rounded-3xl border-2 sm:border-0 border-black select-none"
+      className="relative w-full aspect-[4/5]  sm:aspect-[4/3] md:aspect-[16/9] min-h-[420px] max-h-[750px] overflow-hidden rounded-xl md:rounded-3xl  select-none"
       style={{ backgroundColor: MAP_BG }}
     >
       <style>{`

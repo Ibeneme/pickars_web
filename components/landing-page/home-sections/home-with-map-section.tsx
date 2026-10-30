@@ -27,13 +27,12 @@ const HomeWithMapSection: React.FC = () => {
               className="mx-1.5 sm:mx-2.5 inline-flex h-6 w-6 sm:h-8 sm:w-8 md:h-10 md:w-10 items-center justify-center rounded-full align-middle text-white"
             >
               <Sparkle className="h-3.5 w-3.5 sm:h-5 sm:w-5 md:h-6 md:w-6" />
-            </span>
-            anywhere in{" "}
+            </span>{" "}
             <span
               style={{ backgroundColor: PRIMARY_COLOR }}
               className="inline-block px-2 sm:px-3 text-white mt-1 sm:mt-0"
             >
-              Port Harcourt.
+              with Ease
             </span>
           </h2>
 

@@ -7,7 +7,7 @@ import CityMarquee from "./sub-sections/city-marquee";
 /* ------------------------------------------------------------------ */
 /*  Theme                                                              */
 /* ------------------------------------------------------------------ */
-const RED = "#DFFCE1";
+const RED = "#FAE8E4";
 const BG = RED;
 
 const VB_W = 1262;
@@ -398,7 +398,7 @@ export default function RiderPage() {
 
   return (
     <main
-      className="relative isolate flex w-full flex-col items-center overflow-x-clip px-4 pt-24 pb-0 sm:px-6 md:px-8 md:pt-36 font-['Lufga']"
+      className="relative mb-[-16] isolate flex w-full flex-col items-center overflow-x-clip px-4 pt-24 pb-0 sm:px-6 md:px-8 md:pt-36 font-['Lufga']"
       style={{ backgroundColor: BG }}
     >
       <style>{CSS}</style>
