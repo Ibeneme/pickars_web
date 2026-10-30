@@ -20,6 +20,8 @@ import FAQsClientPage from "@/components/landing-page/faqs/faq-section";
 import PickarsIntro from "@/components/landing-page/home-sections/intro";
 import PickarsMosaic from "@/components/landing-page/home-sections/Pickarsmosaic";
 import TownMarquee from "@/components/landing-page/home-sections/sub-sections/city-marquee";
+import WhyPickars from "@/components/landing-page/home-sections/why-pickars";
+import FeatureSlider from "@/components/landing-page/home-sections/featureslider";
 
 const TITLE = "Pickars: Your doorstep deliveries, redefined";
 const DESCRIPTION =
@@ -59,12 +61,15 @@ export default function HomePage() {
       <JsonLd data={homeSchema} />
       <div className="w-full max-w-full overflow-hidden">
         <RiderPage />
-        <QualitiesSliderSection />
+        <FeatureSlider />
+  
         <PickarsIntro />
+        {/* <QualitiesSliderSection /> */}
         {/* <TownMarquee /> */}
-        <HomeTestimonialsSection />
+  
         <HomeWithMapSection />
-        <FAQsClientPage />
+        <FAQsClientPage limit={4}/>
+        <HomeTestimonialsSection />
         {/* <PickarsMosaic /> */}
       </div>
     </div>

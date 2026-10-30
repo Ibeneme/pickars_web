@@ -2,13 +2,19 @@
 
 import React, { useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { faqData } from "./faq-data";
+import { faqData, FAQItem } from "./faq-data";
 
 const ACCENT = "#FF0000"; // open question + highlights (swap for any colour)
 const WHATSAPP_NUMBER = "2349164860591"; // 0916 486 0591
 const WHATSAPP_LINK = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
   "Hi Pickars! I have a question."
 )}`;
+
+interface FAQsClientPageProps {
+  initialOpenId?: string | null; // Pass specific FAQ ID to open by default (e.g., "01")
+  limit?: number; // Pass a number to limit how many FAQs are displayed from the top
+  ids?: string[]; // Pass an array of specific FAQ IDs to select/show exactly those questions (e.g., ["01", "03", "07"])
+}
 
 /* 12-point burst, drawn once */
 const burstPath = (() => {
@@ -65,17 +71,28 @@ const PlusMinus: React.FC<{ open: boolean }> = ({ open }) => (
   </span>
 );
 
-const FAQsClientPage: React.FC = () => {
-  // null = everything closed
-  const [activeId, setActiveId] = useState<string | null>(faqData[0].id);
+const FAQsClientPage: React.FC<FAQsClientPageProps> = ({
+  initialOpenId = faqData[0]?.id ?? null,
+  limit,
+  ids,
+}) => {
+  const [activeId, setActiveId] = useState<string | null>(initialOpenId);
 
   const toggle = (id: string) =>
     setActiveId((current) => (current === id ? null : id));
 
+  // Filter or limit the FAQs based on the props provided
+  let displayedFAQs = faqData;
+  if (ids && ids.length > 0) {
+    displayedFAQs = faqData.filter((faq) => ids.includes(faq.id));
+  } else if (limit) {
+    displayedFAQs = faqData.slice(0, limit);
+  }
+
   return (
     <section className="relative min-h-[85vh] w-full bg-white px-4 pb-24 pt-40 font-['Lufga'] text-black sm:px-6 md:pt-48 lg:px-8">
       <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-20">
-        {/* LEFT: heading + contact card (stays in view while the list scrolls) */}
+        {/* LEFT: heading + contact card */}
         <aside className="lg:sticky lg:top-32 lg:self-start">
           <motion.h1
             initial={{ opacity: 0, y: 24 }}
@@ -111,9 +128,9 @@ const FAQsClientPage: React.FC = () => {
           </div>
         </aside>
 
-        {/* RIGHT: accordion (works the same on mobile, tablet and desktop) */}
+        {/* RIGHT: accordion */}
         <div className="flex flex-col gap-3" role="list">
-          {faqData.map((faq, i) => {
+          {displayedFAQs.map((faq, i) => {
             const isOpen = faq.id === activeId;
             const panelId = `faq-panel-${faq.id}`;
             const buttonId = `faq-button-${faq.id}`;

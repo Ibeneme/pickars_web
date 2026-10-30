@@ -21,7 +21,7 @@ const HomeWithMapSection: React.FC = () => {
         {/* Header Grid */}
         <div className="grid items-end gap-6  md:grid-cols-[1.6fr_1fr] md:gap-12 lg:gap-16">
           <h2 className="text-6xl font-black leading-none tracking-tight sm:text-8xl">
-            Book a rider
+            Book a Rider
             <span
               style={{ backgroundColor: PRIMARY_COLOR }}
               className="mx-1.5 sm:mx-2.5 inline-flex h-6 w-6 sm:h-8 sm:w-8 md:h-10 md:w-10 items-center justify-center rounded-full align-middle text-white"
@@ -32,7 +32,7 @@ const HomeWithMapSection: React.FC = () => {
               style={{ backgroundColor: PRIMARY_COLOR }}
               className="inline-block px-2 sm:px-3 text-white mt-1 sm:mt-0"
             >
-              with Ease
+              with ease
             </span>
           </h2>
 

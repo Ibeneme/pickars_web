@@ -22,9 +22,9 @@ const stats: {
   decimals?: number;
   label: string;
 }[] = [
-  { value: 500, suffix: "+", label: "Deliveries completed" },
-  { value: 30, suffix: "+", label: "Dispatch riders" },
-  { value: 30, suffix: " min", label: "Average pickup time" },
+  { value: 1300, suffix: "+", label: "Deliveries completed" },
+  { value: 7, suffix: "+", label: "Dispatch riders" },
+  { value: 56, suffix: " min", label: "Average pickup time" },
 ];
 
 // Optional "trusted by" strip. Leave empty to hide it.
@@ -189,7 +189,7 @@ export default function PickarsIntro() {
       className="relative w-full overflow-hidden bg-white pb-0 font-['Lufga'] text-black"
     >
       {/* <RoughEdge position="bottom" /> */}
-      <div className="relative z-10 mx-auto max-w-7xl px-6 py-16 md:py-24 lg:px-12">
+      <div className="relative z-10 mx-auto max-w-7xl py-16 md:py-24 px-4 sm:px-6 lg:px-8">
         {/* Hero row */}
         <div
           ref={heroRef}
@@ -207,7 +207,7 @@ export default function PickarsIntro() {
               style={{ backgroundColor: PRIMARY_COLOR }}
               className="inline-block px-2 text-white md:px-3"
             >
-              Redefined
+              redefined
             </span>
           </h2>
 
@@ -244,7 +244,7 @@ export default function PickarsIntro() {
         {/* Image */}
         <div
           ref={imageWrapRef}
-          className="relative mt-12 aspect-[16/9] w-full overflow-hidden rounded-[28px] bg-neutral-100 md:mt-16 md:aspect-[16/7]"
+          className="relative mt-12 aspect-[12/9] w-full overflow-hidden rounded-[28px] bg-neutral-100 md:mt-16 md:aspect-[12/7]"
         >
           <div
             ref={imageRef}
@@ -271,11 +271,10 @@ export default function PickarsIntro() {
           </span>
 
           <div>
-            <h3 className="text-2xl font-semibold leading-tight tracking-tight text-black md:text-4xl">
-              Whether it&apos;s a gift, a shop order, or an urgent document, we
-              get it there.
+            <h3 className="text-6xl font-black leading-none tracking-tight sm:text-8xl">
+              Need something delivered?
             </h3>
-            <p className="mt-5 max-w-md text-sm leading-relaxed text-black/60">
+            <p className="mt-5 max-w-md text-xl font-regular leading-relaxed text-black/60">
               Good delivery isn&apos;t just about speed. It&apos;s about showing
               up on time, handling every package with care and keeping you
               informed. Here&apos;s how we&apos;re doing.
@@ -283,7 +282,7 @@ export default function PickarsIntro() {
 
             <div
               ref={statsRef}
-              className="mt-10 grid grid-cols-3 gap-4 border-b border-black/10 pb-10 md:mt-14"
+              className="mt-10 grid grid-cols-3 gap-4 pb-10 md:mt-14"
             >
               {stats.map((s, i) => (
                 <div key={s.label}>
@@ -291,7 +290,7 @@ export default function PickarsIntro() {
                     ref={(el) => {
                       statEls.current[i] = el;
                     }}
-                    className="block text-3xl font-semibold tracking-tight text-black sm:text-4xl md:text-6xl"
+                    className="block text-4xl font-medium tracking-tight text-black sm:text-5xl md:text-6xl"
                   />
                   <span className="mt-2 block text-xs text-black/60 md:text-sm">
                     {s.label}
@@ -335,11 +334,7 @@ export default function PickarsIntro() {
         )}
 
         {/* Closing statement */}
-        <div ref={closingRef} className="mt-16 md:mt-24">
-          <h3 className="max-w-md text-2xl font-semibold leading-tight tracking-tight text-black md:text-4xl">
-            This is how we keep Port Harcourt moving.
-          </h3>
-        </div>
+   
       </div>
     </section>
   );

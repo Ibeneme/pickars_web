@@ -7,13 +7,12 @@ import CityMarquee from "./sub-sections/city-marquee";
 /* ------------------------------------------------------------------ */
 /*  Theme                                                              */
 /* ------------------------------------------------------------------ */
-const RED = "#FFDBD3";
+const RED = "#FCF4DF";
 const BG = RED;
 
 const VB_W = 1262;
 const VB_H = 1006;
 
-/* slides shown in the card with expanded text */
 const SLIDES = [
   {
     title: "Doorstep Deliveries.",
@@ -34,7 +33,6 @@ const SLIDES = [
 ];
 
 const CSS = `
-@keyframes rd-bob   { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-7px)} }
 @keyframes rd-glint { 0%,100%{opacity:.55} 50%{opacity:1} }
 @keyframes rd-pulse { 0%,100%{opacity:.35} 50%{opacity:.6} }
 @keyframes rd-arm   { 0%,100%{transform:translateY(0) rotate(-1.5deg)} 50%{transform:translateY(-6px) rotate(2deg)} }
@@ -80,7 +78,6 @@ const CSS = `
   .cloud-hide-mobile { display: none !important; }
 }
 
-.rd-helmet { animation: rd-bob 4.5s ease-in-out infinite; }
 .rd-glint  { animation: rd-glint 3.2s ease-in-out infinite; }
 .rd-glow   { animation: rd-pulse 5s ease-in-out infinite; }
 .rd-arm    { transform-box: view-box; transform-origin: 905px 800px; animation: rd-arm 4.5s ease-in-out infinite; }
@@ -91,7 +88,7 @@ const CSS = `
 .sl-in { animation: sl-in .45s ease-out; }
 
 @media (prefers-reduced-motion: reduce) {
-  .rd-helmet,.rd-glint,.rd-glow,.rd-arm,.rd-swing,
+  .rd-glint,.rd-glow,.rd-arm,.rd-swing,
   .cloud-ltr,.cloud-rtl,.cloud-roam-x,.cloud-roam-y,.cloud-bob { animation: none; }
 }
 `;
@@ -123,7 +120,7 @@ function mulberry32(seed: number) {
   };
 }
 
-function makeClouds(count: number, seed = 7): CloudDef[] {
+function makeClouds(count: number, seed = 4): CloudDef[] {
   const rnd = mulberry32(seed);
   const range = (min: number, max: number) => min + rnd() * (max - min);
 
@@ -299,7 +296,6 @@ const Jacket = memo(function Jacket() {
         fill="#000"
       />
       {/* arm seam, red piping */}
-  
 
       <path
         d="M418 680 L460 630 C520 640 620 700 700 722 C750 722 745 760 720 780 C690 795 640 797 610 800 C595 770 590 740 588 722 C520 735 450 710 418 680Z"
@@ -317,9 +313,10 @@ const Jacket = memo(function Jacket() {
   );
 });
 
+/* The helmet no longer bobs up and down. Only the visor glint still shimmers. */
 const Helmet = memo(function Helmet() {
   return (
-    <g className="rd-helmet">
+    <g>
       {/* shell */}
       <path
         d="M590 75 C760 78 852 240 862 430 C864 520 840 620 812 692 C760 722 660 722 600 708 C500 685 400 610 366 528 C330 450 312 390 316 320 C322 190 440 85 590 75Z"

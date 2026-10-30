@@ -186,7 +186,7 @@ export default function HomeTestimonialsSection(): React.JSX.Element {
   return (
     <section
       ref={sectionRef}
-      className="relative w-full overflow-hidden px-4 py-16 font-['Lufga'] sm:px-6 sm:py-20 md:py-28 lg:px-8"
+      className="relative w-full overflow-hidden px-4 sm:px-6 lg:px-8 py-16 font-['Lufga'] sm:py-20 md:py-28  "
       style={{ backgroundColor: BG }}
     >
       <div
@@ -207,9 +207,9 @@ export default function HomeTestimonialsSection(): React.JSX.Element {
             TESTIMONIALS
           </motion.div>
 
-          <h3 className="w-full text-3xl font-black leading-tight tracking-tight sm:text-5xl lg:text-6xl">
-            Hear What People Say
-          </h3>
+          <h2 className="text-6xl font-black text-black leading-none tracking-tight sm:text-8xl">
+            Read What People Say
+          </h2>
           <p className="mt-4 max-w-md text-sm leading-relaxed text-gray-600 sm:text-base">
             Hear what everyday senders and merchants have to say about their
             experience with Pickars.

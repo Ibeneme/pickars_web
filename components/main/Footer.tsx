@@ -73,7 +73,7 @@ const FooterSkyline = memo(function FooterSkyline() {
       fill="none"
       aria-hidden
     >
-      {/* <g fill="#ffffff" opacity="0.06">
+      <g fill="#ffffff" opacity="0.06">
         {TOWERS.map((t, i) => {
           const top = GROUND - t.h;
           return t.slant ? (
@@ -87,7 +87,7 @@ const FooterSkyline = memo(function FooterSkyline() {
             <rect key={i} x={t.x} y={top} width={t.w} height={t.h} />
           );
         })}
-      </g> */}
+      </g>
     </svg>
   );
 });
@@ -138,14 +138,14 @@ const Footer: React.FC = () => {
 
   return (
     <footer
-      className="relative mb-0 mt-[150px] w-full z-[24] pt-[64px] font-['Lufga'] text-white sm:mt-[110px] overflow-x-clip"
+      className="relative mb-0 mt-[150px] w-full z-[24] pt-[-48px] font-['Lufga'] text-white sm:mt-[110px] overflow-x-clip"
       style={{ backgroundColor: FOOTER_BG }}
     >
       <TopCloud />
 
       {/* <AppDownloadCTA /> */}
 
-      <FooterSkyline />
+      {/* <FooterSkyline /> */}
 
       <div className="relative z-10 mx-auto max-w-7xl px-6 pb-16 pt-20 md:px-0">
         <div className="grid grid-cols-1 gap-16 lg:grid-cols-12">
@@ -290,13 +290,13 @@ const Footer: React.FC = () => {
         </div>
 
         <div className="mt-12 flex flex-col items-center justify-between gap-6 border-t border-white/10 pt-8 sm:flex-row">
-          <p className="text-xs font-medium text-gray-500">
+          <p className="text-xs font-medium text-white uppercase">
             © {new Date().getFullYear()} Pickars. Built by{" "}
             <a
               href="https://www.boringthinkers.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="font-semibold text-gray-400 transition-colors hover:text-white"
+              className="transition-colors hover:text-white"
             >
               BORING THINKERS LIMITED
             </a>
