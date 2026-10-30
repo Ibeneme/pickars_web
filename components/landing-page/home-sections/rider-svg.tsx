@@ -39,8 +39,6 @@ const CSS = `
 @keyframes rd-swing { 0%,100%{transform:rotate(-4deg)} 50%{transform:rotate(5deg)} }
 @keyframes hd-rise { from{opacity:0;transform:translateY(60px)} to{opacity:1;transform:translateY(0)} }
 @keyframes sl-in { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
-
-/* ---- clouds ------------------------------------------------------ */
 @keyframes cloud-ltr {
   from { transform: translate3d(-100%, 0, 0); }
   to   { transform: translate3d(100vw, 0, 0); }
@@ -61,7 +59,6 @@ const CSS = `
   0%,100% { transform: translate3d(0, 0, 0) scale(1); }
   50%     { transform: translate3d(0, -10px, 0) scale(1.03); }
 }
-
 .cloud-wrap {
   position: absolute;
   left: 0;
@@ -72,17 +69,13 @@ const CSS = `
 .cloud-roam-x { animation: cloud-roam-x 22s ease-in-out infinite alternate; }
 .cloud-roam-y { animation: cloud-roam-y 9s ease-in-out infinite alternate; will-change: transform; }
 .cloud-bob { animation: cloud-bob ease-in-out infinite; transform-origin: 50% 80%; }
-
-/* MOBILE: show far fewer clouds (only 3 of the 13 stay) */
 @media (max-width: 767px) {
   .cloud-hide-mobile { display: none !important; }
 }
-
 .rd-glint  { animation: rd-glint 3.2s ease-in-out infinite; }
 .rd-glow   { animation: rd-pulse 5s ease-in-out infinite; }
 .rd-arm    { transform-box: view-box; transform-origin: 905px 800px; animation: rd-arm 4.5s ease-in-out infinite; }
 .rd-swing  { transform-box: view-box; transform-origin: 1010px 650px; animation: rd-swing 4.5s ease-in-out -0.45s infinite; }
-
 .hd-line { display: block; animation: hd-rise .9s cubic-bezier(.22,1,.36,1) backwards; }
 .hd-line-2 { animation-delay: .15s; }
 .sl-in { animation: sl-in .45s ease-out; }
@@ -166,7 +159,7 @@ function makeClouds(count: number, seed = 4): CloudDef[] {
   return list;
 }
 
-const CLOUDS: CloudDef[] = makeClouds(12);
+const CLOUDS: CloudDef[] = makeClouds(5);
 
 const CloudShape = () => (
   <>
