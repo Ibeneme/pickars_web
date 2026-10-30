@@ -7,7 +7,7 @@ import CityMarquee from "./sub-sections/city-marquee";
 /* ------------------------------------------------------------------ */
 /*  Theme                                                              */
 /* ------------------------------------------------------------------ */
-const RED = "#FCF4DF";
+const RED = "#EDDFFC";
 const BG = RED;
 
 const VB_W = 1262;
@@ -402,8 +402,8 @@ export default function RiderPage() {
       <Clouds />
 
       {/* very big headline, sits behind the top of the rider */}
-      <h1 className="relative z-0 w-full max-w-[1262px] select-none pt-4 text-center text-[clamp(3.6rem,15vw,10rem)] font-black leading-[0.9] tracking-tighter text-black md:pt-[24px]">
-        <span>Just Send it</span>
+      <h1 className="relative z-0 w-full max-w-[1262px] text-[clamp(3.6rem,24vw,28rem)] select-none pt-16 text-center md:text-[clamp(3.6rem,18vw,10rem)] font-black leading-[0.9] tracking-tighter text-black md:pt-[24px]">
+        <span> Send it</span>
         <span className="ml-1 text-[#ff0000] md:ml-2">.</span>
       </h1>
 

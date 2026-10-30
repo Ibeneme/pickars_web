@@ -23,7 +23,7 @@ const stats: {
   label: string;
 }[] = [
   { value: 1300, suffix: "+", label: "Deliveries completed" },
-  { value: 7, suffix: "+", label: "Dispatch riders" },
+//   { value: 7, suffix: "+", label: "Dispatch riders" },
   { value: 56, suffix: " min", label: "Average pickup time" },
 ];
 

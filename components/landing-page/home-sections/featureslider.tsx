@@ -157,7 +157,7 @@ export default function FeatureSlider({
                 key={`${copy}-${item}`}
                 className="flex shrink-0 items-center gap-8 pl-8 md:gap-14 md:pl-14"
               >
-                <span className="whitespace-nowrap text-lg font-bold tracking-tight md:text-2xl">
+                <span className="whitespace-nowrap text-3xl font-bold tracking-tight md:text-4xl">
                   {item}
                 </span>
                 <Asterisk />
