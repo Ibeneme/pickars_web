@@ -159,7 +159,7 @@ function makeClouds(count: number, seed = 4): CloudDef[] {
   return list;
 }
 
-const CLOUDS: CloudDef[] = makeClouds(5);
+const CLOUDS: CloudDef[] = makeClouds(12);
 
 const CloudShape = () => (
   <>
