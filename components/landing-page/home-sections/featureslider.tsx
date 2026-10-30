@@ -6,7 +6,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const PRIMARY_COLOR = "#ff0000";
+const PRIMARY_COLOR = "#121212";
 
 type FeatureSliderProps = {
   /* seconds for one full loop (higher = slower) */

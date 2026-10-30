@@ -23,7 +23,7 @@ const stats: {
   label: string;
 }[] = [
   { value: 1300, suffix: "+", label: "Deliveries completed" },
-//   { value: 7, suffix: "+", label: "Dispatch riders" },
+  //   { value: 7, suffix: "+", label: "Dispatch riders" },
   { value: 56, suffix: " min", label: "Average pickup time" },
 ];
 
@@ -264,7 +264,7 @@ export default function PickarsIntro() {
         {/* Vision */}
         <div
           ref={visionRef}
-          className="mt-16 grid gap-10 md:mt-24 md:grid-cols-[1fr_1.7fr] md:gap-16"
+          className="mt-16 grid gap-10 md:mt-24 md:gap-16 max-w-3xl"
         >
           <span className="text-xs font-semibold uppercase tracking-widest text-black/50">
             /Our promise/
@@ -272,31 +272,22 @@ export default function PickarsIntro() {
 
           <div>
             <h3 className="text-6xl font-black leading-none tracking-tight sm:text-8xl">
-              Need something delivered?
+              Need something delivered?{" "}
+              <span
+                style={{ backgroundColor: PRIMARY_COLOR }}
+                className="mx-3 inline-flex h-9 w-9 items-center justify-center rounded-full align-middle text-white md:h-12 md:w-12"
+              >
+                <Sparkle />
+              </span>{" "}
             </h3>
-            <p className="mt-5 max-w-md text-xl font-regular leading-relaxed text-black/60">
+            <p className="mt-5 text-xl font-regular leading-relaxed text-black/60 max-w-2xl">
               Good delivery isn&apos;t just about speed. It&apos;s about showing
               up on time, handling every package with care and keeping you
               informed. Here&apos;s how we&apos;re doing.
             </p>
 
-            <div
-              ref={statsRef}
-              className="mt-10 grid grid-cols-3 gap-4 pb-10 md:mt-14"
-            >
-              {stats.map((s, i) => (
-                <div key={s.label}>
-                  <span
-                    ref={(el) => {
-                      statEls.current[i] = el;
-                    }}
-                    className="block text-4xl font-medium tracking-tight text-black sm:text-5xl md:text-6xl"
-                  />
-                  <span className="mt-2 block text-xs text-black/60 md:text-sm">
-                    {s.label}
-                  </span>
-                </div>
-              ))}
+            <div style={{ marginTop: 24 }}>
+              <DownloadButtons alignLeft={true} />
             </div>
           </div>
         </div>
@@ -334,7 +325,6 @@ export default function PickarsIntro() {
         )}
 
         {/* Closing statement */}
-   
       </div>
     </section>
   );

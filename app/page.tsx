@@ -62,13 +62,15 @@ export default function HomePage() {
       <div className="w-full max-w-full overflow-hidden">
         <RiderPage />
         <FeatureSlider />
-  
+
         <PickarsIntro />
         {/* <QualitiesSliderSection /> */}
         {/* <TownMarquee /> */}
-  
+
         <HomeWithMapSection />
-        <FAQsClientPage limit={4}/>
+        <div style={{ marginTop: -120 }}>
+          <FAQsClientPage limit={4} />
+        </div>
         <HomeTestimonialsSection />
         {/* <PickarsMosaic /> */}
       </div>

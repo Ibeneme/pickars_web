@@ -208,7 +208,7 @@ export default function HomeTestimonialsSection(): React.JSX.Element {
           </motion.div>
 
           <h2 className="text-6xl font-black text-black leading-none tracking-tight sm:text-8xl">
-            Read What People Say
+            Words on the Streets
           </h2>
           <p className="mt-4 max-w-md text-sm leading-relaxed text-gray-600 sm:text-base">
             Hear what everyday senders and merchants have to say about their
