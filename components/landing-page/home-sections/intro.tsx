@@ -6,6 +6,7 @@ import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import photo from "@/assets/landing-page-images/home-hero.svg";
+import phoneMockup from "@/assets/landing-page-images/new_a.svg";
 import DownloadButtons from "@/components/atoms/buttons/DownloadButtons";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -84,6 +85,9 @@ export default function PickarsIntro() {
   const statEls = useRef<(HTMLSpanElement | null)[]>([]);
   const closingRef = useRef<HTMLDivElement>(null);
   const marqueeRef = useRef<HTMLDivElement>(null);
+  const phoneWrapRef = useRef<HTMLDivElement>(null);
+  const phoneRiseRef = useRef<HTMLDivElement>(null);
+  const phoneRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const reduce = window.matchMedia(
@@ -146,6 +150,59 @@ export default function PickarsIntro() {
         ease: "power3.out",
         scrollTrigger: { trigger: visionRef.current, start: "top 85%" },
       });
+
+      /* ---------- Phone image: comes up into view ---------- */
+
+      // 1) the frame opens upward: it starts as a short, narrow window
+      //    anchored at the bottom and grows to the full rounded frame
+      gsap.fromTo(
+        phoneWrapRef.current,
+        { clipPath: "inset(55% 8% 0% 8% round 28px)" },
+        {
+          clipPath: "inset(0% 0% 0% 0% round 28px)",
+          ease: "none",
+          scrollTrigger: {
+            trigger: phoneWrapRef.current,
+            start: "top 98%",
+            end: "top 35%",
+            scrub: true,
+          },
+        }
+      );
+
+      // 2) the phone image itself rises up from below inside the frame
+      gsap.fromTo(
+        phoneRiseRef.current,
+        { yPercent: 45, opacity: 0.2 },
+        {
+          yPercent: 0,
+          opacity: 1,
+          ease: "none",
+          scrollTrigger: {
+            trigger: phoneWrapRef.current,
+            start: "top 98%",
+            end: "top 35%",
+            scrub: true,
+          },
+        }
+      );
+
+      // 3) once it is in, it keeps a gentle parallax drift as you scroll
+      gsap.fromTo(
+        phoneRef.current,
+        { yPercent: -6, scale: 1.25 },
+        {
+          yPercent: 6,
+          scale: 1.25,
+          ease: "none",
+          scrollTrigger: {
+            trigger: phoneWrapRef.current,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: true,
+          },
+        }
+      );
 
       // count-up
       stats.forEach((s, i) => {
@@ -288,6 +345,32 @@ export default function PickarsIntro() {
 
             <div style={{ marginTop: 24 }}>
               <DownloadButtons alignLeft={true} />
+            </div>
+          </div>
+        </div>
+
+        {/* Phone image (same width and style as the image above) */}
+        <div
+          ref={phoneWrapRef}
+          className="relative mt-12 aspect-[12/9] w-full overflow-hidden rounded-[28px] bg-neutral-100 md:mt-16 md:aspect-[12/7]"
+        >
+          {/* rise layer: slides the image up from the bottom of the frame */}
+          <div
+            ref={phoneRiseRef}
+            className="absolute inset-0 will-change-transform"
+          >
+            {/* parallax layer: keeps drifting after the image has risen */}
+            <div
+              ref={phoneRef}
+              className="absolute inset-0 will-change-transform"
+            >
+              <Image
+                src={phoneMockup}
+                alt="The Pickars app on a phone showing a delivery in progress"
+                fill
+                sizes="(min-width: 1280px) 1216px, 100vw"
+                className="object-cover grayscale"
+              />
             </div>
           </div>
         </div>

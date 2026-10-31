@@ -6,7 +6,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const PRIMARY_COLOR = "#121212";
+const PRIMARY_COLOR = "#ff0000";
 
 type FeatureSliderProps = {
   /* seconds for one full loop (higher = slower) */
@@ -22,6 +22,7 @@ type FeatureSliderProps = {
 };
 
 /* ---------- Pickars words ---------- */
+/* ---------- Pickars words ---------- */
 export const PICKARS_FEATURES: string[] = [
   "Door-to-Door Delivery",
   "Fast Pickups",
@@ -30,9 +31,12 @@ export const PICKARS_FEATURES: string[] = [
   "Upfront Pricing",
   "Careful Handling",
   "Booking in Minutes",
-  "For Shops & Individuals",
-  "Across Port Harcourt",
-  "iOS & Android App",
+  "Instant Dispatch",
+  "Secure Package Drop",
+  "Real-Time Updates",
+  "Same-Day Delivery",
+  "Reliable Support",
+  "Zero Hidden Fees",
 ];
 
 /* ---------- Torn paper edge path ---------- */
@@ -143,7 +147,7 @@ export default function FeatureSlider({
                 key={`${copy}-${item}`}
                 className="flex shrink-0 items-center gap-8 pl-8 md:gap-14 md:pl-14"
               >
-                <span className="whitespace-nowrap text-3xl font-bold tracking-tight md:text-4xl">
+                <span className="whitespace-nowrap text-3xl font-bold tracking-tight md:text-4xl uppercase">
                   {item}
                 </span>
                 <Asterisk />

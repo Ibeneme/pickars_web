@@ -3,6 +3,7 @@
 import React, { memo, useEffect, useState } from "react";
 import DownloadButtons from "@/components/atoms/buttons/DownloadButtons";
 import CityMarquee from "./sub-sections/city-marquee";
+import { RoughEdge } from "./Pickarsmosaic";
 
 /* ------------------------------------------------------------------ */
 /*  Theme                                                              */
@@ -391,6 +392,7 @@ export default function RiderPage() {
       className="relative mb-[-16] isolate flex w-full flex-col items-center overflow-x-clip px-4 pt-24 pb-0 sm:px-6 md:px-8 md:pt-36 font-['Lufga']"
       style={{ backgroundColor: BG }}
     >
+      {/* <RoughEdge position="bottom" /> */}
       <style>{CSS}</style>
       <Clouds />
 
