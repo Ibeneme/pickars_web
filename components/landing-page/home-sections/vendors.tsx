@@ -79,16 +79,13 @@ export default function PickarsAreas() {
       className="relative w-full overflow-hidden bg-black md:pb-32 pb-12 font-['Lufga'] text-white"
       aria-label="Pickars dispatch services in action"
     >
-      {/* torn edge sits on top of this section */}
       <RoughEdge position="bottom" />
-
-      {/* extra top padding so the heading clears the torn edge */}
       <div className="mx-auto max-w-7xl px-4 pt-24 sm:px-6 md:pt-40 lg:px-8 lg:pt-48">
         {/* Heading */}
         <div ref={headRef} className="grid max-w-2xl gap-6">
-          <span className="text-xs font-semibold uppercase tracking-widest text-white/50">
+          {/* <span className="text-xs font-semibold uppercase tracking-widest text-white/50">
             /Book a dispatch rider/
-          </span>
+          </span> */}
 
           <h2 className="text-5xl font-black leading-none tracking-tight sm:text-7xl">
             Get a Dispatch Rider Quickly on{" "}
@@ -105,7 +102,7 @@ export default function PickarsAreas() {
             active across all major neighborhoods in Port Harcourt.
           </p>
 
-          <ul className="flex flex-wrap gap-3">
+          {/* <ul className="flex flex-wrap gap-3">
             {PERKS.map((perk) => (
               <li
                 key={perk}
@@ -114,7 +111,7 @@ export default function PickarsAreas() {
                 {perk}
               </li>
             ))}
-          </ul>
+          </ul> */}
 
           <DownloadButtons dark={true} alignLeft={true} />
         </div>

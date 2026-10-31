@@ -351,25 +351,25 @@ export default function PickarsIntro() {
 
         {/* Phone image (same width and style as the image above) */}
         <div
-          ref={phoneWrapRef}
+ 
           className="relative mt-12 aspect-[12/9] w-full overflow-hidden rounded-[28px] bg-neutral-100 md:mt-16 md:aspect-[12/7]"
         >
           {/* rise layer: slides the image up from the bottom of the frame */}
           <div
-            ref={phoneRiseRef}
-            className="absolute inset-0 will-change-transform"
+           
+            className="absolute inset-0 "
           >
             {/* parallax layer: keeps drifting after the image has risen */}
             <div
-              ref={phoneRef}
-              className="absolute inset-0 will-change-transform"
+         
+              className="absolute inset-0 "
             >
               <Image
                 src={phoneMockup}
                 alt="The Pickars app on a phone showing a delivery in progress"
                 fill
                 sizes="(min-width: 1280px) 1216px, 100vw"
-                className="object-cover grayscale"
+                className="object-cover"
               />
             </div>
           </div>
