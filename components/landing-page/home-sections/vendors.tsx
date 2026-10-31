@@ -76,7 +76,7 @@ export default function PickarsAreas() {
   return (
     <section
       ref={rootRef}
-      className="relative w-full overflow-hidden bg-black pb-32 font-['Lufga'] text-white"
+      className="relative w-full overflow-hidden bg-black md:pb-32 pb-12 font-['Lufga'] text-white"
       aria-label="Pickars dispatch services in action"
     >
       {/* torn edge sits on top of this section */}
